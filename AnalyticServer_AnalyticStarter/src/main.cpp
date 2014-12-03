@@ -101,7 +101,6 @@ string getQueueAddress(string portNumber) {
 	//TODO : Replace the "localhost" by the machine IP address
 
 	sAnalyticQueueAddress.append("localhost");
-	//sAnalyticQueueAddress.append("192.41.170.213");
 	sAnalyticQueueAddress.append(":");
 	sAnalyticQueueAddress.append(portNumber);
 
