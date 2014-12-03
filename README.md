@@ -1,0 +1,4 @@
+OpenCCTV
+========
+
+OpenCCTV server application
