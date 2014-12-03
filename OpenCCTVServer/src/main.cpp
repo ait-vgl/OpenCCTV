@@ -26,8 +26,7 @@ int main(int argc, char* argv[])
 		_iImageCount = atoi(argv[1]);
 	}
 
-	string _sAnalyticServerName = "192.41.170.213";
-	//string _sAnalyticServerName = "localhost";
+	string _sAnalyticServerName = "serverName";
 	unsigned int _iAnalyticServerPort = 5555;
 
 	//Create an instance of DataModel class.
