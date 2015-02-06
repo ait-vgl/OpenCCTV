@@ -25,3 +25,5 @@ This server application uses the data written by the Web application to the data
 
 ##### Analytic Server
 The Analytics server runs video analytic instances in separate processes. Since different analytics will have different processing speeds, each analytic process has its own input image queue and also output results queue. OpenCCTV server routes video Streams as individual image objects (with metadata) to these input image queues of analytic processes. And retrieves analytic results from the output results queues as XML texts.
+
+[![IMAGE ALT TEXT HERE](http://img.youtube.com/vi/YOUTUBE_VIDEO_ID_HERE/0.jpg)](http://youtu.be/xRuYp1DhHBs)
