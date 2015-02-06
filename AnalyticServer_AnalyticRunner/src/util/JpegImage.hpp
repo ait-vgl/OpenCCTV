@@ -19,6 +19,7 @@ class JpegImage
 {
 public:
 	static Mat toOpenCvMat(Image& image);
+	static Image toOpenCCTVImage(const Image& imageInput, const Mat& imageOutput, const string& result);
 };
 
 #endif /* JPEGIMAGE_HPP_ */

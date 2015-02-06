@@ -27,7 +27,6 @@ LibExecutor::LibExecutor(const int streamId, const int lyticInstId, const int an
 }
 
 int LibExecutor::start(){
-	cout << "LibExecutor::start()" << endl;
 	int result = 1;
 
 	if (libPath.size() != 0 && !libPath.empty()) {
@@ -58,12 +57,12 @@ int LibExecutor::start(){
 			//namedWindow(displayWindowName, WINDOW_AUTOSIZE);
 
 			//TODO Later change this to a while loop?
-			int count = 1;
+			//int count = 1;
 			while(1)
 			{
 				//TODO : Remove this
-				cout << "Reading image : " << count << endl;
-				++count;
+				//cout << "Reading image : " << count << endl;
+				//++count;
 
 				//Read serialized Image object
 				string serializedImageStr = mqIn.read();
@@ -75,21 +74,44 @@ int LibExecutor::start(){
 				boost::archive::text_iarchive iarchive(ibuffer);
 				iarchive & imageObj;
 
-				cout << "Image received : " << "\tStream ID: " << imageObj.getStreamId() << "\tTimestamp: " << imageObj.getTimestamp() << endl;
+				//cout << "Image received : " << "\tStream ID: " << imageObj.getStreamId() << "\tTimestamp: " << imageObj.getTimestamp() << endl;
 
 				Mat img = JpegImage::toOpenCvMat(imageObj); //Convert Image to OpenCV Mat object
+
 				if (img.empty()) {
 					std::cerr << "AnalyticRunner:LibExecutor: Image is empty." << std::endl;
 					// TODO: throw exception
 				} else {
-					cout << "LibExecutor::start()-process()" << endl;
 					libLoder.process(img,analysisResult);
+					string sAnalyticLibResult = AnalyticOutputMessage::getAnalyticLibResult(analysisResult);
+
+					Mat outputImg = libLoder.getOutputImage();
+
+					/*ostringstream filename;
+					filename << "/usr/local/opencctv/images/temp/";
+					filename << imageObj.getTimestamp();
+					filename << ".jpg";
+					imwrite(filename.str(), outputImg);*/
+
+					Image imageResutObj = JpegImage::toOpenCCTVImage(imageObj,outputImg,sAnalyticLibResult);
 
 					//Write the result to the output queue
-					string sAnalyticLibResult = AnalyticOutputMessage::getAnalyticLibResult(analysisResult);
-					string sAnalyticResult = AnalyticOutputMessage::getAnalyticResult(streamId,analyticInstId,analyticId,imageObj.getTimestamp(),sAnalyticLibResult);
-					mqOut.write(sAnalyticResult);
-					cout << "LibExecutor::start()-process-end()" << endl;
+					//Prepare the output buffer
+					std::ostringstream obuffer;
+					//Initialize the archive
+					boost::archive::text_oarchive oarchive(obuffer);
+					//Serialize the image object
+					oarchive & (imageResutObj);
+					//Get the serialization data (a string) from the buffer
+					std::string outStr(obuffer.str());
+					//Write to the output queue
+					mqOut.write(outStr);
+
+					//Write the result to the output queue
+					//string sAnalyticLibResult = AnalyticOutputMessage::getAnalyticLibResult(analysisResult);
+					//string sAnalyticResult = AnalyticOutputMessage::getAnalyticResult(streamId,analyticInstId,analyticId,imageObj.getTimestamp(),sAnalyticLibResult);
+					//mqOut.write(sAnalyticResult);
+					//cout << "LibExecutor::start()-process-end()" << endl;
 
 					//cout << endl;
 					//cout << sAnalyticResult << endl;
@@ -105,8 +127,13 @@ int LibExecutor::start(){
 					break;
 			}*/
 		}
-	}else{
-
+		else
+		{
+			result = -1;
+		}
+	}
+	else
+	{
 		result = -1;
 	}
 

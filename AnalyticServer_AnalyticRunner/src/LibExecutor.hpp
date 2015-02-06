@@ -9,6 +9,7 @@
 #define LIBRARYEXECUTOR_HPP_
 
 #include <string>
+#include <sstream>
 //#include <dlfcn.h>
 
 #include <opencv2/highgui/highgui.hpp>
