@@ -1,0 +1,44 @@
+<%= render 'info' %>
+
+<br/>
+
+<p>
+  <a href="<%= new_analytic_analytic_input_stream_path(@analytic)%>" class="btn btn-success"> <span class="glyphicon glyphicon-plus"></span> Add New Input Streams Manually </a>
+</p>
+
+<%if @analytic.analytic_input_streams.empty?%>
+    <div class="alert alert-warning">
+      Currently no input streams are registered with the analytic.
+    </div>
+<%else%>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4>Input Streams</h4>
+      </div>
+      <div class="media">
+        <table class="table table-hover">
+          <thead>
+          <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th colspan="3"></th>
+          </tr>
+          </thead>
+
+          <tbody>
+          <% @analytic.analytic_input_streams.each do |input_stream|%>
+              <tr>
+                <td><%= input_stream.name %></td>
+                <td><%= input_stream.description %></td>
+                <td><%= link_to 'Show', analytic_analytic_input_stream_path(@analytic,input_stream), :class => "btn btn-xs btn-default"%></td>
+                <td><%= link_to 'Edit', edit_analytic_analytic_input_stream_path(@analytic, input_stream), :class => "btn btn-xs btn-warning" %></td>
+                <td><%= link_to 'Destroy', analytic_analytic_input_stream_path(@analytic, input_stream), method: :delete, :class => "btn btn-xs btn-danger", data: { confirm: 'Are you sure?' } %></td>
+              </tr>
+          <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+<%end%>
+
+

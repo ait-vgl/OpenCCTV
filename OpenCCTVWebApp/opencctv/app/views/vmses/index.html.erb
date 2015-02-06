@@ -1,0 +1,41 @@
+<h1>Listing VMSes</h1>
+<a href="<%= new_vms_path%>" class="btn btn-success"> <span class="glyphicon glyphicon-plus"></span> Register a new VMS </a>
+<br />
+<div class="media">
+	<%if @vmses.empty?%>
+	<div class="alert alert-warning">
+		<center>
+			Currently no VMSs are registered with the system.
+		</center>
+	</div>
+	<%else%>
+
+	<table class="table table-hover">
+		<thead>
+			<tr>
+				<th>Server name</th>
+				<th>Server port</th>
+				<th>Vms type</th>
+				<th>Description</th>
+				<th>Username</th>
+				<th colspan="3"></th>
+			</tr>
+		</thead>
+
+		<tbody>
+			<% @vmses.each do |vms| %>
+			<tr>
+				<td><%= vms.server_name %></td>
+				<td><%= vms.server_port %></td>
+				<td><%= vms.vms_type %></td>
+				<td><%= vms.description %></td>
+				<td><%= vms.username %></td>
+				<td><%= link_to 'Show Cameras', vms, :class => "btn btn-xs btn-default" %></td>
+				<td><%= link_to 'Edit', edit_vms_path(vms), :class => "btn btn-xs btn-warning" %></td>
+				<td><%= link_to 'Delete', vms, method: :delete, :class => "btn btn-xs btn-danger", data: { confirm: 'Are you sure?' } %></td>
+			</tr>
+			<% end %>
+		</tbody>
+	</table>
+</div>
+<%end%>

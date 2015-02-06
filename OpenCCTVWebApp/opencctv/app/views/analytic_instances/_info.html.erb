@@ -1,0 +1,27 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h4>Analytic Instance Information</h4>
+  </div>
+  <div class="panel-body">
+    <div class="media">
+      <div class="media-body col-sm-12">
+        <p>
+          <strong>Name:</strong>
+          <%= @analytic_instance.name %>
+        </p>
+        <p>
+          <strong>Analytic Type:</strong>
+          <%= @analytic_instance.analytic.name %>
+        </p>
+        <p>
+          <strong>Description:</strong>
+          <%= @analytic_instance.description %>
+        </p>
+        <p>
+          <%= link_to 'Edit', edit_analytic_instance_path(@analytic_instance), class: "btn btn-xs btn-warning" %> |
+          <%= link_to 'Analytic Instance List', analytic_instances_path, class: "btn btn-xs btn-default" %>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

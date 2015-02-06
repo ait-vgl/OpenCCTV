@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>OpenCCTV</title>
+		<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+		<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+		<%= csrf_meta_tags %>
+	</head>
+	<body>
+		<div id="top-nav" class="navbar navbar-inverse navbar-static-top">
+			<div class="container">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+						<span class="glyphicon glyphicon-align-justify"></span>
+					</button>
+					<a href="<%=root_path%>" class="navbar-brand">
+						<span class="glyphicon glyphicon-eye-open"></span>
+						OpenCCTV
+					</a>
+				</div>
+				<div class="navbar-collapse collapse">
+					<ul class="nav navbar-nav navbar-right">
+						<%if user_signed_in?%>
+						<div class="navbar-brand">
+							<span class="glyphicon glyphicon-user"></span>
+							<%= current_user.email%>
+						</div>
+						<%= link_to "Sign out", destroy_user_session_path, :method => :delete, :class => "btn btn-danger navbar-btn"%>
+						<%else%>
+						<%= link_to "Sign in", new_user_session_path, :class => "btn btn-success navbar-btn"%>
+						<%= link_to "Create an account", new_user_registration_path, :class => "btn btn-primary navbar-btn"%>
+						<%end%>
+					</ul>
+				</div>
+			</div><!-- /container -->
+		</div>
+
+		<div class="container">
+			<%if notice%>
+			<p class="alert alert-success text-center" role="alert">
+				<%= notice %>
+			</p>
+			<%end%>
+			<%if alert%>
+			<p class="alert alert-warning text-center" role="alert">
+				<strong>Alert: </strong> <%= alert %>
+			</p>
+			<%end%>
+			<% if flash[:error] %>
+			<div id="error" class="alert alert-danger text-center" role="alert">
+				<strong>Error: </strong> <%= flash[:error] %>
+			</div>
+			<% end %>
+
+			<%if user_signed_in?%>
+			<div class="row">
+				<div class="col-sm-2">
+					<h3><i class="glyphicon glyphicon-dashboard"></i> Dashboard</h3>
+					<%= render 'layouts/links' %>
+				</div>
+				<div class="col-sm-10">
+					<%= yield %>
+				</div>
+			</div>
+			<%else%>
+			<%= yield %>
+			<%end%>
+		</div>
+	</body>
+</html>

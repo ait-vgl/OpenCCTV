@@ -1,0 +1,43 @@
+<hr>
+<ul class="nav nav-stacked nav-pills">
+	<%if controller_name == "vmses"%>
+	<li role="presentation" class="active">
+		<a href="<%=vmses_path%>">VMSes <span class="badge"></span></a>
+	</li>
+	<%else%>
+	<li role="presentation">
+		<%= link_to('VMSes', vmses_path)%>
+	</li>
+	<%end%>
+	
+	<%if controller_name == "analytics"%>
+	<li role="presentation" class="active">
+        <a href="<%=analytics_path%>">Analytics<span class="badge"></span></a>
+	</li>
+	<%else%>
+	<li role="presentation">
+		<%= link_to('Analytics', analytics_path)%>
+	</li>
+	<%end%>
+
+  <%if controller_name == "analytic_instances"%>
+      <li role="presentation" class="active">
+        <a href="<%=analytic_instances_path%>">Analytic Instances<span class="badge"></span></a>
+      </li>
+  <%else%>
+      <li role="presentation">
+        <%= link_to('Analytic Instances', analytic_instances_path)%>
+      </li>
+  <%end%>
+
+  <%if controller_name == "servers"%>
+      <li role="presentation" class="active">
+        <a href="<%servers_path%>">OpenCCTV Server<span class="badge"></span></a>
+      </li>
+  <%else%>
+      <li role="presentation">
+        <%= link_to('OpenCCTV Server', servers_path)%>
+      </li>
+  <%end%>
+</ul>
+<hr>

@@ -1,0 +1,15 @@
+<%if @server.nil?%>
+
+    <a href="<%=new_server_path%>" class="btn btn-success"> <span class="glyphicon glyphicon-plus"></span>Register a Connection to OpenCCTV Server</a>
+    <br/>
+    <br/>
+
+    <div class="alert alert-warning">
+        Currently no OpenCCTV Server is registered with the system.
+    </div>
+<%else%>
+    <%= render 'info' %>
+<%end%>
+
+
+

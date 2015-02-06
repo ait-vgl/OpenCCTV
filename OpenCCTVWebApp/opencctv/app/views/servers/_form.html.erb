@@ -1,0 +1,37 @@
+<%= form_for(@server) do |f| %>
+  <% if @server.errors.any? %>
+        <div id="error_explanation" class="alert alert-danger" role="alert">
+      <h2><%= pluralize(@server.errors.count, "error") %> prohibited this server from being saved:</h2>
+
+      <ul>
+      <% @server.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :host %><br>
+    <%= f.text_field :host %>
+  </div>
+  <div class="field">
+    <%= f.label :port %><br>
+    <%= f.number_field :port %>
+  </div>
+  <div class="field">
+    <%= f.label :username %><br>
+    <%= f.text_field :username %>
+  </div>
+  <div class="field">
+    <%= f.label :password %><br>
+    <%= f.password_field :password, {autocomplete: 'off'} %>
+  </div><br/>
+  <div class="actions">
+    <%= f.submit 'Save Connection Details', :class => 'btn btn-success btn-mini'%>
+  </div>
+<% end %>

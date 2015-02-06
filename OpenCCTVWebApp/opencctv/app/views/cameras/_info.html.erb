@@ -1,0 +1,48 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h4>Camera information</h4>
+  </div>
+  <div class="panel-body">
+    <div class="media">
+      <div class="media-body col-sm-9">
+        <p>
+          <strong>Name:</strong>
+          <%= @camera.name %> |
+
+          <strong>Camera ID:</strong>
+          <%= @camera.camera_id %>
+        </p>
+
+        <p>
+          <strong>Description:</strong>
+          <%= @camera.description %>
+        </p>
+
+        <p>
+          <%= link_to 'Edit', edit_vms_camera_path(@camera.vms, @camera), :class => "btn btn-mini btn-warning" %> |
+          <%= link_to 'Cameras list', vms_path(@camera.vms) %>
+        </p>
+      </div>
+      <div class="media-body col-sm-3">
+        <center>
+          <p>
+            <%= image_tag("#{@camera.vms.id}_#{@camera.id}.jpeg", :alt => "Default frame from Camera comes here.", :class => "img-responsive") %>
+          </p>
+          <p>
+            <% if (@camera.verified) %>
+                  <span class="label label-success" title="Connection to the Camera is verified.">
+                    <span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>
+                    Verified
+                  </span>
+            <% else %>
+                  <span class="label label-danger" title="Connection to the Camera is failed.">
+                    <span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span>
+                    Unverified
+                  </span>
+            <% end %>
+          </p>
+        </center>
+      </div>
+    </div>
+  </div>
+</div>

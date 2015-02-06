@@ -1,0 +1,9 @@
+<h1>Editing Camera</h1>
+<%= render 'vmses/info' %>
+
+<%= render 'cameras/info' %>
+
+<%= render 'form' %>
+
+<%= link_to 'Show', vms_camera_stream_path(@vms, @camera, @stream) %> |
+<%= link_to 'Back', vms_camera_streams_path(@vms, @camera) %>

@@ -1,0 +1,27 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h4>Analytic Information</h4>
+  </div>
+  <div class="panel-body">
+    <div class="media">
+      <div class="media-body col-sm-12">
+        <p>
+          <strong>Name:</strong>
+          <%= @analytic.name %>
+        </p>
+        <p>
+          <strong>Description:</strong>
+          <%= @analytic.description %>
+        </p>
+        <p>
+          <strong>Location:</strong>
+          <%= link_to @analytic.location,target:'_blank' %>
+        </p>
+        <p>
+          <%= link_to 'Edit', edit_analytic_path(@analytic), :class => "btn btn-xs btn-warning"%> |
+          <%= link_to 'Analytic List', analytics_path, :class => "btn btn-xs btn-default" %>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

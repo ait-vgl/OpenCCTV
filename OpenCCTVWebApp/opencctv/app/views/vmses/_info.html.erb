@@ -1,0 +1,63 @@
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h4>VMS information</h4>
+	</div>
+	<div class="panel-body">
+		<div class="media">
+			<div class="media-body col-sm-10">
+				<p>
+					<strong>Server name:</strong>
+					<%= @vms.server_name %> |
+
+					<strong>Server port:</strong>
+					<%= @vms.server_port %> |
+
+					<strong>VMS type:</strong>
+					<%= @vms.vms_type %>
+				</p>
+				<p>
+					<strong>Description:</strong>
+					<%= @vms.description %>
+				</p>
+				<p>
+					<strong>Username:</strong>
+					<%= @vms.username %> |
+
+					<strong>Password:</strong>
+					<%if @vms.password.nil? || @vms.password.empty? || @vms.password.blank?%>
+					NA
+					<%else%>
+					*********
+					<%end%>
+				</p>
+				<p>
+					<%= link_to 'Edit', edit_vms_path(@vms), :class => "btn btn-mini btn-warning" %> |
+					<%= link_to 'VMSes list', vmses_path %>
+				</p>
+			</div>
+			<div class="media-right media-middle">
+              <center>
+              <p>
+				<%if @vms.vms_type == "Milestone"%>
+				<%= image_tag("milestone_logo.png", :alt => "Milestone Logo") %>
+				<%else%> <!-- TODO -->
+				<%end%>
+              </p>
+              <p>
+                <%if(@vms.verified)%>
+                  <span class="label label-success" title="Connection to the VMS is verified.">
+                    <span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>
+                    Verified
+                  </span>
+              <%else%>
+                  <span class="label label-danger" title="Connection to the VMS is failed.">
+                    <span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span>
+                    Unverified
+                  </span>
+              <%end%>
+              </p>
+              </center>
+			</div>
+		</div>
+	</div>
+</div>

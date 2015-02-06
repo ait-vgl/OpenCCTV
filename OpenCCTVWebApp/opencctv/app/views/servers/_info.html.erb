@@ -1,0 +1,65 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h4>OpenCCTV Server Information</h4>
+  </div>
+  <div class="panel-body">
+    <div class="media">
+      <div class="media-body col-sm-12">
+        <p>
+          <strong>Connection Name:</strong>
+          <%= @server.name %>
+        </p>
+        <p>
+          <strong>Host:</strong>
+          <%= @server.host %>
+        </p>
+        <p>
+          <strong>Port:</strong>
+          <%= @server.port %>
+        </p>
+        <p>
+          <strong>Username:</strong>
+          <%= @server.username %> |
+
+          <strong>Password:</strong>
+          <%if @server.password.nil? || @server.password.empty? || @server.password.blank?%>
+              NA
+          <%else%>
+              *********
+          <%end%>
+        </p>
+        <p>
+          <strong>Status:</strong>
+          <%if @server.status.nil? || @server.status.empty? || @server.status.blank?%>
+            Unknown
+          <%else%>
+            <%= @server.status %>
+          <%end%>
+        </p>
+        <p>
+          <strong>PID:</strong>
+          <%if @server.pid.nil? || @server.pid.blank?%>
+              NA
+          <%else%>
+              <%= @server.pid %>
+          <%end%>
+        </p>
+        <p>
+          <%= link_to 'Edit', edit_server_path(@server), :class => "btn btn-xs btn-warning", data: { confirm: 'This may need restarting the OpenCCTV Server, do you want to continue?' }%> |
+          <%= link_to 'Delete', @server, method: :delete, :class => "btn btn-xs btn-danger", data: { confirm: 'Do you want to delete the connection to the OpenCCTV Server?' } %>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<br/>
+<% if @server.status.eql? 'Stopped' %>
+    <%= link_to 'Start Server', servers_start_path(@server), :class => "btn btn-success"%>
+<%elsif @server.status.eql? 'Running'%>
+    <%= link_to 'Stop Server', servers_stop_path(@server), :class => "btn btn-danger"%>
+<%else%>
+    <%= link_to 'Restart Server', servers_restart_path(@server), :class => "btn btn-warning"%>
+<%end%>
+
+

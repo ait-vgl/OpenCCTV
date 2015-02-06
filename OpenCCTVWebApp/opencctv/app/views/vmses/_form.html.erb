@@ -1,0 +1,49 @@
+<%= form_for(@vms) do |f| %>
+<% if @vms.errors.any? %>
+<div id="error_explanation" class="alert alert-danger" role="alert">
+	<h2><%= pluralize(@vms.errors.count, "Error") %> prohibited this VMS from being saved:</h2>
+	<ul>
+		<% @vms.errors.full_messages.each do |message| %>
+		<li>
+			<%= message %>
+		</li>
+		<% end %>
+	</ul>
+</div>
+<% end %>
+
+<div class="field">
+	<%= f.label :server_name %>
+	<br>
+	<%= f.text_field :server_name %>
+</div>
+<div class="field">
+	<%= f.label :server_port %>
+	<br>
+	<%= f.number_field :server_port %>
+</div>
+<div class="field">
+	<%= f.label :vms_type %>
+	<br>
+	<%= f.select :vms_type, options_for_select([['Milestone', 'Milestone'],['ZoneMinder', 'ZoneMinder']]) %>
+</div>
+<div class="field">
+	<%= f.label :description %>
+	<br>
+	<%= f.text_area :description %>
+</div>
+<div class="field">
+	<%= f.label :username %>
+	<br>
+	<%= f.text_field :username %>
+</div>
+<div class="field">
+	<%= f.label :password %>
+	<br>
+	<%= f.password_field :password %>
+</div>
+<br />
+<div class="actions">
+    <%= f.submit "Save VMS", :class => "btn btn-success btn-mini", data: { confirm: 'Are you sure that you want to save?' }%>
+</div>
+<% end %>

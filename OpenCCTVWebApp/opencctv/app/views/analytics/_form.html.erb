@@ -1,0 +1,29 @@
+<%= form_for(@analytic) do |f| %>
+  <% if @analytic.errors.any? %>
+        <div id="error_explanation" class="alert alert-danger" role="alert">
+      <h2><%= pluralize(@analytic.errors.count, "error") %> prohibited this analytic from being saved:</h2>
+
+      <ul>
+      <% @analytic.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+   <div class="field">
+     <%= f.label :name %><br>
+     <%= f.text_field :name %>
+   </div>
+   <div class="field">
+     <%= f.label :description %><br>
+     <%= f.text_area :description %>
+   </div>
+   <div class="field">
+     <%= f.label :analyticfile,  "Analytic File"%><br>
+     <%= f.file_field :analyticfile%>
+   </div>
+   <p><div class="actions">
+    <%= f.submit class: 'btn btn-success btn-mini'%>
+   </div></p>
+<% end %>

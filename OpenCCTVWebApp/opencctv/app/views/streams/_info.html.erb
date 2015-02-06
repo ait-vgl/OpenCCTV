@@ -1,0 +1,66 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h4>Stream information</h4>
+  </div>
+  <div class="panel-body">
+    <div class="media">
+      <div class="media-body col-sm-9">
+        <p>
+          <strong>Name:</strong>
+          <%= @stream.name %> |
+
+          <strong>Width:</strong>
+          <%= @stream.width %> |
+
+          <strong>Height:</strong>
+          <%= @stream.height %> |
+
+          <strong>Keep aspect ratio:</strong>
+          <%= @stream.keep_aspect_ratio %> |
+
+          <strong>Allow upsizing:</strong>
+          <%= @stream.allow_upsizing %> |
+
+          <strong>Compression rate:</strong>
+          <%= @stream.compression_rate %>
+        </p>
+
+        <p>
+          <strong>Description:</strong>
+          <%= @stream.description %>
+        </p>
+
+        <p>
+          <%= link_to 'Edit', edit_vms_camera_stream_path(@stream.camera.vms, @stream.camera, @stream), :class => "btn btn-mini btn-warning" %>
+          |
+          <%= link_to 'Streams list', vms_camera_path(@stream.camera.vms, @stream.camera) %>
+        </p>
+      </div>
+      <div class="media-body col-sm-3">
+        <center>
+          <p>
+            <%if(@stream.name == "Default")%>
+                <%= image_tag("#{@stream.camera.vms.id}_#{@stream.camera.id}.jpeg", :alt => "Default frame from Camera comes here.", :class => "img-responsive") %>
+            <%else%>
+                <%= image_tag("#{@stream.camera.vms.id}_#{@stream.camera.id}_#{@stream.id}.jpeg", :alt => "Default frame from Camera comes here.", :class => "img-responsive") %>
+            <%end%>
+          </p>
+
+          <p>
+            <% if (@stream.verified) %>
+                  <span class="label label-success" title="Stream is verified.">
+                    <span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>
+                    Verified
+                  </span>
+            <% else %>
+                  <span class="label label-danger" title="Stream verification failed.">
+                    <span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span>
+                    Unverified
+                  </span>
+            <% end %>
+          </p>
+        </center>
+      </div>
+    </div>
+  </div>
+</div>

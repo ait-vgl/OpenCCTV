@@ -1,0 +1,2 @@
+module VmsesHelper
+end

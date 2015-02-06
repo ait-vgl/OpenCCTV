@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" hash="1994706521">
+    <data-source source="LOCAL" name="Rails opencctv: development" uuid="64e16b1b-fdae-4eff-aa9f-53717c7e3947">
+      <driver-ref>mysql</driver-ref>
+      <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://lakindu-csim/opencctv_development</jdbc-url>
+      <user-name>opencctv</user-name>
+      <user-password>dfe5dfdadfcfdfc4dfe9dfe9dffedffcdfeadf9b</user-password>
+      <libraries />
+    </data-source>
+    <data-source source="LOCAL" name="Rails opencctv: test" uuid="bc7bf676-788e-439f-bc59-ee0cbbe0d2ab">
+      <driver-ref>mysql</driver-ref>
+      <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://lakindu-csim/opencctv_test</jdbc-url>
+      <user-name>opencctv</user-name>
+      <user-password>dfe5dfdadfcfdfc4dfe9dfe9dffedffcdfeadf9b</user-password>
+      <libraries />
+    </data-source>
+    <data-source source="LOCAL" name="Rails opencctv: production" uuid="6ac0a5a7-6981-4bd3-a4e2-30c8dc0b0d4b">
+      <driver-ref>mysql</driver-ref>
+      <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://lakindu-csim/opencctv_production</jdbc-url>
+      <user-name>opencctv</user-name>
+      <user-password>dfe5dfdadfcfdfc4dfe9dfe9dffedffcdfeadf9b</user-password>
+      <libraries />
+    </data-source>
+  </component>
+</project>
+
