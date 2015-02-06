@@ -6,10 +6,6 @@
  */
 
 #include "TcpMpegDecoder.hpp"
-#include <boost/algorithm/string.hpp>
-#include <boost/algorithm/string/split.hpp>
-#include <boost/lexical_cast.hpp>
-#include "../Image.hpp"
 
 namespace milestone
 {
@@ -79,7 +75,7 @@ void TcpMpegDecoder::startDecoding(ThreadSafeQueue<Image>& queuePtr, Stream &str
 					{
 						//got jpeg
 						decodedImageCount++;
-						Image image(stream.getWidth(), stream.getHeight(), currentImageData, stream.getId(), currentImageTimeStamp);
+						Image image(stream.getWidth(), stream.getHeight(), currentImageData, stream.getId(), currentImageTimeStamp, "");
 						queuePtr.push(image);
 						//cout << "TcpMpegDecoder::startDecoding: Produced image from stream " << stream.getId() << " at " << currentImageTimeStamp << endl;
 					}

@@ -12,16 +12,18 @@
 #include <exception>
 #include <boost/lexical_cast.hpp>
 #include <iostream>
+#include "SocketTypeDef.hpp"
 
 using namespace std;
 
 namespace tcpsocket
 {
-struct ReceivedDataStruct
+
+/*struct ReceivedDataStruct
 {
 	char* dataPtr;
 	size_t length;
-};
+};*/
 
 class TcpClient
 {

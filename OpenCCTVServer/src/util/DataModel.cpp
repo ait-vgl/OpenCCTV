@@ -11,13 +11,12 @@ namespace util {
 
 DataModel* DataModel::_pdataModel = NULL;
 
-DataModel::DataModel() {
-	// TODO Auto-generated constructor stub
-
+DataModel::DataModel()
+{
 }
 
-DataModel::~DataModel() {
-	// TODO Auto-generated destructor stub
+DataModel::~DataModel()
+{
 }
 
 DataModel* DataModel::getInstance()

@@ -11,5 +11,6 @@
 #include "AnalyticOutputMessage.hpp"
 #include "DataModel.hpp"
 #include "TypeDef.hpp"
+#include "JpegImage.hpp"
 
 #endif /* UTIL_HPP_ */

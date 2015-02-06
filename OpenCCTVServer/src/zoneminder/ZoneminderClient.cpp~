@@ -1,0 +1,69 @@
+/*
+ * ZoneminderClient.cpp
+ *
+ *  Created on: Feb 3, 2015
+ *      Author: anjana
+ */
+
+#include "ZoneminderClient.hpp"
+
+namespace zoneminder {
+
+ZoneminderClient::ZoneminderClient(Stream &stream, Camera &camera) : VmsClient(stream, camera)
+{
+	_pDecoderPtr = NULL;	//Initialized in the init() function
+	_pHttpClientPtr = NULL;	//Initialized in the init() function
+	_sUsername = "";
+	_sPassword = "";
+	_sServerName = "";
+	_iServerPort = -1;
+}
+
+bool ZoneminderClient::init()
+{
+	bool bResult = true;
+
+	//TODO : Remove hard coded server name, port and url
+	_sServerName = "192.41.170.30";
+	_iServerPort = 80;
+	string _sUrl = "/cgi-bin/nph-zms?mode=jpeg&monitor=7&scale=100&maxfps=5&buffer=1000&auth=2245eb53444598840a9ff1ec194accb2&connkey=626336&rand=1423116524";
+
+	_pHttpClientPtr = new HttpClient(_sServerName, _iServerPort);
+	if((*_pHttpClientPtr).sendGetRequest(_sServerName, _sUrl))
+	{
+		map<string,string> mapHttpHeaderDetails = (*_pHttpClientPtr).processHttpHeader();
+		map<string,string>::iterator it = mapHttpHeaderDetails.find("Status");
+
+		if(mapHttpHeaderDetails.size() != 0 && it != mapHttpHeaderDetails.end()){
+			bResult = ZoneminderMessage::isConnectionSuccessful(mapHttpHeaderDetails["Status"]);
+			if(bResult){
+				_pDecoderPtr = new TcpMpegDecoder(_pHttpClientPtr);
+			}
+		}else{
+			bResult = false;
+		}
+	}else
+	{
+		bResult = false;
+	}
+
+	return bResult;
+}
+
+void ZoneminderClient::produceImageObjects(ThreadSafeQueue<Image>& queue, Stream &stream, const unsigned int imageCount)
+{
+	(*_pDecoderPtr).startDecoding(queue, stream, imageCount);
+}
+
+bool ZoneminderClient::isStillProducingImages()
+{
+	return (*_pDecoderPtr).isStillProcessing();
+}
+
+ZoneminderClient::~ZoneminderClient()
+{
+	delete _pDecoderPtr; _pDecoderPtr = NULL;
+	delete _pHttpClientPtr; _pHttpClientPtr = NULL;
+}
+
+} /* namespace zoneminder */

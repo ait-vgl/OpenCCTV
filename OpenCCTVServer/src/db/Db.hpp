@@ -9,7 +9,6 @@
 #define DB_HPP_
 
 #include "Analytic.hpp"
-#include "AnalyticGateway.hpp"
 #include "AnalyticInstStream.hpp"
 #include "AnalyticInstStreamGateway.hpp"
 #include "AnalyticResultGateway.hpp"

@@ -7,12 +7,12 @@
 
 #include "ResultsRouterThread.hpp"
 
-ResultsRouterThread::ResultsRouterThread(string analyticOutQueueAddress, unsigned int imageCount)
+ResultsRouterThread::ResultsRouterThread(string analyticOutQueueAddress, unsigned int imageCount, int iAnalyticInstId)
 {
 	mqPtr = new TcpMq(1);
 	_analyticOutQueueAddress = analyticOutQueueAddress;
 	_iImageCount = imageCount;
-
+	_iAnalyticInstId = iAnalyticInstId;
 }
 
 ResultsRouterThread::~ResultsRouterThread()
@@ -27,27 +27,53 @@ void ResultsRouterThread::operator ()()
 
 	if(bConnectResult){
 
-		cout << "ResultsRouterThread::operator: "<<"Results router thread for queue " << _analyticOutQueueAddress << " started." << endl;
+		//cout << "ResultsRouterThread::operator: "<<"Results router thread for analytic instance " << _iAnalyticInstId << " started." << endl;
+		//cout << "Results router thread for analytic instance " << _iAnalyticInstId << " started." << endl;
 
-		int iStreamId = 0;
-		int iAnalyticInstId = 0 ;
-		int iAnalyticId = 0;
-		string sImgTimestamp = "";
-		string sResult = "";
+		cout << "Results router thread : Start reading the images from the analytic process  : " << _iAnalyticInstId << endl << endl;
 
 		AnalyticResultGateway _analyticResultGateway;
+		Image imageResultObj;
+
+		ostringstream filePath;
+		filePath << "/usr/local/opencctv/images/";
+		filePath << _iAnalyticInstId;
+		filePath << "/";
+
+		//TODO : Add the error handling to mkdir
+		mkdir(filePath.str().c_str(), 0775);
+
+		int iFrameCount = 1;
 
 		//Read the output results and store in the OpenCCTV database
-		//TODO Later change this to a while loop?
-		while(1)
-		{
-			//Read serialized Analytic Results
-			string sResultsStr = mqPtr->read();
-			cout << "sResultsStr : "<< sResultsStr << endl;
+		while(1)		{
 
-			AnalyticOutputMessage::getAnalyticResultsData(sResultsStr, iStreamId, iAnalyticInstId, iAnalyticId,sImgTimestamp,sResult);
+			//Read serialized results image object
+			string serializedImageStr = mqPtr->read();
 
-			_analyticResultGateway.insertResults(iStreamId,iAnalyticInstId,iAnalyticId, sImgTimestamp,sResult);
+			//Initialize with received serialized string data
+			std::istringstream ibuffer(serializedImageStr);
+
+			//De-serialize and create image object
+			boost::archive::text_iarchive iarchive(ibuffer);
+			iarchive & imageResultObj;
+
+			//TODO Define the image store location in a config file
+			//1. Write the images to the path /usr/local/opencctv/images
+			Mat matResultObj = JpegImage::toOpenCvMat(imageResultObj);
+
+			ostringstream filename;
+			filename << filePath.str();
+			filename << imageResultObj.getTimestamp() << "_";
+			filename << iFrameCount;
+			filename << ".jpg";
+
+			imwrite(filename.str(), matResultObj);
+
+			++iFrameCount;
+
+			//2. Store the image detais in the results DB
+			_analyticResultGateway.insertResults(_iAnalyticInstId,imageResultObj.getTimestamp(),imageResultObj.getResult(),filename.str());
 
 		}
 

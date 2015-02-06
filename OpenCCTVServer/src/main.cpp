@@ -1,22 +1,36 @@
-#include <boost/thread/thread.hpp>
-#include <boost/lockfree/queue.hpp>
+/*
+ * main.cpp
+ *
+ *  Created on: Sep 11, 2014
+ *      Author: anjana
+ */
+
 #include <iostream>
 #include <string>
+#include <sstream>
+
+#include <boost/thread/thread.hpp>
+#include <boost/lockfree/queue.hpp>
 
 #include "db/StreamGateway.hpp"
 #include "db/CameraGateway.hpp"
 #include "VmsDefinitions.hpp"
 #include "VmsClient.hpp"
 #include "milestone/MilestoneClient.hpp"
+#include "zoneminder/ZoneminderClient.hpp"
 #include "Image.hpp"
 #include "ProducerThread.hpp"
 #include "util/DataModel.hpp"
 #include "ConsumerThread.hpp"
+#include "util/ConfigDetails.hpp"
+#include "filetransfer/FileTransferClient.hpp"
 
 using namespace std;
 using namespace db;
 using namespace milestone;
+using namespace zoneminder;
 using namespace util;
+using namespace filetransfer;
 
 int main(int argc, char* argv[])
 {
@@ -26,8 +40,21 @@ int main(int argc, char* argv[])
 		_iImageCount = atoi(argv[1]);
 	}
 
-	string _sAnalyticServerName = "serverName";
-	unsigned int _iAnalyticServerPort = 5555;
+	ConfigDetails *_pConfigDetails = ConfigDetails::getInstance();
+	if(!_pConfigDetails)
+	{
+		exit(EXIT_FAILURE);
+	}
+
+	//TODO : May need to change when multiple analytic servers are integrated. This is only for a single server
+	string _sAnalyticServerName = _pConfigDetails->getAnalyticSererAddress();
+	unsigned int _iAnalyticServerPort = _pConfigDetails->getAnalyticServerPort();
+
+	cout << "_sAnalyticServerName : " << _sAnalyticServerName << " _iAnalyticServerPort : " << _iAnalyticServerPort << endl;
+
+	/*FileTransferClient fileTransferClient("/usr/local/opencctv/analytics/",_sAnalyticServerName,_iAnalyticServerPort);
+	fileTransferClient.transferAllFiles();
+	exit(0);*/
 
 	//Create an instance of DataModel class.
 	//DataModel is a registry holding ref. to all the threads and queues created on the OpenCCTV server
@@ -54,15 +81,23 @@ int main(int argc, char* argv[])
 		{
 			//TODO : This needs to be deleted when a stream is stopped
 			vmsPtr = new MilestoneClient(vStreams[i], camera);
-		} else
+		}else if(camera.getVmsType().compare(VMS_TYPE_ZONEMINDER) == 0)
+		{
+			//TODO : This needs to be deleted when a stream is stopped
+			vmsPtr = new ZoneminderClient(vStreams[i], camera);
+		}else
 		{
 			//not yet implemented
-			cerr << "OpenCCTVServer:main: Error: Invalid VMS type received from the database."
-					<< std::endl;
+			cerr << "OpenCCTVServer:main: Error: Invalid VMS type received from the database." << std::endl;
 		}
+
 		if (vmsPtr != NULL && (*vmsPtr).init())
 		{
 			int _iStreamId = vStreams[i].getId();
+
+			/*cout << "vStreams[i].getId() : " << vStreams[i].getId() << endl;
+			continue;*/
+
 			ThreadSafeQueue<Image>* queuePtr = new ThreadSafeQueue<Image>(_iStreamId);
 			_mImageQueueMap[_iStreamId] = queuePtr;
 
@@ -86,6 +121,7 @@ int main(int argc, char* argv[])
 		else
 		{}
 	}
+
 	_producerThreadGroup.join_all();
 	_consumerThreadGroup.join_all();
 	_resultsRouterThreadGroup.join_all();

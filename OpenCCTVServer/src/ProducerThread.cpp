@@ -23,7 +23,9 @@ ProducerThread::~ProducerThread()
 
 void ProducerThread::operator ()()
 {
-	cout << "ProducerThread::operator: "<<"Producer thread for stream " << _stream.getId() << " started." << endl;
+	//cout << "ProducerThread::operator: "<<"Producer thread for stream " << _stream.getId() << " started." << endl;
+	//cout << "Stream reader and decoder thread for stream " << _stream.getId() << " started." << endl;
+	cout << "Decoder thread : Start decoding the images from the stream  : " << _stream.getId() << endl << endl;
 	(*vmsClientPtr).produceImageObjects((*queuePtr), _stream, imageCount);
 }
 

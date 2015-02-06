@@ -26,17 +26,18 @@ private:
 	unsigned int _iStreamId;
 	string _sInputName;
 	string _sTimestamp;
+	string _sResult;
 
 	friend class boost::serialization::access;
 	template<typename Archive>
 	void serialize(Archive & archive, const unsigned version)
 	{
-		archive & const_cast<unsigned int&>(_iWidth) & const_cast<unsigned int&>(_iHeight) & _vImageData & const_cast<unsigned int&>(_iStreamId) & _sInputName & _sTimestamp;
+		archive & const_cast<unsigned int&>(_iWidth) & const_cast<unsigned int&>(_iHeight) & _vImageData & const_cast<unsigned int&>(_iStreamId) & _sInputName & _sTimestamp & _sResult;
 	}
 
 public:
 	Image();
-	Image(unsigned int iWidth, unsigned int iHeight, vector<char>& vImageData, unsigned int iStreamId, const string& sTimestamp);
+	Image(unsigned int iWidth, unsigned int iHeight, vector<char>& vImageData, unsigned int iStreamId, const string& sTimestamp, const string& sResult);
 	~Image();
 
 	unsigned int getHeight() const;
@@ -50,6 +51,9 @@ public:
 	const string& getTimestamp() const;
 	void setTimestamp(const string& timestamp);
 	const vector<char>& getImageData() const;
-	void setImageData(const vector<char>& imageData);};
+	void setImageData(const vector<char>& imageData);
+	const string& getResult() const;
+	void setResult(const string& result);
+};
 
 #endif /* IMAGE_HPP_ */

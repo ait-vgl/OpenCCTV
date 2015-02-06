@@ -9,7 +9,7 @@
 
 namespace db {
 
-const string AnalyticInstStreamGateway::_SELECT_ANALYTICINSTSTREAM_INFO_SQL = "SELECT ais.id, ais.analyticInstanceId, ais.streamId, aip.inputName, a.id as analyticId, a.location FROM Analytic as a, AnalyticInstance as ai, AnalyticInstanceStream as ais, AnalyticInput as aip WHERE ai.analyticId = a.id AND ais.analyticInstanceId = ai.id AND ais.analyticInputId = aip.id AND ais.streamId = ?";
+const string AnalyticInstStreamGateway::_SELECT_ANALYTICINSTSTREAM_INFO_SQL = "SELECT ais.id, ais.analytic_instance_id, ais.stream_id, aip.name, a.id as analytic_id, a.location FROM analytics as a, analytic_instances as ai, analytic_instance_streams as ais, analytic_input_streams as aip WHERE ai.analytic_id = a.id AND ais.analytic_instance_id = ai.id AND ais.analytic_input_stream_id = aip.id AND ais.stream_id = ?";
 
 AnalyticInstStreamGateway::AnalyticInstStreamGateway() {
 	_pDbConn = DbConnector::getConnection();
@@ -36,10 +36,10 @@ vector<AnalyticInstStream> AnalyticInstStreamGateway::findAnalyticInstances(unsi
 			while ((*pResults).next()) {
 
 				_analyticInstStream.setId((*pResults).getInt("id"));
-				_analyticInstStream.setAnalyticInstanceId((*pResults).getInt("analyticInstanceId"));
+				_analyticInstStream.setAnalyticInstanceId((*pResults).getInt("analytic_instance_id"));
 				_analyticInstStream.setStreamId(iStreamId);
-				_analyticInstStream.setInputName((*pResults).getString("inputName"));
-				_analyticInstStream.setAnalyticId((*pResults).getInt("analyticId"));
+				_analyticInstStream.setInputName((*pResults).getString("name"));
+				_analyticInstStream.setAnalyticId((*pResults).getInt("analytic_id"));
 				_analyticInstStream.setLocation((*pResults).getString("location"));
 
 				vAnalyticInstStream.push_back(_analyticInstStream);

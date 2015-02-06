@@ -9,7 +9,7 @@
 
 namespace milestone
 {
-const string MilestoneClient::SELECT_CONNECT_INFO_SQL = "SELECT v.username, v.password, v.serverName, v.serverPort FROM VMS AS v, Camera AS c WHERE c.vmsId = v.id AND c.id = ?";
+const string MilestoneClient::SELECT_CONNECT_INFO_SQL = "SELECT v.username, v.password, v.server_name, v.server_port FROM vmses AS v, cameras AS c WHERE c.vms_id = v.id AND c.id = ?";
 
 MilestoneClient::MilestoneClient(Stream &stream, Camera &camera) : VmsClient(stream, camera)
 {
@@ -59,8 +59,8 @@ void MilestoneClient::extractConnectInformation()
 		{
 			username = (*resultsPtr).getString("username");
 			password = (*resultsPtr).getString("password");
-			serverName = (*resultsPtr).getString("serverName");
-			serverPort = (*resultsPtr).getInt("serverPort");
+			serverName = (*resultsPtr).getString("server_name");
+			serverPort = (*resultsPtr).getInt("server_port");
 		}
 		else
 		{

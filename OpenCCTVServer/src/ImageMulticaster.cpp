@@ -53,17 +53,18 @@ void ImageMulticaster::start()
 	for (size_t i = 0; i < analyticInQueues.size(); i++)
 	{
 		(*analyticInQueues[i]).write(outStr);
-		//cout << "Image sent : i = " << i << "\tStream ID: " << image.getStreamId() << "\tTimestamp: " << image.getTimestamp() << endl;
+		//cout << "Image sent - "<< "\tStream ID: " << image.getStreamId() << "\tTimestamp: " << image.getTimestamp() << endl;
+
 		//cout << "\tStream ID: " << image.getStreamId() << endl;
 		//cout << "\tTimestamp: " << image.getTimestamp() << endl;
-//		cout << "\tImage data size: " << (*imagePtr).getImageData().size() << endl;
-//		cout << "\tData: " << endl;
-//		for(int i = 0; i < 5; i++)
-//		{
-//			int chr = (*imagePtr).getImageData()[i];
-//			cout << "\t" << chr;
-//		}
-//		cout << endl;
+		//cout << "\tImage data size: " << (*imagePtr).getImageData().size() << endl;
+		//cout << "\tData: " << endl;
+		//for(int i = 0; i < 5; i++)
+		//{
+		//	int chr = (*imagePtr).getImageData()[i];
+		//	cout << "\t" << chr;
+		//}
+		//cout << endl;
 	}
 	}
 }

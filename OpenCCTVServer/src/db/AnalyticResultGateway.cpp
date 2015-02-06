@@ -9,24 +9,23 @@
 
 namespace db {
 
-const string AnalyticResultGateway::_INSERT_RESULT_SQL = "INSERT INTO AnalyticResult (StreamId, AnalyticInstanceId, AnalyticId, ImgTimestamp, Result) VALUES(?,?,?,?,?)";
+const string AnalyticResultGateway::_INSERT_RESULT_SQL = "INSERT INTO analytic_results (analytic_instance_id, image_timestamp, result, image_file_path) VALUES (?,?,?,?)";
 
 AnalyticResultGateway::AnalyticResultGateway() {
-	_pDbConn = DbConnector::getConnection();
+	_pDbConn = DbConnector::getConnection_ResultsDB();
 
 }
 
-int AnalyticResultGateway::insertResults(int iStreamId, int iAnalyticInstId, int iAnalyticId, string sImgTimestamp, string sResult)
+int AnalyticResultGateway::insertResults(int iAnalyticInstId, string sImgTimestamp, string sResult, string sImgFilePath)
 {
 	int result = 0;
 
 	try{
 		PreparedStatement* statementPtr = (*_pDbConn).prepareStatement(_INSERT_RESULT_SQL);
-		(*statementPtr).setInt(1, iStreamId);
-		(*statementPtr).setInt(2, iAnalyticInstId);
-		(*statementPtr).setInt(3, iAnalyticId);
-		(*statementPtr).setString(4, sImgTimestamp);
-		(*statementPtr).setString(5, sResult);
+		(*statementPtr).setInt(1, iAnalyticInstId);
+		(*statementPtr).setString(2, sImgTimestamp);
+		(*statementPtr).setString(3, sResult);
+		(*statementPtr).setString(4, sImgFilePath);
 		result = (*statementPtr).executeUpdate();
 
 		(*statementPtr).close();

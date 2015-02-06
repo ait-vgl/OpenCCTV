@@ -13,6 +13,9 @@
 #include "../ThreadSafeQueue.hpp"
 #include "../Image.hpp"
 #include "../db/Stream.hpp"
+#include <boost/algorithm/string.hpp>
+#include <boost/algorithm/string/split.hpp>
+#include <boost/lexical_cast.hpp>
 
 using namespace db;
 using namespace std;

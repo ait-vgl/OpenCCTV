@@ -9,8 +9,8 @@
 
 namespace db
 {
-//const string StreamGateway::_SELECT_STREAM_INFO_SQL = "SELECT DISTINCT * FROM AnalyticInstanceStream AS ais, Stream AS s WHERE s.id = ais.streamId";
-const string StreamGateway::_SELECT_STREAM_INFO_SQL = "SELECT * FROM Stream AS s WHERE s.id IN (SELECT DISTINCT ais.streamId FROM AnalyticInstanceStream as ais);";
+
+const string StreamGateway::_SELECT_STREAM_INFO_SQL = "SELECT * FROM streams AS s WHERE s.id IN (SELECT DISTINCT ais.stream_id FROM analytic_instance_streams as ais)";
 
 StreamGateway::StreamGateway()
 {
@@ -36,10 +36,10 @@ vector<Stream> StreamGateway::findAll()
 			stream.setId((*pResults).getInt("id"));
 			stream.setWidth((*pResults).getInt("width"));
 			stream.setHeight((*pResults).getInt("height"));
-			stream.setKeepAspectRatio((*pResults).getBoolean("keepAspectRatio"));
-			stream.setAllowupSizing((*pResults).getBoolean("allowUpsizing"));
-			stream.setCompressionRate((*pResults).getInt("compressionRate"));
-			stream.setCamerId((*pResults).getInt("cameraId"));
+			stream.setKeepAspectRatio((*pResults).getBoolean("keep_aspect_ratio"));
+			stream.setAllowupSizing((*pResults).getBoolean("allow_upsizing"));
+			stream.setCompressionRate((*pResults).getInt("compression_rate"));
+			stream.setCamerId((*pResults).getInt("camera_id"));
 			vStreams.push_back(stream);
 		}
 		(*pResults).close();

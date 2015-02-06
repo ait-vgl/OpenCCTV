@@ -22,7 +22,7 @@ private:
 public:
 	AnalyticResultGateway();
 	virtual ~AnalyticResultGateway();
-	int insertResults(int iStreamId, int iAnalyticInstId, int iAnalyticId, string sImgTimestamp, string sResult);
+	int insertResults(int iAnalyticInstId, string sImgTimestamp, string sResult, string sImgFilePath);
 
 
 };

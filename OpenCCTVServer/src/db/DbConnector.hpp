@@ -31,6 +31,7 @@ public:
 	 * using the given server IP, port number, username, password and database name.
 	 */
 	static Connection* getConnection();
+	static Connection* getConnection_ResultsDB();
 };
 }
 

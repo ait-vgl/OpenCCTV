@@ -47,6 +47,9 @@ string MilestoneMessage::getConnectMessage(int iRequestId, string &sUsername, st
 		return oss.str();
 	}
 	string connectMessage = oss.str();
+
+	//cout << connectMessage << endl;
+
 	connectMessage.append("\r\n\r\n");
 	return connectMessage;
 }

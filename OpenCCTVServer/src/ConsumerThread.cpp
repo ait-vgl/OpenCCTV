@@ -47,7 +47,9 @@ void ConsumerThread::operator ()()
 
 	map<int,AnalyticQueues>& _mAlyticInstanceMap = _pDataModel->getAlyticInstanceMap();
 
-	cout << "ConsumerThread::operator: "<<"Consumer thread for stream " << consumerId << " started." << endl;
+	//cout << "ConsumerThread::operator: "<<"Consumer thread for stream " << consumerId << " started." << endl;
+	//cout << "Image router thread for stream " << consumerId << " started." << endl;
+	cout << "Image router thread : Start sending images to analytic processes from the stream  : " << consumerId << endl << endl;
 	(*mqPtr).connectTo(analyticServerName, analyticServerPort, ZMQ_REQ);
 
 	for (size_t i = 0; i < _analyticInstStreams.size(); i++) {
@@ -64,7 +66,7 @@ void ConsumerThread::operator ()()
 			string sOutputQueue = "";
 			string replyStr = sendAnalyticStartRequest(_analyticInstStreams[i].getLocation(), _analyticInstStreams[i].getAnalyticInstanceId(), _analyticInstStreams[i].getAnalyticId(), consumerId);
 
-			cout << "ConsumerThread::operator : replyStr = " << replyStr << endl;
+			//cout << "ConsumerThread::operator : replyStr = " << replyStr << endl;
 
 			AnalyticServerMessage::getAnalyticQueueAddress(replyStr, sInputQueue, sOutputQueue);
 
@@ -77,7 +79,7 @@ void ConsumerThread::operator ()()
 
 				analyticQueueAddresses.push_back(analyticQueues.inputQueue);
 
-				ResultsRouterThread resultsRouterThread(sOutputQueue, imageCount);
+				ResultsRouterThread resultsRouterThread(sOutputQueue, imageCount, _analyticInstStreams[i].getAnalyticInstanceId());
 				boost::thread* pResultsRouterThread = new boost::thread(resultsRouterThread);
 				map<int, boost::thread*>& _mResultsRouterMap = _pDataModel->getResultsRouterMap();
 				_mResultsRouterMap[instanceId] = pResultsRouterThread;

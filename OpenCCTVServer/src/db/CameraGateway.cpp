@@ -9,7 +9,7 @@
 
 namespace db
 {
-const string CameraGateway::_SELECT_CAMERA_INFO_SQL = "SELECT DISTINCT c.id, c.cameraId, c.vmsId, v.type FROM Camera AS c, VMS AS v WHERE c.vmsId = v.id AND c.id = ?";
+const string CameraGateway::_SELECT_CAMERA_INFO_SQL = "SELECT DISTINCT c.id, c.camera_id, c.vms_id, v.vms_type FROM cameras AS c, vmses AS v WHERE c.vms_id = v.id AND c.id = ?";
 
 CameraGateway::CameraGateway()
 {
@@ -34,9 +34,9 @@ Camera CameraGateway::find(int iCameraId)
 		while((*resultsPtr).next())
 		{
 			camera.setId((*resultsPtr).getInt("id"));
-			camera.setCameraId((*resultsPtr).getString("cameraId"));
-			camera.setVmsId((*resultsPtr).getInt("vmsId"));
-			camera.setVmsType((*resultsPtr).getString("type"));
+			camera.setCameraId((*resultsPtr).getString("camera_id"));
+			camera.setVmsId((*resultsPtr).getInt("vms_id"));
+			camera.setVmsType((*resultsPtr).getString("vms_type"));
 		}
 		(*resultsPtr).close();
 		(*statementPtr).close();
