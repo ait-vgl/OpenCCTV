@@ -57,4 +57,4 @@ Installation guide to OpenCV: http://docs.opencv.org/trunk/doc/tutorials/introdu
 
 Installation guide to MySQL: http://www.tocker.ca/2014/04/21/installing-mysql-5-6-on-ubuntu-14-04-trusty-tahr.html
 
-To install MySQL dev kit using terminal: <code>sudo apt-get install libmysqlcppconn-dev</code>
+To install MySQL C++ connector API using terminal: <code>sudo apt-get install libmysqlcppconn-dev</code>
