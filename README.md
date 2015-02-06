@@ -30,3 +30,31 @@ The Analytics server runs video analytic instances in separate processes. Since 
 [OpenCCTV Video part 1](http://youtu.be/xRuYp1DhHBs)
 
 [OpenCCTV Video part 2](http://youtu.be/NPrm8g5uqm8)
+
+Required packages for OpenCCTV
+------------------------------
+* [Boost C++ Libraries](http://www.boost.org/)
+
+![Boost](http://www.boost.org/doc/libs/1_57_0/boost.png)
+
+Installation guide to Boost: http://particlephysicsandcode.com/2013/03/11/installing-boost-1-52-ubuntu-12-04-fedora/
+
+* [ZeroMQ](http://zeromq.org/)
+
+![ZeroMQ](http://travlr.github.io/zmqirclog/images/zeromq1-300x115.png)
+
+Installation guide to ZeroMQ: https://maddigitiser.wordpress.com/2013/05/02/installing-zeromq-on-ubuntu-13-04/
+
+* [OpenCV](http://opencv.org/)
+
+![OpenCV](http://opencv.org/wp-content/themes/opencv/images/logo.png)
+
+Installation guide to OpenCV: http://docs.opencv.org/trunk/doc/tutorials/introduction/linux_install/linux_install.html
+
+* [MySQL](http://www.mysql.com/)
+
+![MySQL](http://www.mysql.com/common/logos/logo-mysql-110x57.png)
+
+Installation guide to MySQL: http://www.tocker.ca/2014/04/21/installing-mysql-5-6-on-ubuntu-14-04-trusty-tahr.html
+
+To install MySQL dev kit using terminal: <code>sudo apt-get install libmysqlcppconn-dev</code>
