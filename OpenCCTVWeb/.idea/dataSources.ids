@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="dataSourceStorage">
+  <data-source source="LOCAL" name="Rails OpenCCTVWeb: development" uuid="16c95096-7080-438e-b62c-abba380a729b">
+    <database-info product="" version="" jdbc-version="" driver-name="" driver-version=""/>
+  </data-source>
+  <data-source source="LOCAL" name="Rails OpenCCTVWeb: test" uuid="5c6cca0e-cb8d-48ee-8fe0-1094aa2cc289">
+    <database-info product="" version="" jdbc-version="" driver-name="" driver-version=""/>
+  </data-source>
+  <data-source source="LOCAL" name="Rails OpenCCTVWeb: production" uuid="06e3d405-cda1-4fc1-848b-6dc7c8cdd9a9">
+    <database-info product="" version="" jdbc-version="" driver-name="" driver-version=""/>
+  </data-source>
+</component>

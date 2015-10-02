@@ -1,0 +1,13 @@
+<div class="container">
+  <ol class="breadcrumb">
+    <li><%= link_to 'Home', root_path %></li>
+    <li><%= link_to 'Analytic plugins', analytics_path %></li>
+    <li><%= link_to 'Analytic plugin', analytic_path(@analytic)%></li>
+    <li class="active">New input stream</li>
+  </ol>
+</div>
+
+<div class="container">
+  <h1>New Analytic Input Stream</h1>
+  <%= render 'form' %>
+</div>

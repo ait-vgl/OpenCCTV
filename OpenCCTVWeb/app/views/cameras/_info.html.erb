@@ -1,0 +1,46 @@
+<h1>
+  Camera information
+  <a href="<%=edit_vms_camera_path(@vms, @camera)%>" class="btn btn-warning"><span class="glyphicon glyphicon-pencil"></span> Edit</a>
+</h1>
+
+<div class="media">
+  <table class="table table-hover">
+    <thead>
+    <tr>
+      <th>Name</th>
+      <th>Camera ID</th>
+      <th>Description</th>
+      <th> </th>
+      <% if(@camera.vms.vms_type != 'other') %>
+      <th> </th>
+      <% end %>
+    </tr>
+    </thead>
+
+    <tbody>
+        <tr>
+          <td><%= @camera.name %></td>
+          <td><%= @camera.camera_id %></td>
+          <td><%= @camera.description %></td>
+          <td>
+            <% if (@camera.verified) %>
+                  <span class="label label-success" title="Connection to the Camera is verified.">
+                    <span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>
+                    Verified
+                  </span>
+            <% else %>
+                  <span class="label label-danger" title="Connection to the Camera is failed.">
+                    <span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span>
+                    Unverified
+                  </span>
+            <% end %>
+          </td>
+          <% if(@camera.vms.vms_type != 'other') %>
+          <td>
+            <%= image_tag("#{@camera.vms.id}_#{@camera.id}.jpeg", :alt => 'Default frame from Camera comes here.', width: '320') %>
+          </td>
+          <% end %>
+        </tr>
+    </tbody>
+  </table>
+</div>

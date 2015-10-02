@@ -1,0 +1,32 @@
+<div class="container">
+  <ol class="breadcrumb">
+    <li><%= link_to 'Home', root_path %></li>
+    <li><%= link_to 'VMS connectors', vms_connectors_path %></li>
+    <li class="active">VMS connector</li>
+  </ol>
+</div>
+
+<div class="container">
+  <%= render 'info' %>
+
+  <p>
+    <strong>Verification report:</strong>
+    <% if(@vms_connector.verified?) %>
+      <div class="alert alert-success">
+        <samp>
+          <%= @vms_connector.log.html_safe %>
+        </samp>
+      </div>
+  <% else %>
+      <div class="alert alert-danger">
+        <samp>
+          <%= @vms_connector.log.html_safe %>
+        </samp>
+      </div>
+  <% end %>
+  </p>
+
+  <p>
+    <a href="<%=vms_connector_download_path(@vms_connector.filename)%>" class="btn btn-xs btn-primary"><span class="glyphicon glyphicon-download-alt"></span> Download the Archive</a>
+  </p>
+</div>

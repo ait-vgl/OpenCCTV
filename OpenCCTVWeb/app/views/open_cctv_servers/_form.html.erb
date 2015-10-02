@@ -1,0 +1,36 @@
+<%= form_for(@open_cctv_server) do |f| %>
+  <!--Report errors if any-->
+  <% if @open_cctv_server.errors.any? %>
+      <div id="error_explanation" class="alert alert-danger" role="alert">
+      <h2><%= pluralize(@open_cctv_server.errors.count, "error") %> prohibited this open_cctv_server from being saved:</h2>
+
+      <ul>
+      <% @open_cctv_server.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <!--Form fields-->
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name%>
+  </div>
+  <div class="field">
+    <%= f.label :host %><br>
+    <%= f.text_field :host%>
+  </div>
+  <div class="field">
+    <%= f.label :port %><br>
+    <%= f.number_field :port%>
+  </div>
+
+  <!--Submit button-->
+  <p>
+  <div class="actions">
+    <%= f.submit 'Save Connection Details', :class => 'btn btn-success btn-mini'%>
+    <%= link_to 'Cancel', open_cctv_servers_path, :class => "btn btn-danger" %>
+  </div>
+  </p>
+<% end %> <!--Form ends-->

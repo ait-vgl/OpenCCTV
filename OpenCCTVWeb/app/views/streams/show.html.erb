@@ -1,0 +1,15 @@
+<div class="container">
+  <ol class="breadcrumb">
+    <li><%= link_to 'Home', root_path %></li>
+    <li><%= link_to 'VMS', vms_path(@vms) %></li>
+    <li><%= link_to 'Camera', vms_camera_path(@vms, @camera) %></li>
+    <li class="active">Stream</li>
+  </ol>
+</div>
+
+<div class="container">
+  <%= render 'vms_connectors/info' %>
+  <%= render 'vmses/info' %>
+  <%= render 'cameras/info' %>
+  <%= render 'info' %>
+</div>

@@ -1,0 +1,29 @@
+<h1>Listing analytic_instance_streams</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Analytic instance</th>
+      <th>Analytic input stream</th>
+      <th>Stream</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @analytic_instance_streams.each do |analytic_instance_stream| %>
+      <tr>
+        <td><%= analytic_instance_stream.analytic_instance.name %></td>
+        <td><%= analytic_instance_stream.analytic_input_stream.name %></td>
+        <td><%= analytic_instance_stream.stream.name %></td>
+        <td><%= link_to 'Show', analytic_instance_stream %></td>
+        <td><%= link_to 'Edit', edit_analytic_instance_stream_path(analytic_instance_stream) %></td>
+        <td><%= link_to 'Destroy', analytic_instance_stream, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Analytic instance stream', new_analytic_instance_stream_path %>

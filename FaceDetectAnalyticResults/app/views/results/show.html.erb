@@ -1,0 +1,40 @@
+<div class="container">
+<p id="notice"><%= notice %></p>
+
+  <p>
+    <strong>ID</strong>:
+    <%= @result.id %>
+  </p>
+
+<p>
+  <strong>Analytic instance:</strong>
+  <%= @result.analytic_instance_id %>
+</p>
+
+<p>
+  <strong>Timestamp:</strong>
+  <%= @result.timestamp %>
+</p>
+
+<p>
+  <strong>Result text:</strong>
+  <%= @result.result_text %>
+</p>
+
+<p>
+  <strong>Time:</strong>
+  <%= @result.time %>
+</p>
+
+<p>
+  <strong>Face count:</strong>
+  <%= @result.count %>
+</p>
+
+  <p>
+    <strong>RTSP URI:</strong>
+    <%= @result.get_rtsp_uri %>
+  </p>
+
+<%= link_to 'Back', results_path %>
+</div>

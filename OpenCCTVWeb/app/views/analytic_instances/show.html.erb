@@ -1,0 +1,60 @@
+<div class="container">
+  <ol class="breadcrumb">
+    <li><%= link_to 'Home', root_path %></li>
+    <li><%= link_to 'Analytic instances', analytic_instances_path %></li>
+    <li class="active">Analytic instance</li>
+  </ol>
+</div>
+
+<%= render 'info' %>
+
+<div class="container">
+  <p>
+    <a href="<%= new_analytic_instance_analytic_instance_stream_path(@analytic_instance)%>" class="btn btn-success"> <span class="glyphicon glyphicon-plus"></span> Add Input Stream </a>
+  </p>
+
+  <br/>
+
+  <div class="media">
+    <%if @analytic_instance.analytic_instance_streams.empty?%>
+        <div class="alert alert-warning">
+          Currently no input streams are registered with the analytic instance.
+        </div>
+    <%else%>
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4>Analytic Instance Input Streams</h4>
+          </div>
+          <div class="media">
+            <table class="table table-hover">
+              <thead>
+              <tr>
+                <th>#</th>
+                <th>Analytic input stream</th>
+                <th>Stream</th>
+                <th colspan="3"></th>
+              </tr>
+              </thead>
+
+              <tbody>
+              <% i = 1 %>
+              <% @analytic_instance.analytic_instance_streams.each do |input_stream| %>
+                  <tr>
+                    <td><%= i %></td>
+                    <td><%= input_stream.analytic_input_stream.name %></td>
+                    <td><%= input_stream.stream.name %></td>
+                    <td><%= link_to 'Show', analytic_instance_analytic_instance_stream_path(@analytic_instance,input_stream), class: "btn btn-xs btn-default"%></td>
+                    <td><%= link_to 'Edit', edit_analytic_instance_analytic_instance_stream_path(@analytic_instance,input_stream), class: "btn btn-xs btn-warning" %>
+                    <td><%= link_to 'Destroy', analytic_instance_analytic_instance_stream_path(@analytic_instance,input_stream), method: :delete, class: "btn btn-xs btn-danger", data: { confirm: 'Are you sure?' } %></td>
+                  </tr>
+                  <% i = i + 1 %>
+              <% end %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+    <%end%>
+  </div>
+</div>
+
+

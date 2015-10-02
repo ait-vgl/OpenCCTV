@@ -1,0 +1,35 @@
+<%= form_for([@vms, @camera]) do |f| %>
+    <% if @camera.errors.any? %>
+        <div id="error_explanation" class="alert alert-danger" role="alert">
+          <h2><%= pluralize(@camera.errors.count, "Error") %> prohibited this Camera from being saved:</h2>
+          <ul>
+            <% @camera.errors.full_messages.each do |message| %>
+                <li>
+                  <%= message %>
+                </li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <div class="field">
+      <%= f.label :name %>
+      <br>
+      <%= f.text_field :name, :value => @camera.name %>
+    </div>
+    <div class="field">
+      <%= f.label :camera_id, "Camera ID" %>
+      <br>
+      <%= f.text_field :camera_id, :value => @camera.camera_id %>
+    </div>
+    <div class="field">
+      <%= f.label :description %>
+      <br>
+      <%= f.text_area :description, :value => @camera.description %>
+    </div>
+    <br />
+    <div class="actions">
+      <%= f.submit "Save Camera", :class => "btn btn-success btn-mini" %>
+      <%= link_to 'Cancel', vms_path(@vms), :class => "btn btn-danger" %>
+    </div>
+<% end %>

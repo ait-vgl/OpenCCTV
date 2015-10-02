@@ -1,6 +1,0 @@
-# ignore all Debug directories
-# matches "Debug" in any subfolder
-Debug/
-
-# ignore all files ending with ~
-*~ 

@@ -1,0 +1,35 @@
+<%= form_for(@vms_connector) do |f| %>
+    <!--Report errors if any-->
+    <% if @vms_connector.errors.any? %>
+        <div id="error_explanation" class="alert alert-danger" role="alert">
+            <h2><%= pluralize(@vms_connector.errors.count, "error") %> prohibited this VMS connector from being uploaded:</h2>
+            <ul>
+                <% @vms_connector.errors.full_messages.each do |message| %>
+                    <li><%= message %></li>
+                <% end %>
+            </ul>
+        </div>
+    <% end %>
+
+    <!--Form fields-->
+    <div class="field">
+      <%= f.label 'Name*' %><br>
+      <%= f.text_field :name %>
+    </div>
+    <div class="field">
+      <%= f.label :description %><br>
+      <%= f.text_area :description %>
+    </div>
+    <div class="field">
+      <%= f.label  'VMS connector plugin archive zip file*'%><br>
+      <%= f.file_field :file%>
+    </div>
+
+    <!--Submit button-->
+    <p>
+    <div class="actions">
+      <%= f.submit 'Upload and save VMS connector', :class => 'btn btn-success btn-mini'%>
+      <%= link_to 'Cancel', @vms_connector, :class => "btn btn-danger" %>
+    </div>
+    </p>
+<% end %> <!--Form ends-->

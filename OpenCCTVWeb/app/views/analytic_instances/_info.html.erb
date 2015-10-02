@@ -1,0 +1,23 @@
+<div class="container">
+  <h1>
+    Analytic instance information
+    <a href="<%=edit_analytic_instance_path(@analytic_instance)%>" class="btn btn-warning"><span class="glyphicon glyphicon-pencil"></span> Edit</a>
+  </h1>
+  <p>
+    <strong>Analytic ID:</strong>
+    <%= @analytic_instance.id %>
+  </p>
+  <p>
+    <strong>Name:</strong>
+    <%= @analytic_instance.name %>
+  </p>
+  <p>
+    <strong>Analytic Type:</strong>
+    <%= @analytic_instance.analytic.name %>
+  </p>
+  <p>
+    <strong>Description:</strong>
+    <%= @analytic_instance.description %>
+  </p>
+</div>
+

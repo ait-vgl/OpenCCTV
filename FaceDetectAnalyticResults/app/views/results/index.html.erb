@@ -1,0 +1,36 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Face Detect Analytic Results</h1>
+
+<table class="table table-hover">
+  <thead>
+  <tr>
+    <th>#</th>
+    <th>Analytic Instance ID</th>
+    <th>Time</th>
+    <th>Face count</th>
+    <th></th>
+    <th colspan="2"></th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @results.each do |result| %>
+      <tr>
+        <td><%= result.id %></td>
+        <td><%= result.analytic_instance_id %></td>
+        <td><%= result.time %></td>
+        <td><%= result.count %></td>
+        <td>
+          <% @images = Dir.glob("#{Rails.root}/app/assets/images/#{result.timestamp}/*.jpg") %>
+          <% @images.each do |image| %>
+              <% image_path = image.to_s.gsub("#{Rails.root}/app/assets/images/", '') %>
+              <%= image_tag "#{image_path}" %>
+          <% end %>
+        </td>
+        <td><%= link_to '', result, :class => "btn btn-xs btn-default glyphicon glyphicon-play" %></td>
+        <td><%= link_to 'Delete', result, method: :delete, :class => "btn btn-xs btn-danger", data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>

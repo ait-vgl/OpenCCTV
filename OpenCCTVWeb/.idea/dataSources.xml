@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" hash="140794004">
+    <data-source source="LOCAL" name="Rails OpenCCTVWeb: development" uuid="16c95096-7080-438e-b62c-abba380a729b">
+      <driver-ref>mysql</driver-ref>
+      <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://127.0.0.1/opencctv_development</jdbc-url>
+      <libraries />
+    </data-source>
+    <data-source source="LOCAL" name="Rails OpenCCTVWeb: test" uuid="5c6cca0e-cb8d-48ee-8fe0-1094aa2cc289">
+      <driver-ref>mysql</driver-ref>
+      <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://127.0.0.1/opencctv_test</jdbc-url>
+      <libraries />
+    </data-source>
+    <data-source source="LOCAL" name="Rails OpenCCTVWeb: production" uuid="06e3d405-cda1-4fc1-848b-6dc7c8cdd9a9">
+      <driver-ref>mysql</driver-ref>
+      <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://127.0.0.1/opencctv_production</jdbc-url>
+      <libraries />
+    </data-source>
+  </component>
+</project>

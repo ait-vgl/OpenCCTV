@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<streams>
+
+	<stream>
+		<id> 1 </id>
+		<width> 2288 </width>
+		<height> 1712 </height>
+		<keepaspectratio> true </keepaspectratio>
+		<allowupsizing> false </allowupsizing>
+		<compressionrate> 100 </compressionrate>
+		<cameraid> Custom_Cam_ID </cameraid>
+		<vmstypeid> 1 </vmstypeid>
+		<serverip> localhost </serverip>
+		<serverport> 8080 </serverport>
+		<username> opencctv </username>
+		<password> opencctvpassword </password>
+		<vmsconnectordir>
+			/usr/local/opencctv/vms_connectors/FakeVmsConnector
+		</vmsconnectordir>
+		<vmsconnectorfile> libFakeVmsConnectorPlugin.so </vmsconnectorfile>
+	</stream>
+
+</streams>

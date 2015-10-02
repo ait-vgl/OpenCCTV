@@ -1,0 +1,68 @@
+<div class="container">
+  <ol class="breadcrumb">
+    <li><%= link_to 'Home', root_path %></li>
+    <li><%= link_to 'VMS connectors', open_cctv_servers_path%></li>
+    <li class="active">Edit VMS connector</li>
+  </ol>
+</div>
+
+<div class="container">
+  <h1>Edit the VMS connector information</h1>
+  <%= form_for(@vms_connector) do |f| %>
+      <!--Form fields-->
+      <div class="field">
+        <%= f.label 'Name*' %><br>
+        <%= f.text_field :name %>
+      </div>
+      <div class="field">
+        <%= f.label :description %><br>
+        <%= f.text_area :description %>
+      </div>
+
+      <!--Submit button-->
+      <p>
+      <div class="actions">
+        <%= f.submit 'Update', :class => 'btn btn-success btn-mini'%>
+        <%= link_to 'Cancel', @vms_connector, :class => "btn btn-danger" %>
+      </div>
+      </p>
+  <% end %> <!--Form ends-->
+
+  <br>
+  <div>
+    <strong>Changing VMS connector plugin archive zip file:</strong> <br>
+    If you need to change the VMS connector archive, please
+    <%= link_to 'Delete', @vms_connector, method: :delete, :class => "btn btn-xs btn-danger", data: { confirm: 'Are you sure?' } %>
+    the current VMS connector and upload a new.
+    <p>
+      <strong>Archive info:</strong>
+      <% if(@vms_connector.verified?) %>
+        <span class="label label-success">
+          <span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>
+          Verified
+        </span>
+      <% else %>
+        <span class="label label-danger">
+          <span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span>
+          Invalid
+        </span>
+      <% end %>
+    </p>
+    <p>
+      <% if(@vms_connector.verified?) %>
+        <div class="alert alert-success">
+          <samp>
+            <%= @vms_connector.log.html_safe %>
+          </samp>
+        </div>
+    <% else %>
+        <div class="alert alert-danger">
+          <samp>
+            <%= @vms_connector.log.html_safe %>
+          </samp>
+        </div>
+    <% end %>
+    </p>
+  </div>
+
+</div>

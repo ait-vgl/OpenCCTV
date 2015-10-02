@@ -1,0 +1,58 @@
+<div class="container">
+  <ol class="breadcrumb">
+    <li><%= link_to 'Home', root_path %></li>
+    <li><%= link_to 'Analytic plugins', analytics_path %></li>
+    <li class="active">Analytic plugin</li>
+  </ol>
+</div>
+
+<%= render 'info' %>
+
+<br/>
+
+<div class="container">
+  <p>
+    <a href="<%= new_analytic_analytic_input_stream_path(@analytic)%>" class="btn btn-success"> <span class="glyphicon glyphicon-plus"></span> Add New Input Streams Manually </a>
+  </p>
+
+  <%if @analytic.analytic_input_streams.empty?%>
+      <div class="alert alert-warning">
+        Currently no input streams are registered with the analytic.
+      </div>
+  <%else%>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4>Input Streams</h4>
+        </div>
+        <div class="media">
+          <table class="table table-hover">
+            <thead>
+            <tr>
+              <th>#</th>
+              <th>Name</th>
+              <th>Description</th>
+              <th> </th>
+              <th colspan="3"></th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <% i = 1 %>
+            <% @analytic.analytic_input_streams.each do |input_stream|%>
+                <tr>
+                  <td><%= i %></td>
+                  <td><%= input_stream.name %></td>
+                  <td><%= input_stream.description %></td>
+                  <td><%= link_to 'Show', analytic_analytic_input_stream_path(@analytic,input_stream), :class => "btn btn-xs btn-default"%></td>
+                  <td><%= link_to 'Edit', edit_analytic_analytic_input_stream_path(@analytic, input_stream), :class => "btn btn-xs btn-warning" %></td>
+                  <td><%= link_to 'Destroy', analytic_analytic_input_stream_path(@analytic, input_stream), method: :delete, :class => "btn btn-xs btn-danger", data: { confirm: 'Are you sure?' } %></td>
+                </tr>
+                <% i = i + 1 %>
+            <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+  <%end%>
+</div>
+

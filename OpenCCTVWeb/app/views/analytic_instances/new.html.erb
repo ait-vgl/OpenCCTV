@@ -1,0 +1,12 @@
+<div class="container">
+  <ol class="breadcrumb">
+    <li><%= link_to 'Home', root_path %></li>
+    <li><%= link_to 'Analytic instances', analytic_instances_path %></li>
+    <li class="active">New analytic instance</li>
+  </ol>
+</div>
+
+<div class="container">
+  <h1>Create a new analytic instance</h1>
+  <%= render 'form' %> <!--Form from _form.html.erb-->
+</div>

@@ -1,0 +1,60 @@
+<div class="container">
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h1>OpenCCTV Server Information</h1>
+    </div>
+    <div class="panel-body">
+      <div class="media">
+        <div class="media-body col-sm-12">
+          <p>
+            <strong>Connection Name:</strong>
+            <%= @open_cctv_server.name %>
+          </p>
+          <p>
+            <strong>Host:</strong>
+            <%= @open_cctv_server.host %>
+          </p>
+          <p>
+            <strong>Port:</strong>
+            <%= @open_cctv_server.port %>
+          </p>
+          <p>
+            <strong>Status:</strong>
+            <%if @open_cctv_server.status.nil? || @open_cctv_server.status.empty? || @open_cctv_server.status.blank?%>
+                Unknown
+            <%else%>
+                <%= @open_cctv_server.status %>
+            <%end%>
+          </p>
+          <p>
+            <strong>PID:</strong>
+            <%if @open_cctv_server.pid.nil? || @open_cctv_server.pid.blank?%>
+                NA
+            <%else%>
+                <%= @open_cctv_server.pid %>
+            <%end%>
+          </p>
+          <p>
+            <%if (@open_cctv_server.status.eql? 'Stopped') || (@open_cctv_server.status.eql? 'Unknown')%>
+                <%= link_to 'Edit', edit_open_cctv_server_path(@open_cctv_server), :class => "btn btn-xs btn-warning", data: { confirm: 'This may need restarting the OpenCCTV Server, do you want to continue?' }%> |
+                <%= link_to 'Delete', @open_cctv_server, method: :delete, :class => "btn btn-xs btn-danger", data: { confirm: 'Do you want to delete the connection to the OpenCCTV Server?' } %>
+            <%end%>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <br/>
+  <% if @open_cctv_server.status.eql? 'Stopped' %>
+      <%= link_to 'Start Server', open_cctv_servers_start_path(@open_cctv_server), :class => "btn btn-success"%>
+  <%elsif @open_cctv_server.status.eql? 'Running'%>
+      <%= link_to 'Stop Server', open_cctv_servers_stop_path(@open_cctv_server), :class => "btn btn-danger"%>
+      <%= link_to 'Check Server Status', open_cctv_server_path(@open_cctv_server), :class => "btn btn-success"%>
+  <%else%>
+      <%= link_to 'Restart Server', open_cctv_servers_restart_path(@open_cctv_server), :class => "btn btn-warning"%>
+      <%= link_to 'Check Server Status', open_cctv_server_path(@open_cctv_server), :class => "btn btn-success"%>
+  <%end%>
+
+</div>

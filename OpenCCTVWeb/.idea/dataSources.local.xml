@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal">
+    <data-source name="Rails OpenCCTVWeb: development" uuid="16c95096-7080-438e-b62c-abba380a729b">
+      <user-name>opencctv</user-name>
+      <user-password>dfe5dfdadfcfdfc4dfe9dfe9dffedffcdfeadf9b</user-password>
+    </data-source>
+    <data-source name="Rails OpenCCTVWeb: test" uuid="5c6cca0e-cb8d-48ee-8fe0-1094aa2cc289">
+      <user-name>opencctv</user-name>
+      <user-password>dfe5dfdadfcfdfc4dfe9dfe9dffedffcdfeadf9b</user-password>
+    </data-source>
+    <data-source name="Rails OpenCCTVWeb: production" uuid="06e3d405-cda1-4fc1-848b-6dc7c8cdd9a9">
+      <user-name>opencctv</user-name>
+      <user-password>dfe5dfdadfcfdfc4dfe9dfe9dffedffcdfeadf9b</user-password>
+    </data-source>
+  </component>
+</project>
