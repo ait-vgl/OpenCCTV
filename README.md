@@ -58,3 +58,15 @@ Installation guide to OpenCV: http://docs.opencv.org/trunk/doc/tutorials/introdu
 Installation guide to MySQL: http://www.tocker.ca/2014/04/21/installing-mysql-5-6-on-ubuntu-14-04-trusty-tahr.html
 
 To install MySQL C++ connector API using terminal: <code>sudo apt-get install libmysqlcppconn-dev</code>
+
+Supported By
+-------------
+This project is developed by [Vision and Graphics Lab (VGL)](http://vgl-ait.org/wiki/doku.php) at [Asian Institute of Technology](http://www.ait.asia) and the [National Electronics and Computer Technology Center (NECTEC)](http://www.nectec.or.th/en/).
+
+![AIT logo](http://www.ait.ac.th/media/documents/logo_ait_08_ver3.jpg)
+
+![NECTEC logo](http://www.nstda.or.th/images/stories/resource/corporate-band-nstda/Color-400/20110613-nectec-400px.gif)
+
+This project was funded by the [Nation Science and Technology Development Agency (NSTDA)](http://www.nstda.or.th/eng/).
+
+![NSTDA logo](http://www.nstda.or.th/images/stories/resource/corporate-band-nstda/Color-400/20110613-nstda-400px.gif)
