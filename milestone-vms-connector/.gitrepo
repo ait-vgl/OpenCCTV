@@ -6,6 +6,6 @@
 [subrepo]
 	remote = https://github.com/ait-vgl/milestone-vms-connector
 	branch = master
-	commit = 485dd8df96eaa099e6ac3e240c95bc64a4abe4ab
-	parent = db64da2e70f27ae0f3582eb25373823c9e3b90e7
+	commit = d97e3ab146f952599f3683c74136e6e394311d51
+	parent = 402507a3c3a5dffff3f22359f7fab33b4d26f4f9
 	cmdver = 0.3.0
