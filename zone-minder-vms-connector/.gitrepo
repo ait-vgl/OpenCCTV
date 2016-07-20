@@ -1,0 +1,11 @@
+; DO NOT EDIT (unless you know what you are doing)
+;
+; This subdirectory is a git "subrepo", and this file is maintained by the
+; git-subrepo command. See https://github.com/git-commands/git-subrepo#readme
+;
+[subrepo]
+	remote = https://github.com/ait-vgl/zone-minder-vms-connector
+	branch = master
+	commit = 0089ed581b45b8c4400c57f17457c3ecd29f3b57
+	parent = 2fd38574002881266a102f47952c5fb7c39c9c88
+	cmdver = 0.3.0
