@@ -1,0 +1,11 @@
+; DO NOT EDIT (unless you know what you are doing)
+;
+; This subdirectory is a git "subrepo", and this file is maintained by the
+; git-subrepo command. See https://github.com/git-commands/git-subrepo#readme
+;
+[subrepo]
+	remote = https://github.com/ait-vgl/opencctv-server
+	branch = master
+	commit = 768aa148f26ed0d95ea5c48df568c69c65d73e28
+	parent = bb09faa9fcd4e9b71aeb91471ff46615ea9d35f2
+	cmdver = 0.3.0
