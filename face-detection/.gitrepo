@@ -1,0 +1,11 @@
+; DO NOT EDIT (unless you know what you are doing)
+;
+; This subdirectory is a git "subrepo", and this file is maintained by the
+; git-subrepo command. See https://github.com/git-commands/git-subrepo#readme
+;
+[subrepo]
+	remote = https://github.com/ait-vgl/face-detection
+	branch = master
+	commit = 13625e55746cdd6bcfe50ca45f691006fd86aa8e
+	parent = 817335654c01625dee8a3dddc625e12478d02364
+	cmdver = 0.3.0
