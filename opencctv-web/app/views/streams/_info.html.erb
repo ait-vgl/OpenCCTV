@@ -1,0 +1,58 @@
+<h1>
+  Stream information
+  <a href="<%=edit_vms_camera_stream_path(@vms, @camera, @stream)%>" class="btn btn-warning"><span class="glyphicon glyphicon-pencil"></span> Edit</a>
+</h1>
+
+<div class="media">
+  <table class="table table-hover">
+    <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Width</th>
+      <th>Height</th>
+      <th>Keep aspect ratio</th>
+      <th>Allow upsizing</th>
+      <th>Compression rate</th>
+      <th> </th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr>
+      <td><%= @stream.name %></td>
+      <td><%= @stream.description %></td>
+      <td><%= @stream.width %></td>
+      <td><%= @stream.height %></td>
+      <td><%= @stream.keep_aspect_ratio %></td>
+      <td><%= @stream.allow_upsizing %></td>
+      <td><%= @stream.compression_rate %></td>
+      <td>
+        <% if (@camera.verified) %>
+                  <span class="label label-success" title="Connection to the Camera is verified.">
+                    <span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>
+                    Verified
+                  </span>
+        <% else %>
+                  <span class="label label-danger" title="Connection to the Camera is failed.">
+                    <span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span>
+                    Unverified
+                  </span>
+        <% end %>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+<% if(@stream.camera.vms.vms_type != 'other') %>
+<center>
+<div class="container">
+  <% if(@stream.name.start_with?('Default - ') && @stream.camera.vms.vms_type != 'milestone') %>
+      <%= image_tag("#{@camera.vms.id}_#{@camera.id}.jpeg", :alt => 'Default frame of Stream comes here.', width: '720') %>
+  <% else %>
+      <%= image_tag("#{@camera.vms.id}_#{@camera.id}_#{@stream.id}.jpeg", :alt => 'Default frame of Stream comes here.', width: '720') %>
+  <% end %>
+</div>
+</center>
+<% end %>

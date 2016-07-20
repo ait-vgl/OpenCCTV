@@ -1,0 +1,66 @@
+<div class="container">
+  <ol class="breadcrumb">
+    <li><%= link_to 'Home', root_path %></li>
+    <li><%= link_to 'Analytic plugins', analytics_path %></li>
+    <li class="active">Edit analytic plugin</li>
+  </ol>
+</div>
+
+<div class="container">
+  <h1>Edit the analytic plugin information</h1>
+  <%= form_for(@analytic) do |f| %>
+      <!--Form fields-->
+      <div class="field">
+        <%= f.label 'Name*' %><br>
+        <%= f.text_field :name %>
+      </div>
+      <div class="field">
+        <%= f.label :description %><br>
+        <%= f.text_area :description %>
+      </div>
+
+      <!--Submit button-->
+      <p>
+      <div class="actions">
+        <%= f.submit 'Update', :class => 'btn btn-success btn-mini'%>
+      </div>
+      </p>
+  <% end %> <!--Form ends-->
+
+  <br>
+  <div>
+    <strong>Changing analytic plugin archive zip file:</strong> <br>
+    If you need to change the analytic plugin archive, please
+    <%= link_to 'Delete', @analytic, method: :delete, :class => "btn btn-xs btn-danger", data: { confirm: 'Are you sure?' } %>
+    the current analytic plugin and upload a new.
+    <p>
+      <strong>Archive info:</strong>
+      <% if(@analytic.verified?) %>
+        <span class="label label-success">
+          <span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>
+          Verified
+        </span>
+      <% else %>
+        <span class="label label-danger">
+          <span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span>
+          Invalid
+        </span>
+      <% end %>
+    </p>
+    <p>
+      <% if(@analytic.verified?) %>
+        <div class="alert alert-success">
+          <samp>
+            <%= @analytic.log.html_safe %>
+          </samp>
+        </div>
+    <% else %>
+        <div class="alert alert-danger">
+          <samp>
+            <%= @analytic.log.html_safe %>
+          </samp>
+        </div>
+    <% end %>
+    </p>
+  </div>
+</div>

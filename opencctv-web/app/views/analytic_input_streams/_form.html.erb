@@ -1,0 +1,32 @@
+<%= form_for([@analytic, @analytic_input_stream]) do |f| %>
+  <!--Report errors if any-->
+  <% if @analytic_input_stream.errors.any? %>
+    <div id="error_explanation" class="alert alert-danger" role="alert">
+      <h2><%= pluralize(@analytic_input_stream.errors.count, "error") %> prohibited this analytic input stream from being saved:</h2>
+
+      <ul>
+      <% @analytic_input_stream.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+    <!--Form fields-->
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br>
+    <%= f.text_area :description %>
+  </div>
+
+    <!--Submit button-->
+    <p>
+    <div class="actions">
+      <%= f.submit class:'btn btn-success btn-mini' %>
+      <%= link_to 'Cancel', @analytic, :class => "btn btn-danger" %>
+    </div>
+    </p>
+<% end %> <!--Form ends-->

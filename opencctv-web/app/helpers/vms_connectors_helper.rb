@@ -1,0 +1,2 @@
+module VmsConnectorsHelper
+end

@@ -1,0 +1,36 @@
+<%= form_for(@analytic) do |f| %>
+  <!--Report errors if any-->
+  <% if @analytic.errors.any? %>
+    <div id="error_explanation" class="alert alert-danger" role="alert">
+      <h2><%= pluralize(@analytic.errors.count, "error") %> prohibited this analytic from being uploaded:</h2>
+
+      <ul>
+      <% @analytic.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <!--Form fields-->
+  <div class="field">
+    <%= f.label 'Name*' %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br>
+    <%= f.text_area :description %>
+  </div>
+  <div class="field">
+     <%= f.label  'Analytic plugin archive zip file*'%><br>
+     <%= f.file_field :file%>
+   </div>
+
+  <!--Submit button-->
+  <p>
+  <div class="actions">
+    <%= f.submit 'Upload and save analytic plugin', :class => 'btn btn-success btn-mini'%>
+    <%= link_to 'Cancel', @analytic, :class => "btn btn-danger" %>
+  </div>
+  </p>
+<% end %><!--Form ends-->

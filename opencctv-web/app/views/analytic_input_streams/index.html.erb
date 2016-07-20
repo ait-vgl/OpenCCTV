@@ -1,0 +1,29 @@
+<h1>Listing analytic_input_streams</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Analytic</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @analytic_input_streams.each do |analytic_input_stream| %>
+      <tr>
+        <td><%= analytic_input_stream.name %></td>
+        <td><%= analytic_input_stream.description %></td>
+        <td><%= analytic_input_stream.analytic.name %></td>
+        <td><%= link_to 'Show', analytic_input_stream %></td>
+        <td><%= link_to 'Edit', edit_analytic_input_stream_path(analytic_input_stream) %></td>
+        <td><%= link_to 'Destroy', analytic_input_stream, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Analytic input stream', new_analytic_input_stream_path %>

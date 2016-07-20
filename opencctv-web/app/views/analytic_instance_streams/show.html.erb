@@ -1,0 +1,12 @@
+<div class="container">
+  <ol class="breadcrumb">
+    <li><%= link_to 'Home', root_path %></li>
+    <li><%= link_to 'Analytic instances', analytic_instances_path %></li>
+    <li><%= link_to 'Analytic instance', analytic_instance_path(@analytic_instance) %></li>
+    <li class="active">Analytic instance input stream</li>
+  </ol>
+</div>
+
+<%= render 'analytic_instances/info' %>
+
+<%= render 'info' %>

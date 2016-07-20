@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  description: MyText
+  width: 1
+  height: 1
+  keep_aspect_ratio: false
+  allow_upsizing: false
+  compression_rate: 1
+  verified: false
+  camera_id: 
+
+two:
+  name: MyString
+  description: MyText
+  width: 1
+  height: 1
+  keep_aspect_ratio: false
+  allow_upsizing: false
+  compression_rate: 1
+  verified: false
+  camera_id: 

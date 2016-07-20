@@ -1,0 +1,56 @@
+<%= form_for([@vms, @camera, @stream]) do |f| %>
+    <% if @stream.errors.any? %>
+        <div id="error_explanation" class="alert alert-danger" role="alert">
+          <h2><%= pluralize(@stream.errors.count, "Error") %> prohibited this Stream from being saved:</h2>
+          <ul>
+            <% @stream.errors.full_messages.each do |message| %>
+                <li>
+                  <%= message %>
+                </li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <div class="field">
+      <%= f.label :name %>
+      <br>
+      <%= f.text_field :name, :value => @stream.name %>
+    </div>
+
+    <div class="field">
+      <%= f.label :width %>
+      <br>
+      <%= f.number_field :width, :value => @stream.width %>
+    </div>
+    <div class="field">
+      <%= f.label :height %>
+      <br>
+      <%= f.number_field :height, :value => @stream.height %>
+    </div>
+    <br />
+    <div class="field">
+      <%= f.check_box :keep_aspect_ratio, :value => @stream.keep_aspect_ratio %>
+      <%= f.label :keep_aspect_ratio %>
+    </div>
+    <div class="field">
+      <%= f.check_box :allow_upsizing, :value => @stream.allow_upsizing %>
+      <%= f.label :allow_upsizing %>
+    </div>
+    <br />
+    <div class="field">
+      <%= f.label :compression_rate %>
+      <br>
+      <%= f.number_field :compression_rate, :value => @stream.compression_rate %>
+    </div>
+    <div class="field">
+      <%= f.label :description %>
+      <br>
+      <%= f.text_area :description, :value => @stream.description %>
+    </div>
+    <br />
+    <div class="actions">
+      <%= f.submit "Save Stream", :class => "btn btn-success btn-mini"%>
+      <%= link_to 'Cancel', vms_camera_path(@vms, @camera), :class => "btn btn-danger" %>
+    </div>
+<% end %>

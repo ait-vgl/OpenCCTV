@@ -1,0 +1,12 @@
+<div class="container">
+  <ol class="breadcrumb">
+    <li><%= link_to 'Home', root_path %></li>
+    <li><%= link_to 'Open CCTV Server', open_cctv_server_path(@open_cctv_server) %></li>
+    <li class="active">Edit OpenCCTV Server</li>
+  </ol>
+</div>
+
+<div class="container">
+  <h1>Editing OpenCCTV Server connection</h1>
+  <%= render 'form' %>
+</div>

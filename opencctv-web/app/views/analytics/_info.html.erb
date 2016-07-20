@@ -1,0 +1,46 @@
+<div class="container">
+  <h1>
+    Analytic plugin information
+    <a href="<%=edit_analytic_path(@analytic)%>" class="btn btn-warning"><span class="glyphicon glyphicon-pencil"></span> Edit</a>
+  </h1>
+  <p>
+    <strong>Name:</strong>
+    <%= @analytic.name %>
+  </p>
+  <p>
+    <strong>Description:</strong>
+    <%= @analytic.description %>
+  </p>
+  <p>
+    <strong>Verification report:</strong>
+    <% if(@analytic.verified?) %>
+        <span class="label label-success">
+          <span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>
+          Verified
+        </span>
+    <% else %>
+        <span class="label label-danger">
+          <span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span>
+          Invalid
+        </span>
+    <% end %>
+  </p>
+  <p>
+    <% if(@analytic.verified?) %>
+      <div class="alert alert-success">
+        <samp>
+          <%= @analytic.log.html_safe %>
+        </samp>
+      </div>
+  <% else %>
+      <div class="alert alert-danger">
+        <samp>
+          <%= @analytic.log.html_safe %>
+        </samp>
+      </div>
+  <% end %>
+  </p>
+  <p>
+    <a href="<%=analytic_download_path(@analytic.filename)%>" class="btn btn-xs btn-primary"><span class="glyphicon glyphicon-download-alt"></span> Download the Archive</a>
+  </p>
+</div>

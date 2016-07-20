@@ -1,0 +1,2 @@
+module AnalyticInputStreamsHelper
+end

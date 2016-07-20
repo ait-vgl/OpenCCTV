@@ -1,0 +1,23 @@
+<div class="container">
+
+    <h3>Analytic Input Stream Information:</h3>
+
+  <div class="panel-body">
+    <div class="media">
+      <div class="media-body col-sm-12">
+        <p>
+          <strong>Name:</strong>
+          <%= @analytic_input_stream.name %>
+        </p>
+        <p>
+          <strong>Description:</strong>
+          <%= @analytic_input_stream.description %>
+        </p>
+        <p>
+          <%= link_to 'Edit', edit_analytic_analytic_input_stream_path(@analytic,@analytic_input_stream), class: 'btn btn-xs btn-warning' %> |
+          <%= link_to 'Input Stream List', analytic_path(@analytic), class: 'btn btn-xs btn-default'%>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,23 @@
+<div class="container">
+  <ol class="breadcrumb">
+    <li><%= link_to 'Home', root_path %></li>
+    <li class="active">OpenCCTV Server</li>
+  </ol>
+</div>
+
+<%if @open_cctv_server.nil?%>
+    <div class="container">
+      <a href="<%=new_open_cctv_server_path%>" class="btn btn-success"> <span class="glyphicon glyphicon-plus"></span>Register a Connection to OpenCCTV Server</a>
+      <br/>
+      <br/>
+
+      <div class="alert alert-warning">
+        Currently no OpenCCTV Server is registered with the system.
+      </div>
+    </div>
+<%else%>
+    <%= render 'info' %>
+<%end%>
+
+
+<%#= render 'info' %>

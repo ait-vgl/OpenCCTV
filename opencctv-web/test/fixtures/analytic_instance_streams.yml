@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  analytic_instance_id: 
+  analytic_input_stream_id: 
+  stream_id: 
+
+two:
+  analytic_instance_id: 
+  analytic_input_stream_id: 
+  stream_id: 

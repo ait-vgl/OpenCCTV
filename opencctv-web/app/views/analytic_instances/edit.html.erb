@@ -1,0 +1,20 @@
+<div class="container">
+  <ol class="breadcrumb">
+    <li><%= link_to 'Home', root_path %></li>
+    <li><%= link_to 'Analytic instances', analytic_instances_path %></li>
+    <li class="active">Edit analytic instance</li>
+  </ol>
+</div>
+
+<div class="container">
+  <h1>Edit analytic instance details</h1>
+  <%= render 'form' %>
+
+  <br>
+  <div>
+    <strong>Changing analytic instance type:</strong> <br>
+    If you need to change the analytic instance type, please
+    <%= link_to 'Delete', @analytic_instance, method: :delete, :class => "btn btn-xs btn-danger", data: { confirm: 'Are you sure?' } %>
+    and re-create the instance with a new type.
+  </div>
+</div>

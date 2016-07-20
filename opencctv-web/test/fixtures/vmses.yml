@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  description: MyText
+  server_ip: MyString
+  server_port: 1
+  username: MyString
+  password: MyString
+  verified: false
+  vms_connector_id: 
+
+two:
+  name: MyString
+  description: MyText
+  server_ip: MyString
+  server_port: 1
+  username: MyString
+  password: MyString
+  verified: false
+  vms_connector_id: 
