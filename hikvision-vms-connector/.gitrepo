@@ -1,0 +1,11 @@
+; DO NOT EDIT (unless you know what you are doing)
+;
+; This subdirectory is a git "subrepo", and this file is maintained by the
+; git-subrepo command. See https://github.com/git-commands/git-subrepo#readme
+;
+[subrepo]
+	remote = https://github.com/ait-vgl/hikvision-vms-connector
+	branch = master
+	commit = 069b5cdc1039632d6d3e827591cf2e03cb0c3644
+	parent = 90bac4e4d6fc5216badd8e27b362479eb4e99506
+	cmdver = 0.3.0
