@@ -6,6 +6,6 @@
 [subrepo]
 	remote = https://github.com/ait-vgl/zone-minder-vms-connector
 	branch = master
-	commit = 0089ed581b45b8c4400c57f17457c3ecd29f3b57
-	parent = 2fd38574002881266a102f47952c5fb7c39c9c88
+	commit = c5c3105f8eb37af882a00528a347d94681122067
+	parent = b792d60b2605ee93a792dad9d0e0d2977fd87af3
 	cmdver = 0.3.0
