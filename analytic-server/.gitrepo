@@ -6,6 +6,6 @@
 [subrepo]
 	remote = https://github.com/ait-vgl/analytic-server
 	branch = master
-	commit = b31e90f844356a9ff5acd68d341613e4d6a46e15
-	parent = e3f143d04a5f97c9a94b5f77f0794c2878332fb0
+	commit = 854764a22c53766743155493cefe5a88fded51f8
+	parent = 4a4b762d1b336225804bbd3cb4422ff9ec3f9781
 	cmdver = 0.3.0
