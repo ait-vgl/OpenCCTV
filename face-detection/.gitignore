@@ -1,0 +1,7 @@
+/Debug/
+/Release/*.so
+/Release/*.zip
+/Release/*.txt
+/Release/FinalAitHAAR.xml
+/Release/src/*.d
+/Release/src/*.o

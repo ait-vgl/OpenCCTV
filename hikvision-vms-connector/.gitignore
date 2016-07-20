@@ -1,0 +1,7 @@
+/Debug/
+/Release/libHikVisionConnector.so
+/Release/*.zip
+/Release/src/*.d
+/Release/src/*.o
+/Release/src/opencctv/*.d
+/Release/src/opencctv/*.o

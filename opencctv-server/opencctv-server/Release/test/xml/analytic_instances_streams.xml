@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<analyticinstancesstreams>
+
+	<analyticinstancestream>
+		<id> 1 </id>
+		<analyticinstanceid> 1 </analyticinstanceid>
+		<streamid> 1 </streamid>
+		<inputname> default </inputname>
+		<analyticdir>
+			/usr/local/opencctv/analytics/MockAnalytic
+		</analyticdir>
+		<analyticfile> libMockAnalyticPlugin.so </analyticfile>
+	</analyticinstancestream>
+
+	<analyticinstancestream>
+		<id> 2 </id>
+		<analyticinstanceid> 2 </analyticinstanceid>
+		<streamid> 1 </streamid>
+		<inputname> default </inputname>
+		<analyticdir>
+			/usr/local/opencctv/analytics/MockAnalytic
+		</analyticdir>
+		<analyticfile> libMockAnalyticPlugin.so </analyticfile>
+	</analyticinstancestream>
+
+</analyticinstancesstreams>

@@ -1,0 +1,9 @@
+/Debug/
+/Release/*.so
+/Release/src/*.d
+/Release/src/*.o
+/Release/src/opencctv/*.d
+/Release/src/opencctv/*.o
+/Release/src/util/*d
+/Release/src/util/*o
+
