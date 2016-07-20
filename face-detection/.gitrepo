@@ -6,6 +6,6 @@
 [subrepo]
 	remote = https://github.com/ait-vgl/face-detection
 	branch = master
-	commit = 13625e55746cdd6bcfe50ca45f691006fd86aa8e
-	parent = 817335654c01625dee8a3dddc625e12478d02364
+	commit = f0c6af21790481ab05c0ccc259be0fb684c73c9f
+	parent = f35924e8c0b0e044beefc8bd27bbbcfd8bb52ba9
 	cmdver = 0.3.0
