@@ -1,0 +1,11 @@
+; DO NOT EDIT (unless you know what you are doing)
+;
+; This subdirectory is a git "subrepo", and this file is maintained by the
+; git-subrepo command. See https://github.com/git-commands/git-subrepo#readme
+;
+[subrepo]
+	remote = https://github.com/ait-vgl/milestone-vms-connector
+	branch = master
+	commit = 485dd8df96eaa099e6ac3e240c95bc64a4abe4ab
+	parent = db64da2e70f27ae0f3582eb25373823c9e3b90e7
+	cmdver = 0.3.0
