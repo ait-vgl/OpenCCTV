@@ -2,6 +2,8 @@ class CamerasController < ApplicationController
   before_action :set_camera, only: [:show, :edit, :update, :destroy]
   before_action :set_vms, only: [:index, :new, :create, :edit, :show, :update, :destroy]
   before_action :set_vms_connector, only: [:show]
+  before_action :authenticate_user!
+  #before_action :isOpenCCTVPageAdmin?
   respond_to :html
 
   def index

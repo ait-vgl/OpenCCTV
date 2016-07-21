@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/html">
 <head>
   <title>OpenCCTV</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
@@ -18,86 +18,188 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <%= link_to 'OpenCCTV', root_path, :class => "navbar-brand"%>
+      <%= link_to 'OpenCCTV', root_path, :class => "navbar-brand" %>
     </div>
 
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
-      <ul class="nav navbar-nav">
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">VMS Connectors <span class="caret"></span></a>
-          <ul class="dropdown-menu" role="menu">
-            <li> <%= link_to 'All uploaded VMS connectors', vms_connectors_path%> </li>
-            <li class="divider"></li>
-            <li> <%= link_to 'Upload a new VMS connector', new_vms_connector_path%> </li>
-          </ul>
-        </li>
+      <% if user_signed_in? %>
 
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">VMSes <span class="caret"></span></a>
-          <ul class="dropdown-menu" role="menu">
-            <li> <%= link_to 'All registered VMSes', vmses_path%> </li>
-            <li class="divider"></li>
-            <li> <%= link_to 'Register a new VMS', new_vms_path%> </li>
-          </ul>
-        </li>
+          <ul class="nav navbar-nav">
+            <li class="dropdown">
 
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Analytic Plugins <span class="caret"></span></a>
-          <ul class="dropdown-menu" role="menu">
-            <li> <%= link_to 'All uploaded Analytic plugins', analytics_path%> </li>
-            <li class="divider"></li>
-            <li> <%= link_to 'Upload a new Analytic plugin', new_analytic_path%> </li>
-          </ul>
-        </li>
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Your
+                resource <span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
 
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Analytics Instances <span class="caret"></span></a>
-          <ul class="dropdown-menu" role="menu">
-            <li> <%= link_to 'All created Analytic instances', analytic_instances_path%> </li>
-            <li class="divider"></li>
-            <li> <%= link_to 'Create a new Analytic instance', new_analytic_instance_path%> </li>
-          </ul>
-        </li>
+                <li> <%= link_to 'Register a new VMS', new_vms_path %> </li>
+                <li class="divider"></li>
+                <li> <%= link_to 'All registered VMSes', vmses_path %> </li>
+                <li class="divider"></li>
+                <li class="divider"></li>
 
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">OpenCCTV Servers <span class="caret"></span></a>
-          <ul class="dropdown-menu" role="menu">
-            <li> <%= link_to 'OpenCCTV server Connection', open_cctv_servers_path%> </li>
-          </ul>
-        </li>
+                <li> <%= link_to 'Create a new Analytic instance', new_analytic_instance_path %> </li>
+                <li class="divider"></li>
+                <li> <%= link_to 'All created Analytic instances', analytic_instances_path %> </li>
+                <li class="divider"></li>
+                <li class="divider"></li>
 
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Analytic Servers <span class="caret"></span></a>
-          <ul class="dropdown-menu" role="menu">
-            <li> <%= link_to 'All registered Analytic servers', '#'%> </li>
-            <li class="divider"></li>
-            <li> <%= link_to 'Register a new Analytic server', '#'%> </li>
+                <li> <%= link_to 'Create a new Notification', new_notification_path %> </li>
+                <li class="divider"></li>
+                <li> <%= link_to 'All Notification', notifications_path %> </li>
+
+              </ul>
+            </li>
+
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Organization
+                <span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+
+                <li> <%= link_to 'Create an organization', new_org_path %> </li>
+                <li class="divider"></li>
+                <li> <%= link_to 'All organizations', orgs_path %> </li>
+                <li class="divider"></li>
+                <li> <%= link_to 'Request to organization', new_request_path %> </li>
+                <li class="divider"></li>
+                <li> <%= link_to 'All requestes', requests_path %> </li>
+              </ul>
+            </li>
+
+            <% if isOrganizationAdmin? %>
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Organization
+                    Admin
+                    <span class="caret"></span></a>
+                  <ul class="dropdown-menu" role="menu">
+                    <li> <%= link_to 'All users', org_users_path %> </li>
+                    <li class="divider"></li>
+                    <li class="divider"></li>
+                    <li> <%= link_to 'Create a group', new_group_user_path %> </li>
+                    <li class="divider"></li>
+                    <li> <%= link_to 'All groups', group_users_path %> </li>
+                    <li class="divider"></li>
+                    <li class="divider"></li>
+                    <li> <%= link_to 'All requests to this organization', org_requests_path %> </li>
+                  </ul>
+                </li>
+            <% end %>
+
+            <% if isOpenCCTVAdmin? %>
+
+                <li class="dropdown">
+
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                    OpenCCTV Admin <span class="caret"></span></a>
+                  <ul class="dropdown-menu" role="menu">
+
+                    <li> <%= link_to 'Upload a new VMS connector', new_vms_connector_path %> </li>
+                    <li class="divider"></li>
+                    <li> <%= link_to 'All uploaded VMS connectors', vms_connectors_path %> </li>
+                    <li class="divider"></li>
+                    <li class="divider"></li>
+
+                    <li> <%= link_to 'Upload a new Analytic plugin', new_analytic_path %> </li>
+                    <li class="divider"></li>
+                    <li> <%= link_to 'All uploaded Analytic plugins', analytics_path %> </li>
+                    <li class="divider"></li>
+                    <li class="divider"></li>
+
+                    <li> <%= link_to 'Register Google project', new_google_project_path %> </li>
+                    <li class="divider"></li>
+
+                    <li> <%= link_to 'All registerd Google projects', google_projects_path %> </li>
+                    <li class="divider"></li>
+                    <li class="divider"></li>
+
+                    <li> <%= link_to 'Register mobile notification', new_mobile_notification_path %> </li>
+                    <li class="divider"></li>
+
+                    <li> <%= link_to 'All mobile notifications', mobile_notifications_path %> </li>
+                    <li class="divider"></li>
+                    <li class="divider"></li>
+
+                    <li> <%= link_to 'OpenCCTV server Connection', open_cctv_servers_path %> </li>
+                    <!--<li class="divider"></li>-->
+                    <!--<li class="divider"></li>-->
+
+                    <!--<li> <%#= link_to 'All registered Analytic servers', '#' %> </li>-->
+                    <!--<li class="divider"></li>-->
+                    <!--<li> <%#= link_to 'Register a new Analytic server', '#' %> </li>-->
+                  </ul>
+                </li>
+
+                <!--<li class="dropdown">-->
+                  <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">-->
+                    <!--Identity Admin <span class="caret"></span></a>-->
+                  <!--<ul class="dropdown-menu" role="menu">-->
+                    <!--<li> <%#= link_to 'All Users', '#' %> </li>-->
+                  <!--</ul>-->
+                <!--</li>-->
+
+            <% end %>
+
+
           </ul>
-        </li>
-      </ul>
+
+      <% end %>
+
+
+
 
       <ul class="nav navbar-nav navbar-right">
-        <!-- <li ><a href="<%='#' %>">Users <span class="badge">1</span> </a> -->
-        <li > <%= link_to 'About', '#'%> </li>
-        <li> <%= link_to 'Login', '#'%> </li>
+
+        <% if user_signed_in? %>
+
+            <!--User Menu-->
+            <ul class="nav navbar-nav navbar-text">
+              <!--User detail-->
+              <li> <%= current_user.email %> </li>
+              <li> <%= !session[:org_id].nil? ? ('/n :in ' + Org.find(session[:org_id]).title) : '' %> </li>
+
+            </ul>
+
+
+            <!--User Menu-->
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">User
+                <span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <% if !session[:org_id].nil? %>
+                    <li> <%= link_to 'Login as this user', login_as_user_path, :method => :delete %></li>
+                    <li class="divider"></li>
+                <% end %>
+                <li> <%= link_to 'Logout', destroy_user_session_path, :method => :delete %></li>
+
+              </ul>
+            </li>
+        <% end %>
+
+        <% if !user_signed_in? %>
+            <li> <%= link_to 'Login', new_user_session_path %> </li>
+            <li> <%= link_to 'Register', new_user_registration_path %></li>
+        <% end %>
+
+        <li> <%= link_to 'About', '/' %> </li>
       </ul>
 
-    </div><!-- /.navbar-collapse -->
+    </div>
+    <!-- /.navbar-collapse -->
 
-  </div><!-- /.container-fluid -->
+  </div>
+  <!-- /.container-fluid -->
 </nav>
 
-<%if notice%>
+<% if notice %>
     <p class="alert alert-success text-center" role="alert">
       <%= notice %>
     </p>
-<%end%>
-<%if alert%>
+<% end %>
+<% if alert %>
     <p class="alert alert-warning text-center" role="alert">
       <strong>Alert: </strong> <%= alert %>
     </p>
-<%end%>
+<% end %>
 <% if flash[:error] %>
     <div id="error" class="alert alert-danger text-center" role="alert">
       <strong>Error: </strong> <%= flash[:error] %>

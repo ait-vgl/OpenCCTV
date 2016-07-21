@@ -1,0 +1,31 @@
+<%= form_for(@mobile_notification) do |f| %>
+    <% if @mobile_notification.errors.any? %>
+        <div id="error_explanation" class="alert alert-danger" role="alert">
+          <h2><%= pluralize(@mobile_notification.errors.count, "Error") %> prohibited this mobile notification from being saved:</h2>
+          <ul>
+            <% @mobile_notification.errors.full_messages.each do |message| %>
+                <li>
+                  <%= message %>
+                </li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <div class="field">
+      <%= f.label :google_project_id, "Google Project: " %>
+      <%= f.collection_select(:google_project_id, @google_projects, :id, :application_name, {prompt: 'Select Application'}) %>
+    </div> <br>
+
+    <div class="field">
+      <%= f.label :analytic_id, "Analytic Module: " %>
+      <%= f.collection_select(:analytic_id, @analytics, :id, :name, {prompt: 'Select Analytic Module'}) %>
+    </div>
+
+    <p>
+      <div class="actions">
+        <%= f.submit "Save Notification", :class => "btn btn-success btn-mini" %>
+      <%= link_to 'Cancel', :back, :class => "btn btn-danger" %>
+      </div>
+    </p>
+<% end %>

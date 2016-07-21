@@ -1,0 +1,64 @@
+<div class="container">
+  <ol class="breadcrumb">
+    <li><%= link_to 'Home', root_path %></li>
+    <li class="active">Notifications</li>
+  </ol>
+</div>
+
+<div class="container">
+  <h1>
+    Listing notifications
+    <a href="<%= new_notification_path %>" class="btn btn-success"> <span class="glyphicon glyphicon-upload"></span>
+      Create new notification</a>
+  </h1>
+
+  <% if @notifications.empty? %>
+      <p>
+      <div class="alert alert-warning">
+        Currently no notification are created with the system.
+      </div>
+      </p>
+  <% else %>
+      <div class="media">
+        <table class="table table-hover">
+
+          <thead>
+          <tr>
+            <th>#</th>
+            <th>Title</th>
+            <th>To user</th>
+            <th colspan="3"></th>
+          </tr>
+          </thead>
+
+          <tbody>
+          <% i = 1 %>
+          <% @notifications.each do |notification| %>
+              <tr>
+                <td><%= i %></td>
+                <td><%= notification.title %></td>
+                <td><%= notification.email %></td>
+                <td><%= notification.to_user %></td>
+
+                <% if isOrganization? %>
+
+                    <td><%= link_to 'Show', group_user_notification_path(notification.group_user_id, notification), :class => "btn btn-xs btn-default" %></td>
+                    <td><%= link_to 'Edit', edit_group_user_notification_path(notification.group_user_id, notification), :class => "btn btn-xs btn-warning" %></td>
+                    <td><%= link_to 'Destroy', group_user_notification_path(notification.group_user_id, notification), method: :delete, :class => "btn btn-xs btn-danger", data: {confirm: 'Are you sure?'} %></td>
+
+                <% else %>
+
+                    <td><%= link_to 'Show', notification, :class => "btn btn-xs btn-default" %></td>
+                    <td><%= link_to 'Edit', edit_notification_path(notification), :class => "btn btn-xs btn-warning" %></td>
+                    <td><%= link_to 'Destroy', notification, method: :delete, :class => "btn btn-xs btn-danger", data: {confirm: 'Are you sure?'} %></td>
+
+                <% end %>
+
+              </tr>
+              <% i = i + 1 %>
+          <% end %>
+          </tbody>
+        </table>
+      </div>
+  <% end %>
+</div>

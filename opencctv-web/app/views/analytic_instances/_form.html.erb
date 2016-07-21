@@ -1,37 +1,86 @@
 <%= form_for(@analytic_instance) do |f| %>
-  <!--Report errors if any-->
-  <% if @analytic_instance.errors.any? %>
-      <div id="error_explanation" class="alert alert-danger" role="alert">
-      <h2><%= pluralize(@analytic_instance.errors.count, "error") %> prohibited this analytic_instance from being saved:</h2>
 
-      <ul>
-      <% @analytic_instance.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+    <!--Report errors if any-->
+    <% if @analytic_instance.errors.any? %>
+        <div id="error_explanation" class="alert alert-danger" role="alert">
+          <h2><%= pluralize(@analytic_instance.errors.count, "error") %> prohibited this analytic_instance from being
+            saved:</h2>
+
+          <ul>
+            <% @analytic_instance.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <!--Form fields-->
+    <div class="field">
+      <%= f.label :analytic_id, 'Analytic Type' %><br>
+      <%= f.collection_select(:analytic_id, Analytic.where(verified: true), :id, :name, {prompt: 'Select Analytic Type'}, {:disabled => params[:action]=="edit"}) %>
     </div>
-  <% end %>
+    <div class="field">
+      <%= f.label :name %><br>
+      <%= f.text_field :name %>
+    </div>
+    <div class="field">
+      <%= f.label :description %><br>
+      <%= f.text_area :description %>
+    </div>
 
-  <!--Form fields-->
-  <div class="field">
-    <%= f.label :analytic_id, 'Analytic Type'%><br>
-    <%= f.collection_select( :analytic_id, Analytic.where(verified: true), :id, :name, {prompt: 'Select Analytic Type'}, {:disabled => params[:action]=="edit"})%>
-  </div>
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_area :description %>
-  </div>
+    <div class="field">
+      <%= f.label :notification_id, 'Notification' %><br>
 
-  <!--Submit button-->
-  <p>
-  <div class="actions">
-    <%= f.submit class: "btn btn-success btn-mini"%>
-    <%= link_to 'Cancel', @analytic_instance, :class => "btn btn-danger" %>
-  </div>
-  </p>
+      <% if isOrganization? %>
+
+          <% #### To protect someone edit an analytic instance but he/she does not have permisstion in this notification
+             @notifications = Notification.where(:group_user_id => GroupUser.getGroupUserList(session[:org_id], current_user.id))
+
+             isAllowNotification = false
+             @notifications.each do |notification|
+
+               if notification.id == @analytic_instance.notification_id
+                 isAllowNotification = true
+                 break
+               end
+             end
+          %>
+
+          <% if params[:action]!="edit" %>
+              <%= f.collection_select(:notification_id, @notifications,:id, :title, {prompt: 'Select Notification'},{:selected => @analytic_instance.notification_id}) %>
+          <% else %>
+              <% if isAllowNotification %>
+                  <%= f.collection_select(:notification_id, @notifications,:id, :title, {prompt: 'Select Notification'},{:selected => @analytic_instance.notification_id}) %>
+              <% else %>
+                  <%= f.collection_select(:notification_id, Notification.where(:id => @analytic_instance.notification_id),:id, :title,{},:disabled => 'disabled' ) %>
+                  <br />
+                  <p style="color:red;"> *** You are not allowed editing notification.</p>
+              <% end %>
+          <% end %>
+      <% else %>
+          <%= f.collection_select(:notification_id, Notification.where(:user_id => current_user.id), :id, :title,
+                                  {prompt: 'Select Notification'},
+                                  {:selected => @analytic_instance.notification_id}) %>
+      <% end %>
+    </div>
+
+    <% if isOrganization? %>
+        <%= f.label :group_user_id, 'Created as' %>
+        <br>
+
+        <%= f.collection_select(:group_user_id, GroupUser.getGroupUserListSelection(session[:org_id], current_user.id),
+                                :id, :title,
+                                {:selected => params[:group_user_id]}) %>
+
+        <br/>
+    <% end %>
+
+    <!--Submit button-->
+    <p>
+    <div class="actions">
+      <%= f.submit class: "btn btn-success btn-mini" %>
+      <%= link_to 'Cancel', :back, :class => "btn btn-danger" %>
+    </div>
+    </p>
 <% end %> <!--Form ends-->
 

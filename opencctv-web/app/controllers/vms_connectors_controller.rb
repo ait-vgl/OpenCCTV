@@ -1,5 +1,7 @@
 class VmsConnectorsController < ApplicationController
   before_action :set_vms_connector, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
+  before_action :isOpenCCTVPageAdmin?
   respond_to :html
 
   def new

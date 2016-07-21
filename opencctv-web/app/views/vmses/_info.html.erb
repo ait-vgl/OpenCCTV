@@ -1,56 +1,61 @@
 <h1>
   VMS information
-  <a href="<%=edit_vms_path(@vms)%>" class="btn btn-warning"><span class="glyphicon glyphicon-pencil"></span> Edit</a>
+  <% if isOrganization? %>
+      <a href="<%= edit_group_user_vms_path(params[:group_user_id], @vms) %>" class="btn btn-warning"><span class="glyphicon glyphicon-pencil"></span>
+        Edit</a>
+  <% else %>
+      <a href="<%= edit_vms_path(@vms) %>" class="btn btn-warning"><span class="glyphicon glyphicon-pencil"></span> Edit</a>
+  <% end %>
 </h1>
 
 <div class="media">
-      <table class="table table-hover">
-        <thead>
-        <tr>
-          <th>Name</th>
-          <th>Server name</th>
-          <th>Server port</th>
-          <th>Description</th>
-          <th>Username</th>
-          <th>Password</th>
-          <th> </th>
-        </tr>
-        </thead>
+  <table class="table table-hover">
+    <thead>
+    <tr>
+      <th>Name</th>
+      <th>Server name</th>
+      <th>Server port</th>
+      <th>Description</th>
+      <th>Username</th>
+      <th>Password</th>
+      <th></th>
+    </tr>
+    </thead>
 
-        <tbody>
-            <tr>
-              <td><%= @vms.name %></td>
-              <td><%= @vms.server_ip %></td>
-              <td><%= @vms.server_port %></td>
-              <td><%= @vms.description %></td>
-              <td>
-                <%if @vms.username.nil? || @vms.username.empty? || @vms.username.blank?%>
-                    NA
-                <%else%>
-                    <%= @vms.username %>
-                <%end%>
-              </td>
-              <td>
-                <%if @vms.password.nil? || @vms.password.empty? || @vms.password.blank?%>
-                    NA
-                <%else%>
-                    *********
-                <%end%>
-              </td>
-              <td>
-                <% if(@vms.verified?) %>
+    <tbody>
+    <tr>
+      <td><%= @vms.name %></td>
+      <td><%= @vms.server_ip %></td>
+      <td><%= @vms.server_port %></td>
+      <td><%= @vms.description %></td>
+      <td>
+        <% if @vms.username.nil? || @vms.username.empty? || @vms.username.blank? %>
+            NA
+        <% else %>
+            <%= @vms.username %>
+        <% end %>
+      </td>
+      <td>
+        <% if @vms.password.nil? || @vms.password.empty? || @vms.password.blank? %>
+            NA
+        <% else %>
+            *********
+        <% end %>
+      </td>
+      <td>
+        <% if (@vms.verified?) %>
                     <span class="label label-success">
                     <span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>
                     Verified
                   </span>
-                <% else %>
+        <% else %>
                     <span class="label label-danger">
                     <span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span>
                     Invalid
                   </span>
-                <% end %>
-              </td>
-            </tr>
-        </tbody>
-      </table>
-      </div>
+        <% end %>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>

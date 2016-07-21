@@ -1,0 +1,14 @@
+<div class="container">
+  <ol class="breadcrumb">
+    <li><%= link_to 'Home', root_path %></li>
+    <li><%= link_to 'Notifications', notifications_path %></li>
+    <li class="active">New notification</li>
+  </ol>
+</div>
+
+<div class="container">
+    <h1>Create a new notification</h1>
+
+    <%= render 'form' %>
+</div>
+

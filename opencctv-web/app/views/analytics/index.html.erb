@@ -8,59 +8,60 @@
 <div class="container">
   <h1>
     All uploaded analytic plugins
-    <a href="<%=new_analytic_path%>" class="btn btn-success"> <span class="glyphicon glyphicon-upload"></span> Upload a new analytic plugin</a>
+    <a href="<%= new_analytic_path %>" class="btn btn-success"> <span class="glyphicon glyphicon-upload"></span> Upload
+      a new analytic plugin</a>
   </h1>
-</div>
 
-<%if @analytics.empty?%>
-    <p>
-    <div class="alert alert-warning">
-      <center>
+
+  <% if @analytics.empty? %>
+      <p>
+
+      <div class="alert alert-warning">
         Currently no analytic plugins are uploaded to the system.
-      </center>
-    </div>
-    </p>
-<%else%>
-    <div class="media">
-      <table class="table table-hover">
-        <thead>
-        <tr>
-          <th>#</th>
-          <th>Name</th>
-          <th>Description</th>
-          <th> </th>
-          <th colspan="3"></th>
-        </tr>
-        </thead>
+      </div>
+      </p>
+  <% else %>
+      <div class="media">
+        <table class="table table-hover">
+          <thead>
+          <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th></th>
+            <th colspan="3"></th>
+          </tr>
+          </thead>
 
-        <tbody>
-        <% i = 1 %>
-        <% @analytics.each do |analytic| %>
-            <tr>
-              <td><%= i %></td>
-              <td><%= analytic.name %></td>
-              <td><%= analytic.description %></td>
-              <td>
-                <% if(analytic.verified?) %>
+          <tbody>
+          <% i = 1 %>
+          <% @analytics.each do |analytic| %>
+              <tr>
+                <td><%= i %></td>
+                <td><%= analytic.name %></td>
+                <td><%= analytic.description %></td>
+                <td>
+                  <% if (analytic.verified?) %>
                     <span class="label label-success">
                     <span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>
                     Verified
                   </span>
-                <% else %>
+                  <% else %>
                     <span class="label label-danger">
                     <span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span>
                     Invalid
                   </span>
-                <% end %>
-              </td>
-              <td><%= link_to 'Show', analytic, :class => "btn btn-xs btn-default"%></td>
-              <td><%= link_to 'Edit', edit_analytic_path(analytic), :class => "btn btn-xs btn-warning" %></td>
-              <td><%= link_to 'Destroy', analytic, method: :delete, :class => "btn btn-xs btn-danger", data: { confirm: 'Are you sure?' } %></td>
-              <% i = i + 1 %>
-            </tr>
-        <% end %>
-        </tbody>
-      </table>
-    </div>
-<%end%>
+                  <% end %>
+                </td>
+                <td><%= link_to 'Show', analytic, :class => "btn btn-xs btn-default" %></td>
+                <td><%= link_to 'Edit', edit_analytic_path(analytic), :class => "btn btn-xs btn-warning" %></td>
+                <td><%= link_to 'Destroy', analytic, method: :delete, :class => "btn btn-xs btn-danger", data: {confirm: 'Are you sure?'} %></td>
+                <% i = i + 1 %>
+              </tr>
+          <% end %>
+          </tbody>
+        </table>
+      </div>
+  <% end %>
+</div>
 

@@ -1,0 +1,2 @@
+module MobileApplicationHelper
+end

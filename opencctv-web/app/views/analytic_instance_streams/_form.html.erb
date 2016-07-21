@@ -19,7 +19,7 @@
   </div>
   <div class="field">
     <%= f.label :stream_id, "Stream"%><br>
-    <%= f.collection_select( :stream_id, Stream.where(verified: true), :id, :name, {prompt: 'Select the Stream'})%>
+    <%= f.collection_select( :stream_id, @streams, :id, :name, {prompt: 'Select the Stream'})%>
   </div>
   <br/>
   <!--Submit button-->

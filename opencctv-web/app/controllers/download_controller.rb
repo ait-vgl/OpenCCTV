@@ -1,4 +1,8 @@
 class DownloadController < ApplicationController
+  before_action :authenticate_user!
+  before_action :isOpenCCTVPageAdmin?
+
+
   def vms_connector
     path_to_file = Rails.root.join('app/uploads', 'vms_connectors', (params[:filename].to_s + '.zip'))
     if (File.exist?(path_to_file))

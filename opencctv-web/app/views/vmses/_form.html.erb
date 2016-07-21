@@ -1,65 +1,77 @@
 <%= form_for(@vms) do |f| %>
-<% if @vms.errors.any? %>
-<div id="error_explanation" class="alert alert-danger" role="alert">
-	<h2><%= pluralize(@vms.errors.count, "Error") %> prohibited this VMS from being saved:</h2>
-	<ul>
-		<% @vms.errors.full_messages.each do |message| %>
-		<li>
-			<%= message %>
-		</li>
-		<% end %>
-	</ul>
-</div>
-<% end %>
-
-<div class="field">
-  <%= f.label :name %>
-  <br>
-  <%= f.text_field :name %>
-</div>
-<div class="field">
-	<%= f.label :server_ip, 'Server IP address / URL' %>
-	<br>
-	<%= f.text_field :server_ip, {:disabled => params[:action]=="edit"} %>
-</div>
-<div class="field">
-	<%= f.label :server_port %>
-	<br>
-	<%= f.number_field :server_port, {:disabled => params[:action]=="edit"} %>
-</div>
-<div class="field">
-	<%= f.label :vms_connector_id, 'VMS connector' %>
-	<br>
-	<%= f.collection_select(:vms_connector_id, VmsConnector.where('verified = 1'), :id, :name, {prompt: 'Select Connector Type'}, {:disabled => params[:action]=="edit"}) %>
-    <% if(params[:action]=='edit') %>
-      <%= "(#{@vms.vms_type})" %>
+    <% if @vms.errors.any? %>
+        <div id="error_explanation" class="alert alert-danger" role="alert">
+          <h2><%= pluralize(@vms.errors.count, "Error") %> prohibited this VMS from being saved:</h2>
+          <ul>
+            <% @vms.errors.full_messages.each do |message| %>
+                <li>
+                  <%= message %>
+                </li>
+            <% end %>
+          </ul>
+        </div>
     <% end %>
-</div>
-<% if(params[:action]!='edit') %>
+
     <div class="field">
-        <%= f.label :vms_type, 'VMS type' %>
-        <br>
-        <%= f.select :vms_type, options_for_select([['Other', 'other'], ['Milestone XProtect', 'milestone'], ['ZoneMinder', 'zoneminder'], ['HikVision', 'hikvision']]) %>
+      <%= f.label :name %>
+      <br>
+      <%= f.text_field :name %>
     </div>
-<% end %>
-<div class="field">
-	<%= f.label :description %>
-	<br>
-	<%= f.text_area :description %>
-</div>
-<div class="field">
-	<%= f.label :username %>
-	<br>
-	<%= f.text_field :username %>
-</div>
-<div class="field">
-	<%= f.label :password %>
-	<br>
-	<%= f.password_field :password %>
-</div>
-<br />
-<div class="actions">
-    <%= f.submit "Save VMS", :class => "btn btn-success btn-mini" %>
-    <%= link_to 'Cancel', @vms, :class => "btn btn-danger" %>
-</div>
+    <div class="field">
+      <%= f.label :server_ip, 'Server IP address / URL' %>
+      <br>
+      <%= f.text_field :server_ip, {:disabled => params[:action]=="edit"} %>
+    </div>
+    <div class="field">
+      <%= f.label :server_port %>
+      <br>
+      <%= f.number_field :server_port, {:disabled => params[:action]=="edit"} %>
+    </div>
+    <div class="field">
+      <%= f.label :vms_connector_id, 'VMS connector' %>
+      <br>
+      <%= f.collection_select(:vms_connector_id, VmsConnector.where('verified = 1'), :id, :name, {prompt: 'Select Connector Type'}, {:disabled => params[:action]=="edit"}) %>
+      <% if (params[:action]=='edit') %>
+          <%= "(#{@vms.vms_type})" %>
+      <% end %>
+    </div>
+    <% if (params[:action]!='edit') %>
+        <div class="field">
+          <%= f.label :vms_type, 'VMS type' %>
+          <br>
+          <%= f.select :vms_type, options_for_select([['Other', 'other'], ['Milestone XProtect', 'milestone'], ['ZoneMinder', 'zoneminder'], ['HikVision', 'hikvision']]) %>
+        </div>
+    <% end %>
+    <div class="field">
+      <%= f.label :description %>
+      <br>
+      <%= f.text_area :description %>
+    </div>
+    <div class="field">
+      <%= f.label :username %>
+      <br>
+      <%= f.text_field :username %>
+    </div>
+    <div class="field">
+      <%= f.label :password %>
+      <br>
+      <%= f.password_field :password %>
+    </div>
+    <br/>
+
+    <% if isOrganization? %>
+        <%= f.label :group_user_id, 'Created as' %>
+        <br>
+
+        <%= f.collection_select(:group_user_id, GroupUser.getGroupUserListSelection(session[:org_id], current_user.id),
+                                :id, :title, {:selected => @vms.group_user_id}) %>
+
+        <br/>
+    <% end %>
+
+    <br/>
+    <div class="actions">
+      <%= f.submit "Save VMS", :class => "btn btn-success btn-mini" %>
+      <%= link_to 'Cancel', :back, :class => "btn btn-danger" %>
+    </div>
 <% end %>

@@ -1,0 +1,12 @@
+<div class="container">
+  <ol class="breadcrumb">
+    <li><%= link_to 'Home', root_path %></li>
+    <li><%= link_to 'Organizations', orgs_path %></li>
+    <li class="active">Edit organization</li>
+  </ol>
+</div>
+
+<div class="container">
+  <h1>Editing organization</h1>
+  <%= render 'form' %>
+</div>

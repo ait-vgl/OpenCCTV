@@ -1,0 +1,34 @@
+<%= form_for(@google_project) do |f| %>
+    <% if @google_project.errors.any? %>
+        <div id="error_explanation" class="alert alert-danger" role="alert">
+          <h2><%= pluralize(@google_project.errors.count, "Error") %> prohibited this google project from being saved:</h2>
+          <ul>
+            <% @google_project.errors.full_messages.each do |message| %>
+                <li>
+                  <%= message %>
+                </li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <div class="field">
+      <%= f.label :application_name, 'Application Name' %><br />
+      <%= f.text_field :application_name %>
+    </div>
+    <div class="field">
+      <%= f.label :project_number, 'Project Number' %><br />
+      <%= f.text_field :project_number %>
+    </div>
+    <div class="field">
+      <%= f.label :api_key, 'API Key' %><br />
+      <%= f.text_field :api_key, {:disabled => params[:action]=="edit"} %>
+    </div>
+
+    <br />
+
+    <div class="actions">
+      <%= f.submit "Save VMS", :class => "btn btn-success btn-mini" %>
+      <%= link_to 'Cancel', :back, :class => "btn btn-danger" %>
+    </div>
+<% end %>

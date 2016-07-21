@@ -1,0 +1,21 @@
+<div class="container">
+  <h1>
+    Organization information
+
+    <a href="<%= edit_org_path(@org) %>" class="btn btn-warning"><span class="glyphicon glyphicon-pencil"></span>
+      Edit</a>
+
+  </h1>
+
+
+  <p>
+    <strong>Title:</strong>
+    <%= @org.title %>
+  </p>
+
+  <p>
+    <strong>Detail:</strong>
+    <%= @org.detail %>
+  </p>
+
+</div>

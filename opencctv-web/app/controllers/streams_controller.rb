@@ -3,6 +3,10 @@ class StreamsController < ApplicationController
   before_action :set_camera, only: [:index, :new, :create, :show, :edit, :destroy]
   before_action :set_vms, only: [:new, :show, :edit, :destroy]
   before_action :set_vms_connector, only: [:show]
+  before_action :authenticate_user!
+  #before_action :isOpenCCTVPageAdmin?
+  respond_to :html
+
   respond_to :html
 
   def index

@@ -1,5 +1,7 @@
 class AnalyticsController < ApplicationController
   before_action :set_analytic, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
+  before_action :isOpenCCTVPageAdmin?
   respond_to :html
 
   # GET /analytics

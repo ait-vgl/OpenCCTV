@@ -1,6 +1,13 @@
 class Vms < ActiveRecord::Base
   belongs_to :vms_connector
   has_many :cameras, dependent: :destroy
+
+  belongs_to :user
+  belongs_to :group_user
+
+  #has_many :group_cans, dependent: :destroy
+  #has_many :group_users, through: :group_cans
+
   validates :server_ip, presence: true
   validates :server_port, presence: true
   validates :vms_connector_id, presence: true
@@ -207,8 +214,8 @@ class Vms < ActiveRecord::Base
   def connect_with_basic_auth(url, port_number, username, password)
     uri = URI.parse(url)
     http = Net::HTTP.new(uri.host, port_number)
-    http.open_timeout = 5
-    http.read_timeout = 5
+    http.open_timeout = 20
+    http.read_timeout = 20
     request = Net::HTTP::Get.new(uri.request_uri)
     request.basic_auth(username, password)
     begin

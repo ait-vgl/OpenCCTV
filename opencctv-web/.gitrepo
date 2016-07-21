@@ -7,5 +7,5 @@
 	remote = https://github.com/ait-vgl/opencctv-web
 	branch = develop
 	commit = fabd2fef52dd1f1c91e7a199bf313f8c2baa6088
-	parent = 9f4ef4581b58197680b3d7cd6436745915a2bf7e
+	parent = a013eb63de18bd3b5a456ca724fd80892e583e0f
 	cmdver = 0.3.0

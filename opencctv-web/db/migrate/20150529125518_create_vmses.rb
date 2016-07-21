@@ -10,6 +10,9 @@ class CreateVmses < ActiveRecord::Migration
       t.boolean :verified, :null => false, :default => false
       t.references :vms_connector, index: true
 
+      t.references :user, index: true
+      t.references :group_user, index: true
+
       t.timestamps
     end
   end

@@ -1,5 +1,7 @@
 class OpenCctvServersController < ApplicationController
   before_action :set_open_cctv_server, only: [:show, :edit, :update, :destroy, :start_server, :stop_server, :restart_server]
+  before_action :authenticate_user!
+  before_action :isOpenCCTVPageAdmin?
   respond_to :html
 
   # GET /open_cctv_servers

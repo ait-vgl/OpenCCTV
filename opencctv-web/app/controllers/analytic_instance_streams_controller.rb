@@ -1,6 +1,8 @@
 class AnalyticInstanceStreamsController < ApplicationController
   before_action :set_analytic_instance_stream, only: [:show, :edit, :update, :destroy]
   before_action :set_analytic_instance, only: [:index, :new, :create, :edit, :show, :update, :destroy]
+  before_action :authenticate_user!
+  #before_action :isOpenCCTVPageAdmin?
   respond_to :html
 
   # GET /analytic_instance_streams
@@ -18,6 +20,10 @@ class AnalyticInstanceStreamsController < ApplicationController
     flash[:alert] = "Analytic instance may not work properly if the input streams are not properly configured"
     @analytic_instance_stream = AnalyticInstanceStream.new
     @analytic_instance_stream.analytic_instance = @analytic_instance
+
+    #@vmses = Vms.where(user_id: current_user.id)
+    @streams = Vms.where(user_id: current_user.id).joins(cameras: :streams).select("streams.id,streams.name")
+
     respond_with(@analytic_instance_stream)
   end
 

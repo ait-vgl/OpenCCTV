@@ -1,0 +1,29 @@
+<div class="container">
+  <h1>
+    Notification information
+    <% if isOrganization? %>
+        <a href="<%= edit_group_user_notification_path(params[:group_user_id], @notification) %>" class="btn btn-warning"><span class="glyphicon glyphicon-pencil"></span>
+          Edit</a>
+    <% else %>
+        <a href="<%= edit_notification_path(@notification) %>" class="btn btn-warning"><span class="glyphicon glyphicon-pencil"></span>
+          Edit</a>
+    <% end %>
+
+  </h1>
+
+  <p>
+    <strong>Title:</strong>
+    <%= @notification.title %>
+  </p>
+
+  <p>
+    <!--<strong>Email:</strong>-->
+    <%#= @notification.email %>
+  </p>
+
+  <p>
+    <strong>To user:</strong>
+    <%= @notification.to_user %>
+
+  </p>
+</div>

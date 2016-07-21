@@ -1,0 +1,45 @@
+<%= form_for(@notification) do |f| %>
+    <% if @notification.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@notification.errors.count, "error") %> prohibited this notification from being saved:</h2>
+
+          <ul>
+            <% @notification.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <div class="field">
+      <%= f.label :title %><br>
+      <%= f.text_field :title %>
+    </div>
+    <div class="field">
+      <%#= f.label :email %><br>
+      <%#= f.text_area :email %>
+    </div>
+    <div class="field">
+      <%= f.label :to_user %><br>
+      <%= f.text_area :to_user %>
+    </div>
+
+    <% if isOrganization? %>
+        <%= f.label :group_user_id, 'Created as' %>
+        <br>
+
+        <%= f.collection_select(:group_user_id, GroupUser.getGroupUserListSelection(session[:org_id], current_user.id),
+                                :id, :title, {:selected => params[:group_user_id]}) %>
+
+        <br/>
+    <% end %>
+
+
+    <!--Submit button-->
+    <p>
+    <div class="actions">
+      <%= f.submit class: "btn btn-success btn-mini" %>
+      <%= link_to 'Cancel', :back, :class => "btn btn-danger" %>
+    </div>
+    </p>
+<% end %>

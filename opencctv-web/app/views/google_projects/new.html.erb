@@ -1,0 +1,12 @@
+<div class="container">
+  <ol class="breadcrumb">
+    <li><%= link_to 'Home', root_path %></li>
+    <li><%= link_to 'Google Projects', vmses_path %></li>
+    <li class="active">New</li>
+  </ol>
+</div>
+
+<div class="container">
+  <h1>Register new Google project</h1>
+  <%= render 'form' %> <!--Form from _form.html.erb-->
+</div>

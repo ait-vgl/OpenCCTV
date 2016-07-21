@@ -1,0 +1,2 @@
+module MobileNotificationsHelper
+end

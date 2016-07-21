@@ -1,6 +1,7 @@
 class Camera < ActiveRecord::Base
   belongs_to :vms
   has_many :streams, dependent: :destroy
+
   before_destroy :delete_frame
 
   # validates the milestone Camera

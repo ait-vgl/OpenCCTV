@@ -1,0 +1,15 @@
+<div class="container">
+  <ol class="breadcrumb">
+    <li><%= link_to 'Home', root_path %></li>
+    <li><%= link_to 'Groups', group_users_path %></li>
+    <li class="active">New group</li>
+  </ol>
+</div>
+
+<div class="container">
+
+  <h1>New group</h1>
+
+  <%= render 'form' %>
+
+</div>

@@ -1,0 +1,99 @@
+<div class="container">
+  <ol class="breadcrumb">
+    <li><%= link_to 'Home', root_path %></li>
+    <li class="active">Requests</li>
+  </ol>
+</div>
+
+<div class="container">
+  <h1>
+    Listing pending requested
+  </h1>
+
+  <% if @requests_pending.empty? %>
+      <p>
+      <div class="alert alert-warning">
+        Currently no requests are new created with the system.
+      </div>
+      </p>
+  <% else %>
+      <div class="media">
+        <table class="table table-hover">
+
+          <thead>
+          <tr>
+            <th>#</th>
+            <th>Organization</th>
+            <th>From</th>
+            <th>Status</th>
+            <th colspan="3"></th>
+          </tr>
+          </thead>
+
+          <tbody>
+          <% i = 1 %>
+          <% @requests_pending.each do |request| %>
+              <% if request.status_id.to_s == ApplicationController::REQUEST_STATUS_PENDING %>
+                  <tr>
+                    <td><%= i %></td>
+                    <td><%= request.title %></td>
+                    <td><%= User.find(request.user_id).fullName %></td>
+                    <td><%= request.status %></td>
+                    <td><%= link_to 'Approve', request_path(request), method: :put, :class => "btn btn-xs btn-default", data: {confirm: 'Are you sure?'} %></td>
+                    <td><%= link_to 'Reject', request_path(request), method: :get, :class => "btn btn-xs btn-danger", data: {confirm: 'Are you sure?'} %></td>
+                  </tr>
+                  <% i = i + 1 %>
+              <% end %>
+          <% end %>
+          </tbody>
+        </table>
+      </div>
+  <% end %>
+</div>
+
+<br />
+
+<div class="container">
+  <h3>
+    Listing  requested of approved or rejected status
+  </h3>
+
+  <% if @requests_not_pending.empty? %>
+      <p>
+
+      <div class="alert alert-warning">
+        Currently no requests are created to this organization.
+      </div>
+      </p>
+  <% else %>
+      <div class="media">
+        <table class="table table-hover">
+
+          <thead>
+          <tr>
+            <th>#</th>
+            <th>Organization</th>
+            <th>From</th>
+            <th>Status</th>
+            <th colspan="3"></th>
+          </tr>
+          </thead>
+
+          <tbody>
+          <% i = 1 %>
+          <% @requests_not_pending.each do |request| %>
+              <% if request.status_id.to_s != ApplicationController::REQUEST_STATUS_PENDING %>
+                  <tr>
+                    <td><%= i %></td>
+                    <td><%= request.title %></td>
+                    <td><%= User.find(request.user_id).fullName %></td>
+                    <td><%= request.status %></td>
+                  </tr>
+                  <% i = i + 1 %>
+              <% end %>
+          <% end %>
+          </tbody>
+        </table>
+      </div>
+  <% end %>
+</div>

@@ -1,7 +1,14 @@
 <div class="container">
   <h1>
     Analytic instance information
-    <a href="<%=edit_analytic_instance_path(@analytic_instance)%>" class="btn btn-warning"><span class="glyphicon glyphicon-pencil"></span> Edit</a>
+
+    <% if isOrganization? %>
+        <a href="<%=edit_group_user_analytic_instance_path(params[:group_user_id],@analytic_instance)%>" class="btn btn-warning"><span class="glyphicon glyphicon-pencil"></span> Edit</a>
+
+  <% else %>
+        <a href="<%=edit_analytic_instance_path(@analytic_instance)%>" class="btn btn-warning"><span class="glyphicon glyphicon-pencil"></span> Edit</a>
+  <% end %>
+
   </h1>
   <p>
     <strong>Analytic ID:</strong>

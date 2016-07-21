@@ -4,7 +4,7 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.5'
 # Use mysql as the database for Active Record
-gem 'mysql2'
+gem 'mysql2', '~> 0.3.18'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.3'
 # Use bootstrap styling
@@ -47,3 +47,14 @@ gem 'nokogiri'
 gem 'ffi-rzmq'
 
 gem 'unirest'
+
+# Use for authentication
+gem 'devise'
+
+# For activeadmin
+#gem 'activeadmin', github: 'activeadmin'
+#gem 'cancan'
+#gem 'draper'
+#gem 'pundit'
+
+gem 'ssl_requirement'

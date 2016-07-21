@@ -1,0 +1,26 @@
+<%= form_for(@request,:html => { :method => 'GET' }, :url => {:action => "new"}) do |f| %>
+  <% if @request.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@request.errors.count, "error") %> prohibited this request from being saved:</h2>
+
+      <ul>
+      <% @request.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :Organization %>
+    <%= text_field_tag :text_search %>
+
+
+      <%= f.submit "Search", class: "btn btn-success btn-mini" %>
+
+  </div>
+    <!--Submit button-->
+
+
+
+<% end %>

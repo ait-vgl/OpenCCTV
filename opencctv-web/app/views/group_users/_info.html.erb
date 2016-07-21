@@ -1,0 +1,20 @@
+<div class="container">
+  <h1>
+    Group information
+
+    <a href="<%= edit_group_user_path(@group_user) %>" class="btn btn-warning"><span class="glyphicon glyphicon-pencil"></span>
+      Edit</a>
+
+  </h1>
+
+  <p>
+    <strong>Title:</strong>
+    <%= @group_user.title %>
+  </p>
+
+  <p>
+    <strong>Detail:</strong>
+    <%= @group_user.detail %>
+  </p>
+
+</div>

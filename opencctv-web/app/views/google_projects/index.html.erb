@@ -1,0 +1,49 @@
+<div class="container">
+  <ol class="breadcrumb">
+    <li><%= link_to 'Home', root_path %></li>
+    <li class="active">Google Projects</li>
+  </ol>
+</div>
+
+<div class="container">
+  <h1>
+    All registered Google projects
+    <a href="<%= new_google_project_path %>" class="btn btn-success"> <span class="glyphicon glyphicon-upload"></span> Register a
+      new Google project</a>
+  </h1>
+
+  <br/>
+
+  <div class="media">
+    <% if @google_projects.empty? %>
+      <div class="alert alert-warning">
+        No Google projects are registered with the system.
+      </div>
+    <% else %>
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Application Name</th>
+            <th>Project Number</th>
+            <th>API Key</th>
+            <th colspan="3"></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% i = 1 %>
+          <% @google_projects.each do |google_project| %>
+            <tr>
+              <td><%= i %></td>
+              <th><%= google_project.application_name %></td>
+              <td><%= google_project.project_number %></td>
+              <td><%= google_project.api_key %></td>
+
+              <td><%= link_to 'Delete', google_project, method: :delete, :class => "btn btn-xs btn-danger", data: {confirm: 'Are you sure?'} %></td>
+            </tr>
+          <% end %>
+        </tbody>
+    <% end %>
+  </div>
+</div>

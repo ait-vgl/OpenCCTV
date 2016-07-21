@@ -1,0 +1,31 @@
+<%= form_for(@group_user) do |f| %>
+    <% if @group_user.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@group_user.errors.count, "error") %> prohibited this group_user from being saved:</h2>
+
+          <ul>
+            <% @group_user.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <div class="field">
+      <%= f.label :title %><br>
+      <%= f.text_field :title %>
+    </div>
+    <div class="field">
+      <%= f.label :detail %><br>
+      <%= f.text_area :detail %>
+    </div>
+
+    <!--Submit button-->
+
+    <p>
+    <div class="actions">
+      <%= f.submit class: "btn btn-success btn-mini" %>
+      <%= link_to 'Cancel', @group_user, :class => "btn btn-danger" %>
+    </div>
+    </p>
+<% end %>

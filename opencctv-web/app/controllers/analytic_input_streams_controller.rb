@@ -1,7 +1,10 @@
 class AnalyticInputStreamsController < ApplicationController
   before_action :set_analytic_input_stream, only: [:show, :edit, :update, :destroy]
   before_action :set_analytic, only: [:index, :new, :create, :edit, :show, :update, :destroy]
+  before_action :authenticate_user!
+  #before_action :isOpenCCTVPageAdmin?
   respond_to :html
+
 
   # GET /analytic_input_streams
   def index

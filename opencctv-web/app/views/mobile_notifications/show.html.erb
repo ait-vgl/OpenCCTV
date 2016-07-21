@@ -1,0 +1,53 @@
+<div class="container">
+  <ol class="breadcrumb">
+    <li><%= link_to 'Home', root_path %></li>
+    <li><%= link_to 'Mobile Notificaion', mobile_notification_path %></li>
+    <li class="active">Mobile Notification</li>
+  </ol>
+</div>
+
+<div class="container">
+  <%= render 'vms_connectors/info' %>
+  <%= render 'info' %>
+
+  <p>
+  <h1>
+    All registered Cameras
+    <a href="<%=new_vms_camera_path(@vms)%>" class="btn btn-success"> <span class="glyphicon glyphicon-plus"></span> Add new Camera manually</a>
+  </h1>
+  </p>
+</div>
+
+  <%if @vms.cameras.empty?%>
+      <div class="alert alert-warning">
+        <center>
+          Currently no Cameras are registered under the VMS.
+        </center>
+      </div>
+  <%else%>
+        <div class="media">
+          <table class="table table-hover">
+            <thead>
+            <tr>
+              <th>Name</th>
+              <th>Camera ID</th>
+              <th>Description</th>
+              <th colspan="3"></th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <% @vms.cameras.each do |camera| %>
+                <tr>
+                  <td><%= camera.name %></td>
+                  <td><%= camera.camera_id %></td>
+                  <td><%= camera.description %></td>
+                  <td><%= link_to 'Show Streams', vms_camera_path(@vms, camera), :class => "btn btn-xs btn-default" %></td>
+                  <td><%= link_to 'Edit', edit_vms_camera_path(@vms, camera), :class => "btn btn-xs btn-warning" %></td>
+                  <td><%= link_to 'Delete', vms_camera_path(@vms, camera), method: :delete, :class => "btn btn-xs btn-danger", data: { confirm: 'Are you sure?' } %></td>
+                </tr>
+            <% end %>
+            </tbody>
+          </table>
+      </div>
+  <%end%>
