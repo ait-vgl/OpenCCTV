@@ -6,6 +6,6 @@
 [subrepo]
 	remote = git@github.com:ait-vgl/hikvision-vms-connector.git
 	branch = develop
-	commit = 8e702482868b3313d685555a240f6e04cde690fc
-	parent = b53efaa9e10c01db0674f136dd2da9b2b1bd3cb5
+	commit = 4bfa4873e827b21b4acfc588e19c391751cea87a
+	parent = 5c8c0dfa98f262fb33d7c61e7eb3d4ec88e6c60e
 	cmdver = 0.3.0
