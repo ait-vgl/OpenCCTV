@@ -6,6 +6,6 @@
 [subrepo]
 	remote = git@github.com:ait-vgl/linlin-vms-connector.git
 	branch = develop
-	commit = 6579e0b6998611a32f5cf016b4031c778e829825
-	parent = e8bd7cfcfa8277de02b0451639efed1727059c24
+	commit = 7e4e9411b672b6171a4623a2d31049a42b65aa72
+	parent = 5e1f4f757e173735c6f9b579e393feee8f70131d
 	cmdver = 0.3.0
