@@ -4,7 +4,7 @@
 ; git-subrepo command. See https://github.com/git-commands/git-subrepo#readme
 ;
 [subrepo]
-	remote = git@github.com:ait-vgl/hikvision-vms-connnector.git
+	remote = git@github.com:ait-vgl/hikvision-vms-connector.git
 	branch = develop
 	commit = 8e702482868b3313d685555a240f6e04cde690fc
 	parent = b53efaa9e10c01db0674f136dd2da9b2b1bd3cb5
