@@ -1,0 +1,11 @@
+; DO NOT EDIT (unless you know what you are doing)
+;
+; This subdirectory is a git "subrepo", and this file is maintained by the
+; git-subrepo command. See https://github.com/git-commands/git-subrepo#readme
+;
+[subrepo]
+	remote = git@github.com:ait-vgl/analytic-server.git
+	branch = develop
+	commit = ea0d35443ac3ca1e8914a8fab39b842ba1955a1d
+	parent = ee806f74df7d18f7a079e6790b74deec1632a011
+	cmdver = 0.3.0
