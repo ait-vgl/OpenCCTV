@@ -4,7 +4,7 @@
 ; git-subrepo command. See https://github.com/git-commands/git-subrepo#readme
 ;
 [subrepo]
-	remote = git@github.com:ait-vgl/zone-minder-vms-connnector.git
+	remote = git@github.com:ait-vgl/zone-minder-vms-connector.git
 	branch = develop
 	commit = 54a4f7d9fdc421a8e86abc03ff3b8b421642d3ed
 	parent = 25fd25997e53d15e18fbd60875c0db5396e7626d
