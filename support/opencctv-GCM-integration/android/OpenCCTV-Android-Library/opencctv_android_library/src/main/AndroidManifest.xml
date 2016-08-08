@@ -1,0 +1,53 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="edu.visutr.opencctv_android_library">
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <permission
+        android:name="edu.visutr.opencctv_android_library.permission.C2D_MESSAGE"
+        android:protectionLevel="signature" />
+    <uses-permission android:name="edu.visutr.opencctv_android_library.permission.C2D_MESSAGE" />
+
+    <application
+        android:allowBackup="true"
+        android:label="@string/app_name"
+        android:supportsRtl="true">
+
+        <receiver
+            android:name="com.google.android.gms.gcm.GcmReceiver"
+            android:exported="true"
+            android:permission="com.google.android.c2dm.permission.SEND">
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                <category android:name="edu.visutr.opencctv_android_library" />
+            </intent-filter>
+        </receiver>
+
+        <receiver android:name=".notification.registration.OpenCCTVGcmRegistrationAlarmReceiver" />
+
+
+        <service
+            android:name=".notification.registration.OpenCCTVInstanceIDListenerService"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.google.android.gms.iid.InstanceID" />
+            </intent-filter>
+        </service>
+
+        <service android:name=".notification.registration.OpenCCTVGcmUpdateService" />
+
+        <activity
+            android:name=".video_streaming.activity.ArchiveStreamingHelper"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+
+        <activity
+            android:name=".video_streaming.activity.LiveStreamingHelper"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+    </application>
+
+</manifest>

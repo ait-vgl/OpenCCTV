@@ -1,0 +1,705 @@
+﻿-- logger module started --
+main debug: VLC media player - 2.1.6 Rincewind
+main debug: Copyright © 1996-2015 the VideoLAN team
+main debug: revision 2.1.6-0-gea01d28
+main debug: configured with ./configure  '--includedir=${prefix}/include' '--mandir=${prefix}/share/man' '--infodir=${prefix}/share/info' '--localstatedir=/var' '--libdir=${prefix}/lib/x86_64-linux-gnu' '--libexecdir=${prefix}/lib/x86_64-linux-gnu' '--disable-dependency-tracking' '--build=x86_64-linux-gnu' 'CPPFLAGS=-D_FORTIFY_SOURCE=2' 'LDFLAGS=-Wl,-Bsymbolic-functions -Wl,-z,relro' '--config-cache' '--disable-maintainer-mode' '--disable-silent-rules' '--disable-update-check' '--enable-fast-install' '--prefix=/usr' '--docdir=/usr/share/doc/vlc-nox' '--libdir=/usr/lib' '--sysconfdir=/etc' '--with-binary-version=0ubuntu14.04.1' '--enable-a52' '--enable-aa' '--enable-bluray' '--enable-bonjour' '--enable-caca' '--enable-chromaprint' '--enable-dbus' '--enable-dca' '--enable-dirac' '--enable-directfb' '--enable-dvbpsi' '--enable-dvdnav' '--enable-faad' '--enable-flac' '--enable-fluidsynth' '--enable-freetype' '--enable-fribidi' '--enable-gnutls' '--enable-jack' '--enable-kate' '--enable-libass' '--enable-libfreerdp' '--enable-libmpeg2' '--enable-libxml2' '--enable-lirc' '--enable-live555' '--enable-mad' '--enable-mkv' '--enable-mod' '--enable-mpc' '--enable-mtp' '--enable-mux_ogg' '--enable-ncurses' '--enable-notify' '--enable-ogg' '--enable-opus' '--enable-oss' '--enable-pulse' '--enable-qt' '--enable-realrtsp' '--enable-samplerate' '--enable-schroedinger' '--enable-sdl' '--enable-sftp' '--enable-shout' '--enable-skins2' '--enable-smbclient' '--enable-speex' '--enable-svg' '--enable-taglib' '--enable-theora' '--enable-twolame' '--enable-upnp' '--enable-vcd' '--enable-vcdx' '--enable-vorbis' '--enable-x264' '--enable-zvbi' '--with-kde-solid=/usr/share/kde4/apps/solid/actions/' '--disable-decklink' '--disable-dxva2' '--disable-fdkaac' '--disable-gnomevfs' '--disable-goom' '--disable-libvnc' '--disable-opencv' '--disable-projectm' '--disable-quicksync' '--disable-sndio' '--disable-telx' '--disable-vsxu' '--disable-wasapi' '--enable-alsa' '--enable-atmo' '--enable-dc1394' '--enable-dv1394' '--enable-linsys' '--enable-omxil' '--enable-udev' '--enable-libva' '--enable-v4l2' '--enable-crystalhd' '--enable-mmx' '--enable-sse' '--disable-neon' '--disable-altivec' 'CFLAGS=-g -O2 -fstack-protector --param=ssp-buffer-size=4 -Wformat -Werror=format-security' 'CXXFLAGS=-g -O2 -fstack-protector --param=ssp-buffer-size=4 -Wformat -Werror=format-security' 'build_alias=x86_64-linux-gnu'
+main debug: using interface module "logger"
+main debug: Creating an input for 'rtsp://192.41.170.253:554/rtsph264720p'
+main debug: using timeshift granularity of 50 MiB, in path '/tmp'
+main debug: `rtsp://admin:pass@192.41.170.253:554/rtsph264720p' gives access `rtsp' demux `' path `admin:pass@192.41.170.253:554/rtsph264720p'
+main debug: creating demux: access='rtsp' demux='' location='admin:pass@192.41.170.253:554/rtsph264720p' file='(null)'
+main debug: looking for access_demux module matching "rtsp": 20 candidates
+live555 debug: version 2014.01.13
+live555 debug: RTP subsession 'video/H264'
+main debug: selecting program id=0
+live555 debug: RTP subsession 'audio/PCMU'
+live555 debug: setup start: 0.000000 stop:0.000000
+live555 debug: play start: 0.000000 stop:0.000000
+main debug: using access_demux module "live555"
+main debug: looking for decoder module matching "any": 39 candidates
+avcodec debug: trying to use direct rendering
+avcodec debug: allowing 4 thread(s) for decoding
+avcodec debug: avcodec codec (H264 - MPEG-4 AVC (part 10)) started
+avcodec debug: using frame thread mode with 4 threads
+main debug: using decoder module "avcodec"
+main debug: looking for packetizer module matching "any": 21 candidates
+packetizer_h264 debug: found NAL_SPS (sps_id=0)
+packetizer_h264 debug: found NAL_PPS (pps_id=0 sps_id=0)
+main debug: using packetizer module "packetizer_h264"
+main debug: looking for decoder module matching "any": 39 candidates
+g711 debug: samplerate:8000Hz channels:1
+main debug: using decoder module "g711"
+main debug: looking for meta reader module matching "any": 2 candidates
+lua debug: Trying Lua scripts in /root/.local/share/vlc/lua/meta/reader
+lua debug: Trying Lua scripts in /usr/lib/vlc/lua/meta/reader
+lua debug: Trying Lua playlist script /usr/lib/vlc/lua/meta/reader/filename.luac
+lua debug: Trying Lua scripts in /usr/share/vlc/lua/meta/reader
+main debug: no meta reader modules matched
+main debug: `rtsp://admin:pass@192.41.170.253:554/rtsph264720p' successfully opened
+main debug: creating audio output
+main debug: Buffering 0%
+main debug: looking for audio output module matching "any": 6 candidates
+main debug: Buffering 0%
+main debug: Buffering 12%
+live555 debug: tk->rtpSource->hasBeenSynchronizedUsingRTCP()
+main error: ES_OUT_RESET_PCR called
+pulse debug: using library version 4.0.0
+pulse debug:  (compiled with version 4.0.0, protocol 28)
+pulse error: PulseAudio server connection failure: Connection refused
+alsa debug: Available ALSA PCM devices:
+alsa debug: Discard all samples (playback) or generate zero samples (capture) (null)
+main debug: using audio output module "alsa"
+alsa error: cannot open ALSA device "default": No such file or directory
+main error: Audio output failed
+main error: The audio device "default" could not be used:
+No such file or directory.
+main error: module not functional
+main debug: keeping audio output
+main error: failed to create audio output
+main debug: Buffering 0%
+main debug: Buffering 12%
+main debug: Buffering 25%
+main warning: clock gap, unexpected stream discontinuity
+main warning: feeding synchro with a new reference point trying to recover from clock gap
+main debug: Buffering 0%
+main debug: Buffering 3%
+main debug: Buffering 7%
+main debug: Buffering 9%
+main debug: Buffering 13%
+main debug: looking for text renderer module matching "any": 2 candidates
+freetype debug: Building font databases.
+freetype debug: Took 0 microseconds
+freetype debug: Using Serif Bold as font from file /usr/share/fonts/truetype/dejavu/DejaVuSans.ttf
+freetype debug: using fontsize: 2
+main debug: using text renderer module "freetype"
+main debug: looking for video filter2 module matching "any": 55 candidates
+main debug: Buffering 17%
+swscale debug: 32x32 chroma: YUVA -> 16x16 chroma: RGBA with scaling using Bicubic (good quality)
+main debug: using video filter2 module "swscale"
+main debug: looking for video filter2 module matching "any": 55 candidates
+yuvp debug: YUVP to YUVA converter
+main debug: using video filter2 module "yuvp"
+main debug: Deinterlacing available
+main debug: deinterlace 0, mode blend, is_needed 0
+main debug: Opening vout display wrapper
+main debug: looking for vout display module matching "vmem": 12 candidates
+main debug: VoutDisplayEvent 'fullscreen' 0
+main debug: VoutDisplayEvent 'resize' 720x480 window
+main debug: using vout display module "vmem"
+main debug: A filter to adapt decoder to display is needed
+main debug: looking for video filter2 module matching "any": 55 candidates
+swscale debug: 1280x720 chroma: I420 -> 720x480 chroma: RV32 with scaling using Bicubic (good quality)
+main debug: using video filter2 module "swscale"
+main debug: Filter 'Swscale' (0x7f51fc001f18) appended to chain
+main debug: original format sz 1280x720, of (0,0), vsz 1280x720, 4cc I420, sar 1:1, msk r0x0 g0x0 b0x0
+main debug: removing module "freetype"
+main debug: looking for text renderer module matching "any": 2 candidates
+freetype debug: Building font databases.
+freetype debug: Took 0 microseconds
+freetype debug: Using Serif Bold as font from file /usr/share/fonts/truetype/dejavu/DejaVuSans.ttf
+freetype debug: using fontsize: 2
+main debug: using text renderer module "freetype"
+avcodec debug: using direct rendering
+main debug: Buffering 19%
+main debug: Buffering 23%
+main debug: Buffering 23%
+main debug: End of video preroll
+main debug: Received first picture
+main debug: Buffering 27%
+main debug: Buffering 29%
+main error: Failed to change zoom
+main error: Failed to set on top
+main error: Failed to change source AR
+main debug: Buffering 33%
+main debug: Buffering 33%
+main debug: Buffering 38%
+main debug: Buffering 39%
+main debug: Buffering 43%
+main debug: Buffering 48%
+main debug: Buffering 48%
+main debug: Buffering 49%
+main debug: Buffering 53%
+main debug: Buffering 58%
+main debug: Buffering 59%
+main debug: Buffering 59%
+main debug: Buffering 63%
+main debug: Buffering 67%
+main debug: Buffering 69%
+main debug: Buffering 73%
+main debug: Buffering 73%
+main debug: Buffering 77%
+main debug: Buffering 79%
+main debug: Buffering 83%
+main debug: Buffering 87%
+main debug: Buffering 87%
+main debug: Buffering 89%
+main debug: Buffering 93%
+main debug: Buffering 97%
+main debug: Stream buffering done (1000 ms in 884 ms)
+main debug: Decoder buffering done in 0 ms
+main warning: picture is too late to be displayed (missing 33 ms)
+main debug: picture might be displayed late (missing 0 ms)
+main debug: picture might be displayed late (missing 2 ms)
+main debug: picture might be displayed late (missing 0 ms)
+main debug: picture might be displayed late (missing 1 ms)
+main debug: picture might be displayed late (missing 1 ms)
+main debug: picture might be displayed late (missing 7 ms)
+main debug: picture might be displayed late (missing 2 ms)
+main debug: picture might be displayed late (missing 2 ms)
+main debug: picture might be displayed late (missing 0 ms)
+main debug: picture might be displayed late (missing 2 ms)
+main debug: picture might be displayed late (missing 1 ms)
+main debug: picture might be displayed late (missing 1 ms)
+main debug: picture might be displayed late (missing 2 ms)
+main debug: picture might be displayed late (missing 7 ms)
+main debug: picture might be displayed late (missing 0 ms)
+main debug: picture might be displayed late (missing 5 ms)
+main debug: picture might be displayed late (missing 2 ms)
+main debug: picture might be displayed late (missing 0 ms)
+main debug: picture might be displayed late (missing 3 ms)
+live555 debug: tk->rtpSource->hasBeenSynchronizedUsingRTCP()
+main error: ES_OUT_RESET_PCR called
+main debug: Buffering 0%
+main debug: Buffering 0%
+main debug: Buffering 0%
+main debug: Buffering 4%
+main debug: Buffering 5%
+main debug: Buffering 9%
+main debug: Buffering 11%
+main debug: Buffering 14%
+main debug: Buffering 15%
+main debug: End of video preroll
+main debug: Received first picture
+main debug: Buffering 19%
+main debug: Buffering 24%
+main debug: Buffering 24%
+main debug: Buffering 26%
+main debug: Buffering 29%
+main debug: Buffering 34%
+main debug: Buffering 36%
+main debug: Buffering 37%
+main debug: Buffering 39%
+main debug: Buffering 43%
+main debug: Buffering 46%
+main debug: Buffering 50%
+main debug: Buffering 50%
+main debug: Buffering 53%
+main debug: Buffering 55%
+main debug: Buffering 59%
+main debug: Buffering 62%
+main debug: Buffering 63%
+main debug: Buffering 66%
+main debug: Buffering 69%
+main debug: Buffering 74%
+main debug: Buffering 75%
+main debug: Buffering 76%
+main debug: Buffering 79%
+main debug: Buffering 83%
+main debug: Buffering 85%
+main debug: Buffering 88%
+main debug: Buffering 89%
+main debug: Buffering 93%
+main debug: Buffering 95%
+main debug: Stream buffering done (1000 ms in 982 ms)
+main debug: Decoder buffering done in 0 ms
+main debug: picture might be displayed late (missing 2 ms)
+main debug: picture might be displayed late (missing 11 ms)
+main debug: picture might be displayed late (missing 0 ms)
+main debug: picture might be displayed late (missing 0 ms)
+main debug: picture might be displayed late (missing 0 ms)
+main debug: picture might be displayed late (missing 0 ms)
+main debug: picture might be displayed late (missing 0 ms)
+main debug: picture might be displayed late (missing 1 ms)
+main debug: picture might be displayed late (missing 2 ms)
+main debug: picture might be displayed late (missing 1 ms)
+main debug: picture might be displayed late (missing 0 ms)
+main debug: picture might be displayed late (missing 4 ms)
+main debug: picture might be displayed late (missing 2 ms)
+main debug: picture might be displayed late (missing 2 ms)
+main debug: picture might be displayed late (missing 1 ms)
+main debug: picture might be displayed late (missing 1 ms)
+main debug: picture might be displayed late (missing 0 ms)
+main debug: picture might be displayed late (missing 0 ms)
+main debug: picture might be displayed late (missing 3 ms)
+main debug: picture might be displayed late (missing 1 ms)
+main debug: picture might be displayed late (missing 2 ms)
+main debug: picture might be displayed late (missing 1 ms)
+main debug: picture might be displayed late (missing 1 ms)
+main debug: picture might be displayed late (missing 1 ms)
+main debug: picture might be displayed late (missing 1 ms)
+main debug: picture might be displayed late (missing 0 ms)
+main debug: picture might be displayed late (missing 0 ms)
+main debug: picture might be displayed late (missing 0 ms)
+main debug: picture might be displayed late (missing 0 ms)
+main debug: picture might be displayed late (missing 1 ms)
+main debug: picture might be displayed late (missing 0 ms)
+main debug: picture might be displayed late (missing 1 ms)
+main debug: picture might be displayed late (missing 6 ms)
+main debug: picture might be displayed late (missing 2 ms)
+main debug: picture might be displayed late (missing 1 ms)
+main debug: picture might be displayed late (missing 0 ms)
+main debug: picture might be displayed late (missing 1 ms)
+main debug: picture might be displayed late (missing 1 ms)
+﻿-- logger module started --
+main debug: VLC media player - 2.1.6 Rincewind
+main debug: Copyright © 1996-2015 the VideoLAN team
+main debug: revision 2.1.6-0-gea01d28
+main debug: configured with ./configure  '--includedir=${prefix}/include' '--mandir=${prefix}/share/man' '--infodir=${prefix}/share/info' '--localstatedir=/var' '--libdir=${prefix}/lib/x86_64-linux-gnu' '--libexecdir=${prefix}/lib/x86_64-linux-gnu' '--disable-dependency-tracking' '--build=x86_64-linux-gnu' 'CPPFLAGS=-D_FORTIFY_SOURCE=2' 'LDFLAGS=-Wl,-Bsymbolic-functions -Wl,-z,relro' '--config-cache' '--disable-maintainer-mode' '--disable-silent-rules' '--disable-update-check' '--enable-fast-install' '--prefix=/usr' '--docdir=/usr/share/doc/vlc-nox' '--libdir=/usr/lib' '--sysconfdir=/etc' '--with-binary-version=0ubuntu14.04.1' '--enable-a52' '--enable-aa' '--enable-bluray' '--enable-bonjour' '--enable-caca' '--enable-chromaprint' '--enable-dbus' '--enable-dca' '--enable-dirac' '--enable-directfb' '--enable-dvbpsi' '--enable-dvdnav' '--enable-faad' '--enable-flac' '--enable-fluidsynth' '--enable-freetype' '--enable-fribidi' '--enable-gnutls' '--enable-jack' '--enable-kate' '--enable-libass' '--enable-libfreerdp' '--enable-libmpeg2' '--enable-libxml2' '--enable-lirc' '--enable-live555' '--enable-mad' '--enable-mkv' '--enable-mod' '--enable-mpc' '--enable-mtp' '--enable-mux_ogg' '--enable-ncurses' '--enable-notify' '--enable-ogg' '--enable-opus' '--enable-oss' '--enable-pulse' '--enable-qt' '--enable-realrtsp' '--enable-samplerate' '--enable-schroedinger' '--enable-sdl' '--enable-sftp' '--enable-shout' '--enable-skins2' '--enable-smbclient' '--enable-speex' '--enable-svg' '--enable-taglib' '--enable-theora' '--enable-twolame' '--enable-upnp' '--enable-vcd' '--enable-vcdx' '--enable-vorbis' '--enable-x264' '--enable-zvbi' '--with-kde-solid=/usr/share/kde4/apps/solid/actions/' '--disable-decklink' '--disable-dxva2' '--disable-fdkaac' '--disable-gnomevfs' '--disable-goom' '--disable-libvnc' '--disable-opencv' '--disable-projectm' '--disable-quicksync' '--disable-sndio' '--disable-telx' '--disable-vsxu' '--disable-wasapi' '--enable-alsa' '--enable-atmo' '--enable-dc1394' '--enable-dv1394' '--enable-linsys' '--enable-omxil' '--enable-udev' '--enable-libva' '--enable-v4l2' '--enable-crystalhd' '--enable-mmx' '--enable-sse' '--disable-neon' '--disable-altivec' 'CFLAGS=-g -O2 -fstack-protector --param=ssp-buffer-size=4 -Wformat -Werror=format-security' 'CXXFLAGS=-g -O2 -fstack-protector --param=ssp-buffer-size=4 -Wformat -Werror=format-security' 'build_alias=x86_64-linux-gnu'
+main debug: using interface module "logger"
+main debug: Creating an input for 'rtsp://192.41.170.222:80/getstream000'
+main debug: using timeshift granularity of 50 MiB, in path '/tmp'
+main debug: `rtsp://192.41.170.222:80/getstream000' gives access `rtsp' demux `' path `192.41.170.222:80/getstream000'
+main debug: enforced demux ` h264'
+main debug: creating demux: access='rtsp' demux='h264' location='192.41.170.222:80/getstream000' file='(null)'
+main debug: looking for access_demux module matching "rtsp": 20 candidates
+live555 debug: version 2014.01.13
+live555 debug: we will now try HTTP tunneling mode
+live555 debug: connection error -115
+live555 error: Failed to connect with rtsp://192.41.170.222:80/getstream000
+main debug: no access_demux modules matched
+main debug: creating access 'rtsp' location='192.41.170.222:80/getstream000', path='(null)'
+main debug: looking for access module matching "rtsp": 25 candidates
+main debug: net: connecting to 192.41.170.222 port 80
+main debug: connection succeeded (socket = 27)
+access_realrtsp debug: rtsp connected
+access_realrtsp warning: only real/helix rtsp servers supported for now
+main debug: no access modules matched
+main error: open of `rtsp://192.41.170.222:80/getstream000' failed
+main error: Your input can't be opened
+main error: VLC is unable to open the MRL 'rtsp://192.41.170.222:80/getstream000'. Check the log for details.
+﻿-- logger module started --
+main debug: VLC media player - 2.1.6 Rincewind
+main debug: Copyright © 1996-2015 the VideoLAN team
+main debug: revision 2.1.6-0-gea01d28
+main debug: configured with ./configure  '--includedir=${prefix}/include' '--mandir=${prefix}/share/man' '--infodir=${prefix}/share/info' '--localstatedir=/var' '--libdir=${prefix}/lib/x86_64-linux-gnu' '--libexecdir=${prefix}/lib/x86_64-linux-gnu' '--disable-dependency-tracking' '--build=x86_64-linux-gnu' 'CPPFLAGS=-D_FORTIFY_SOURCE=2' 'LDFLAGS=-Wl,-Bsymbolic-functions -Wl,-z,relro' '--config-cache' '--disable-maintainer-mode' '--disable-silent-rules' '--disable-update-check' '--enable-fast-install' '--prefix=/usr' '--docdir=/usr/share/doc/vlc-nox' '--libdir=/usr/lib' '--sysconfdir=/etc' '--with-binary-version=0ubuntu14.04.1' '--enable-a52' '--enable-aa' '--enable-bluray' '--enable-bonjour' '--enable-caca' '--enable-chromaprint' '--enable-dbus' '--enable-dca' '--enable-dirac' '--enable-directfb' '--enable-dvbpsi' '--enable-dvdnav' '--enable-faad' '--enable-flac' '--enable-fluidsynth' '--enable-freetype' '--enable-fribidi' '--enable-gnutls' '--enable-jack' '--enable-kate' '--enable-libass' '--enable-libfreerdp' '--enable-libmpeg2' '--enable-libxml2' '--enable-lirc' '--enable-live555' '--enable-mad' '--enable-mkv' '--enable-mod' '--enable-mpc' '--enable-mtp' '--enable-mux_ogg' '--enable-ncurses' '--enable-notify' '--enable-ogg' '--enable-opus' '--enable-oss' '--enable-pulse' '--enable-qt' '--enable-realrtsp' '--enable-samplerate' '--enable-schroedinger' '--enable-sdl' '--enable-sftp' '--enable-shout' '--enable-skins2' '--enable-smbclient' '--enable-speex' '--enable-svg' '--enable-taglib' '--enable-theora' '--enable-twolame' '--enable-upnp' '--enable-vcd' '--enable-vcdx' '--enable-vorbis' '--enable-x264' '--enable-zvbi' '--with-kde-solid=/usr/share/kde4/apps/solid/actions/' '--disable-decklink' '--disable-dxva2' '--disable-fdkaac' '--disable-gnomevfs' '--disable-goom' '--disable-libvnc' '--disable-opencv' '--disable-projectm' '--disable-quicksync' '--disable-sndio' '--disable-telx' '--disable-vsxu' '--disable-wasapi' '--enable-alsa' '--enable-atmo' '--enable-dc1394' '--enable-dv1394' '--enable-linsys' '--enable-omxil' '--enable-udev' '--enable-libva' '--enable-v4l2' '--enable-crystalhd' '--enable-mmx' '--enable-sse' '--disable-neon' '--disable-altivec' 'CFLAGS=-g -O2 -fstack-protector --param=ssp-buffer-size=4 -Wformat -Werror=format-security' 'CXXFLAGS=-g -O2 -fstack-protector --param=ssp-buffer-size=4 -Wformat -Werror=format-security' 'build_alias=x86_64-linux-gnu'
+main debug: using interface module "logger"
+main debug: Creating an input for 'http://192.41.170.222:80/getstream000'
+main debug: using timeshift granularity of 50 MiB, in path '/tmp'
+main debug: `http://192.41.170.222:80/getstream000' gives access `http' demux `' path `192.41.170.222:80/getstream000'
+main debug: enforced demux ` h264'
+main debug: creating demux: access='http' demux='h264' location='192.41.170.222:80/getstream000' file='(null)'
+main debug: looking for access_demux module matching "http": 20 candidates
+main debug: no access_demux modules matched
+main debug: creating access 'http' location='192.41.170.222:80/getstream000', path='(null)'
+main debug: looking for access module matching "http": 25 candidates
+access_http debug: querying proxy for http://192.41.170.222:80/getstream000
+access_http debug: no proxy
+access_http debug: http: server='192.41.170.222' port=80 file='/getstream000'
+main debug: net: connecting to 192.41.170.222 port 80
+main debug: connection succeeded (socket = 27)
+access_http debug: protocol 'HTTP' answer code 404
+access_http error: error: HTTP/1.1 404 Object Not Found
+access_http debug: switching to HTTP version 1.0
+main debug: net: connecting to 192.41.170.222 port 80
+main debug: connection succeeded (socket = 27)
+access_http debug: protocol 'HTTP' answer code 404
+access_http error: error: HTTP/1.1 404 Object Not Found
+main debug: net: connecting to 192.41.170.222 port 80
+main debug: connection succeeded (socket = 27)
+access_mms error: error: HTTP/1.1 404 Object Not Found
+main debug: no access modules matched
+main error: open of `http://192.41.170.222:80/getstream000' failed
+main error: Your input can't be opened
+main error: VLC is unable to open the MRL 'http://192.41.170.222:80/getstream000'. Check the log for details.
+﻿-- logger module started --
+main debug: VLC media player - 2.1.6 Rincewind
+main debug: Copyright © 1996-2015 the VideoLAN team
+main debug: revision 2.1.6-0-gea01d28
+main debug: configured with ./configure  '--includedir=${prefix}/include' '--mandir=${prefix}/share/man' '--infodir=${prefix}/share/info' '--localstatedir=/var' '--libdir=${prefix}/lib/x86_64-linux-gnu' '--libexecdir=${prefix}/lib/x86_64-linux-gnu' '--disable-dependency-tracking' '--build=x86_64-linux-gnu' 'CPPFLAGS=-D_FORTIFY_SOURCE=2' 'LDFLAGS=-Wl,-Bsymbolic-functions -Wl,-z,relro' '--config-cache' '--disable-maintainer-mode' '--disable-silent-rules' '--disable-update-check' '--enable-fast-install' '--prefix=/usr' '--docdir=/usr/share/doc/vlc-nox' '--libdir=/usr/lib' '--sysconfdir=/etc' '--with-binary-version=0ubuntu14.04.1' '--enable-a52' '--enable-aa' '--enable-bluray' '--enable-bonjour' '--enable-caca' '--enable-chromaprint' '--enable-dbus' '--enable-dca' '--enable-dirac' '--enable-directfb' '--enable-dvbpsi' '--enable-dvdnav' '--enable-faad' '--enable-flac' '--enable-fluidsynth' '--enable-freetype' '--enable-fribidi' '--enable-gnutls' '--enable-jack' '--enable-kate' '--enable-libass' '--enable-libfreerdp' '--enable-libmpeg2' '--enable-libxml2' '--enable-lirc' '--enable-live555' '--enable-mad' '--enable-mkv' '--enable-mod' '--enable-mpc' '--enable-mtp' '--enable-mux_ogg' '--enable-ncurses' '--enable-notify' '--enable-ogg' '--enable-opus' '--enable-oss' '--enable-pulse' '--enable-qt' '--enable-realrtsp' '--enable-samplerate' '--enable-schroedinger' '--enable-sdl' '--enable-sftp' '--enable-shout' '--enable-skins2' '--enable-smbclient' '--enable-speex' '--enable-svg' '--enable-taglib' '--enable-theora' '--enable-twolame' '--enable-upnp' '--enable-vcd' '--enable-vcdx' '--enable-vorbis' '--enable-x264' '--enable-zvbi' '--with-kde-solid=/usr/share/kde4/apps/solid/actions/' '--disable-decklink' '--disable-dxva2' '--disable-fdkaac' '--disable-gnomevfs' '--disable-goom' '--disable-libvnc' '--disable-opencv' '--disable-projectm' '--disable-quicksync' '--disable-sndio' '--disable-telx' '--disable-vsxu' '--disable-wasapi' '--enable-alsa' '--enable-atmo' '--enable-dc1394' '--enable-dv1394' '--enable-linsys' '--enable-omxil' '--enable-udev' '--enable-libva' '--enable-v4l2' '--enable-crystalhd' '--enable-mmx' '--enable-sse' '--disable-neon' '--disable-altivec' 'CFLAGS=-g -O2 -fstack-protector --param=ssp-buffer-size=4 -Wformat -Werror=format-security' 'CXXFLAGS=-g -O2 -fstack-protector --param=ssp-buffer-size=4 -Wformat -Werror=format-security' 'build_alias=x86_64-linux-gnu'
+main debug: using interface module "logger"
+main debug: Creating an input for 'http://192.41.170.222:80/getstream000'
+main debug: using timeshift granularity of 50 MiB, in path '/tmp'
+main debug: `http://192.41.170.222:80/getstream000' gives access `http' demux `' path `192.41.170.222:80/getstream000'
+main debug: enforced demux ` h264'
+main debug: creating demux: access='http' demux='h264' location='192.41.170.222:80/getstream000' file='(null)'
+main debug: looking for access_demux module matching "http": 20 candidates
+main debug: no access_demux modules matched
+main debug: creating access 'http' location='192.41.170.222:80/getstream000', path='(null)'
+main debug: looking for access module matching "http": 25 candidates
+access_http debug: querying proxy for http://192.41.170.222:80/getstream000
+access_http debug: no proxy
+access_http debug: http: server='192.41.170.222' port=80 file='/getstream000'
+main debug: net: connecting to 192.41.170.222 port 80
+main debug: connection succeeded (socket = 26)
+access_http debug: protocol 'HTTP' answer code 404
+access_http error: error: HTTP/1.1 404 Object Not Found
+access_http debug: switching to HTTP version 1.0
+main debug: net: connecting to 192.41.170.222 port 80
+main debug: connection succeeded (socket = 26)
+access_http debug: protocol 'HTTP' answer code 404
+access_http error: error: HTTP/1.1 404 Object Not Found
+main debug: net: connecting to 192.41.170.222 port 80
+main debug: connection succeeded (socket = 26)
+access_mms error: error: HTTP/1.1 404 Object Not Found
+main debug: no access modules matched
+main error: open of `http://192.41.170.222:80/getstream000' failed
+main error: Your input can't be opened
+main error: VLC is unable to open the MRL 'http://192.41.170.222:80/getstream000'. Check the log for details.
+﻿-- logger module started --
+main debug: VLC media player - 2.1.6 Rincewind
+main debug: Copyright © 1996-2015 the VideoLAN team
+main debug: revision 2.1.6-0-gea01d28
+main debug: configured with ./configure  '--includedir=${prefix}/include' '--mandir=${prefix}/share/man' '--infodir=${prefix}/share/info' '--localstatedir=/var' '--libdir=${prefix}/lib/x86_64-linux-gnu' '--libexecdir=${prefix}/lib/x86_64-linux-gnu' '--disable-dependency-tracking' '--build=x86_64-linux-gnu' 'CPPFLAGS=-D_FORTIFY_SOURCE=2' 'LDFLAGS=-Wl,-Bsymbolic-functions -Wl,-z,relro' '--config-cache' '--disable-maintainer-mode' '--disable-silent-rules' '--disable-update-check' '--enable-fast-install' '--prefix=/usr' '--docdir=/usr/share/doc/vlc-nox' '--libdir=/usr/lib' '--sysconfdir=/etc' '--with-binary-version=0ubuntu14.04.1' '--enable-a52' '--enable-aa' '--enable-bluray' '--enable-bonjour' '--enable-caca' '--enable-chromaprint' '--enable-dbus' '--enable-dca' '--enable-dirac' '--enable-directfb' '--enable-dvbpsi' '--enable-dvdnav' '--enable-faad' '--enable-flac' '--enable-fluidsynth' '--enable-freetype' '--enable-fribidi' '--enable-gnutls' '--enable-jack' '--enable-kate' '--enable-libass' '--enable-libfreerdp' '--enable-libmpeg2' '--enable-libxml2' '--enable-lirc' '--enable-live555' '--enable-mad' '--enable-mkv' '--enable-mod' '--enable-mpc' '--enable-mtp' '--enable-mux_ogg' '--enable-ncurses' '--enable-notify' '--enable-ogg' '--enable-opus' '--enable-oss' '--enable-pulse' '--enable-qt' '--enable-realrtsp' '--enable-samplerate' '--enable-schroedinger' '--enable-sdl' '--enable-sftp' '--enable-shout' '--enable-skins2' '--enable-smbclient' '--enable-speex' '--enable-svg' '--enable-taglib' '--enable-theora' '--enable-twolame' '--enable-upnp' '--enable-vcd' '--enable-vcdx' '--enable-vorbis' '--enable-x264' '--enable-zvbi' '--with-kde-solid=/usr/share/kde4/apps/solid/actions/' '--disable-decklink' '--disable-dxva2' '--disable-fdkaac' '--disable-gnomevfs' '--disable-goom' '--disable-libvnc' '--disable-opencv' '--disable-projectm' '--disable-quicksync' '--disable-sndio' '--disable-telx' '--disable-vsxu' '--disable-wasapi' '--enable-alsa' '--enable-atmo' '--enable-dc1394' '--enable-dv1394' '--enable-linsys' '--enable-omxil' '--enable-udev' '--enable-libva' '--enable-v4l2' '--enable-crystalhd' '--enable-mmx' '--enable-sse' '--disable-neon' '--disable-altivec' 'CFLAGS=-g -O2 -fstack-protector --param=ssp-buffer-size=4 -Wformat -Werror=format-security' 'CXXFLAGS=-g -O2 -fstack-protector --param=ssp-buffer-size=4 -Wformat -Werror=format-security' 'build_alias=x86_64-linux-gnu'
+main debug: using interface module "logger"
+main debug: Creating an input for 'rtsp://192.41.170.253:554/rtsph264720p'
+main debug: using timeshift granularity of 50 MiB, in path '/tmp'
+main debug: `rtsp://admin:pass@192.41.170.253:554/rtsph264720p' gives access `rtsp' demux `' path `admin:pass@192.41.170.253:554/rtsph264720p'
+main debug: creating demux: access='rtsp' demux='' location='admin:pass@192.41.170.253:554/rtsph264720p' file='(null)'
+main debug: looking for access_demux module matching "rtsp": 20 candidates
+live555 debug: version 2014.01.13
+live555 debug: RTP subsession 'video/H264'
+main debug: selecting program id=0
+live555 debug: RTP subsession 'audio/PCMU'
+live555 debug: setup start: 0.000000 stop:0.000000
+live555 debug: play start: 0.000000 stop:0.000000
+main debug: using access_demux module "live555"
+main debug: looking for decoder module matching "any": 39 candidates
+avcodec debug: trying to use direct rendering
+avcodec debug: allowing 4 thread(s) for decoding
+avcodec debug: avcodec codec (H264 - MPEG-4 AVC (part 10)) started
+avcodec debug: using frame thread mode with 4 threads
+main debug: using decoder module "avcodec"
+main debug: looking for packetizer module matching "any": 21 candidates
+packetizer_h264 debug: found NAL_SPS (sps_id=0)
+packetizer_h264 debug: found NAL_PPS (pps_id=0 sps_id=0)
+main debug: using packetizer module "packetizer_h264"
+main debug: looking for decoder module matching "any": 39 candidates
+g711 debug: samplerate:8000Hz channels:1
+main debug: using decoder module "g711"
+main debug: looking for meta reader module matching "any": 2 candidates
+lua debug: Trying Lua scripts in /root/.local/share/vlc/lua/meta/reader
+lua debug: Trying Lua scripts in /usr/lib/vlc/lua/meta/reader
+lua debug: Trying Lua playlist script /usr/lib/vlc/lua/meta/reader/filename.luac
+lua debug: Trying Lua scripts in /usr/share/vlc/lua/meta/reader
+main debug: no meta reader modules matched
+main debug: `rtsp://admin:pass@192.41.170.253:554/rtsph264720p' successfully opened
+main debug: Buffering 0%
+main debug: creating audio output
+main debug: Buffering 12%
+main debug: looking for audio output module matching "any": 6 candidates
+pulse debug: using library version 4.0.0
+pulse debug:  (compiled with version 4.0.0, protocol 28)
+main debug: Buffering 25%
+pulse error: PulseAudio server connection failure: Connection refused
+alsa debug: Available ALSA PCM devices:
+alsa debug: Discard all samples (playback) or generate zero samples (capture) (null)
+main debug: using audio output module "alsa"
+alsa error: cannot open ALSA device "default": No such file or directory
+main error: Audio output failed
+main error: The audio device "default" could not be used:
+No such file or directory.
+main error: module not functional
+main debug: keeping audio output
+main error: failed to create audio output
+main debug: Buffering 38%
+main debug: Buffering 51%
+main debug: Buffering 64%
+main debug: Buffering 76%
+main debug: Buffering 76%
+main debug: Buffering 76%
+live555 debug: tk->rtpSource->hasBeenSynchronizedUsingRTCP()
+main error: ES_OUT_RESET_PCR called
+main debug: Buffering 0%
+main warning: clock gap, unexpected stream discontinuity
+main warning: feeding synchro with a new reference point trying to recover from clock gap
+main debug: Buffering 0%
+main debug: Buffering 3%
+main debug: Buffering 5%
+main debug: Buffering 5%
+main debug: Buffering 9%
+main debug: Buffering 13%
+main debug: Buffering 15%
+main debug: Buffering 19%
+main debug: Buffering 19%
+main debug: Buffering 23%
+main debug: Buffering 27%
+main debug: Buffering 29%
+main debug: Buffering 33%
+main debug: Buffering 33%
+main debug: Buffering 37%
+main debug: Buffering 39%
+main debug: Buffering 44%
+main debug: Buffering 44%
+main debug: Buffering 47%
+main debug: Buffering 49%
+main debug: Buffering 53%
+main debug: Buffering 57%
+main debug: Buffering 59%
+main debug: Buffering 59%
+main debug: Buffering 64%
+main debug: Buffering 67%
+main debug: Buffering 70%
+main debug: Buffering 70%
+main debug: Buffering 73%
+main debug: Buffering 78%
+main debug: Buffering 80%
+main debug: Buffering 83%
+main debug: Buffering 83%
+main debug: Buffering 88%
+main debug: Buffering 89%
+main debug: Buffering 93%
+main debug: Buffering 98%
+main debug: Buffering 98%
+main debug: Buffering 98%
+main debug: Buffering 98%
+main debug: Stream buffering done (1003 ms in 1003 ms)
+main debug: Decoder buffering done in 0 ms
+main debug: looking for text renderer module matching "any": 2 candidates
+freetype debug: Building font databases.
+freetype debug: Took 0 microseconds
+freetype debug: Using Serif Bold as font from file /usr/share/fonts/truetype/dejavu/DejaVuSans.ttf
+freetype debug: using fontsize: 2
+main debug: using text renderer module "freetype"
+main debug: looking for video filter2 module matching "any": 55 candidates
+swscale debug: 32x32 chroma: YUVA -> 16x16 chroma: RGBA with scaling using Bicubic (good quality)
+main debug: using video filter2 module "swscale"
+main debug: looking for video filter2 module matching "any": 55 candidates
+yuvp debug: YUVP to YUVA converter
+main debug: using video filter2 module "yuvp"
+main debug: Deinterlacing available
+main debug: deinterlace 0, mode blend, is_needed 0
+main debug: Opening vout display wrapper
+main debug: looking for vout display module matching "vmem": 12 candidates
+main debug: VoutDisplayEvent 'fullscreen' 0
+main debug: VoutDisplayEvent 'resize' 720x480 window
+main debug: using vout display module "vmem"
+main debug: A filter to adapt decoder to display is needed
+main debug: looking for video filter2 module matching "any": 55 candidates
+swscale debug: 1280x720 chroma: I420 -> 720x480 chroma: RV32 with scaling using Bicubic (good quality)
+main debug: using video filter2 module "swscale"
+main debug: Filter 'Swscale' (0x7f2e30001f18) appended to chain
+main debug: original format sz 1280x720, of (0,0), vsz 1280x720, 4cc I420, sar 1:1, msk r0x0 g0x0 b0x0
+main debug: removing module "freetype"
+main debug: looking for text renderer module matching "any": 2 candidates
+freetype debug: Building font databases.
+freetype debug: Took 0 microseconds
+freetype debug: Using Serif Bold as font from file /usr/share/fonts/truetype/dejavu/DejaVuSans.ttf
+freetype debug: using fontsize: 2
+main debug: using text renderer module "freetype"
+avcodec debug: using direct rendering
+main error: Failed to change zoom
+main error: Failed to set on top
+main error: Failed to change source AR
+main error: pictures leaked, trying to workaround
+main error: pictures leaked, trying to workaround
+main error: pictures leaked, trying to workaround
+main debug: End of video preroll
+main debug: picture might be displayed late (missing 0 ms)
+main warning: picture is too late to be displayed (missing 24 ms)
+main debug: picture might be displayed late (missing 1 ms)
+main debug: picture might be displayed late (missing 0 ms)
+main debug: picture might be displayed late (missing 1 ms)
+main debug: picture might be displayed late (missing 0 ms)
+main debug: picture might be displayed late (missing 4 ms)
+main debug: picture might be displayed late (missing 0 ms)
+live555 debug: tk->rtpSource->hasBeenSynchronizedUsingRTCP()
+main error: ES_OUT_RESET_PCR called
+main debug: Buffering 0%
+main debug: Buffering 4%
+main debug: Buffering 5%
+main debug: Buffering 9%
+main debug: Buffering 11%
+main debug: Buffering 14%
+main debug: Buffering 15%
+main debug: Buffering 20%
+main debug: Buffering 21%
+main debug: Buffering 24%
+main debug: Buffering 26%
+main debug: Buffering 30%
+main debug: Buffering 31%
+main debug: Buffering 35%
+main debug: Buffering 37%
+main debug: Buffering 39%
+main debug: Buffering 43%
+main debug: Buffering 45%
+main debug: Buffering 50%
+main debug: Buffering 50%
+main debug: Buffering 50%
+main debug: Buffering 50%
+main debug: Buffering 53%
+main debug: Buffering 55%
+main debug: Buffering 59%
+main debug: Buffering 62%
+main debug: Buffering 64%
+main debug: Buffering 66%
+main debug: Buffering 69%
+main debug: End of video preroll
+main debug: Received first picture
+main debug: Buffering 73%
+main debug: Buffering 75%
+main debug: Buffering 75%
+main debug: Buffering 79%
+main debug: Buffering 83%
+main debug: Buffering 85%
+main debug: Buffering 88%
+main debug: Buffering 89%
+main debug: Buffering 93%
+main debug: Buffering 95%
+main debug: Buffering 99%
+main debug: Stream buffering done (1010 ms in 1010 ms)
+main debug: Decoder buffering done in 0 ms
+main debug: picture might be displayed late (missing 3 ms)
+main debug: picture might be displayed late (missing 1 ms)
+main debug: picture might be displayed late (missing 1 ms)
+main debug: picture might be displayed late (missing 0 ms)
+main debug: picture might be displayed late (missing 0 ms)
+main debug: picture might be displayed late (missing 0 ms)
+﻿-- logger module started --
+main debug: VLC media player - 2.1.6 Rincewind
+main debug: Copyright © 1996-2015 the VideoLAN team
+main debug: revision 2.1.6-0-gea01d28
+main debug: configured with ./configure  '--includedir=${prefix}/include' '--mandir=${prefix}/share/man' '--infodir=${prefix}/share/info' '--localstatedir=/var' '--libdir=${prefix}/lib/x86_64-linux-gnu' '--libexecdir=${prefix}/lib/x86_64-linux-gnu' '--disable-dependency-tracking' '--build=x86_64-linux-gnu' 'CPPFLAGS=-D_FORTIFY_SOURCE=2' 'LDFLAGS=-Wl,-Bsymbolic-functions -Wl,-z,relro' '--config-cache' '--disable-maintainer-mode' '--disable-silent-rules' '--disable-update-check' '--enable-fast-install' '--prefix=/usr' '--docdir=/usr/share/doc/vlc-nox' '--libdir=/usr/lib' '--sysconfdir=/etc' '--with-binary-version=0ubuntu14.04.1' '--enable-a52' '--enable-aa' '--enable-bluray' '--enable-bonjour' '--enable-caca' '--enable-chromaprint' '--enable-dbus' '--enable-dca' '--enable-dirac' '--enable-directfb' '--enable-dvbpsi' '--enable-dvdnav' '--enable-faad' '--enable-flac' '--enable-fluidsynth' '--enable-freetype' '--enable-fribidi' '--enable-gnutls' '--enable-jack' '--enable-kate' '--enable-libass' '--enable-libfreerdp' '--enable-libmpeg2' '--enable-libxml2' '--enable-lirc' '--enable-live555' '--enable-mad' '--enable-mkv' '--enable-mod' '--enable-mpc' '--enable-mtp' '--enable-mux_ogg' '--enable-ncurses' '--enable-notify' '--enable-ogg' '--enable-opus' '--enable-oss' '--enable-pulse' '--enable-qt' '--enable-realrtsp' '--enable-samplerate' '--enable-schroedinger' '--enable-sdl' '--enable-sftp' '--enable-shout' '--enable-skins2' '--enable-smbclient' '--enable-speex' '--enable-svg' '--enable-taglib' '--enable-theora' '--enable-twolame' '--enable-upnp' '--enable-vcd' '--enable-vcdx' '--enable-vorbis' '--enable-x264' '--enable-zvbi' '--with-kde-solid=/usr/share/kde4/apps/solid/actions/' '--disable-decklink' '--disable-dxva2' '--disable-fdkaac' '--disable-gnomevfs' '--disable-goom' '--disable-libvnc' '--disable-opencv' '--disable-projectm' '--disable-quicksync' '--disable-sndio' '--disable-telx' '--disable-vsxu' '--disable-wasapi' '--enable-alsa' '--enable-atmo' '--enable-dc1394' '--enable-dv1394' '--enable-linsys' '--enable-omxil' '--enable-udev' '--enable-libva' '--enable-v4l2' '--enable-crystalhd' '--enable-mmx' '--enable-sse' '--disable-neon' '--disable-altivec' 'CFLAGS=-g -O2 -fstack-protector --param=ssp-buffer-size=4 -Wformat -Werror=format-security' 'CXXFLAGS=-g -O2 -fstack-protector --param=ssp-buffer-size=4 -Wformat -Werror=format-security' 'build_alias=x86_64-linux-gnu'
+main debug: using interface module "logger"
+main debug: Creating an input for 'http://192.41.170.222:80/getstream000'
+main debug: using timeshift granularity of 50 MiB, in path '/tmp'
+main debug: `http://admin:@192.41.170.222:80/getstream000' gives access `http' demux `' path `admin:@192.41.170.222:80/getstream000'
+main debug: enforced demux ` h264'
+main debug: creating demux: access='http' demux='h264' location='admin:@192.41.170.222:80/getstream000' file='(null)'
+main debug: looking for access_demux module matching "http": 20 candidates
+main debug: no access_demux modules matched
+main debug: creating access 'http' location='admin:@192.41.170.222:80/getstream000', path='(null)'
+main debug: looking for access module matching "http": 25 candidates
+access_http debug: querying proxy for http://admin:@192.41.170.222:80/getstream000
+access_http debug: no proxy
+access_http debug: http: server='192.41.170.222' port=80 file='/getstream000'
+access_http debug:       user='admin'
+main debug: net: connecting to 192.41.170.222 port 80
+main debug: connection succeeded (socket = 27)
+access_http debug: protocol 'HTTP' answer code 404
+access_http error: error: HTTP/1.1 404 Object Not Found
+access_http debug: switching to HTTP version 1.0
+main debug: net: connecting to 192.41.170.222 port 80
+main debug: connection succeeded (socket = 27)
+access_http debug: protocol 'HTTP' answer code 404
+access_http error: error: HTTP/1.1 404 Object Not Found
+main debug: net: connecting to 192.41.170.222 port 80
+main debug: connection succeeded (socket = 27)
+access_mms error: error: HTTP/1.1 404 Object Not Found
+main debug: no access modules matched
+main error: open of `http://admin:@192.41.170.222:80/getstream000' failed
+main error: Your input can't be opened
+main error: VLC is unable to open the MRL 'http://admin:@192.41.170.222:80/getstream000'. Check the log for details.
+﻿-- logger module started --
+main debug: VLC media player - 2.1.6 Rincewind
+main debug: Copyright © 1996-2015 the VideoLAN team
+main debug: revision 2.1.6-0-gea01d28
+main debug: configured with ./configure  '--includedir=${prefix}/include' '--mandir=${prefix}/share/man' '--infodir=${prefix}/share/info' '--localstatedir=/var' '--libdir=${prefix}/lib/x86_64-linux-gnu' '--libexecdir=${prefix}/lib/x86_64-linux-gnu' '--disable-dependency-tracking' '--build=x86_64-linux-gnu' 'CPPFLAGS=-D_FORTIFY_SOURCE=2' 'LDFLAGS=-Wl,-Bsymbolic-functions -Wl,-z,relro' '--config-cache' '--disable-maintainer-mode' '--disable-silent-rules' '--disable-update-check' '--enable-fast-install' '--prefix=/usr' '--docdir=/usr/share/doc/vlc-nox' '--libdir=/usr/lib' '--sysconfdir=/etc' '--with-binary-version=0ubuntu14.04.1' '--enable-a52' '--enable-aa' '--enable-bluray' '--enable-bonjour' '--enable-caca' '--enable-chromaprint' '--enable-dbus' '--enable-dca' '--enable-dirac' '--enable-directfb' '--enable-dvbpsi' '--enable-dvdnav' '--enable-faad' '--enable-flac' '--enable-fluidsynth' '--enable-freetype' '--enable-fribidi' '--enable-gnutls' '--enable-jack' '--enable-kate' '--enable-libass' '--enable-libfreerdp' '--enable-libmpeg2' '--enable-libxml2' '--enable-lirc' '--enable-live555' '--enable-mad' '--enable-mkv' '--enable-mod' '--enable-mpc' '--enable-mtp' '--enable-mux_ogg' '--enable-ncurses' '--enable-notify' '--enable-ogg' '--enable-opus' '--enable-oss' '--enable-pulse' '--enable-qt' '--enable-realrtsp' '--enable-samplerate' '--enable-schroedinger' '--enable-sdl' '--enable-sftp' '--enable-shout' '--enable-skins2' '--enable-smbclient' '--enable-speex' '--enable-svg' '--enable-taglib' '--enable-theora' '--enable-twolame' '--enable-upnp' '--enable-vcd' '--enable-vcdx' '--enable-vorbis' '--enable-x264' '--enable-zvbi' '--with-kde-solid=/usr/share/kde4/apps/solid/actions/' '--disable-decklink' '--disable-dxva2' '--disable-fdkaac' '--disable-gnomevfs' '--disable-goom' '--disable-libvnc' '--disable-opencv' '--disable-projectm' '--disable-quicksync' '--disable-sndio' '--disable-telx' '--disable-vsxu' '--disable-wasapi' '--enable-alsa' '--enable-atmo' '--enable-dc1394' '--enable-dv1394' '--enable-linsys' '--enable-omxil' '--enable-udev' '--enable-libva' '--enable-v4l2' '--enable-crystalhd' '--enable-mmx' '--enable-sse' '--disable-neon' '--disable-altivec' 'CFLAGS=-g -O2 -fstack-protector --param=ssp-buffer-size=4 -Wformat -Werror=format-security' 'CXXFLAGS=-g -O2 -fstack-protector --param=ssp-buffer-size=4 -Wformat -Werror=format-security' 'build_alias=x86_64-linux-gnu'
+main debug: using interface module "logger"
+main debug: Creating an input for 'http://192.41.170.222:8021/getstream000'
+main debug: using timeshift granularity of 50 MiB, in path '/tmp'
+main debug: `http://admin:@192.41.170.222:8021/getstream000' gives access `http' demux `' path `admin:@192.41.170.222:8021/getstream000'
+main debug: enforced demux ` h264'
+main debug: creating demux: access='http' demux='h264' location='admin:@192.41.170.222:8021/getstream000' file='(null)'
+main debug: looking for access_demux module matching "http": 20 candidates
+main debug: no access_demux modules matched
+main debug: creating access 'http' location='admin:@192.41.170.222:8021/getstream000', path='(null)'
+main debug: looking for access module matching "http": 25 candidates
+access_http debug: querying proxy for http://admin:@192.41.170.222:8021/getstream000
+access_http debug: no proxy
+access_http debug: http: server='192.41.170.222' port=8021 file='/getstream000'
+access_http debug:       user='admin'
+main debug: net: connecting to 192.41.170.222 port 8021
+main debug: connection succeeded (socket = 27)
+access_http debug: protocol 'HTTP' answer code 200
+access_http debug: Connection: Keep-Alive
+access_http debug: Content-Type: multipart/form-data;boundary=--myboundary
+main debug: using access module "access_http"
+main debug: Using stream method for AStream*
+main debug: starting pre-buffering
+main debug: received first data after 0 ms
+main debug: pre-buffering done 174 bytes in 0s - 6068 KiB/s
+main debug: looking for stream_filter module matching "any": 9 candidates
+main debug: no stream_filter modules matched
+main debug: looking for stream_filter module matching "record": 9 candidates
+main debug: using stream_filter module "record"
+main debug: creating demux: access='http' demux='h264' location='admin:@192.41.170.222:8021/getstream000' file='(null)'
+main debug: looking for demux module matching "h264": 63 candidates
+h264 error: this doesn't look like a H264 ES stream, continuing anyway
+h264 debug: using 25.00 fps
+main debug: looking for packetizer module matching "any": 21 candidates
+main debug: using packetizer module "packetizer_h264"
+main debug: using demux module "h264"
+main debug: looking for meta reader module matching "any": 2 candidates
+lua debug: Trying Lua scripts in /root/.local/share/vlc/lua/meta/reader
+lua debug: Trying Lua scripts in /usr/lib/vlc/lua/meta/reader
+lua debug: Trying Lua playlist script /usr/lib/vlc/lua/meta/reader/filename.luac
+lua debug: Trying Lua scripts in /usr/share/vlc/lua/meta/reader
+main debug: no meta reader modules matched
+main debug: `http://admin:@192.41.170.222:8021/getstream000' successfully opened
+packetizer_h264 debug: found NAL_SPS (sps_id=0)
+packetizer_h264 debug: found NAL_PPS (pps_id=0 sps_id=0)
+main debug: selecting program id=0
+main debug: looking for decoder module matching "any": 39 candidates
+avcodec debug: trying to use direct rendering
+avcodec debug: allowing 4 thread(s) for decoding
+avcodec debug: avcodec codec (H264 - MPEG-4 AVC (part 10)) started
+avcodec debug: using frame thread mode with 4 threads
+main debug: using decoder module "avcodec"
+main error: Invalid PCR value in ES_OUT_SET_(GROUP_)PCR !
+main debug: Buffering 0%
+main debug: Buffering 4%
+main debug: looking for text renderer module matching "any": 2 candidates
+freetype debug: Building font databases.
+freetype debug: Took 0 microseconds
+freetype debug: Using Serif Bold as font from file /usr/share/fonts/truetype/dejavu/DejaVuSans.ttf
+freetype debug: using fontsize: 2
+main debug: using text renderer module "freetype"
+main debug: looking for video filter2 module matching "any": 55 candidates
+swscale debug: 32x32 chroma: YUVA -> 16x16 chroma: RGBA with scaling using Bicubic (good quality)
+main debug: using video filter2 module "swscale"
+main debug: looking for video filter2 module matching "any": 55 candidates
+yuvp debug: YUVP to YUVA converter
+main debug: using video filter2 module "yuvp"
+main debug: Deinterlacing available
+main debug: deinterlace 0, mode blend, is_needed 0
+main debug: Opening vout display wrapper
+main debug: looking for vout display module matching "vmem": 12 candidates
+main debug: VoutDisplayEvent 'fullscreen' 0
+main debug: VoutDisplayEvent 'resize' 720x480 window
+main debug: using vout display module "vmem"
+main debug: A filter to adapt decoder to display is needed
+main debug: looking for video filter2 module matching "any": 55 candidates
+swscale debug: 720x480 chroma: I420 -> 720x480 chroma: RV32 with scaling using Bicubic (good quality)
+main debug: using video filter2 module "swscale"
+main debug: Filter 'Swscale' (0x7fc1ac002b48) appended to chain
+main debug: original format sz 720x480, of (0,0), vsz 720x480, 4cc I420, sar 1:1, msk r0x0 g0x0 b0x0
+main debug: removing module "freetype"
+main debug: looking for text renderer module matching "any": 2 candidates
+freetype debug: Building font databases.
+freetype debug: Took 0 microseconds
+freetype debug: Using Serif Bold as font from file /usr/share/fonts/truetype/dejavu/DejaVuSans.ttf
+freetype debug: using fontsize: 2
+main debug: using text renderer module "freetype"
+avcodec debug: using direct rendering
+main error: Failed to change zoom
+main error: Failed to set on top
+main error: Failed to change source AR
+main debug: Buffering 8%
+main debug: End of video preroll
+main debug: Received first picture
+main debug: Buffering 12%
+main debug: Buffering 16%
+main debug: Buffering 20%
+main debug: Buffering 24%
+main debug: Buffering 28%
+main debug: Buffering 32%
+main debug: Buffering 36%
+main debug: Buffering 40%
+main debug: Buffering 44%
+main debug: Buffering 48%
+main debug: Buffering 52%
+main debug: Buffering 56%
+main debug: Buffering 60%
+main debug: Buffering 64%
+main debug: Buffering 68%
+main debug: Buffering 72%
+main debug: Buffering 76%
+main debug: Buffering 80%
+main debug: Buffering 84%
+main debug: Buffering 88%
+main debug: Buffering 92%
+main debug: Buffering 96%
+main debug: Buffering 100%
+main debug: Stream buffering done (1040 ms in 686 ms)
+main debug: Decoder buffering done in 0 ms
+main debug: picture might be displayed late (missing 10 ms)

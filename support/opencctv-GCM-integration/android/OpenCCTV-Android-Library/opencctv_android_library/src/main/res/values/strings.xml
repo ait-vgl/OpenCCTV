@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">OpenCCTV-Android-Library</string>
+
+    <string name="common_please_wait">Please wait</string>
+    <string name="common_logging_in">Logging in...</string>
+    <string name="common_logging_out">Logging out...</string>
+    <string name="common_forgot_password">Forgot your password?</string>
+    <string name="common_error">Error</string>
+    <string name="common_sorry">Sorry</string>
+    <string name="common_connection_error_msg">Cannot connect to server, please try again.</string>
+    <string name="common_check_login_credentials">Please check your username and password.</string>
+    <string name="common_unknown_error">Unknown error.</string>
+    <string name="common_view_live_streaming">View live streaming</string>
+    <string name="common_view_recorded_video">View recorded video</string>
+    <string name="no_avaliable_stream">No available stream</string>
+
+    <string name="dialog_select_camera">Select camera</string>
+    <string name="dialog_vms_not_supported_message">Your vms software is not compatible with our streaming application.</string>
+    <string name="progress_dialog_getting_streaming_information">Getting streaming information.</string>
+
+    <string name="dialog_select_track">Select track</string>
+
+    <string name="ok">OK</string>
+
+</resources>

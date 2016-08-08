@@ -49,7 +49,7 @@ gem 'ffi-rzmq'
 gem 'unirest'
 
 # Use for authentication
-gem 'devise'
+gem 'devise', '~> 4.0.1'
 
 # For activeadmin
 #gem 'activeadmin', github: 'activeadmin'

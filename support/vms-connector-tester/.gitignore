@@ -1,0 +1,12 @@
+/Debug/
+/Release/VmsConnectorPluginTester
+/Release/src/*.d
+/Release/src/*.o
+/Release/src/opencctv/*.d
+/Release/src/opencctv/*.o
+/Release/src/opencctv/util/*.d
+/Release/src/opencctv/util/*.o
+/Release/src/analytic/*.d
+/Release/src/analytic/*.o
+/Release/src/analytic/util/*.d
+/Release/src/analytic/util/*.o

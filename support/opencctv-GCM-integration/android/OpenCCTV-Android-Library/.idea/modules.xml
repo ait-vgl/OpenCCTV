@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/OpenCCTV-Android-Library.iml" filepath="$PROJECT_DIR$/OpenCCTV-Android-Library.iml" />
+      <module fileurl="file://$PROJECT_DIR$/opencctv_android_library/opencctv_android_library.iml" filepath="$PROJECT_DIR$/opencctv_android_library/opencctv_android_library.iml" />
+    </modules>
+  </component>
+</project>

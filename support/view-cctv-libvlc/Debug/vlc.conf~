@@ -1,0 +1,7 @@
+[h264] # H264 video demuxer
+
+# Frames per Second (float)
+h264-fps=12.000000
+
+# Demux module (string)
+demux=h264

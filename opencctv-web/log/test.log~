@@ -1,0 +1,18 @@
+  [1m[36m (247.4ms)[0m  [1mCREATE TABLE `analytic_input_streams` (`id` int(11) auto_increment PRIMARY KEY, `name` varchar(255), `description` text, `analytic_id` int(11), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [1m[35m (267.5ms)[0m  CREATE  INDEX `index_analytic_input_streams_on_analytic_id` USING btree ON `analytic_input_streams` (`analytic_id`) 
+  [1m[36m (264.1ms)[0m  [1mCREATE TABLE `analytic_instance_streams` (`id` int(11) auto_increment PRIMARY KEY, `analytic_instance_id` int(11), `analytic_input_stream_id` int(11), `stream_id` int(11), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [1m[35m (255.1ms)[0m  CREATE  INDEX `index_analytic_instance_streams_on_analytic_input_stream_id` USING btree ON `analytic_instance_streams` (`analytic_input_stream_id`) 
+  [1m[36m (255.2ms)[0m  [1mCREATE  INDEX `index_analytic_instance_streams_on_analytic_instance_id` USING btree ON `analytic_instance_streams` (`analytic_instance_id`) [0m
+  [1m[35m (288.4ms)[0m  CREATE  INDEX `index_analytic_instance_streams_on_stream_id` USING btree ON `analytic_instance_streams` (`stream_id`) 
+  [1m[36m (242.0ms)[0m  [1mCREATE TABLE `analytic_instances` (`id` int(11) auto_increment PRIMARY KEY, `name` varchar(255), `description` text, `analytic_id` int(11), `notification_id` int(11), `user_id` int(11), `group_user_id` int(11), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [1m[35m (244.1ms)[0m  CREATE  INDEX `index_analytic_instances_on_analytic_id` USING btree ON `analytic_instances` (`analytic_id`) 
+  [1m[36m (245.7ms)[0m  [1mCREATE  INDEX `index_analytic_instances_on_group_user_id` USING btree ON `analytic_instances` (`group_user_id`) [0m
+  [1m[35m (299.3ms)[0m  CREATE  INDEX `index_analytic_instances_on_notification_id` USING btree ON `analytic_instances` (`notification_id`) 
+  [1m[36m (254.8ms)[0m  [1mCREATE  INDEX `index_analytic_instances_on_user_id` USING btree ON `analytic_instances` (`user_id`) [0m
+  [1m[35m (287.5ms)[0m  CREATE TABLE `analytics` (`id` int(11) auto_increment PRIMARY KEY, `name` varchar(255), `description` text, `filename` varchar(255), `verified` tinyint(1) DEFAULT 0 NOT NULL, `created_at` datetime, `updated_at` datetime, `log` text) ENGINE=InnoDB
+  [1m[36m (94.3ms)[0m  [1mCREATE TABLE `cameras` (`id` int(11) auto_increment PRIMARY KEY, `name` varchar(255), `camera_id` varchar(255), `description` text, `verified` tinyint(1) DEFAULT 0 NOT NULL, `vms_id` int(11), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [1m[36m (151.1ms)[0m  [1mDROP TABLE `analytic_input_streams`[0m
+  [1m[35m (244.8ms)[0m  CREATE TABLE `analytic_input_streams` (`id` int(11) auto_increment PRIMARY KEY, `name` varchar(255), `description` text, `analytic_id` int(11), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36m (266.0ms)[0m  [1mCREATE  INDEX `index_analytic_input_streams_on_analytic_id` USING btree ON `analytic_input_streams` (`analytic_id`) [0m
+  [1m[35m (109.9ms)[0m  DROP TABLE `analytic_instance_streams`
+  [1m[36m (13.5ms)[0m  [1mCREATE TABLE `analytic_instance_streams` (`id` int(11) auto_increment PRIMARY KEY, `analytic_instance_id` int(11), `analytic_input_stream_id` int(11), `stream_id` int(11), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m

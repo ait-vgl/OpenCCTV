@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="url_opencctv_auth_sign_in">http://[address]:[port]/users/sign_in</string>
+    <string name="url_opencctv_auth_sign_out">http://[address]:[port]/users/sign_out</string>
+
+    <string name="url_opencctv_google_tokens_register">http://[address]:[port]/google_tokens/</string>
+    <string name="url_opencctv_google_tokens_update">http://[address]:[port]/google_tokens/</string>
+    <string name="url_opencctv_google_tokens_unregister">http://[address]:[port]/google_tokens/:id</string>
+
+    <string name="url_opencctv_live_streams">http://[address]:[port]/video/live_streams/</string>
+    <string name="url_opencctv_live_streams_show">http://[address]:[port]/video/live_streams/:aiid</string>
+
+    <string name="url_opencctv_archive_streams">http://[address]:[port]/video/archive_streams/</string>
+    <string name="url_opencctv_archive_streams_show">http://[address]:[port]/video/archive_streams/:aiid</string>
+
+    <string name="url_opencctv_unnotified_messages">http://[address]:[port]/unnotified_messages?google_project_number=:google_project_number</string>
+    <string name="url_opencctv_unnotified_messages_destroy">http://[address]:[port]/unnotified_messages?google_project_number=:google_project_number</string>
+
+    <string name="action_log_in_completed">edu.visutr.opencctv_android_library.action.login_completed</string>
+    <string name="action_unnotified_messages_fetched">edu.visutr.opencctv_android_library.action.unnotified_messages_fetched</string>
+    <string name="action_streaming_urls_fetched">edu.visutr.opencctv_android_library.action.streaming_urls_fetched</string>
+
+</resources>
