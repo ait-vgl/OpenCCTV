@@ -1,0 +1,11 @@
+; DO NOT EDIT (unless you know what you are doing)
+;
+; This subdirectory is a git "subrepo", and this file is maintained by the
+; git-subrepo command. See https://github.com/git-commands/git-subrepo#readme
+;
+[subrepo]
+	remote = git@github.com:ait-vgl/lilin-vms-connector.git
+	branch = develop
+	commit = 7e4e9411b672b6171a4623a2d31049a42b65aa72
+	parent = 5e1f4f757e173735c6f9b579e393feee8f70131d
+	cmdver = 0.3.0
