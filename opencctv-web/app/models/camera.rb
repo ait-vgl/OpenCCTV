@@ -85,6 +85,35 @@ class Camera < ActiveRecord::Base
     end
   end
 
+  def lilin_grab_default_frame
+    url = "http://#{self.vms.server_ip}/snap#{self.camera_id.to_s.split("getstream")[1]}"
+    #puts "URLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL"
+    #puts self.camera_id.to_s
+    #puts self.camera_id.to_s.split("getstream")[0]
+    #puts self.camera_id.to_s.split("getstream")[1]
+    #puts url
+    uri = URI.parse(url)
+    http = Net::HTTP.new(uri.host, self.vms.server_port)
+    http.open_timeout = 5
+    http.read_timeout = 5
+    request = Net::HTTP::Get.new(uri.request_uri)
+    request.basic_auth(self.vms.username, self.vms.password)
+    # Open the file for writing
+    img_path = "#{Rails.root}/app/assets/images/#{self.vms.id}_#{self.id}.jpeg"
+    destFile = open(img_path, "wb")
+    begin
+      http.request(request) do |response|
+        # Read the data as it comes in
+        response.read_body do |part|
+          # Write the data direct to file
+          destFile.write(part)
+        end
+      end
+    ensure
+      destFile.close
+    end
+  end
+
   def set_verification(is_verified)
     if(!is_verified)
       self.streams.each do |stream|
