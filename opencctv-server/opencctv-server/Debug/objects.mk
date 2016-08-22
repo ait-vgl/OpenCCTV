@@ -4,5 +4,5 @@
 
 USER_OBJS :=
 
-LIBS :=
+LIBS := -lboost_thread -lboost_system -lboost_program_options -lboost_filesystem -lprotobuf -lzmq -ldl -lmysqlcppconn
 
