@@ -39,6 +39,7 @@ class OpenCctvServer < ActiveRecord::Base
 
     reply.nil? ? msg_details = parse_reply(error_reply) : msg_details = parse_reply(reply)
     return msg_details
+
   end
 
   private

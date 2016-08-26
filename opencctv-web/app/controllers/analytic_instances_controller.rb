@@ -2,9 +2,11 @@ class AnalyticInstancesController < ApplicationController
 
   before_action :authenticate_user!
 
-  before_action :set_analytic_instance, only: [:show, :edit, :update, :destroy]
+  before_action :set_analytic_instance, only: [:show, :edit, :update, :destroy, :startAnalytic, :stopAnalytic]
   before_action :setGroupList, only: [:index, :new]
   respond_to :html
+
+  include OpenCctvServersHelper
 
   # GET /analytic_instances
   def index
@@ -87,6 +89,25 @@ class AnalyticInstancesController < ApplicationController
     @analytic_instance.destroy
     respond_with(@analytic_instance)
   end
+
+
+  def startAnalytic
+    @analytic_instance.update(status: 'true')
+
+    puts "xxxxx"
+    @openCctvServer = OpenCctvServer.first()
+    sendToServerWithData(@openCctvServer,"StartAnalytic","Pop")
+    redirect_to :back
+  end
+
+
+  def stopAnalytic
+    @analytic_instance.update(status: 'false')
+    @openCctvServer = OpenCctvServer.first()
+    sendToServerWithData(@openCctvServer,"StopAnalytic","Pop")
+    redirect_to :back
+  end
+
 
   private
   # Use callbacks to share common setup or constraints between actions.

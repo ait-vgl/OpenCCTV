@@ -10,7 +10,18 @@
 namespace opencctv {
 namespace db {
 
-const std::string StreamGateway::_SELECT_STREAM_SQL = "SELECT DISTINCT s.id, s.width, s.height, s.keep_aspect_ratio, s.allow_upsizing, s.compression_rate, ca.camera_id, vms.vms_connector_id, vms.server_ip, vms.server_port, vms.username, vms.password, vmsc.filename FROM streams AS s, cameras AS ca, vmses as vms, vms_connectors as vmsc WHERE (s.verified = TRUE) AND (s.camera_id = ca.id) AND (ca.vms_id = vms.id) AND (vms.vms_connector_id = vmsc.id) AND (s.id IN (SELECT DISTINCT ais.stream_id FROM analytic_instance_streams as ais))";
+//"SELECT DISTINCT s.id, s.width, s.height, s.keep_aspect_ratio, s.allow_upsizing, s.compression_rate, ca.camera_id, vms.vms_connector_id, vms.server_ip, vms.server_port, vms.username, vms.password, vmsc.filename FROM streams AS s, cameras AS ca, vmses as vms, vms_connectors as vmsc WHERE (s.verified = TRUE) AND (s.camera_id = ca.id) AND (ca.vms_id = vms.id) AND (vms.vms_connector_id = vmsc.id) AND (s.id IN (SELECT DISTINCT ais.stream_id FROM analytic_instance_streams as ais))";
+
+const std::string StreamGateway::_SELECT_STREAM_SQL = "SELECT DISTINCT s.id, s.width, s.height, s.keep_aspect_ratio, s.allow_upsizing, "
+ "s.compression_rate, "
+ "ca.camera_id, "
+ "vms.vms_connector_id, vms.server_ip, vms.server_port, vms.username, vms.password, "
+ "vmsc.filename "
+"FROM streams AS s, cameras AS ca, vmses as vms, vms_connectors as vmsc,analytic_instance_streams as ais, analytic_instances as ai "
+"WHERE (s.verified = TRUE) AND (ai.status=true) "
+"AND (s.camera_id = ca.id) AND (ca.vms_id = vms.id) "
+"AND (vms.vms_connector_id = vmsc.id) "
+"AND (ais.stream_id = s.id); ";
 
 StreamGateway::StreamGateway()
 {

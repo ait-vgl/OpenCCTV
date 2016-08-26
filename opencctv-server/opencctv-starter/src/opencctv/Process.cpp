@@ -75,6 +75,20 @@ bool Process::stop()
 	return died;
 }
 
+
+bool Process::userDefinedSignal()
+{
+	int iStatus = -1;
+	readStatus(iStatus);
+
+	if ( iStatus == 0){
+		kill(_pid, SIGUSR1);
+		return true;
+	}
+    return false;
+}
+
+
 pid_t Process::getPid()
 {
 	return _pid;

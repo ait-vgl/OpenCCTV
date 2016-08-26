@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160415171456) do
+ActiveRecord::Schema.define(version: 20160822071607) do
 
   create_table "analytic_input_streams", force: true do |t|
     t.string   "name"
@@ -44,6 +44,7 @@ ActiveRecord::Schema.define(version: 20160415171456) do
     t.integer  "group_user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "status",          default: false
   end
 
   add_index "analytic_instances", ["analytic_id"], name: "index_analytic_instances_on_analytic_id", using: :btree
@@ -96,7 +97,7 @@ ActiveRecord::Schema.define(version: 20160415171456) do
   end
 
   create_table "google_tokens", force: true do |t|
-    t.string   "token"
+    t.string   "reg_token"
     t.integer  "analytic_id"
     t.integer  "user_id"
     t.datetime "created_at"

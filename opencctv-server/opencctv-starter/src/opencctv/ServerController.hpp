@@ -52,6 +52,9 @@ public:
 	void sendStatusReply();
 	void sendErrorReply(const string& sMessageContent);
 	string readMessage();
+
+	void startAnalytic();
+	void testReply();
 };
 
 } /* namespace opencctv */

@@ -17,65 +17,78 @@ using namespace std;
 
 void exitHandler(int iSignum);
 
-int main(int argc, char* argv[])
-{
+int main(int argc, char* argv[]) {
 	// Registering signal SIGINT and signal handler
 	signal(SIGINT, exitHandler);
 
 	// Initialize an instance of the server controller
 	opencctv::ServerController* _pServerController = NULL;
-	try
-	{
+	try {
 		_pServerController = opencctv::ServerController::getInstance();
-		opencctv::util::log::Loggers::getDefaultLogger()->info("OpenCCTV Server Manager Started.");
-	}
-	catch(opencctv::Exception &e)
-	{
+		opencctv::util::log::Loggers::getDefaultLogger()->info(
+				"OpenCCTV Server Manager Started.");
+	} catch (opencctv::Exception &e) {
 		opencctv::util::log::Loggers::getDefaultLogger()->error(e.what());
 		return -1;
 	}
 
 	// Continue to read the messages from a client(web_app) and respond to the requests
-	while(true)
-	{
-		try
-		{
+	while (true) {
+		try {
 			// Read request from the OpenCCTV Web application
 			string sRequestStr = _pServerController->readMessage();
+
+			opencctv::util::log::Loggers::getDefaultLogger()->debug(sRequestStr);
+
 			// Determine message type
 			string sMessageType;
-			opencctv::util::xml::OpenCCTVServerMessage::extractMessageDetails(sRequestStr,sMessageType);
+			string sData;
+
+			opencctv::util::xml::OpenCCTVServerMessage::extractMessageDetailWithData(sRequestStr, sMessageType, sData);
 
 			// Process the message
-			if(sMessageType.compare(opencctv::util::MSG_TYPE_START_REQ) == 0)
-			{
+
+			if (sMessageType.compare(opencctv::util::MSG_TYPE_START_ANALYTIC_REQ) == 0) {
+				//_pServerController->execServerStart();
+				opencctv::util::log::Loggers::getDefaultLogger()->debug("Start analytic process by id =>" + sData);
+				_pServerController->startAnalytic();
+				_pServerController->testReply();
+
+			} else if (sMessageType.compare(opencctv::util::MSG_TYPE_STOP_ANALYTIC_REQ)
+					== 0) {
+				//_pServerController->execServerStop();
+				opencctv::util::log::Loggers::getDefaultLogger()->debug("Stop analytic process by id =>" + sData);
+
+				_pServerController->testReply();
+
+			} else if (sMessageType.compare(opencctv::util::MSG_TYPE_START_REQ)
+					== 0) {
 				_pServerController->execServerStart();
-				opencctv::util::log::Loggers::getDefaultLogger()->debug("OpenCCTVServer started.");
+				opencctv::util::log::Loggers::getDefaultLogger()->debug(
+						"OpenCCTVServer started.");
 
-			} else if(sMessageType.compare(opencctv::util::MSG_TYPE_STOP_REQ) == 0)
-			{
+			} else if (sMessageType.compare(opencctv::util::MSG_TYPE_STOP_REQ)
+					== 0) {
 				_pServerController->execServerStop();
-				opencctv::util::log::Loggers::getDefaultLogger()->debug("OpenCCTVServer stopped.");
+				opencctv::util::log::Loggers::getDefaultLogger()->debug(
+						"OpenCCTVServer stopped.");
 
-			} else if(sMessageType.compare(opencctv::util::MSG_TYPE_RESTART_REQ) == 0)
-			{
+			} else if (sMessageType.compare(
+					opencctv::util::MSG_TYPE_RESTART_REQ) == 0) {
 				_pServerController->execServerRestart();
 
-			}else if(sMessageType.compare(opencctv::util::MSG_TYPE_STATUS_REQ) == 0)
-			{
+			} else if (sMessageType.compare(opencctv::util::MSG_TYPE_STATUS_REQ)
+					== 0) {
 				_pServerController->sendStatusReply();
 
-			}else if(sMessageType.compare(opencctv::util::MSG_TYPE_INVALID) == 0)
-			{
+			} else if (sMessageType.compare(opencctv::util::MSG_TYPE_INVALID)
+					== 0) {
 				throw opencctv::Exception("Invalid message type received.");
 
-			} else
-			{
+			} else {
 				throw opencctv::Exception("Unknown message type received.");
 			}
-		}
-		catch(opencctv::Exception &e)
-		{
+		} catch (opencctv::Exception &e) {
 			_pServerController->sendErrorReply(e.what());
 			opencctv::util::log::Loggers::getDefaultLogger()->error(e.what());
 		}
@@ -83,8 +96,8 @@ int main(int argc, char* argv[])
 	return 0;
 }
 
-void exitHandler( int iSignum )
-{
-	opencctv::util::log::Loggers::getDefaultLogger()->info("Exiting OpenCCTV Server Manager.");
+void exitHandler(int iSignum) {
+	opencctv::util::log::Loggers::getDefaultLogger()->info(
+			"Exiting OpenCCTV Server Manager.");
 	exit(iSignum);
 }

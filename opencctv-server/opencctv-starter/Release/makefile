@@ -44,19 +44,19 @@ endif
 # Add inputs and outputs from these tool invocations to the build variables 
 
 # All Target
-all: OpenCCTVServer_Starter
+all: OpenCCTV-Starter
 
 # Tool invocations
-OpenCCTVServer_Starter: $(OBJS) $(USER_OBJS)
+OpenCCTV-Starter: $(OBJS) $(USER_OBJS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: GCC C++ Linker'
-	g++ -L/usr/local/lib -o "OpenCCTVServer_Starter" $(OBJS) $(USER_OBJS) $(LIBS)
+	g++  -o "OpenCCTV-Starter" $(OBJS) $(USER_OBJS) $(LIBS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 
 # Other Targets
 clean:
-	-$(RM) $(OBJS)$(C++_DEPS)$(C_DEPS)$(CC_DEPS)$(CPP_DEPS)$(EXECUTABLES)$(CXX_DEPS)$(C_UPPER_DEPS) OpenCCTVServer_Starter
+	-$(RM) $(OBJS)$(C++_DEPS)$(C_DEPS)$(CC_DEPS)$(CPP_DEPS)$(EXECUTABLES)$(CXX_DEPS)$(C_UPPER_DEPS) OpenCCTV-Starter
 	-@echo ' '
 
 .PHONY: all clean dependents

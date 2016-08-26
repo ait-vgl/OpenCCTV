@@ -227,6 +227,31 @@ void ServerController::sendErrorReply(const string& sMessageContent)
 	}
 }
 
+void ServerController::testReply(){
+	string sContent = "testReply";
+	string sReplyMessage;
+	_sServerStatus = opencctv::util::SVR_STATUS_STOPPED;
+	opencctv::util::xml::OpenCCTVServerMessage::createStopMessageReply(sContent, _sServerStatus, _pProcess->getPid(), sReplyMessage);
+	opencctv::mq::MqUtil::writeToSocket(_tcpMq, sReplyMessage);
+}
+
+void ServerController::startAnalytic(){
+	bool result =false;
+
+	opencctv::util::log::Loggers::getDefaultLogger()->info("Called from ServerConntroler for statAnalytic");
+
+	result = _pProcess->userDefinedSignal();
+
+	if(result){
+		opencctv::util::log::Loggers::getDefaultLogger()->info("Signal sent  successfully");
+	}else{
+
+		opencctv::util::log::Loggers::getDefaultLogger()->error("Starter: Cannot send  signal, server is not be started");
+	}
+
+
+}
+
 ServerController::~ServerController()
 {
 	delete _tcpMq; _tcpMq = NULL;
