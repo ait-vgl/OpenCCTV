@@ -8,12 +8,20 @@ RM := rm -rf
 
 # All of the sources participating in the build are defined here
 -include sources.mk
+-include src/test/gateway/subdir.mk
 -include src/opencctv/util/xml/subdir.mk
+-include src/opencctv/util/serialization/gpb/subdir.mk
+-include src/opencctv/util/serialization/subdir.mk
 -include src/opencctv/util/log/colored/subdir.mk
 -include src/opencctv/util/log/subdir.mk
+-include src/opencctv/util/flow/subdir.mk
 -include src/opencctv/util/subdir.mk
 -include src/opencctv/mq/subdir.mk
+-include src/opencctv/dto/subdir.mk
+-include src/opencctv/db/subdir.mk
 -include src/opencctv/subdir.mk
+-include src/analytic/xml/subdir.mk
+-include src/analytic/subdir.mk
 -include src/subdir.mk
 -include subdir.mk
 -include objects.mk

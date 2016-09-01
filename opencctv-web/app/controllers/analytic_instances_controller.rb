@@ -94,9 +94,9 @@ class AnalyticInstancesController < ApplicationController
   def startAnalytic
     @analytic_instance.update(status: 'true')
 
-    puts "xxxxx"
+    #puts "xxxxx"
     @openCctvServer = OpenCctvServer.first()
-    sendToServerWithData(@openCctvServer,"StartAnalytic","Pop")
+    sendToServerWithData(@openCctvServer,"StartAnalytic",@analytic_instance.id)
     redirect_to :back
   end
 
@@ -104,7 +104,7 @@ class AnalyticInstancesController < ApplicationController
   def stopAnalytic
     @analytic_instance.update(status: 'false')
     @openCctvServer = OpenCctvServer.first()
-    sendToServerWithData(@openCctvServer,"StopAnalytic","Pop")
+    sendToServerWithData(@openCctvServer,"StopAnalytic",@analytic_instance.id)
     redirect_to :back
   end
 

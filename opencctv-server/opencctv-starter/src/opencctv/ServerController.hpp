@@ -24,6 +24,7 @@
 #include <vector>
 #include <sstream>
 
+
 namespace opencctv {
 
 using namespace std;
@@ -38,6 +39,7 @@ private:
 	//static pid_t _iServerProcessId;
 	static unsigned int _iOpenCCTVServerPort;
 	static Process*_pProcess;
+
 
 	ServerController();
 	ServerController(ServerController const&);

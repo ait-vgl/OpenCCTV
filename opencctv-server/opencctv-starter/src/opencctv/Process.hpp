@@ -26,7 +26,6 @@ public:
 	bool stop();
 	pid_t getPid();
 	bool readStatus(int& iStatus);
-	bool userDefinedSignal();
 	virtual ~Process();
 };
 

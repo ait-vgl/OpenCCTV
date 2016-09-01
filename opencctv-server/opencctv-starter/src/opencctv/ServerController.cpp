@@ -240,14 +240,14 @@ void ServerController::startAnalytic(){
 
 	opencctv::util::log::Loggers::getDefaultLogger()->info("Called from ServerConntroler for statAnalytic");
 
-	result = _pProcess->userDefinedSignal();
+	/*result = _pProcess->userDefinedSignal();
 
 	if(result){
 		opencctv::util::log::Loggers::getDefaultLogger()->info("Signal sent  successfully");
 	}else{
 
 		opencctv::util::log::Loggers::getDefaultLogger()->error("Starter: Cannot send  signal, server is not be started");
-	}
+	}*/
 
 
 }
@@ -258,4 +258,9 @@ ServerController::~ServerController()
 	delete _pProcess; _pProcess = NULL;
 }
 
+
 } /* namespace opencctv */
+
+
+
+

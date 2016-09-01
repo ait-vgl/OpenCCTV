@@ -24,24 +24,6 @@
 void terminateHandler(int signum); // Terminate signal handler
 void userDefined1Handler(int signum); // Start/stop analytic process
 
-void check_mask( int sig, char *signame ) {
-
-    sigset_t sigset;
-
-    sigprocmask( SIG_SETMASK, NULL, &sigset );
-    if( sigismember( &sigset, sig ) )
-        printf( "the %s signal is blocked\n", signame );
-    else
-        printf( "the %s signal is unblocked\n", signame );
-}
-
-
-void catcher( int sig ) {
-
-    printf( "inside catcher() function\n" );
-    check_mask( SIGUSR1, "SIGUSR1" );
-    check_mask( SIGUSR2, "SIGUSR2" );
-}
 
 int main()
 {
@@ -54,47 +36,6 @@ int main()
 	// Registering signal handlers
 	signal(SIGTERM, terminateHandler); // for Terminate signal
 	signal(SIGINT, terminateHandler); // for Ctrl + C keyboard interrupt
-	//signal(SIGUSR1, userDefined1Handler); // for User-defined 1, calling a method to stat/stop analyic process individully
-
-	//struct sigaction new_action;
-	/* Set up the structure to specify the new action. */
-	//	new_action.sa_handler = userDefined1Handler;
-		//new_action.sa_mask;
-	//	new_action.sa_flags = SA_NODEFER;
-
-		 // Setup the sighub handler
-		   // sa.sa_handler = &handle_signal;
-
-		    // Restart the system call, if at all possible
-		    //sa.sa_flags = SA_RESTART;
-
-		    // Block every signal during the handler
-		   // sigfillset(&sa.sa_mask);
-
-	//if (sigaction(SIGUSR1, &new_action, NULL) < 0) {
-		//opencctv::util::log::Loggers::getDefaultLogger()->error("Server: sigaction");
-		//return -1;
-	//}
-
-
-	struct sigaction sigact, old_sigact;
-	    sigset_t sigset;
-
-	   /*
-	    * Set up an American National Standard C style signal handler
-	    * by setting the signal mask to the empty signal set and
-	    * using the do-not-defer signal, and reset the signal handler
-	    * to the SIG_DFL signal flag options.
-	    */
-
-	    sigemptyset( &sigact.sa_mask );
-	    sigact.sa_flags = 0;
-	    sigact.sa_flags = sigact.sa_flags | SA_NODEFER | SA_RESETHAND;
-	    sigact.sa_handler = catcher;
-	    sigaction( SIGUSR1, &sigact, NULL );
-
-
-
 
 	// Initializing variables
 	//test::gateway::TestStreamGateway streamGateway;
@@ -367,15 +308,3 @@ void terminateHandler(int signum) {
 	}
 	exit(signum);
 	}
-
-
-void userDefined1Handler(int signum) {
-
-	if(signum == SIGUSR1){
-		opencctv::util::log::Loggers::getDefaultLogger()->info("OpenCCTV Server: Start user defined message => " + signum);
-	}else{
-
-		opencctv::util::log::Loggers::getDefaultLogger()->error("OpenCCTV server: Got wrong signal =>" + signum);
-	}
-	//exit(0);
-}
