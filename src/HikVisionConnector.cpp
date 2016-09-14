@@ -34,10 +34,10 @@ bool HikVisionConnector::init(const opencctv::api::VmsConnectInfo& info, const s
 	        "dummy",
 	        "--ignore-config",
 	        "--extraintf=logger",
-	        "--verbose=2",
-			"--no-plugins-cache",
-			"--demux=h264",
-			"--h264-fps=25.000000",
+	       // "--verbose=2",
+		"--no-plugins-cache",
+		"--demux=h264",
+		"--h264-fps=25.000000",
 	    };
 
 	_pVlcInstance = libvlc_new(sizeof(aChVlcArgs) / sizeof(aChVlcArgs[0]), aChVlcArgs);
@@ -53,7 +53,10 @@ bool HikVisionConnector::init(const opencctv::api::VmsConnectInfo& info, const s
 void HikVisionConnector::produceImageObjects(opencctv::ConcurrentQueue<opencctv::Image>* pQueue)
 {
 	_pQueue = pQueue;
+
+	std::cout << "Start vlc player" << std::endl;
 	libvlc_media_player_play(_pVlcMediaPlayer);
+	std::cout << "End vlc player" << std::endl;
 	pause();
 	_bEnable = false;
 	_pQueue = NULL;
@@ -79,20 +82,27 @@ void HikVisionConnector::unlock(void *data, void *id, void * const *p_pixels)
 }
 void HikVisionConnector::display(void *data, void *id)
 {
-	if(_pQueue)
-	{
-		struct ctx *ctx = (struct ctx*)data;
-		IplImage *pImageDisplay = ctx->pImage;
-		cv::Mat matImage(pImageDisplay, false);
-		if(!matImage.empty())
+try{
+		if(_pQueue)
 		{
-			opencctv::Image* pImage = new opencctv::Image();
-			std::vector<unsigned char> vTemp;
-			cv::imencode(".jpg", matImage, vTemp);
-			pImage->setImageData(vTemp);
-			pImage->setTimestamp(currentDateTime());
-			_pQueue->push(pImage);
+			struct ctx *ctx = (struct ctx*)data;
+			IplImage *pImageDisplay = ctx->pImage;
+			cv::Mat matImage(pImageDisplay, false);
+			if(!matImage.empty())
+			{
+				opencctv::Image* pImage = new opencctv::Image();
+				std::vector<unsigned char> vTemp;
+				cv::imencode(".jpg", matImage, vTemp);
+				pImage->setImageData(vTemp);
+				pImage->setTimestamp(currentDateTime());
+				_pQueue->push(pImage);
+
+			}
+
+			boost::this_thread::interruption_point(); // For thread interrupption
 		}
+	}catch (boost::thread_interrupted&) {
+		std::cout << "Producer Thread interrupted." << std::endl;
 	}
 }
 
@@ -110,10 +120,28 @@ std::string HikVisionConnector::currentDateTime()
 }
 
 HikVisionConnector::~HikVisionConnector() {
+
+	std::cout << "Linin connector: destructure called" << std::endl;
+
 	if(_pContext)
 	{
 		delete _pContext;
 		_pContext = NULL;
 	}
+
+
+	// clear media player
+
+	if(libvlc_media_player_is_playing(_pVlcMediaPlayer)){
+
+		libvlc_media_player_stop(_pVlcMediaPlayer);
+	}
+
+	delete _pVlcInstance;
+	_pVlcInstance = NULL;
+	delete _pVlcMedia;
+	_pVlcMedia = NULL;
+	delete _pVlcMediaPlayer;
+	_pVlcMediaPlayer = NULL;
 }
 
