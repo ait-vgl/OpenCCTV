@@ -23,4 +23,23 @@ void ConsumerThread::operator ()()
 	opencctv::util::log::Loggers::getDefaultLogger()->info("Consumer Thread stopped.");
 }
 
+ConsumerThread::~ConsumerThread(){
+
+	// delete ?
+	// _pImageMulticaster
+	// _pQueue ==> in pModel
+
+	std::cout << "1. Consumer destructure called." << std::endl;
+
+	// TODO: delete Multicater
+
+/*
+	if(_pImageMulticaster && _pQueue){
+		delete _pImageMulticaster;
+		_pImageMulticaster = NULL;
+
+		std::cout << "1.1 delete _pImageMulticaster." << std::endl;
+	}*/
+}
+
 } /* namespace opencctv */

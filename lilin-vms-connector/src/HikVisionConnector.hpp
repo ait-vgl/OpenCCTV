@@ -15,6 +15,8 @@
 #include <vector>
 #include <sstream>
 
+#include <boost/thread/thread.hpp>
+
 struct ctx
 {
 	IplImage *pImage;

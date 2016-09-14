@@ -25,38 +25,43 @@ void ImageMulticaster::start() {
 	}
 	while (_bEnable) {
 
-		boost::this_thread::interruption_point(); // Interruption
+		//try{
+			//boost::this_thread::interruption_point(); // Interruption
 
-		Image* pImage = NULL;
-		unsigned long long lProducedTime = pQueue->waitAndGetFrontElement(pImage);
-		if(pImage) {
-			std::map<unsigned int, Element>::iterator it;
-			// for each Analytic Input queue/Analytic Instance Stream
-			for (it = _mAISInfo.begin(); it != _mAISInfo.end(); ++it) {
-				unsigned int iAnalyticInstanceId = it->second.iAnalyticInstanceId;
-				// if Flow Controller available
-				if (pModel->containsFlowController(iAnalyticInstanceId)) {
-					util::flow::FlowController* pFlowController = pModel->getFlowControllers()[iAnalyticInstanceId];
-					// if Flow Controller allows to send
-					if (pFlowController->canSendImageGeneratedAt(lProducedTime)) {
-						unsigned int iId = it->first; // AnalyticInstanceStream ID
-						// check if MQ Sender available
-						if (pModel->containsMulticastDestination(iId)) {
-							mq::Sender* pSender = pModel->getMulticastDestinations()[iId];
-							if (pSender) {
-								pImage->setStreamId(_iStreamId);
-								pImage->setInputName(it->second.sInputName);
-								// send to Analytic Input queue
-								if (send(pSender, pImage)) {
-									pFlowController->sent(pImage, lProducedTime);
+			Image* pImage = NULL;
+			unsigned long long lProducedTime = pQueue->waitAndGetFrontElement(pImage);
+			if(pImage) {
+				std::map<unsigned int, Element>::iterator it;
+				// for each Analytic Input queue/Analytic Instance Stream
+				for (it = _mAISInfo.begin(); it != _mAISInfo.end(); ++it) {
+					unsigned int iAnalyticInstanceId = it->second.iAnalyticInstanceId;
+					// if Flow Controller available
+					if (pModel->containsFlowController(iAnalyticInstanceId)) {
+						util::flow::FlowController* pFlowController = pModel->getFlowControllers()[iAnalyticInstanceId];
+						// if Flow Controller allows to send
+						if (pFlowController->canSendImageGeneratedAt(lProducedTime)) {
+							unsigned int iId = it->first; // AnalyticInstanceStream ID
+							// check if MQ Sender available
+							if (pModel->containsMulticastDestination(iId)) {
+								mq::Sender* pSender = pModel->getMulticastDestinations()[iId];
+								if (pSender) {
+									pImage->setStreamId(_iStreamId);
+									pImage->setInputName(it->second.sInputName);
+									// send to Analytic Input queue
+									if (send(pSender, pImage)) {
+										pFlowController->sent(pImage, lProducedTime);
+									}
 								}
 							}
 						}
 					}
 				}
 			}
-		}
-		pQueue->tryRemoveFrontElement();
+			pQueue->tryRemoveFrontElement();
+
+		//}catch (boost::thread_interrupted&) {
+		//	opencctv::util::log::Loggers::getDefaultLogger()->error("Consumer Thread interrupted.");
+		//}
 	}
 }
 
@@ -92,7 +97,7 @@ bool ImageMulticaster::send(mq::Sender* pMqSender, Image* pImage) {
 	return bSent;
 }
 
-void ImageMulticaster::addDestination(const dto::AnalyticInstanceStream& analyticInstance)
+void ImageMulticaster::addDestination( dto::AnalyticInstanceStream& analyticInstance)
 {
 	ApplicationModel* pModel = ApplicationModel::getInstance();
 	if(pModel->containsImageInputQueueAddress(analyticInstance.getAnalyticInstanceId()))
@@ -140,6 +145,7 @@ void ImageMulticaster::stop() {
 }
 
 ImageMulticaster::~ImageMulticaster() {
+	std::cout << "6. ImageMulticaster destructure is called" << std::endl;
 }
 
 } /* namespace opencctv */

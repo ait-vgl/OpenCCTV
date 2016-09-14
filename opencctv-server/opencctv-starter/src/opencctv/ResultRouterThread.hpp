@@ -21,6 +21,7 @@ private:
 public:
 	ResultRouterThread(unsigned int iAnalyticInstanceId);
 	void operator()();
+	~ResultRouterThread();
 };
 
 } /* namespace opencctv */

@@ -48848,3 +48848,2704 @@ Processing by OpenCctvServersController#show as HTML
   Rendered open_cctv_servers/show.html.erb within layouts/application (2.5ms)
   [1m[35m (0.9ms)[0m  SELECT COUNT(*) FROM `group_users` INNER JOIN `org_group_users` ON `org_group_users`.`group_user_id` = `group_users`.`id` INNER JOIN `org_users` ON `org_users`.`id` = `org_group_users`.`org_user_id` WHERE `group_users`.`org_id` IS NULL AND `group_users`.`role_id` = 2 AND `org_users`.`user_id` = 1
 Completed 200 OK in 172ms (Views: 162.1ms | ActiveRecord: 3.0ms)
+
+
+Started GET "/" for 172.18.0.1 at 2016-09-01 09:32:16 +0000
+Processing by AboutController#index as HTML
+  Rendered about/index.html.erb within layouts/application (0.1ms)
+  [1m[36mUser Load (1.2ms)[0m  [1mSELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35m (0.5ms)[0m  SELECT COUNT(*) FROM `group_users` INNER JOIN `org_group_users` ON `org_group_users`.`group_user_id` = `group_users`.`id` INNER JOIN `org_users` ON `org_users`.`id` = `org_group_users`.`org_user_id` WHERE `group_users`.`org_id` IS NULL AND `group_users`.`role_id` = 2 AND `org_users`.`user_id` = 1
+Completed 200 OK in 151ms (Views: 148.7ms | ActiveRecord: 1.7ms)
+
+
+Started GET "/assets/application.css?body=1" for 172.18.0.1 at 2016-09-01 09:32:16 +0000
+
+
+Started GET "/assets/bootstrap/alert.js?body=1" for 172.18.0.1 at 2016-09-01 09:32:16 +0000
+
+
+Started GET "/assets/bootstrap/button.js?body=1" for 172.18.0.1 at 2016-09-01 09:32:16 +0000
+
+
+Started GET "/assets/bootstrap/carousel.js?body=1" for 172.18.0.1 at 2016-09-01 09:32:16 +0000
+
+
+Started GET "/assets/jquery.js?body=1" for 172.18.0.1 at 2016-09-01 09:32:16 +0000
+
+
+Started GET "/assets/bootstrap/affix.js?body=1" for 172.18.0.1 at 2016-09-01 09:32:16 +0000
+
+
+Started GET "/assets/bootstrap/collapse.js?body=1" for 172.18.0.1 at 2016-09-01 09:32:17 +0000
+
+
+Started GET "/assets/bootstrap/tab.js?body=1" for 172.18.0.1 at 2016-09-01 09:32:17 +0000
+
+
+Started GET "/assets/bootstrap/dropdown.js?body=1" for 172.18.0.1 at 2016-09-01 09:32:17 +0000
+
+
+Started GET "/assets/bootstrap/transition.js?body=1" for 172.18.0.1 at 2016-09-01 09:32:17 +0000
+
+
+Started GET "/assets/bootstrap/scrollspy.js?body=1" for 172.18.0.1 at 2016-09-01 09:32:17 +0000
+
+
+Started GET "/assets/bootstrap/modal.js?body=1" for 172.18.0.1 at 2016-09-01 09:32:17 +0000
+
+
+Started GET "/assets/bootstrap/tooltip.js?body=1" for 172.18.0.1 at 2016-09-01 09:32:17 +0000
+
+
+Started GET "/assets/bootstrap/popover.js?body=1" for 172.18.0.1 at 2016-09-01 09:32:17 +0000
+
+
+Started GET "/assets/bootstrap-sprockets.js?body=1" for 172.18.0.1 at 2016-09-01 09:32:17 +0000
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 172.18.0.1 at 2016-09-01 09:32:17 +0000
+
+
+Started GET "/assets/turbolinks.js?body=1" for 172.18.0.1 at 2016-09-01 09:32:17 +0000
+
+
+Started GET "/assets/about.js?body=1" for 172.18.0.1 at 2016-09-01 09:32:17 +0000
+
+
+Started GET "/assets/analytic_input_streams.js?body=1" for 172.18.0.1 at 2016-09-01 09:32:17 +0000
+
+
+Started GET "/assets/analytic_instance_streams.js?body=1" for 172.18.0.1 at 2016-09-01 09:32:17 +0000
+
+
+Started GET "/assets/analytic_instances.js?body=1" for 172.18.0.1 at 2016-09-01 09:32:17 +0000
+
+
+Started GET "/assets/analytics.js?body=1" for 172.18.0.1 at 2016-09-01 09:32:17 +0000
+
+
+Started GET "/assets/cameras.js?body=1" for 172.18.0.1 at 2016-09-01 09:32:17 +0000
+
+
+Started GET "/assets/download.js?body=1" for 172.18.0.1 at 2016-09-01 09:32:17 +0000
+
+
+Started GET "/assets/open_cctv_servers.js?body=1" for 172.18.0.1 at 2016-09-01 09:32:17 +0000
+
+
+Started GET "/assets/streams.js?body=1" for 172.18.0.1 at 2016-09-01 09:32:17 +0000
+
+
+Started GET "/assets/test.js?body=1" for 172.18.0.1 at 2016-09-01 09:32:17 +0000
+
+
+Started GET "/assets/vms_connectors.js?body=1" for 172.18.0.1 at 2016-09-01 09:32:17 +0000
+
+
+Started GET "/assets/vmses.js?body=1" for 172.18.0.1 at 2016-09-01 09:32:17 +0000
+
+
+Started GET "/assets/application.js?body=1" for 172.18.0.1 at 2016-09-01 09:32:17 +0000
+
+
+Started GET "/open_cctv_servers" for 172.18.0.1 at 2016-09-01 09:32:20 +0000
+Processing by OpenCctvServersController#index as HTML
+  [1m[36mUser Load (0.6ms)[0m  [1mSELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35mOpenCctvServer Load (0.6ms)[0m  SELECT  `open_cctv_servers`.* FROM `open_cctv_servers`   ORDER BY `open_cctv_servers`.`id` DESC LIMIT 1
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.2ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  COMMIT
+  Rendered open_cctv_servers/_info.html.erb (1.0ms)
+  Rendered open_cctv_servers/index.html.erb within layouts/application (2.5ms)
+  [1m[36m (0.5ms)[0m  [1mSELECT COUNT(*) FROM `group_users` INNER JOIN `org_group_users` ON `org_group_users`.`group_user_id` = `group_users`.`id` INNER JOIN `org_users` ON `org_users`.`id` = `org_group_users`.`org_user_id` WHERE `group_users`.`org_id` IS NULL AND `group_users`.`role_id` = 2 AND `org_users`.`user_id` = 1[0m
+Completed 200 OK in 130ms (Views: 121.5ms | ActiveRecord: 2.3ms)
+
+
+Started GET "/open_cctv_servers/1/start" for 172.18.0.1 at 2016-09-01 09:32:22 +0000
+Processing by OpenCctvServersController#start_server as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mOpenCctvServer Load (0.6ms)[0m  SELECT  `open_cctv_servers`.* FROM `open_cctv_servers`  WHERE `open_cctv_servers`.`id` = 1 LIMIT 1
+  [1m[36mUser Load (0.7ms)[0m  [1mSELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35m (0.4ms)[0m  BEGIN
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mCOMMIT[0m
+Redirected to http://localhost:3000/open_cctv_servers/1
+Completed 302 Found in 463ms (ActiveRecord: 2.1ms)
+
+
+Started GET "/open_cctv_servers/1" for 172.18.0.1 at 2016-09-01 09:32:23 +0000
+Processing by OpenCctvServersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mOpenCctvServer Load (0.6ms)[0m  SELECT  `open_cctv_servers`.* FROM `open_cctv_servers`  WHERE `open_cctv_servers`.`id` = 1 LIMIT 1
+  [1m[36mUser Load (0.5ms)[0m  [1mSELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35mOpenCctvServer Load (0.4ms)[0m  SELECT  `open_cctv_servers`.* FROM `open_cctv_servers`   ORDER BY `open_cctv_servers`.`id` DESC LIMIT 1
+  [1m[36m (0.4ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  COMMIT
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.2ms)[0m  COMMIT
+  Rendered open_cctv_servers/_info.html.erb (1.0ms)
+  Rendered open_cctv_servers/show.html.erb within layouts/application (2.3ms)
+  [1m[36m (0.8ms)[0m  [1mSELECT COUNT(*) FROM `group_users` INNER JOIN `org_group_users` ON `org_group_users`.`group_user_id` = `group_users`.`id` INNER JOIN `org_users` ON `org_users`.`id` = `org_group_users`.`org_user_id` WHERE `group_users`.`org_id` IS NULL AND `group_users`.`role_id` = 2 AND `org_users`.`user_id` = 1[0m
+Completed 200 OK in 134ms (Views: 123.1ms | ActiveRecord: 3.2ms)
+
+
+Started GET "/open_cctv_servers/1/stop" for 172.18.0.1 at 2016-09-01 09:32:30 +0000
+Processing by OpenCctvServersController#stop_server as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mOpenCctvServer Load (0.5ms)[0m  SELECT  `open_cctv_servers`.* FROM `open_cctv_servers`  WHERE `open_cctv_servers`.`id` = 1 LIMIT 1
+  [1m[36mUser Load (1.0ms)[0m  [1mSELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+Redirected to http://localhost:3000/open_cctv_servers/1
+Completed 302 Found in 14ms (ActiveRecord: 2.2ms)
+
+
+Started GET "/open_cctv_servers/1" for 172.18.0.1 at 2016-09-01 09:32:30 +0000
+Processing by OpenCctvServersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mOpenCctvServer Load (0.4ms)[0m  SELECT  `open_cctv_servers`.* FROM `open_cctv_servers`  WHERE `open_cctv_servers`.`id` = 1 LIMIT 1
+  [1m[36mUser Load (0.4ms)[0m  [1mSELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35mOpenCctvServer Load (0.3ms)[0m  SELECT  `open_cctv_servers`.* FROM `open_cctv_servers`   ORDER BY `open_cctv_servers`.`id` DESC LIMIT 1
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  COMMIT
+  Rendered open_cctv_servers/_info.html.erb (0.5ms)
+  Rendered open_cctv_servers/show.html.erb within layouts/application (1.2ms)
+  [1m[36m (0.5ms)[0m  [1mSELECT COUNT(*) FROM `group_users` INNER JOIN `org_group_users` ON `org_group_users`.`group_user_id` = `group_users`.`id` INNER JOIN `org_users` ON `org_users`.`id` = `org_group_users`.`org_user_id` WHERE `group_users`.`org_id` IS NULL AND `group_users`.`role_id` = 2 AND `org_users`.`user_id` = 1[0m
+Completed 200 OK in 139ms (Views: 132.2ms | ActiveRecord: 2.0ms)
+
+
+Started GET "/open_cctv_servers/1/start" for 172.18.0.1 at 2016-09-01 09:32:33 +0000
+Processing by OpenCctvServersController#start_server as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mOpenCctvServer Load (0.5ms)[0m  SELECT  `open_cctv_servers`.* FROM `open_cctv_servers`  WHERE `open_cctv_servers`.`id` = 1 LIMIT 1
+  [1m[36mUser Load (0.4ms)[0m  [1mSELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+Redirected to http://localhost:3000/open_cctv_servers/1
+Completed 302 Found in 20ms (ActiveRecord: 1.6ms)
+
+
+Started GET "/open_cctv_servers/1" for 172.18.0.1 at 2016-09-01 09:32:33 +0000
+Processing by OpenCctvServersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mOpenCctvServer Load (0.4ms)[0m  SELECT  `open_cctv_servers`.* FROM `open_cctv_servers`  WHERE `open_cctv_servers`.`id` = 1 LIMIT 1
+  [1m[36mUser Load (0.6ms)[0m  [1mSELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35mOpenCctvServer Load (0.5ms)[0m  SELECT  `open_cctv_servers`.* FROM `open_cctv_servers`   ORDER BY `open_cctv_servers`.`id` DESC LIMIT 1
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.2ms)[0m  COMMIT
+  Rendered open_cctv_servers/_info.html.erb (0.7ms)
+  Rendered open_cctv_servers/show.html.erb within layouts/application (1.7ms)
+  [1m[36m (0.7ms)[0m  [1mSELECT COUNT(*) FROM `group_users` INNER JOIN `org_group_users` ON `org_group_users`.`group_user_id` = `group_users`.`id` INNER JOIN `org_users` ON `org_users`.`id` = `org_group_users`.`org_user_id` WHERE `group_users`.`org_id` IS NULL AND `group_users`.`role_id` = 2 AND `org_users`.`user_id` = 1[0m
+Completed 200 OK in 136ms (Views: 126.5ms | ActiveRecord: 3.2ms)
+
+
+Started GET "/open_cctv_servers/1/start" for 172.18.0.1 at 2016-09-01 09:32:54 +0000
+Processing by OpenCctvServersController#start_server as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mOpenCctvServer Load (0.5ms)[0m  SELECT  `open_cctv_servers`.* FROM `open_cctv_servers`  WHERE `open_cctv_servers`.`id` = 1 LIMIT 1
+  [1m[36mUser Load (0.5ms)[0m  [1mSELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mCOMMIT[0m
+Redirected to http://localhost:3000/open_cctv_servers/1
+Completed 302 Found in 17ms (ActiveRecord: 1.6ms)
+
+
+Started GET "/open_cctv_servers/1" for 172.18.0.1 at 2016-09-01 09:32:54 +0000
+Processing by OpenCctvServersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mOpenCctvServer Load (0.7ms)[0m  SELECT  `open_cctv_servers`.* FROM `open_cctv_servers`  WHERE `open_cctv_servers`.`id` = 1 LIMIT 1
+  [1m[36mUser Load (0.5ms)[0m  [1mSELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35mOpenCctvServer Load (0.4ms)[0m  SELECT  `open_cctv_servers`.* FROM `open_cctv_servers`   ORDER BY `open_cctv_servers`.`id` DESC LIMIT 1
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  COMMIT
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.4ms)[0m  COMMIT
+  Rendered open_cctv_servers/_info.html.erb (0.7ms)
+  Rendered open_cctv_servers/show.html.erb within layouts/application (1.7ms)
+  [1m[36m (0.6ms)[0m  [1mSELECT COUNT(*) FROM `group_users` INNER JOIN `org_group_users` ON `org_group_users`.`group_user_id` = `group_users`.`id` INNER JOIN `org_users` ON `org_users`.`id` = `org_group_users`.`org_user_id` WHERE `group_users`.`org_id` IS NULL AND `group_users`.`role_id` = 2 AND `org_users`.`user_id` = 1[0m
+Completed 200 OK in 205ms (Views: 196.1ms | ActiveRecord: 3.0ms)
+
+
+Started GET "/open_cctv_servers/1/start" for 172.18.0.1 at 2016-09-01 10:37:24 +0000
+Processing by OpenCctvServersController#start_server as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mOpenCctvServer Load (0.6ms)[0m  SELECT  `open_cctv_servers`.* FROM `open_cctv_servers`  WHERE `open_cctv_servers`.`id` = 1 LIMIT 1
+  [1m[36mUser Load (0.5ms)[0m  [1mSELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35m (0.4ms)[0m  BEGIN
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mCOMMIT[0m
+Redirected to http://localhost:3000/open_cctv_servers/1
+Completed 302 Found in 156ms (ActiveRecord: 2.0ms)
+
+
+Started GET "/open_cctv_servers/1" for 172.18.0.1 at 2016-09-01 10:37:24 +0000
+Processing by OpenCctvServersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mOpenCctvServer Load (0.6ms)[0m  SELECT  `open_cctv_servers`.* FROM `open_cctv_servers`  WHERE `open_cctv_servers`.`id` = 1 LIMIT 1
+  [1m[36mUser Load (0.5ms)[0m  [1mSELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35mOpenCctvServer Load (0.3ms)[0m  SELECT  `open_cctv_servers`.* FROM `open_cctv_servers`   ORDER BY `open_cctv_servers`.`id` DESC LIMIT 1
+  [1m[36m (0.4ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.2ms)[0m  COMMIT
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.2ms)[0m  COMMIT
+  Rendered open_cctv_servers/_info.html.erb (0.6ms)
+  Rendered open_cctv_servers/show.html.erb within layouts/application (1.5ms)
+  [1m[36m (0.7ms)[0m  [1mSELECT COUNT(*) FROM `group_users` INNER JOIN `org_group_users` ON `org_group_users`.`group_user_id` = `group_users`.`id` INNER JOIN `org_users` ON `org_users`.`id` = `org_group_users`.`org_user_id` WHERE `group_users`.`org_id` IS NULL AND `group_users`.`role_id` = 2 AND `org_users`.`user_id` = 1[0m
+Completed 200 OK in 128ms (Views: 119.2ms | ActiveRecord: 3.0ms)
+
+
+Started GET "/open_cctv_servers/1/stop" for 172.18.0.1 at 2016-09-01 10:37:33 +0000
+Processing by OpenCctvServersController#stop_server as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mOpenCctvServer Load (0.5ms)[0m  SELECT  `open_cctv_servers`.* FROM `open_cctv_servers`  WHERE `open_cctv_servers`.`id` = 1 LIMIT 1
+  [1m[36mUser Load (0.6ms)[0m  [1mSELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mCOMMIT[0m
+Redirected to http://localhost:3000/open_cctv_servers/1
+Completed 302 Found in 12ms (ActiveRecord: 1.7ms)
+
+
+Started GET "/open_cctv_servers/1" for 172.18.0.1 at 2016-09-01 10:37:33 +0000
+Processing by OpenCctvServersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mOpenCctvServer Load (0.5ms)[0m  SELECT  `open_cctv_servers`.* FROM `open_cctv_servers`  WHERE `open_cctv_servers`.`id` = 1 LIMIT 1
+  [1m[36mUser Load (0.5ms)[0m  [1mSELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35mOpenCctvServer Load (0.4ms)[0m  SELECT  `open_cctv_servers`.* FROM `open_cctv_servers`   ORDER BY `open_cctv_servers`.`id` DESC LIMIT 1
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  COMMIT
+  Rendered open_cctv_servers/_info.html.erb (1.1ms)
+  Rendered open_cctv_servers/show.html.erb within layouts/application (2.6ms)
+  [1m[36m (0.7ms)[0m  [1mSELECT COUNT(*) FROM `group_users` INNER JOIN `org_group_users` ON `org_group_users`.`group_user_id` = `group_users`.`id` INNER JOIN `org_users` ON `org_users`.`id` = `org_group_users`.`org_user_id` WHERE `group_users`.`org_id` IS NULL AND `group_users`.`role_id` = 2 AND `org_users`.`user_id` = 1[0m
+Completed 200 OK in 147ms (Views: 138.5ms | ActiveRecord: 2.6ms)
+
+
+Started GET "/open_cctv_servers/1/start" for 172.18.0.1 at 2016-09-01 10:37:43 +0000
+Processing by OpenCctvServersController#start_server as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mOpenCctvServer Load (0.5ms)[0m  SELECT  `open_cctv_servers`.* FROM `open_cctv_servers`  WHERE `open_cctv_servers`.`id` = 1 LIMIT 1
+  [1m[36mUser Load (0.6ms)[0m  [1mSELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+Redirected to http://localhost:3000/open_cctv_servers/1
+Completed 302 Found in 118ms (ActiveRecord: 1.7ms)
+
+
+Started GET "/open_cctv_servers/1" for 172.18.0.1 at 2016-09-01 10:37:44 +0000
+Processing by OpenCctvServersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mOpenCctvServer Load (0.6ms)[0m  SELECT  `open_cctv_servers`.* FROM `open_cctv_servers`  WHERE `open_cctv_servers`.`id` = 1 LIMIT 1
+  [1m[36mUser Load (0.7ms)[0m  [1mSELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35mOpenCctvServer Load (0.5ms)[0m  SELECT  `open_cctv_servers`.* FROM `open_cctv_servers`   ORDER BY `open_cctv_servers`.`id` DESC LIMIT 1
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  COMMIT
+  Rendered open_cctv_servers/_info.html.erb (0.6ms)
+  Rendered open_cctv_servers/show.html.erb within layouts/application (1.4ms)
+  [1m[36m (0.9ms)[0m  [1mSELECT COUNT(*) FROM `group_users` INNER JOIN `org_group_users` ON `org_group_users`.`group_user_id` = `group_users`.`id` INNER JOIN `org_users` ON `org_users`.`id` = `org_group_users`.`org_user_id` WHERE `group_users`.`org_id` IS NULL AND `group_users`.`role_id` = 2 AND `org_users`.`user_id` = 1[0m
+Completed 200 OK in 131ms (Views: 121.7ms | ActiveRecord: 3.2ms)
+
+
+Started GET "/" for 172.18.0.1 at 2016-09-02 03:02:27 +0000
+Processing by AboutController#index as HTML
+  Rendered about/index.html.erb within layouts/application (0.4ms)
+  [1m[35mUser Load (7.2ms)[0m  SELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1
+  [1m[36m (0.9ms)[0m  [1mSELECT COUNT(*) FROM `group_users` INNER JOIN `org_group_users` ON `org_group_users`.`group_user_id` = `group_users`.`id` INNER JOIN `org_users` ON `org_users`.`id` = `org_group_users`.`org_user_id` WHERE `group_users`.`org_id` IS NULL AND `group_users`.`role_id` = 2 AND `org_users`.`user_id` = 1[0m
+Completed 200 OK in 168ms (Views: 159.2ms | ActiveRecord: 8.1ms)
+
+
+Started GET "/assets/application.css?body=1" for 172.18.0.1 at 2016-09-02 03:02:28 +0000
+
+
+Started GET "/assets/jquery.js?body=1" for 172.18.0.1 at 2016-09-02 03:02:28 +0000
+
+
+Started GET "/assets/bootstrap/affix.js?body=1" for 172.18.0.1 at 2016-09-02 03:02:28 +0000
+
+
+Started GET "/assets/bootstrap/alert.js?body=1" for 172.18.0.1 at 2016-09-02 03:02:28 +0000
+
+
+Started GET "/assets/bootstrap/button.js?body=1" for 172.18.0.1 at 2016-09-02 03:02:28 +0000
+
+
+Started GET "/assets/bootstrap/carousel.js?body=1" for 172.18.0.1 at 2016-09-02 03:02:28 +0000
+
+
+Started GET "/assets/bootstrap/collapse.js?body=1" for 172.18.0.1 at 2016-09-02 03:02:28 +0000
+
+
+Started GET "/assets/bootstrap/tab.js?body=1" for 172.18.0.1 at 2016-09-02 03:02:28 +0000
+
+
+Started GET "/assets/bootstrap/dropdown.js?body=1" for 172.18.0.1 at 2016-09-02 03:02:28 +0000
+
+
+Started GET "/assets/bootstrap/transition.js?body=1" for 172.18.0.1 at 2016-09-02 03:02:28 +0000
+
+
+Started GET "/assets/bootstrap/scrollspy.js?body=1" for 172.18.0.1 at 2016-09-02 03:02:28 +0000
+
+
+Started GET "/assets/bootstrap/modal.js?body=1" for 172.18.0.1 at 2016-09-02 03:02:28 +0000
+
+
+Started GET "/assets/bootstrap/tooltip.js?body=1" for 172.18.0.1 at 2016-09-02 03:02:28 +0000
+
+
+Started GET "/assets/bootstrap/popover.js?body=1" for 172.18.0.1 at 2016-09-02 03:02:28 +0000
+
+
+Started GET "/assets/bootstrap-sprockets.js?body=1" for 172.18.0.1 at 2016-09-02 03:02:28 +0000
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 172.18.0.1 at 2016-09-02 03:02:28 +0000
+
+
+Started GET "/assets/turbolinks.js?body=1" for 172.18.0.1 at 2016-09-02 03:02:28 +0000
+
+
+Started GET "/assets/about.js?body=1" for 172.18.0.1 at 2016-09-02 03:02:28 +0000
+
+
+Started GET "/assets/analytic_input_streams.js?body=1" for 172.18.0.1 at 2016-09-02 03:02:28 +0000
+
+
+Started GET "/assets/analytic_instance_streams.js?body=1" for 172.18.0.1 at 2016-09-02 03:02:28 +0000
+
+
+Started GET "/assets/analytic_instances.js?body=1" for 172.18.0.1 at 2016-09-02 03:02:28 +0000
+
+
+Started GET "/assets/analytics.js?body=1" for 172.18.0.1 at 2016-09-02 03:02:28 +0000
+
+
+Started GET "/assets/cameras.js?body=1" for 172.18.0.1 at 2016-09-02 03:02:28 +0000
+
+
+Started GET "/assets/download.js?body=1" for 172.18.0.1 at 2016-09-02 03:02:28 +0000
+
+
+Started GET "/assets/open_cctv_servers.js?body=1" for 172.18.0.1 at 2016-09-02 03:02:28 +0000
+
+
+Started GET "/assets/test.js?body=1" for 172.18.0.1 at 2016-09-02 03:02:28 +0000
+
+
+Started GET "/assets/streams.js?body=1" for 172.18.0.1 at 2016-09-02 03:02:28 +0000
+
+
+Started GET "/assets/vmses.js?body=1" for 172.18.0.1 at 2016-09-02 03:02:28 +0000
+
+
+Started GET "/assets/vms_connectors.js?body=1" for 172.18.0.1 at 2016-09-02 03:02:28 +0000
+
+
+Started GET "/assets/application.js?body=1" for 172.18.0.1 at 2016-09-02 03:02:28 +0000
+
+
+Started GET "/open_cctv_servers" for 172.18.0.1 at 2016-09-02 03:02:31 +0000
+Processing by OpenCctvServersController#index as HTML
+  [1m[35mUser Load (0.6ms)[0m  SELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1
+  [1m[36mOpenCctvServer Load (0.5ms)[0m  [1mSELECT  `open_cctv_servers`.* FROM `open_cctv_servers`   ORDER BY `open_cctv_servers`.`id` DESC LIMIT 1[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+  Rendered open_cctv_servers/_info.html.erb (0.8ms)
+  Rendered open_cctv_servers/index.html.erb within layouts/application (2.2ms)
+  [1m[35m (0.8ms)[0m  SELECT COUNT(*) FROM `group_users` INNER JOIN `org_group_users` ON `org_group_users`.`group_user_id` = `group_users`.`id` INNER JOIN `org_users` ON `org_users`.`id` = `org_group_users`.`org_user_id` WHERE `group_users`.`org_id` IS NULL AND `group_users`.`role_id` = 2 AND `org_users`.`user_id` = 1
+Completed 200 OK in 137ms (Views: 128.0ms | ActiveRecord: 2.9ms)
+
+
+Started GET "/open_cctv_servers/1/start" for 172.18.0.1 at 2016-09-02 03:02:33 +0000
+Processing by OpenCctvServersController#start_server as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mOpenCctvServer Load (0.5ms)[0m  [1mSELECT  `open_cctv_servers`.* FROM `open_cctv_servers`  WHERE `open_cctv_servers`.`id` = 1 LIMIT 1[0m
+  [1m[35mUser Load (0.8ms)[0m  SELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.2ms)[0m  COMMIT
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.2ms)[0m  COMMIT
+Redirected to http://localhost:3000/open_cctv_servers/1
+Completed 302 Found in 572ms (ActiveRecord: 2.0ms)
+
+
+Started GET "/open_cctv_servers/1" for 172.18.0.1 at 2016-09-02 03:02:33 +0000
+Processing by OpenCctvServersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mOpenCctvServer Load (0.6ms)[0m  [1mSELECT  `open_cctv_servers`.* FROM `open_cctv_servers`  WHERE `open_cctv_servers`.`id` = 1 LIMIT 1[0m
+  [1m[35mUser Load (0.5ms)[0m  SELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1
+  [1m[36mOpenCctvServer Load (0.5ms)[0m  [1mSELECT  `open_cctv_servers`.* FROM `open_cctv_servers`   ORDER BY `open_cctv_servers`.`id` DESC LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mCOMMIT[0m
+  Rendered open_cctv_servers/_info.html.erb (1.1ms)
+  Rendered open_cctv_servers/show.html.erb within layouts/application (2.1ms)
+  [1m[35m (0.9ms)[0m  SELECT COUNT(*) FROM `group_users` INNER JOIN `org_group_users` ON `org_group_users`.`group_user_id` = `group_users`.`id` INNER JOIN `org_users` ON `org_users`.`id` = `org_group_users`.`org_user_id` WHERE `group_users`.`org_id` IS NULL AND `group_users`.`role_id` = 2 AND `org_users`.`user_id` = 1
+Completed 200 OK in 129ms (Views: 120.1ms | ActiveRecord: 3.1ms)
+
+
+Started GET "/open_cctv_servers/1/start" for 172.18.0.1 at 2016-09-02 03:16:52 +0000
+Processing by OpenCctvServersController#start_server as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mOpenCctvServer Load (0.5ms)[0m  [1mSELECT  `open_cctv_servers`.* FROM `open_cctv_servers`  WHERE `open_cctv_servers`.`id` = 1 LIMIT 1[0m
+  [1m[35mUser Load (0.4ms)[0m  SELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.2ms)[0m  COMMIT
+  [1m[36m (1.3ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.2ms)[0m  COMMIT
+Redirected to http://localhost:3000/open_cctv_servers/1
+Completed 302 Found in 127ms (ActiveRecord: 2.9ms)
+
+
+Started GET "/open_cctv_servers/1" for 172.18.0.1 at 2016-09-02 03:16:52 +0000
+Processing by OpenCctvServersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mOpenCctvServer Load (0.6ms)[0m  [1mSELECT  `open_cctv_servers`.* FROM `open_cctv_servers`  WHERE `open_cctv_servers`.`id` = 1 LIMIT 1[0m
+  [1m[35mUser Load (0.6ms)[0m  SELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1
+  [1m[36mOpenCctvServer Load (0.6ms)[0m  [1mSELECT  `open_cctv_servers`.* FROM `open_cctv_servers`   ORDER BY `open_cctv_servers`.`id` DESC LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+  Rendered open_cctv_servers/_info.html.erb (0.7ms)
+  Rendered open_cctv_servers/show.html.erb within layouts/application (1.7ms)
+  [1m[35m (0.8ms)[0m  SELECT COUNT(*) FROM `group_users` INNER JOIN `org_group_users` ON `org_group_users`.`group_user_id` = `group_users`.`id` INNER JOIN `org_users` ON `org_users`.`id` = `org_group_users`.`org_user_id` WHERE `group_users`.`org_id` IS NULL AND `group_users`.`role_id` = 2 AND `org_users`.`user_id` = 1
+Completed 200 OK in 162ms (Views: 150.8ms | ActiveRecord: 3.4ms)
+
+
+Started GET "/open_cctv_servers/1/start" for 172.18.0.1 at 2016-09-02 03:21:16 +0000
+Processing by OpenCctvServersController#start_server as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mOpenCctvServer Load (0.5ms)[0m  [1mSELECT  `open_cctv_servers`.* FROM `open_cctv_servers`  WHERE `open_cctv_servers`.`id` = 1 LIMIT 1[0m
+  [1m[35mUser Load (0.4ms)[0m  SELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.2ms)[0m  COMMIT
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.2ms)[0m  COMMIT
+Redirected to http://localhost:3000/open_cctv_servers/1
+Completed 302 Found in 131ms (ActiveRecord: 1.7ms)
+
+
+Started GET "/open_cctv_servers/1" for 172.18.0.1 at 2016-09-02 03:21:16 +0000
+Processing by OpenCctvServersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mOpenCctvServer Load (0.6ms)[0m  [1mSELECT  `open_cctv_servers`.* FROM `open_cctv_servers`  WHERE `open_cctv_servers`.`id` = 1 LIMIT 1[0m
+  [1m[35mUser Load (0.7ms)[0m  SELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1
+  [1m[36mOpenCctvServer Load (0.5ms)[0m  [1mSELECT  `open_cctv_servers`.* FROM `open_cctv_servers`   ORDER BY `open_cctv_servers`.`id` DESC LIMIT 1[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+  Rendered open_cctv_servers/_info.html.erb (0.7ms)
+  Rendered open_cctv_servers/show.html.erb within layouts/application (1.6ms)
+  [1m[35m (1.0ms)[0m  SELECT COUNT(*) FROM `group_users` INNER JOIN `org_group_users` ON `org_group_users`.`group_user_id` = `group_users`.`id` INNER JOIN `org_users` ON `org_users`.`id` = `org_group_users`.`org_user_id` WHERE `group_users`.`org_id` IS NULL AND `group_users`.`role_id` = 2 AND `org_users`.`user_id` = 1
+Completed 200 OK in 145ms (Views: 135.2ms | ActiveRecord: 3.6ms)
+
+
+Started GET "/open_cctv_servers/1/stop" for 172.18.0.1 at 2016-09-02 03:27:17 +0000
+Processing by OpenCctvServersController#stop_server as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mOpenCctvServer Load (0.4ms)[0m  [1mSELECT  `open_cctv_servers`.* FROM `open_cctv_servers`  WHERE `open_cctv_servers`.`id` = 1 LIMIT 1[0m
+  [1m[35mUser Load (0.5ms)[0m  SELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (10.1ms)[0m  UPDATE `open_cctv_servers` SET `status` = 'Unknown', `updated_at` = '2016-09-02 03:27:27' WHERE `open_cctv_servers`.`id` = 1
+  [1m[36m (6.0ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mCOMMIT[0m
+Redirected to http://localhost:3000/open_cctv_servers/1
+Completed 302 Found in 10033ms (ActiveRecord: 17.5ms)
+
+
+Started GET "/open_cctv_servers/1" for 172.18.0.1 at 2016-09-02 03:27:27 +0000
+Processing by OpenCctvServersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mOpenCctvServer Load (0.6ms)[0m  SELECT  `open_cctv_servers`.* FROM `open_cctv_servers`  WHERE `open_cctv_servers`.`id` = 1 LIMIT 1
+  [1m[36mUser Load (0.4ms)[0m  [1mSELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35mOpenCctvServer Load (0.5ms)[0m  SELECT  `open_cctv_servers`.* FROM `open_cctv_servers`   ORDER BY `open_cctv_servers`.`id` DESC LIMIT 1
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.2ms)[0m  COMMIT
+  Rendered open_cctv_servers/_info.html.erb (1.4ms)
+  Rendered open_cctv_servers/show.html.erb within layouts/application (3.7ms)
+  [1m[36m (0.8ms)[0m  [1mSELECT COUNT(*) FROM `group_users` INNER JOIN `org_group_users` ON `org_group_users`.`group_user_id` = `group_users`.`id` INNER JOIN `org_users` ON `org_users`.`id` = `org_group_users`.`org_user_id` WHERE `group_users`.`org_id` IS NULL AND `group_users`.`role_id` = 2 AND `org_users`.`user_id` = 1[0m
+Completed 200 OK in 10164ms (Views: 143.9ms | ActiveRecord: 3.6ms)
+
+
+Started GET "/open_cctv_servers/1/start" for 172.18.0.1 at 2016-09-02 03:47:29 +0000
+Processing by OpenCctvServersController#start_server as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mOpenCctvServer Load (0.6ms)[0m  SELECT  `open_cctv_servers`.* FROM `open_cctv_servers`  WHERE `open_cctv_servers`.`id` = 1 LIMIT 1
+  [1m[36mUser Load (0.5ms)[0m  [1mSELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.4ms)[0m  [1mUPDATE `open_cctv_servers` SET `status` = 'Stopped', `updated_at` = '2016-09-02 03:47:29' WHERE `open_cctv_servers`.`id` = 1[0m
+  [1m[35m (3.7ms)[0m  COMMIT
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  COMMIT
+Redirected to http://localhost:3000/open_cctv_servers/1
+Completed 302 Found in 128ms (ActiveRecord: 5.8ms)
+
+
+Started GET "/open_cctv_servers/1" for 172.18.0.1 at 2016-09-02 03:47:29 +0000
+Processing by OpenCctvServersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mOpenCctvServer Load (0.6ms)[0m  [1mSELECT  `open_cctv_servers`.* FROM `open_cctv_servers`  WHERE `open_cctv_servers`.`id` = 1 LIMIT 1[0m
+  [1m[35mUser Load (0.7ms)[0m  SELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1
+  [1m[36mOpenCctvServer Load (0.6ms)[0m  [1mSELECT  `open_cctv_servers`.* FROM `open_cctv_servers`   ORDER BY `open_cctv_servers`.`id` DESC LIMIT 1[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+  Rendered open_cctv_servers/_info.html.erb (1.2ms)
+  Rendered open_cctv_servers/show.html.erb within layouts/application (2.7ms)
+  [1m[35m (0.6ms)[0m  SELECT COUNT(*) FROM `group_users` INNER JOIN `org_group_users` ON `org_group_users`.`group_user_id` = `group_users`.`id` INNER JOIN `org_users` ON `org_users`.`id` = `org_group_users`.`org_user_id` WHERE `group_users`.`org_id` IS NULL AND `group_users`.`role_id` = 2 AND `org_users`.`user_id` = 1
+Completed 200 OK in 157ms (Views: 145.6ms | ActiveRecord: 3.6ms)
+
+
+Started GET "/open_cctv_servers/1/start" for 172.18.0.1 at 2016-09-02 03:51:03 +0000
+Processing by OpenCctvServersController#start_server as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mOpenCctvServer Load (0.6ms)[0m  [1mSELECT  `open_cctv_servers`.* FROM `open_cctv_servers`  WHERE `open_cctv_servers`.`id` = 1 LIMIT 1[0m
+  [1m[35mUser Load (0.5ms)[0m  SELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.2ms)[0m  COMMIT
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.2ms)[0m  COMMIT
+Redirected to http://localhost:3000/open_cctv_servers/1
+Completed 302 Found in 127ms (ActiveRecord: 1.8ms)
+
+
+Started GET "/open_cctv_servers/1" for 172.18.0.1 at 2016-09-02 03:51:03 +0000
+Processing by OpenCctvServersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mOpenCctvServer Load (0.6ms)[0m  [1mSELECT  `open_cctv_servers`.* FROM `open_cctv_servers`  WHERE `open_cctv_servers`.`id` = 1 LIMIT 1[0m
+  [1m[35mUser Load (0.7ms)[0m  SELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1
+  [1m[36mOpenCctvServer Load (0.5ms)[0m  [1mSELECT  `open_cctv_servers`.* FROM `open_cctv_servers`   ORDER BY `open_cctv_servers`.`id` DESC LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+  Rendered open_cctv_servers/_info.html.erb (1.1ms)
+  Rendered open_cctv_servers/show.html.erb within layouts/application (2.6ms)
+  [1m[35m (0.6ms)[0m  SELECT COUNT(*) FROM `group_users` INNER JOIN `org_group_users` ON `org_group_users`.`group_user_id` = `group_users`.`id` INNER JOIN `org_users` ON `org_users`.`id` = `org_group_users`.`org_user_id` WHERE `group_users`.`org_id` IS NULL AND `group_users`.`role_id` = 2 AND `org_users`.`user_id` = 1
+Completed 200 OK in 143ms (Views: 132.3ms | ActiveRecord: 3.4ms)
+
+
+Started GET "/open_cctv_servers/1/stop" for 172.18.0.1 at 2016-09-02 03:51:24 +0000
+Processing by OpenCctvServersController#stop_server as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mOpenCctvServer Load (0.5ms)[0m  [1mSELECT  `open_cctv_servers`.* FROM `open_cctv_servers`  WHERE `open_cctv_servers`.`id` = 1 LIMIT 1[0m
+  [1m[35mUser Load (0.7ms)[0m  SELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1
+  [1m[36m (0.5ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (1.4ms)[0m  UPDATE `open_cctv_servers` SET `status` = 'Unknown', `updated_at` = '2016-09-02 03:51:34' WHERE `open_cctv_servers`.`id` = 1
+  [1m[36m (4.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+Redirected to http://localhost:3000/open_cctv_servers/1
+Completed 302 Found in 10019ms (ActiveRecord: 7.8ms)
+
+
+Started GET "/open_cctv_servers/1" for 172.18.0.1 at 2016-09-02 03:51:34 +0000
+Processing by OpenCctvServersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mOpenCctvServer Load (0.6ms)[0m  SELECT  `open_cctv_servers`.* FROM `open_cctv_servers`  WHERE `open_cctv_servers`.`id` = 1 LIMIT 1
+  [1m[36mUser Load (0.6ms)[0m  [1mSELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35mOpenCctvServer Load (0.4ms)[0m  SELECT  `open_cctv_servers`.* FROM `open_cctv_servers`   ORDER BY `open_cctv_servers`.`id` DESC LIMIT 1
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.5ms)[0m  COMMIT
+  [1m[36m (0.4ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  COMMIT
+  Rendered open_cctv_servers/_info.html.erb (1.5ms)
+  Rendered open_cctv_servers/show.html.erb within layouts/application (2.6ms)
+  [1m[36m (0.8ms)[0m  [1mSELECT COUNT(*) FROM `group_users` INNER JOIN `org_group_users` ON `org_group_users`.`group_user_id` = `group_users`.`id` INNER JOIN `org_users` ON `org_users`.`id` = `org_group_users`.`org_user_id` WHERE `group_users`.`org_id` IS NULL AND `group_users`.`role_id` = 2 AND `org_users`.`user_id` = 1[0m
+Completed 200 OK in 10168ms (Views: 150.7ms | ActiveRecord: 3.7ms)
+
+
+Started GET "/open_cctv_servers/1/start" for 172.18.0.1 at 2016-09-02 04:11:14 +0000
+Processing by OpenCctvServersController#start_server as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mOpenCctvServer Load (0.6ms)[0m  SELECT  `open_cctv_servers`.* FROM `open_cctv_servers`  WHERE `open_cctv_servers`.`id` = 1 LIMIT 1
+  [1m[36mUser Load (0.5ms)[0m  [1mSELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36mSQL (0.8ms)[0m  [1mUPDATE `open_cctv_servers` SET `status` = 'Stopped', `updated_at` = '2016-09-02 04:11:14' WHERE `open_cctv_servers`.`id` = 1[0m
+  [1m[35m (3.8ms)[0m  COMMIT
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  COMMIT
+Redirected to http://localhost:3000/open_cctv_servers/1
+Completed 302 Found in 135ms (ActiveRecord: 6.3ms)
+
+
+Started GET "/open_cctv_servers/1" for 172.18.0.1 at 2016-09-02 04:11:14 +0000
+Processing by OpenCctvServersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mOpenCctvServer Load (0.5ms)[0m  [1mSELECT  `open_cctv_servers`.* FROM `open_cctv_servers`  WHERE `open_cctv_servers`.`id` = 1 LIMIT 1[0m
+  [1m[35mUser Load (0.6ms)[0m  SELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1
+  [1m[36mOpenCctvServer Load (0.3ms)[0m  [1mSELECT  `open_cctv_servers`.* FROM `open_cctv_servers`   ORDER BY `open_cctv_servers`.`id` DESC LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+  Rendered open_cctv_servers/_info.html.erb (0.7ms)
+  Rendered open_cctv_servers/show.html.erb within layouts/application (1.7ms)
+  [1m[35m (0.9ms)[0m  SELECT COUNT(*) FROM `group_users` INNER JOIN `org_group_users` ON `org_group_users`.`group_user_id` = `group_users`.`id` INNER JOIN `org_users` ON `org_users`.`id` = `org_group_users`.`org_user_id` WHERE `group_users`.`org_id` IS NULL AND `group_users`.`role_id` = 2 AND `org_users`.`user_id` = 1
+Completed 200 OK in 152ms (Views: 142.2ms | ActiveRecord: 3.0ms)
+
+
+Started GET "/open_cctv_servers/1/start" for 172.18.0.1 at 2016-09-02 04:23:41 +0000
+Processing by OpenCctvServersController#start_server as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mOpenCctvServer Load (0.6ms)[0m  [1mSELECT  `open_cctv_servers`.* FROM `open_cctv_servers`  WHERE `open_cctv_servers`.`id` = 1 LIMIT 1[0m
+  [1m[35mUser Load (0.5ms)[0m  SELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.2ms)[0m  COMMIT
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.2ms)[0m  COMMIT
+Redirected to http://localhost:3000/open_cctv_servers/1
+Completed 302 Found in 139ms (ActiveRecord: 2.1ms)
+
+
+Started GET "/open_cctv_servers/1" for 172.18.0.1 at 2016-09-02 04:23:41 +0000
+Processing by OpenCctvServersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mOpenCctvServer Load (0.5ms)[0m  [1mSELECT  `open_cctv_servers`.* FROM `open_cctv_servers`  WHERE `open_cctv_servers`.`id` = 1 LIMIT 1[0m
+  [1m[35mUser Load (0.5ms)[0m  SELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1
+  [1m[36mOpenCctvServer Load (0.6ms)[0m  [1mSELECT  `open_cctv_servers`.* FROM `open_cctv_servers`   ORDER BY `open_cctv_servers`.`id` DESC LIMIT 1[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+  Rendered open_cctv_servers/_info.html.erb (0.9ms)
+  Rendered open_cctv_servers/show.html.erb within layouts/application (2.0ms)
+  [1m[35m (0.8ms)[0m  SELECT COUNT(*) FROM `group_users` INNER JOIN `org_group_users` ON `org_group_users`.`group_user_id` = `group_users`.`id` INNER JOIN `org_users` ON `org_users`.`id` = `org_group_users`.`org_user_id` WHERE `group_users`.`org_id` IS NULL AND `group_users`.`role_id` = 2 AND `org_users`.`user_id` = 1
+Completed 200 OK in 167ms (Views: 156.7ms | ActiveRecord: 3.3ms)
+
+
+Started GET "/open_cctv_servers/1/stop" for 172.18.0.1 at 2016-09-02 04:24:00 +0000
+Processing by OpenCctvServersController#stop_server as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mOpenCctvServer Load (0.4ms)[0m  [1mSELECT  `open_cctv_servers`.* FROM `open_cctv_servers`  WHERE `open_cctv_servers`.`id` = 1 LIMIT 1[0m
+  [1m[35mUser Load (0.6ms)[0m  SELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.2ms)[0m  COMMIT
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.2ms)[0m  COMMIT
+Redirected to http://localhost:3000/open_cctv_servers/1
+Completed 302 Found in 12ms (ActiveRecord: 1.9ms)
+
+
+Started GET "/open_cctv_servers/1" for 172.18.0.1 at 2016-09-02 04:24:00 +0000
+Processing by OpenCctvServersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mOpenCctvServer Load (0.4ms)[0m  [1mSELECT  `open_cctv_servers`.* FROM `open_cctv_servers`  WHERE `open_cctv_servers`.`id` = 1 LIMIT 1[0m
+  [1m[35mUser Load (0.4ms)[0m  SELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1
+  [1m[36mOpenCctvServer Load (0.3ms)[0m  [1mSELECT  `open_cctv_servers`.* FROM `open_cctv_servers`   ORDER BY `open_cctv_servers`.`id` DESC LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+  Rendered open_cctv_servers/_info.html.erb (1.1ms)
+  Rendered open_cctv_servers/show.html.erb within layouts/application (2.5ms)
+  [1m[35m (0.8ms)[0m  SELECT COUNT(*) FROM `group_users` INNER JOIN `org_group_users` ON `org_group_users`.`group_user_id` = `group_users`.`id` INNER JOIN `org_users` ON `org_users`.`id` = `org_group_users`.`org_user_id` WHERE `group_users`.`org_id` IS NULL AND `group_users`.`role_id` = 2 AND `org_users`.`user_id` = 1
+Completed 200 OK in 167ms (Views: 158.2ms | ActiveRecord: 2.8ms)
+
+
+Started GET "/open_cctv_servers/1/start" for 172.18.0.1 at 2016-09-02 06:07:12 +0000
+Processing by OpenCctvServersController#start_server as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mOpenCctvServer Load (0.5ms)[0m  [1mSELECT  `open_cctv_servers`.* FROM `open_cctv_servers`  WHERE `open_cctv_servers`.`id` = 1 LIMIT 1[0m
+  [1m[35mUser Load (0.7ms)[0m  SELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.2ms)[0m  COMMIT
+Redirected to http://localhost:3000/open_cctv_servers/1
+Completed 302 Found in 121ms (ActiveRecord: 2.0ms)
+
+
+Started GET "/open_cctv_servers/1" for 172.18.0.1 at 2016-09-02 06:07:13 +0000
+Processing by OpenCctvServersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mOpenCctvServer Load (0.5ms)[0m  [1mSELECT  `open_cctv_servers`.* FROM `open_cctv_servers`  WHERE `open_cctv_servers`.`id` = 1 LIMIT 1[0m
+  [1m[35mUser Load (0.5ms)[0m  SELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1
+  [1m[36mOpenCctvServer Load (0.4ms)[0m  [1mSELECT  `open_cctv_servers`.* FROM `open_cctv_servers`   ORDER BY `open_cctv_servers`.`id` DESC LIMIT 1[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mCOMMIT[0m
+  Rendered open_cctv_servers/_info.html.erb (0.7ms)
+  Rendered open_cctv_servers/show.html.erb within layouts/application (1.4ms)
+  [1m[35m (0.9ms)[0m  SELECT COUNT(*) FROM `group_users` INNER JOIN `org_group_users` ON `org_group_users`.`group_user_id` = `group_users`.`id` INNER JOIN `org_users` ON `org_users`.`id` = `org_group_users`.`org_user_id` WHERE `group_users`.`org_id` IS NULL AND `group_users`.`role_id` = 2 AND `org_users`.`user_id` = 1
+Completed 200 OK in 158ms (Views: 149.5ms | ActiveRecord: 2.9ms)
+
+
+Started GET "/open_cctv_servers/1/stop" for 172.18.0.1 at 2016-09-02 06:07:56 +0000
+Processing by OpenCctvServersController#stop_server as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mOpenCctvServer Load (0.6ms)[0m  [1mSELECT  `open_cctv_servers`.* FROM `open_cctv_servers`  WHERE `open_cctv_servers`.`id` = 1 LIMIT 1[0m
+  [1m[35mUser Load (0.4ms)[0m  SELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.2ms)[0m  COMMIT
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.2ms)[0m  COMMIT
+Redirected to http://localhost:3000/open_cctv_servers/1
+Completed 302 Found in 13ms (ActiveRecord: 2.1ms)
+
+
+Started GET "/open_cctv_servers/1" for 172.18.0.1 at 2016-09-02 06:07:56 +0000
+Processing by OpenCctvServersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mOpenCctvServer Load (0.6ms)[0m  [1mSELECT  `open_cctv_servers`.* FROM `open_cctv_servers`  WHERE `open_cctv_servers`.`id` = 1 LIMIT 1[0m
+  [1m[35mUser Load (0.6ms)[0m  SELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1
+  [1m[36mOpenCctvServer Load (0.4ms)[0m  [1mSELECT  `open_cctv_servers`.* FROM `open_cctv_servers`   ORDER BY `open_cctv_servers`.`id` DESC LIMIT 1[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+  Rendered open_cctv_servers/_info.html.erb (0.8ms)
+  Rendered open_cctv_servers/show.html.erb within layouts/application (1.7ms)
+  [1m[35m (0.9ms)[0m  SELECT COUNT(*) FROM `group_users` INNER JOIN `org_group_users` ON `org_group_users`.`group_user_id` = `group_users`.`id` INNER JOIN `org_users` ON `org_users`.`id` = `org_group_users`.`org_user_id` WHERE `group_users`.`org_id` IS NULL AND `group_users`.`role_id` = 2 AND `org_users`.`user_id` = 1
+Completed 200 OK in 146ms (Views: 135.3ms | ActiveRecord: 3.4ms)
+
+
+Started GET "/open_cctv_servers/1/start" for 172.18.0.1 at 2016-09-02 06:11:48 +0000
+Processing by OpenCctvServersController#start_server as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mOpenCctvServer Load (0.4ms)[0m  [1mSELECT  `open_cctv_servers`.* FROM `open_cctv_servers`  WHERE `open_cctv_servers`.`id` = 1 LIMIT 1[0m
+  [1m[35mUser Load (0.6ms)[0m  SELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  COMMIT
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.2ms)[0m  COMMIT
+Redirected to http://localhost:3000/open_cctv_servers/1
+Completed 302 Found in 125ms (ActiveRecord: 1.7ms)
+
+
+Started GET "/open_cctv_servers/1" for 172.18.0.1 at 2016-09-02 06:11:48 +0000
+Processing by OpenCctvServersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mOpenCctvServer Load (0.5ms)[0m  [1mSELECT  `open_cctv_servers`.* FROM `open_cctv_servers`  WHERE `open_cctv_servers`.`id` = 1 LIMIT 1[0m
+  [1m[35mUser Load (0.5ms)[0m  SELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1
+  [1m[36mOpenCctvServer Load (0.5ms)[0m  [1mSELECT  `open_cctv_servers`.* FROM `open_cctv_servers`   ORDER BY `open_cctv_servers`.`id` DESC LIMIT 1[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+  Rendered open_cctv_servers/_info.html.erb (0.8ms)
+  Rendered open_cctv_servers/show.html.erb within layouts/application (1.9ms)
+  [1m[35m (0.9ms)[0m  SELECT COUNT(*) FROM `group_users` INNER JOIN `org_group_users` ON `org_group_users`.`group_user_id` = `group_users`.`id` INNER JOIN `org_users` ON `org_users`.`id` = `org_group_users`.`org_user_id` WHERE `group_users`.`org_id` IS NULL AND `group_users`.`role_id` = 2 AND `org_users`.`user_id` = 1
+Completed 200 OK in 146ms (Views: 135.4ms | ActiveRecord: 3.4ms)
+
+
+Started GET "/open_cctv_servers/1/stop" for 172.18.0.1 at 2016-09-02 06:12:26 +0000
+Processing by OpenCctvServersController#stop_server as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mOpenCctvServer Load (0.5ms)[0m  [1mSELECT  `open_cctv_servers`.* FROM `open_cctv_servers`  WHERE `open_cctv_servers`.`id` = 1 LIMIT 1[0m
+  [1m[35mUser Load (0.4ms)[0m  SELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.2ms)[0m  COMMIT
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  COMMIT
+Redirected to http://localhost:3000/open_cctv_servers/1
+Completed 302 Found in 12ms (ActiveRecord: 1.6ms)
+
+
+Started GET "/open_cctv_servers/1" for 172.18.0.1 at 2016-09-02 06:12:26 +0000
+Processing by OpenCctvServersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mOpenCctvServer Load (0.4ms)[0m  [1mSELECT  `open_cctv_servers`.* FROM `open_cctv_servers`  WHERE `open_cctv_servers`.`id` = 1 LIMIT 1[0m
+  [1m[35mUser Load (0.4ms)[0m  SELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1
+  [1m[36mOpenCctvServer Load (1.3ms)[0m  [1mSELECT  `open_cctv_servers`.* FROM `open_cctv_servers`   ORDER BY `open_cctv_servers`.`id` DESC LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mCOMMIT[0m
+  Rendered open_cctv_servers/_info.html.erb (0.8ms)
+  Rendered open_cctv_servers/show.html.erb within layouts/application (2.0ms)
+  [1m[35m (1.0ms)[0m  SELECT COUNT(*) FROM `group_users` INNER JOIN `org_group_users` ON `org_group_users`.`group_user_id` = `group_users`.`id` INNER JOIN `org_users` ON `org_users`.`id` = `org_group_users`.`org_user_id` WHERE `group_users`.`org_id` IS NULL AND `group_users`.`role_id` = 2 AND `org_users`.`user_id` = 1
+Completed 200 OK in 158ms (Views: 148.1ms | ActiveRecord: 3.8ms)
+
+
+Started GET "/open_cctv_servers/1/start" for 172.18.0.1 at 2016-09-02 06:21:23 +0000
+Processing by OpenCctvServersController#start_server as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mOpenCctvServer Load (0.4ms)[0m  [1mSELECT  `open_cctv_servers`.* FROM `open_cctv_servers`  WHERE `open_cctv_servers`.`id` = 1 LIMIT 1[0m
+  [1m[35mUser Load (0.5ms)[0m  SELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.5ms)[0m  COMMIT
+  [1m[36m (0.4ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.4ms)[0m  COMMIT
+Redirected to http://localhost:3000/open_cctv_servers/1
+Completed 302 Found in 126ms (ActiveRecord: 2.5ms)
+
+
+Started GET "/open_cctv_servers/1" for 172.18.0.1 at 2016-09-02 06:21:23 +0000
+Processing by OpenCctvServersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mOpenCctvServer Load (0.6ms)[0m  [1mSELECT  `open_cctv_servers`.* FROM `open_cctv_servers`  WHERE `open_cctv_servers`.`id` = 1 LIMIT 1[0m
+  [1m[35mUser Load (0.6ms)[0m  SELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1
+  [1m[36mOpenCctvServer Load (0.5ms)[0m  [1mSELECT  `open_cctv_servers`.* FROM `open_cctv_servers`   ORDER BY `open_cctv_servers`.`id` DESC LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+  Rendered open_cctv_servers/_info.html.erb (0.6ms)
+  Rendered open_cctv_servers/show.html.erb within layouts/application (1.5ms)
+  [1m[35m (1.0ms)[0m  SELECT COUNT(*) FROM `group_users` INNER JOIN `org_group_users` ON `org_group_users`.`group_user_id` = `group_users`.`id` INNER JOIN `org_users` ON `org_users`.`id` = `org_group_users`.`org_user_id` WHERE `group_users`.`org_id` IS NULL AND `group_users`.`role_id` = 2 AND `org_users`.`user_id` = 1
+Completed 200 OK in 137ms (Views: 128.9ms | ActiveRecord: 3.4ms)
+
+
+Started GET "/open_cctv_servers/1/stop" for 172.18.0.1 at 2016-09-02 06:21:34 +0000
+Processing by OpenCctvServersController#stop_server as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mOpenCctvServer Load (0.5ms)[0m  [1mSELECT  `open_cctv_servers`.* FROM `open_cctv_servers`  WHERE `open_cctv_servers`.`id` = 1 LIMIT 1[0m
+  [1m[35mUser Load (0.6ms)[0m  SELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1
+  [1m[36m (2.0ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.2ms)[0m  COMMIT
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.2ms)[0m  COMMIT
+Redirected to http://localhost:3000/open_cctv_servers/1
+Completed 302 Found in 12ms (ActiveRecord: 3.7ms)
+
+
+Started GET "/open_cctv_servers/1" for 172.18.0.1 at 2016-09-02 06:21:34 +0000
+Processing by OpenCctvServersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mOpenCctvServer Load (0.3ms)[0m  [1mSELECT  `open_cctv_servers`.* FROM `open_cctv_servers`  WHERE `open_cctv_servers`.`id` = 1 LIMIT 1[0m
+  [1m[35mUser Load (0.3ms)[0m  SELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1
+  [1m[36mOpenCctvServer Load (0.3ms)[0m  [1mSELECT  `open_cctv_servers`.* FROM `open_cctv_servers`   ORDER BY `open_cctv_servers`.`id` DESC LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mCOMMIT[0m
+  Rendered open_cctv_servers/_info.html.erb (0.6ms)
+  Rendered open_cctv_servers/show.html.erb within layouts/application (1.9ms)
+  [1m[35m (0.6ms)[0m  SELECT COUNT(*) FROM `group_users` INNER JOIN `org_group_users` ON `org_group_users`.`group_user_id` = `group_users`.`id` INNER JOIN `org_users` ON `org_users`.`id` = `org_group_users`.`org_user_id` WHERE `group_users`.`org_id` IS NULL AND `group_users`.`role_id` = 2 AND `org_users`.`user_id` = 1
+Completed 200 OK in 164ms (Views: 157.3ms | ActiveRecord: 2.2ms)
+
+
+Started GET "/open_cctv_servers/1/start" for 172.18.0.1 at 2016-09-02 06:26:46 +0000
+Processing by OpenCctvServersController#start_server as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mOpenCctvServer Load (0.5ms)[0m  [1mSELECT  `open_cctv_servers`.* FROM `open_cctv_servers`  WHERE `open_cctv_servers`.`id` = 1 LIMIT 1[0m
+  [1m[35mUser Load (0.6ms)[0m  SELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1
+  [1m[36m (0.4ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.2ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.2ms)[0m  COMMIT
+Redirected to http://localhost:3000/open_cctv_servers/1
+Completed 302 Found in 124ms (ActiveRecord: 2.0ms)
+
+
+Started GET "/open_cctv_servers/1" for 172.18.0.1 at 2016-09-02 06:26:46 +0000
+Processing by OpenCctvServersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mOpenCctvServer Load (0.6ms)[0m  [1mSELECT  `open_cctv_servers`.* FROM `open_cctv_servers`  WHERE `open_cctv_servers`.`id` = 1 LIMIT 1[0m
+  [1m[35mUser Load (0.5ms)[0m  SELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1
+  [1m[36mOpenCctvServer Load (0.5ms)[0m  [1mSELECT  `open_cctv_servers`.* FROM `open_cctv_servers`   ORDER BY `open_cctv_servers`.`id` DESC LIMIT 1[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+  Rendered open_cctv_servers/_info.html.erb (1.2ms)
+  Rendered open_cctv_servers/show.html.erb within layouts/application (2.4ms)
+  [1m[35m (0.9ms)[0m  SELECT COUNT(*) FROM `group_users` INNER JOIN `org_group_users` ON `org_group_users`.`group_user_id` = `group_users`.`id` INNER JOIN `org_users` ON `org_users`.`id` = `org_group_users`.`org_user_id` WHERE `group_users`.`org_id` IS NULL AND `group_users`.`role_id` = 2 AND `org_users`.`user_id` = 1
+Completed 200 OK in 191ms (Views: 180.9ms | ActiveRecord: 3.5ms)
+
+
+Started GET "/open_cctv_servers/1/stop" for 172.18.0.1 at 2016-09-02 06:26:56 +0000
+Processing by OpenCctvServersController#stop_server as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mOpenCctvServer Load (0.5ms)[0m  [1mSELECT  `open_cctv_servers`.* FROM `open_cctv_servers`  WHERE `open_cctv_servers`.`id` = 1 LIMIT 1[0m
+  [1m[35mUser Load (0.5ms)[0m  SELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  COMMIT
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.2ms)[0m  COMMIT
+Redirected to http://localhost:3000/open_cctv_servers/1
+Completed 302 Found in 14ms (ActiveRecord: 1.7ms)
+
+
+Started GET "/open_cctv_servers/1" for 172.18.0.1 at 2016-09-02 06:26:56 +0000
+Processing by OpenCctvServersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mOpenCctvServer Load (0.6ms)[0m  [1mSELECT  `open_cctv_servers`.* FROM `open_cctv_servers`  WHERE `open_cctv_servers`.`id` = 1 LIMIT 1[0m
+  [1m[35mUser Load (0.5ms)[0m  SELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1
+  [1m[36mOpenCctvServer Load (0.4ms)[0m  [1mSELECT  `open_cctv_servers`.* FROM `open_cctv_servers`   ORDER BY `open_cctv_servers`.`id` DESC LIMIT 1[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+  Rendered open_cctv_servers/_info.html.erb (0.7ms)
+  Rendered open_cctv_servers/show.html.erb within layouts/application (1.8ms)
+  [1m[35m (0.6ms)[0m  SELECT COUNT(*) FROM `group_users` INNER JOIN `org_group_users` ON `org_group_users`.`group_user_id` = `group_users`.`id` INNER JOIN `org_users` ON `org_users`.`id` = `org_group_users`.`org_user_id` WHERE `group_users`.`org_id` IS NULL AND `group_users`.`role_id` = 2 AND `org_users`.`user_id` = 1
+Completed 200 OK in 146ms (Views: 137.1ms | ActiveRecord: 3.1ms)
+
+
+Started GET "/open_cctv_servers/1/start" for 172.18.0.1 at 2016-09-02 07:05:01 +0000
+Processing by OpenCctvServersController#start_server as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mOpenCctvServer Load (0.4ms)[0m  [1mSELECT  `open_cctv_servers`.* FROM `open_cctv_servers`  WHERE `open_cctv_servers`.`id` = 1 LIMIT 1[0m
+  [1m[35mUser Load (0.4ms)[0m  SELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1
+  [1m[36m (0.4ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (1.0ms)[0m  UPDATE `open_cctv_servers` SET `status` = 'Unknown', `updated_at` = '2016-09-02 07:05:11' WHERE `open_cctv_servers`.`id` = 1
+  [1m[36m (4.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+Redirected to http://localhost:3000/open_cctv_servers/1
+Completed 302 Found in 10025ms (ActiveRecord: 7.2ms)
+
+
+Started GET "/open_cctv_servers/1" for 172.18.0.1 at 2016-09-02 07:05:11 +0000
+Processing by OpenCctvServersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mOpenCctvServer Load (0.7ms)[0m  SELECT  `open_cctv_servers`.* FROM `open_cctv_servers`  WHERE `open_cctv_servers`.`id` = 1 LIMIT 1
+  [1m[36mUser Load (0.7ms)[0m  [1mSELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35mOpenCctvServer Load (0.6ms)[0m  SELECT  `open_cctv_servers`.* FROM `open_cctv_servers`   ORDER BY `open_cctv_servers`.`id` DESC LIMIT 1
+  [1m[36m (0.4ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.4ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.5ms)[0m  COMMIT
+  Rendered open_cctv_servers/_info.html.erb (0.6ms)
+  Rendered open_cctv_servers/show.html.erb within layouts/application (1.9ms)
+  [1m[36m (0.8ms)[0m  [1mSELECT COUNT(*) FROM `group_users` INNER JOIN `org_group_users` ON `org_group_users`.`group_user_id` = `group_users`.`id` INNER JOIN `org_users` ON `org_users`.`id` = `org_group_users`.`org_user_id` WHERE `group_users`.`org_id` IS NULL AND `group_users`.`role_id` = 2 AND `org_users`.`user_id` = 1[0m
+Completed 200 OK in 10158ms (Views: 143.1ms | ActiveRecord: 4.4ms)
+
+
+Started GET "/open_cctv_servers/1/start" for 172.18.0.1 at 2016-09-02 07:05:44 +0000
+Processing by OpenCctvServersController#start_server as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mOpenCctvServer Load (0.5ms)[0m  SELECT  `open_cctv_servers`.* FROM `open_cctv_servers`  WHERE `open_cctv_servers`.`id` = 1 LIMIT 1
+  [1m[36mUser Load (0.6ms)[0m  [1mSELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35m (0.5ms)[0m  BEGIN
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+Redirected to http://localhost:3000/open_cctv_servers/1
+Completed 302 Found in 10014ms (ActiveRecord: 2.3ms)
+
+
+Started GET "/open_cctv_servers/1/edit" for 172.18.0.1 at 2016-09-02 07:05:54 +0000
+Processing by OpenCctvServersController#edit as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mOpenCctvServer Load (0.7ms)[0m  SELECT  `open_cctv_servers`.* FROM `open_cctv_servers`  WHERE `open_cctv_servers`.`id` = 1 LIMIT 1
+  [1m[36mUser Load (0.6ms)[0m  [1mSELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1[0m
+  Rendered open_cctv_servers/_form.html.erb (3.6ms)
+  Rendered open_cctv_servers/edit.html.erb within layouts/application (5.2ms)
+  [1m[35m (0.7ms)[0m  SELECT COUNT(*) FROM `group_users` INNER JOIN `org_group_users` ON `org_group_users`.`group_user_id` = `group_users`.`id` INNER JOIN `org_users` ON `org_users`.`id` = `org_group_users`.`org_user_id` WHERE `group_users`.`org_id` IS NULL AND `group_users`.`role_id` = 2 AND `org_users`.`user_id` = 1
+Completed 200 OK in 140ms (Views: 136.0ms | ActiveRecord: 2.0ms)
+
+
+Started PATCH "/open_cctv_servers/1" for 172.18.0.1 at 2016-09-02 07:06:01 +0000
+Processing by OpenCctvServersController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"0O4PA/csa8+lmSvr75YB3Mwa/EbixycDaCuYJgvSP/w=", "open_cctv_server"=>{"name"=>"OpenCCTV Server", "host"=>"192.41.170.183", "port"=>"4444"}, "commit"=>"Save Connection Details", "id"=>"1"}
+  [1m[36mOpenCctvServer Load (0.6ms)[0m  [1mSELECT  `open_cctv_servers`.* FROM `open_cctv_servers`  WHERE `open_cctv_servers`.`id` = 1 LIMIT 1[0m
+  [1m[35mUser Load (0.5ms)[0m  SELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  UPDATE `open_cctv_servers` SET `host` = '192.41.170.183', `updated_at` = '2016-09-02 07:06:01' WHERE `open_cctv_servers`.`id` = 1
+  [1m[36m (3.7ms)[0m  [1mCOMMIT[0m
+Redirected to http://localhost:3000/open_cctv_servers/1
+Completed 302 Found in 14ms (ActiveRecord: 5.4ms)
+
+
+Started GET "/open_cctv_servers/1" for 172.18.0.1 at 2016-09-02 07:06:01 +0000
+Processing by OpenCctvServersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mOpenCctvServer Load (0.7ms)[0m  SELECT  `open_cctv_servers`.* FROM `open_cctv_servers`  WHERE `open_cctv_servers`.`id` = 1 LIMIT 1
+  [1m[36mUser Load (0.5ms)[0m  [1mSELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35mOpenCctvServer Load (0.4ms)[0m  SELECT  `open_cctv_servers`.* FROM `open_cctv_servers`   ORDER BY `open_cctv_servers`.`id` DESC LIMIT 1
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.6ms)[0m  UPDATE `open_cctv_servers` SET `status` = 'Stopped', `updated_at` = '2016-09-02 07:06:01' WHERE `open_cctv_servers`.`id` = 1
+  [1m[36m (4.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+  Rendered open_cctv_servers/_info.html.erb (1.0ms)
+  Rendered open_cctv_servers/show.html.erb within layouts/application (2.1ms)
+  [1m[35m (0.7ms)[0m  SELECT COUNT(*) FROM `group_users` INNER JOIN `org_group_users` ON `org_group_users`.`group_user_id` = `group_users`.`id` INNER JOIN `org_users` ON `org_users`.`id` = `org_group_users`.`org_user_id` WHERE `group_users`.`org_id` IS NULL AND `group_users`.`role_id` = 2 AND `org_users`.`user_id` = 1
+Completed 200 OK in 149ms (Views: 128.0ms | ActiveRecord: 8.1ms)
+
+
+Started GET "/assets/application.css?body=1" for 172.18.0.1 at 2016-09-02 07:06:02 +0000
+
+
+Started GET "/assets/bootstrap/affix.js?body=1" for 172.18.0.1 at 2016-09-02 07:06:02 +0000
+
+
+Started GET "/assets/bootstrap/carousel.js?body=1" for 172.18.0.1 at 2016-09-02 07:06:02 +0000
+
+
+Started GET "/assets/bootstrap/alert.js?body=1" for 172.18.0.1 at 2016-09-02 07:06:02 +0000
+
+
+Started GET "/assets/jquery.js?body=1" for 172.18.0.1 at 2016-09-02 07:06:02 +0000
+
+
+Started GET "/assets/bootstrap/button.js?body=1" for 172.18.0.1 at 2016-09-02 07:06:02 +0000
+
+
+Started GET "/assets/bootstrap/collapse.js?body=1" for 172.18.0.1 at 2016-09-02 07:06:02 +0000
+
+
+Started GET "/assets/bootstrap/dropdown.js?body=1" for 172.18.0.1 at 2016-09-02 07:06:02 +0000
+
+
+Started GET "/assets/bootstrap/tab.js?body=1" for 172.18.0.1 at 2016-09-02 07:06:02 +0000
+
+
+Started GET "/assets/bootstrap/transition.js?body=1" for 172.18.0.1 at 2016-09-02 07:06:02 +0000
+
+
+Started GET "/assets/bootstrap/scrollspy.js?body=1" for 172.18.0.1 at 2016-09-02 07:06:02 +0000
+
+
+Started GET "/assets/bootstrap/modal.js?body=1" for 172.18.0.1 at 2016-09-02 07:06:02 +0000
+
+
+Started GET "/assets/bootstrap/popover.js?body=1" for 172.18.0.1 at 2016-09-02 07:06:02 +0000
+
+
+Started GET "/assets/bootstrap/tooltip.js?body=1" for 172.18.0.1 at 2016-09-02 07:06:02 +0000
+
+
+Started GET "/assets/bootstrap-sprockets.js?body=1" for 172.18.0.1 at 2016-09-02 07:06:02 +0000
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 172.18.0.1 at 2016-09-02 07:06:02 +0000
+
+
+Started GET "/assets/turbolinks.js?body=1" for 172.18.0.1 at 2016-09-02 07:06:02 +0000
+
+
+Started GET "/assets/about.js?body=1" for 172.18.0.1 at 2016-09-02 07:06:02 +0000
+
+
+Started GET "/assets/analytic_input_streams.js?body=1" for 172.18.0.1 at 2016-09-02 07:06:02 +0000
+
+
+Started GET "/assets/analytic_instance_streams.js?body=1" for 172.18.0.1 at 2016-09-02 07:06:02 +0000
+
+
+Started GET "/assets/analytic_instances.js?body=1" for 172.18.0.1 at 2016-09-02 07:06:02 +0000
+
+
+Started GET "/assets/analytics.js?body=1" for 172.18.0.1 at 2016-09-02 07:06:02 +0000
+
+
+Started GET "/assets/cameras.js?body=1" for 172.18.0.1 at 2016-09-02 07:06:02 +0000
+
+
+Started GET "/assets/download.js?body=1" for 172.18.0.1 at 2016-09-02 07:06:02 +0000
+
+
+Started GET "/assets/open_cctv_servers.js?body=1" for 172.18.0.1 at 2016-09-02 07:06:02 +0000
+
+
+Started GET "/assets/streams.js?body=1" for 172.18.0.1 at 2016-09-02 07:06:02 +0000
+
+
+Started GET "/assets/test.js?body=1" for 172.18.0.1 at 2016-09-02 07:06:02 +0000
+
+
+Started GET "/assets/vms_connectors.js?body=1" for 172.18.0.1 at 2016-09-02 07:06:02 +0000
+
+
+Started GET "/assets/vmses.js?body=1" for 172.18.0.1 at 2016-09-02 07:06:02 +0000
+
+
+Started GET "/assets/application.js?body=1" for 172.18.0.1 at 2016-09-02 07:06:02 +0000
+
+
+Started GET "/open_cctv_servers/1/start" for 172.18.0.1 at 2016-09-02 07:06:03 +0000
+Processing by OpenCctvServersController#start_server as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mOpenCctvServer Load (0.4ms)[0m  [1mSELECT  `open_cctv_servers`.* FROM `open_cctv_servers`  WHERE `open_cctv_servers`.`id` = 1 LIMIT 1[0m
+  [1m[35mUser Load (0.3ms)[0m  SELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  COMMIT
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.2ms)[0m  COMMIT
+Redirected to http://localhost:3000/open_cctv_servers/1
+Completed 302 Found in 162ms (ActiveRecord: 1.4ms)
+
+
+Started GET "/open_cctv_servers/1" for 172.18.0.1 at 2016-09-02 07:06:03 +0000
+Processing by OpenCctvServersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mOpenCctvServer Load (0.4ms)[0m  [1mSELECT  `open_cctv_servers`.* FROM `open_cctv_servers`  WHERE `open_cctv_servers`.`id` = 1 LIMIT 1[0m
+  [1m[35mUser Load (0.3ms)[0m  SELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1
+  [1m[36mOpenCctvServer Load (0.3ms)[0m  [1mSELECT  `open_cctv_servers`.* FROM `open_cctv_servers`   ORDER BY `open_cctv_servers`.`id` DESC LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mCOMMIT[0m
+  Rendered open_cctv_servers/_info.html.erb (0.7ms)
+  Rendered open_cctv_servers/show.html.erb within layouts/application (1.4ms)
+  [1m[35m (0.8ms)[0m  SELECT COUNT(*) FROM `group_users` INNER JOIN `org_group_users` ON `org_group_users`.`group_user_id` = `group_users`.`id` INNER JOIN `org_users` ON `org_users`.`id` = `org_group_users`.`org_user_id` WHERE `group_users`.`org_id` IS NULL AND `group_users`.`role_id` = 2 AND `org_users`.`user_id` = 1
+Completed 200 OK in 153ms (Views: 145.7ms | ActiveRecord: 2.3ms)
+
+
+Started GET "/open_cctv_servers/1/stop" for 172.18.0.1 at 2016-09-02 07:06:13 +0000
+Processing by OpenCctvServersController#stop_server as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mOpenCctvServer Load (0.7ms)[0m  [1mSELECT  `open_cctv_servers`.* FROM `open_cctv_servers`  WHERE `open_cctv_servers`.`id` = 1 LIMIT 1[0m
+  [1m[35mUser Load (0.5ms)[0m  SELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.2ms)[0m  COMMIT
+Redirected to http://localhost:3000/open_cctv_servers/1
+Completed 302 Found in 12ms (ActiveRecord: 2.0ms)
+
+
+Started GET "/open_cctv_servers/1" for 172.18.0.1 at 2016-09-02 07:06:13 +0000
+Processing by OpenCctvServersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mOpenCctvServer Load (0.4ms)[0m  [1mSELECT  `open_cctv_servers`.* FROM `open_cctv_servers`  WHERE `open_cctv_servers`.`id` = 1 LIMIT 1[0m
+  [1m[35mUser Load (0.4ms)[0m  SELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1
+  [1m[36mOpenCctvServer Load (0.3ms)[0m  [1mSELECT  `open_cctv_servers`.* FROM `open_cctv_servers`   ORDER BY `open_cctv_servers`.`id` DESC LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mCOMMIT[0m
+  Rendered open_cctv_servers/_info.html.erb (0.5ms)
+  Rendered open_cctv_servers/show.html.erb within layouts/application (1.2ms)
+  [1m[35m (0.8ms)[0m  SELECT COUNT(*) FROM `group_users` INNER JOIN `org_group_users` ON `org_group_users`.`group_user_id` = `group_users`.`id` INNER JOIN `org_users` ON `org_users`.`id` = `org_group_users`.`org_user_id` WHERE `group_users`.`org_id` IS NULL AND `group_users`.`role_id` = 2 AND `org_users`.`user_id` = 1
+Completed 200 OK in 139ms (Views: 130.9ms | ActiveRecord: 2.5ms)
+
+
+Started GET "/open_cctv_servers/1/start" for 172.18.0.1 at 2016-09-02 07:07:57 +0000
+Processing by OpenCctvServersController#start_server as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mOpenCctvServer Load (0.5ms)[0m  [1mSELECT  `open_cctv_servers`.* FROM `open_cctv_servers`  WHERE `open_cctv_servers`.`id` = 1 LIMIT 1[0m
+  [1m[35mUser Load (0.5ms)[0m  SELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.2ms)[0m  COMMIT
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.2ms)[0m  COMMIT
+Redirected to http://localhost:3000/open_cctv_servers/1
+Completed 302 Found in 120ms (ActiveRecord: 1.9ms)
+
+
+Started GET "/open_cctv_servers/1" for 172.18.0.1 at 2016-09-02 07:07:57 +0000
+Processing by OpenCctvServersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mOpenCctvServer Load (0.4ms)[0m  [1mSELECT  `open_cctv_servers`.* FROM `open_cctv_servers`  WHERE `open_cctv_servers`.`id` = 1 LIMIT 1[0m
+  [1m[35mUser Load (0.4ms)[0m  SELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1
+  [1m[36mOpenCctvServer Load (0.4ms)[0m  [1mSELECT  `open_cctv_servers`.* FROM `open_cctv_servers`   ORDER BY `open_cctv_servers`.`id` DESC LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mCOMMIT[0m
+  Rendered open_cctv_servers/_info.html.erb (0.6ms)
+  Rendered open_cctv_servers/show.html.erb within layouts/application (1.3ms)
+  [1m[35m (0.8ms)[0m  SELECT COUNT(*) FROM `group_users` INNER JOIN `org_group_users` ON `org_group_users`.`group_user_id` = `group_users`.`id` INNER JOIN `org_users` ON `org_users`.`id` = `org_group_users`.`org_user_id` WHERE `group_users`.`org_id` IS NULL AND `group_users`.`role_id` = 2 AND `org_users`.`user_id` = 1
+Completed 200 OK in 131ms (Views: 123.2ms | ActiveRecord: 2.6ms)
+
+
+Started GET "/open_cctv_servers/1/stop" for 172.18.0.1 at 2016-09-02 07:08:26 +0000
+Processing by OpenCctvServersController#stop_server as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mOpenCctvServer Load (0.5ms)[0m  [1mSELECT  `open_cctv_servers`.* FROM `open_cctv_servers`  WHERE `open_cctv_servers`.`id` = 1 LIMIT 1[0m
+  [1m[35mUser Load (0.5ms)[0m  SELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.2ms)[0m  COMMIT
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.2ms)[0m  COMMIT
+Redirected to http://localhost:3000/open_cctv_servers/1
+Completed 302 Found in 14ms (ActiveRecord: 1.9ms)
+
+
+Started GET "/open_cctv_servers/1" for 172.18.0.1 at 2016-09-02 07:08:26 +0000
+Processing by OpenCctvServersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mOpenCctvServer Load (0.5ms)[0m  [1mSELECT  `open_cctv_servers`.* FROM `open_cctv_servers`  WHERE `open_cctv_servers`.`id` = 1 LIMIT 1[0m
+  [1m[35mUser Load (0.5ms)[0m  SELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1
+  [1m[36mOpenCctvServer Load (0.5ms)[0m  [1mSELECT  `open_cctv_servers`.* FROM `open_cctv_servers`   ORDER BY `open_cctv_servers`.`id` DESC LIMIT 1[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+  Rendered open_cctv_servers/_info.html.erb (0.6ms)
+  Rendered open_cctv_servers/show.html.erb within layouts/application (1.3ms)
+  [1m[35m (0.9ms)[0m  SELECT COUNT(*) FROM `group_users` INNER JOIN `org_group_users` ON `org_group_users`.`group_user_id` = `group_users`.`id` INNER JOIN `org_users` ON `org_users`.`id` = `org_group_users`.`org_user_id` WHERE `group_users`.`org_id` IS NULL AND `group_users`.`role_id` = 2 AND `org_users`.`user_id` = 1
+Completed 200 OK in 140ms (Views: 129.8ms | ActiveRecord: 3.2ms)
+
+
+Started GET "/open_cctv_servers/1/start" for 172.18.0.1 at 2016-09-02 07:21:44 +0000
+Processing by OpenCctvServersController#start_server as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mOpenCctvServer Load (0.5ms)[0m  [1mSELECT  `open_cctv_servers`.* FROM `open_cctv_servers`  WHERE `open_cctv_servers`.`id` = 1 LIMIT 1[0m
+  [1m[35mUser Load (0.6ms)[0m  SELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  UPDATE `open_cctv_servers` SET `status` = 'Unknown', `updated_at` = '2016-09-02 07:21:54' WHERE `open_cctv_servers`.`id` = 1
+  [1m[36m (5.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.5ms)[0m  BEGIN
+  [1m[36m (0.5ms)[0m  [1mCOMMIT[0m
+Redirected to http://localhost:3000/open_cctv_servers/1
+Completed 302 Found in 10021ms (ActiveRecord: 8.0ms)
+
+
+Started GET "/open_cctv_servers/1" for 172.18.0.1 at 2016-09-02 07:21:55 +0000
+Processing by OpenCctvServersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mOpenCctvServer Load (0.9ms)[0m  SELECT  `open_cctv_servers`.* FROM `open_cctv_servers`  WHERE `open_cctv_servers`.`id` = 1 LIMIT 1
+  [1m[36mUser Load (0.6ms)[0m  [1mSELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35mOpenCctvServer Load (0.5ms)[0m  SELECT  `open_cctv_servers`.* FROM `open_cctv_servers`   ORDER BY `open_cctv_servers`.`id` DESC LIMIT 1
+  [1m[36m (0.5ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.5ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.6ms)[0m  COMMIT
+  Rendered open_cctv_servers/_info.html.erb (0.8ms)
+  Rendered open_cctv_servers/show.html.erb within layouts/application (1.7ms)
+  [1m[36m (0.8ms)[0m  [1mSELECT COUNT(*) FROM `group_users` INNER JOIN `org_group_users` ON `org_group_users`.`group_user_id` = `group_users`.`id` INNER JOIN `org_users` ON `org_users`.`id` = `org_group_users`.`org_user_id` WHERE `group_users`.`org_id` IS NULL AND `group_users`.`role_id` = 2 AND `org_users`.`user_id` = 1[0m
+Completed 200 OK in 10159ms (Views: 137.5ms | ActiveRecord: 4.7ms)
+
+
+Started GET "/open_cctv_servers/1/start" for 172.18.0.1 at 2016-09-02 07:22:31 +0000
+Processing by OpenCctvServersController#start_server as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mOpenCctvServer Load (0.5ms)[0m  SELECT  `open_cctv_servers`.* FROM `open_cctv_servers`  WHERE `open_cctv_servers`.`id` = 1 LIMIT 1
+  [1m[36mUser Load (0.4ms)[0m  [1mSELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.4ms)[0m  [1mUPDATE `open_cctv_servers` SET `status` = 'Stopped', `updated_at` = '2016-09-02 07:22:31' WHERE `open_cctv_servers`.`id` = 1[0m
+  [1m[35m (4.5ms)[0m  COMMIT
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.2ms)[0m  COMMIT
+Redirected to http://localhost:3000/open_cctv_servers/1
+Completed 302 Found in 124ms (ActiveRecord: 6.6ms)
+
+
+Started GET "/open_cctv_servers/1" for 172.18.0.1 at 2016-09-02 07:22:31 +0000
+Processing by OpenCctvServersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mOpenCctvServer Load (0.6ms)[0m  [1mSELECT  `open_cctv_servers`.* FROM `open_cctv_servers`  WHERE `open_cctv_servers`.`id` = 1 LIMIT 1[0m
+  [1m[35mUser Load (0.7ms)[0m  SELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1
+  [1m[36mOpenCctvServer Load (0.8ms)[0m  [1mSELECT  `open_cctv_servers`.* FROM `open_cctv_servers`   ORDER BY `open_cctv_servers`.`id` DESC LIMIT 1[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  Rendered open_cctv_servers/_info.html.erb (0.8ms)
+  Rendered open_cctv_servers/show.html.erb within layouts/application (5.8ms)
+  [1m[35m (1.0ms)[0m  SELECT COUNT(*) FROM `group_users` INNER JOIN `org_group_users` ON `org_group_users`.`group_user_id` = `group_users`.`id` INNER JOIN `org_users` ON `org_users`.`id` = `org_group_users`.`org_user_id` WHERE `group_users`.`org_id` IS NULL AND `group_users`.`role_id` = 2 AND `org_users`.`user_id` = 1
+Completed 200 OK in 152ms (Views: 138.0ms | ActiveRecord: 4.0ms)
+
+
+Started GET "/open_cctv_servers/1/stop" for 172.18.0.1 at 2016-09-02 07:22:45 +0000
+Processing by OpenCctvServersController#stop_server as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mOpenCctvServer Load (0.6ms)[0m  [1mSELECT  `open_cctv_servers`.* FROM `open_cctv_servers`  WHERE `open_cctv_servers`.`id` = 1 LIMIT 1[0m
+  [1m[35mUser Load (0.6ms)[0m  SELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.2ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  COMMIT
+Redirected to http://localhost:3000/open_cctv_servers/1
+Completed 302 Found in 13ms (ActiveRecord: 2.1ms)
+
+
+Started GET "/open_cctv_servers/1" for 172.18.0.1 at 2016-09-02 07:22:45 +0000
+Processing by OpenCctvServersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mOpenCctvServer Load (0.5ms)[0m  [1mSELECT  `open_cctv_servers`.* FROM `open_cctv_servers`  WHERE `open_cctv_servers`.`id` = 1 LIMIT 1[0m
+  [1m[35mUser Load (0.6ms)[0m  SELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1
+  [1m[36mOpenCctvServer Load (0.4ms)[0m  [1mSELECT  `open_cctv_servers`.* FROM `open_cctv_servers`   ORDER BY `open_cctv_servers`.`id` DESC LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mCOMMIT[0m
+  Rendered open_cctv_servers/_info.html.erb (0.7ms)
+  Rendered open_cctv_servers/show.html.erb within layouts/application (1.7ms)
+  [1m[35m (1.0ms)[0m  SELECT COUNT(*) FROM `group_users` INNER JOIN `org_group_users` ON `org_group_users`.`group_user_id` = `group_users`.`id` INNER JOIN `org_users` ON `org_users`.`id` = `org_group_users`.`org_user_id` WHERE `group_users`.`org_id` IS NULL AND `group_users`.`role_id` = 2 AND `org_users`.`user_id` = 1
+Completed 200 OK in 156ms (Views: 146.4ms | ActiveRecord: 3.1ms)
+
+
+Started GET "/open_cctv_servers/1/start" for 172.18.0.1 at 2016-09-02 07:25:19 +0000
+Processing by OpenCctvServersController#start_server as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mOpenCctvServer Load (0.5ms)[0m  [1mSELECT  `open_cctv_servers`.* FROM `open_cctv_servers`  WHERE `open_cctv_servers`.`id` = 1 LIMIT 1[0m
+  [1m[35mUser Load (0.6ms)[0m  SELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1
+  [1m[36m (0.6ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.3ms)[0m  COMMIT
+  [1m[36m (0.8ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.3ms)[0m  COMMIT
+Redirected to http://localhost:3000/open_cctv_servers/1
+Completed 302 Found in 126ms (ActiveRecord: 3.2ms)
+
+
+Started GET "/open_cctv_servers/1" for 172.18.0.1 at 2016-09-02 07:25:19 +0000
+Processing by OpenCctvServersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mOpenCctvServer Load (0.7ms)[0m  [1mSELECT  `open_cctv_servers`.* FROM `open_cctv_servers`  WHERE `open_cctv_servers`.`id` = 1 LIMIT 1[0m
+  [1m[35mUser Load (0.5ms)[0m  SELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1
+  [1m[36mOpenCctvServer Load (0.4ms)[0m  [1mSELECT  `open_cctv_servers`.* FROM `open_cctv_servers`   ORDER BY `open_cctv_servers`.`id` DESC LIMIT 1[0m
+  [1m[35m (0.4ms)[0m  BEGIN
+  [1m[36m (0.4ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  Rendered open_cctv_servers/_info.html.erb (0.8ms)
+  Rendered open_cctv_servers/show.html.erb within layouts/application (1.9ms)
+  [1m[35m (0.9ms)[0m  SELECT COUNT(*) FROM `group_users` INNER JOIN `org_group_users` ON `org_group_users`.`group_user_id` = `group_users`.`id` INNER JOIN `org_users` ON `org_users`.`id` = `org_group_users`.`org_user_id` WHERE `group_users`.`org_id` IS NULL AND `group_users`.`role_id` = 2 AND `org_users`.`user_id` = 1
+Completed 200 OK in 154ms (Views: 140.9ms | ActiveRecord: 3.9ms)
+
+
+Started GET "/open_cctv_servers/1/stop" for 172.18.0.1 at 2016-09-02 07:25:23 +0000
+Processing by OpenCctvServersController#stop_server as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mOpenCctvServer Load (0.5ms)[0m  [1mSELECT  `open_cctv_servers`.* FROM `open_cctv_servers`  WHERE `open_cctv_servers`.`id` = 1 LIMIT 1[0m
+  [1m[35mUser Load (0.6ms)[0m  SELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1
+  [1m[36m (1.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.2ms)[0m  COMMIT
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.3ms)[0m  COMMIT
+Redirected to http://localhost:3000/open_cctv_servers/1
+Completed 302 Found in 17ms (ActiveRecord: 3.0ms)
+
+
+Started GET "/open_cctv_servers/1" for 172.18.0.1 at 2016-09-02 07:25:23 +0000
+Processing by OpenCctvServersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mOpenCctvServer Load (0.4ms)[0m  [1mSELECT  `open_cctv_servers`.* FROM `open_cctv_servers`  WHERE `open_cctv_servers`.`id` = 1 LIMIT 1[0m
+  [1m[35mUser Load (0.4ms)[0m  SELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1
+  [1m[36mOpenCctvServer Load (0.4ms)[0m  [1mSELECT  `open_cctv_servers`.* FROM `open_cctv_servers`   ORDER BY `open_cctv_servers`.`id` DESC LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mCOMMIT[0m
+  Rendered open_cctv_servers/_info.html.erb (0.7ms)
+  Rendered open_cctv_servers/show.html.erb within layouts/application (1.4ms)
+  [1m[35m (0.6ms)[0m  SELECT COUNT(*) FROM `group_users` INNER JOIN `org_group_users` ON `org_group_users`.`group_user_id` = `group_users`.`id` INNER JOIN `org_users` ON `org_users`.`id` = `org_group_users`.`org_user_id` WHERE `group_users`.`org_id` IS NULL AND `group_users`.`role_id` = 2 AND `org_users`.`user_id` = 1
+Completed 200 OK in 143ms (Views: 134.8ms | ActiveRecord: 2.5ms)
+
+
+Started GET "/open_cctv_servers/1/start" for 172.18.0.1 at 2016-09-02 07:42:17 +0000
+Processing by OpenCctvServersController#start_server as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mOpenCctvServer Load (0.4ms)[0m  [1mSELECT  `open_cctv_servers`.* FROM `open_cctv_servers`  WHERE `open_cctv_servers`.`id` = 1 LIMIT 1[0m
+  [1m[35mUser Load (0.4ms)[0m  SELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.2ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.3ms)[0m  COMMIT
+Redirected to http://localhost:3000/open_cctv_servers/1
+Completed 302 Found in 122ms (ActiveRecord: 1.7ms)
+
+
+Started GET "/open_cctv_servers/1" for 172.18.0.1 at 2016-09-02 07:42:17 +0000
+Processing by OpenCctvServersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mOpenCctvServer Load (0.7ms)[0m  [1mSELECT  `open_cctv_servers`.* FROM `open_cctv_servers`  WHERE `open_cctv_servers`.`id` = 1 LIMIT 1[0m
+  [1m[35mUser Load (0.6ms)[0m  SELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1
+  [1m[36mOpenCctvServer Load (0.6ms)[0m  [1mSELECT  `open_cctv_servers`.* FROM `open_cctv_servers`   ORDER BY `open_cctv_servers`.`id` DESC LIMIT 1[0m
+  [1m[35m (0.4ms)[0m  BEGIN
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+  Rendered open_cctv_servers/_info.html.erb (0.6ms)
+  Rendered open_cctv_servers/show.html.erb within layouts/application (1.3ms)
+  [1m[35m (0.8ms)[0m  SELECT COUNT(*) FROM `group_users` INNER JOIN `org_group_users` ON `org_group_users`.`group_user_id` = `group_users`.`id` INNER JOIN `org_users` ON `org_users`.`id` = `org_group_users`.`org_user_id` WHERE `group_users`.`org_id` IS NULL AND `group_users`.`role_id` = 2 AND `org_users`.`user_id` = 1
+Completed 200 OK in 140ms (Views: 126.7ms | ActiveRecord: 3.7ms)
+
+
+Started GET "/open_cctv_servers/1/stop" for 172.18.0.1 at 2016-09-02 07:42:26 +0000
+Processing by OpenCctvServersController#stop_server as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mOpenCctvServer Load (0.5ms)[0m  [1mSELECT  `open_cctv_servers`.* FROM `open_cctv_servers`  WHERE `open_cctv_servers`.`id` = 1 LIMIT 1[0m
+  [1m[35mUser Load (0.7ms)[0m  SELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.2ms)[0m  COMMIT
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.2ms)[0m  COMMIT
+Redirected to http://localhost:3000/open_cctv_servers/1
+Completed 302 Found in 11ms (ActiveRecord: 2.1ms)
+
+
+Started GET "/open_cctv_servers/1" for 172.18.0.1 at 2016-09-02 07:42:26 +0000
+Processing by OpenCctvServersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mOpenCctvServer Load (0.5ms)[0m  [1mSELECT  `open_cctv_servers`.* FROM `open_cctv_servers`  WHERE `open_cctv_servers`.`id` = 1 LIMIT 1[0m
+  [1m[35mUser Load (0.7ms)[0m  SELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1
+  [1m[36mOpenCctvServer Load (0.7ms)[0m  [1mSELECT  `open_cctv_servers`.* FROM `open_cctv_servers`   ORDER BY `open_cctv_servers`.`id` DESC LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mCOMMIT[0m
+  Rendered open_cctv_servers/_info.html.erb (0.5ms)
+  Rendered open_cctv_servers/show.html.erb within layouts/application (1.2ms)
+  [1m[35m (0.9ms)[0m  SELECT COUNT(*) FROM `group_users` INNER JOIN `org_group_users` ON `org_group_users`.`group_user_id` = `group_users`.`id` INNER JOIN `org_users` ON `org_users`.`id` = `org_group_users`.`org_user_id` WHERE `group_users`.`org_id` IS NULL AND `group_users`.`role_id` = 2 AND `org_users`.`user_id` = 1
+Completed 200 OK in 157ms (Views: 146.6ms | ActiveRecord: 3.5ms)
+
+
+Started GET "/open_cctv_servers/1/start" for 172.18.0.1 at 2016-09-02 07:44:45 +0000
+Processing by OpenCctvServersController#start_server as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mOpenCctvServer Load (0.6ms)[0m  [1mSELECT  `open_cctv_servers`.* FROM `open_cctv_servers`  WHERE `open_cctv_servers`.`id` = 1 LIMIT 1[0m
+  [1m[35mUser Load (0.5ms)[0m  SELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.2ms)[0m  COMMIT
+  [1m[36m (2.0ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.3ms)[0m  COMMIT
+Redirected to http://localhost:3000/open_cctv_servers/1
+Completed 302 Found in 125ms (ActiveRecord: 3.8ms)
+
+
+Started GET "/open_cctv_servers/1" for 172.18.0.1 at 2016-09-02 07:44:45 +0000
+Processing by OpenCctvServersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mOpenCctvServer Load (0.6ms)[0m  [1mSELECT  `open_cctv_servers`.* FROM `open_cctv_servers`  WHERE `open_cctv_servers`.`id` = 1 LIMIT 1[0m
+  [1m[35mUser Load (0.5ms)[0m  SELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1
+  [1m[36mOpenCctvServer Load (0.4ms)[0m  [1mSELECT  `open_cctv_servers`.* FROM `open_cctv_servers`   ORDER BY `open_cctv_servers`.`id` DESC LIMIT 1[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+  Rendered open_cctv_servers/_info.html.erb (1.2ms)
+  Rendered open_cctv_servers/show.html.erb within layouts/application (2.6ms)
+  [1m[35m (0.9ms)[0m  SELECT COUNT(*) FROM `group_users` INNER JOIN `org_group_users` ON `org_group_users`.`group_user_id` = `group_users`.`id` INNER JOIN `org_users` ON `org_users`.`id` = `org_group_users`.`org_user_id` WHERE `group_users`.`org_id` IS NULL AND `group_users`.`role_id` = 2 AND `org_users`.`user_id` = 1
+Completed 200 OK in 149ms (Views: 137.6ms | ActiveRecord: 3.6ms)
+
+
+Started GET "/open_cctv_servers/1/stop" for 172.18.0.1 at 2016-09-02 07:44:50 +0000
+Processing by OpenCctvServersController#stop_server as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mOpenCctvServer Load (0.5ms)[0m  [1mSELECT  `open_cctv_servers`.* FROM `open_cctv_servers`  WHERE `open_cctv_servers`.`id` = 1 LIMIT 1[0m
+  [1m[35mUser Load (0.6ms)[0m  SELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.2ms)[0m  COMMIT
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.2ms)[0m  COMMIT
+Redirected to http://localhost:3000/open_cctv_servers/1
+Completed 302 Found in 11ms (ActiveRecord: 1.8ms)
+
+
+Started GET "/open_cctv_servers/1" for 172.18.0.1 at 2016-09-02 07:44:50 +0000
+Processing by OpenCctvServersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mOpenCctvServer Load (0.5ms)[0m  [1mSELECT  `open_cctv_servers`.* FROM `open_cctv_servers`  WHERE `open_cctv_servers`.`id` = 1 LIMIT 1[0m
+  [1m[35mUser Load (0.5ms)[0m  SELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1
+  [1m[36mOpenCctvServer Load (0.5ms)[0m  [1mSELECT  `open_cctv_servers`.* FROM `open_cctv_servers`   ORDER BY `open_cctv_servers`.`id` DESC LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+  Rendered open_cctv_servers/_info.html.erb (0.9ms)
+  Rendered open_cctv_servers/show.html.erb within layouts/application (1.9ms)
+  [1m[35m (0.6ms)[0m  SELECT COUNT(*) FROM `group_users` INNER JOIN `org_group_users` ON `org_group_users`.`group_user_id` = `group_users`.`id` INNER JOIN `org_users` ON `org_users`.`id` = `org_group_users`.`org_user_id` WHERE `group_users`.`org_id` IS NULL AND `group_users`.`role_id` = 2 AND `org_users`.`user_id` = 1
+Completed 200 OK in 162ms (Views: 153.3ms | ActiveRecord: 2.8ms)
+
+
+Started GET "/open_cctv_servers/1/start" for 172.18.0.1 at 2016-09-02 07:57:36 +0000
+Processing by OpenCctvServersController#start_server as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mOpenCctvServer Load (0.5ms)[0m  [1mSELECT  `open_cctv_servers`.* FROM `open_cctv_servers`  WHERE `open_cctv_servers`.`id` = 1 LIMIT 1[0m
+  [1m[35mUser Load (0.5ms)[0m  SELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.2ms)[0m  COMMIT
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.2ms)[0m  COMMIT
+Redirected to http://localhost:3000/open_cctv_servers/1
+Completed 302 Found in 127ms (ActiveRecord: 1.9ms)
+
+
+Started GET "/open_cctv_servers/1" for 172.18.0.1 at 2016-09-02 07:57:36 +0000
+Processing by OpenCctvServersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mOpenCctvServer Load (0.4ms)[0m  [1mSELECT  `open_cctv_servers`.* FROM `open_cctv_servers`  WHERE `open_cctv_servers`.`id` = 1 LIMIT 1[0m
+  [1m[35mUser Load (0.6ms)[0m  SELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1
+  [1m[36mOpenCctvServer Load (0.4ms)[0m  [1mSELECT  `open_cctv_servers`.* FROM `open_cctv_servers`   ORDER BY `open_cctv_servers`.`id` DESC LIMIT 1[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.7ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mCOMMIT[0m
+  Rendered open_cctv_servers/_info.html.erb (0.6ms)
+  Rendered open_cctv_servers/show.html.erb within layouts/application (1.8ms)
+  [1m[35m (0.9ms)[0m  SELECT COUNT(*) FROM `group_users` INNER JOIN `org_group_users` ON `org_group_users`.`group_user_id` = `group_users`.`id` INNER JOIN `org_users` ON `org_users`.`id` = `org_group_users`.`org_user_id` WHERE `group_users`.`org_id` IS NULL AND `group_users`.`role_id` = 2 AND `org_users`.`user_id` = 1
+Completed 200 OK in 139ms (Views: 129.7ms | ActiveRecord: 3.6ms)
+
+
+Started GET "/open_cctv_servers/1/stop" for 172.18.0.1 at 2016-09-02 07:57:42 +0000
+Processing by OpenCctvServersController#stop_server as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mOpenCctvServer Load (0.5ms)[0m  [1mSELECT  `open_cctv_servers`.* FROM `open_cctv_servers`  WHERE `open_cctv_servers`.`id` = 1 LIMIT 1[0m
+  [1m[35mUser Load (0.5ms)[0m  SELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1
+  [1m[36m (1.3ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  COMMIT
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.2ms)[0m  COMMIT
+Redirected to http://localhost:3000/open_cctv_servers/1
+Completed 302 Found in 12ms (ActiveRecord: 2.7ms)
+
+
+Started GET "/open_cctv_servers/1" for 172.18.0.1 at 2016-09-02 07:57:42 +0000
+Processing by OpenCctvServersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mOpenCctvServer Load (0.5ms)[0m  [1mSELECT  `open_cctv_servers`.* FROM `open_cctv_servers`  WHERE `open_cctv_servers`.`id` = 1 LIMIT 1[0m
+  [1m[35mUser Load (0.5ms)[0m  SELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1
+  [1m[36mOpenCctvServer Load (0.3ms)[0m  [1mSELECT  `open_cctv_servers`.* FROM `open_cctv_servers`   ORDER BY `open_cctv_servers`.`id` DESC LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mCOMMIT[0m
+  Rendered open_cctv_servers/_info.html.erb (0.8ms)
+  Rendered open_cctv_servers/show.html.erb within layouts/application (1.9ms)
+  [1m[35m (1.1ms)[0m  SELECT COUNT(*) FROM `group_users` INNER JOIN `org_group_users` ON `org_group_users`.`group_user_id` = `group_users`.`id` INNER JOIN `org_users` ON `org_users`.`id` = `org_group_users`.`org_user_id` WHERE `group_users`.`org_id` IS NULL AND `group_users`.`role_id` = 2 AND `org_users`.`user_id` = 1
+Completed 200 OK in 150ms (Views: 142.1ms | ActiveRecord: 2.9ms)
+
+
+Started GET "/open_cctv_servers/1/start" for 172.18.0.1 at 2016-09-02 07:58:19 +0000
+Processing by OpenCctvServersController#start_server as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mOpenCctvServer Load (0.6ms)[0m  [1mSELECT  `open_cctv_servers`.* FROM `open_cctv_servers`  WHERE `open_cctv_servers`.`id` = 1 LIMIT 1[0m
+  [1m[35mUser Load (0.6ms)[0m  SELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.2ms)[0m  COMMIT
+  [1m[36m (0.4ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.2ms)[0m  COMMIT
+Redirected to http://localhost:3000/open_cctv_servers/1
+Completed 302 Found in 19ms (ActiveRecord: 2.3ms)
+
+
+Started GET "/open_cctv_servers/1" for 172.18.0.1 at 2016-09-02 07:58:19 +0000
+Processing by OpenCctvServersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mOpenCctvServer Load (0.5ms)[0m  [1mSELECT  `open_cctv_servers`.* FROM `open_cctv_servers`  WHERE `open_cctv_servers`.`id` = 1 LIMIT 1[0m
+  [1m[35mUser Load (0.4ms)[0m  SELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1
+  [1m[36mOpenCctvServer Load (0.4ms)[0m  [1mSELECT  `open_cctv_servers`.* FROM `open_cctv_servers`   ORDER BY `open_cctv_servers`.`id` DESC LIMIT 1[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (0.2ms)[0m  [1mCOMMIT[0m
+  Rendered open_cctv_servers/_info.html.erb (1.3ms)
+  Rendered open_cctv_servers/show.html.erb within layouts/application (2.5ms)
+  [1m[35m (0.9ms)[0m  SELECT COUNT(*) FROM `group_users` INNER JOIN `org_group_users` ON `org_group_users`.`group_user_id` = `group_users`.`id` INNER JOIN `org_users` ON `org_users`.`id` = `org_group_users`.`org_user_id` WHERE `group_users`.`org_id` IS NULL AND `group_users`.`role_id` = 2 AND `org_users`.`user_id` = 1
+Completed 200 OK in 146ms (Views: 138.8ms | ActiveRecord: 3.0ms)
+
+
+Started GET "/open_cctv_servers/1/start" for 172.18.0.1 at 2016-09-02 08:00:10 +0000
+Processing by OpenCctvServersController#start_server as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mOpenCctvServer Load (0.6ms)[0m  [1mSELECT  `open_cctv_servers`.* FROM `open_cctv_servers`  WHERE `open_cctv_servers`.`id` = 1 LIMIT 1[0m
+  [1m[35mUser Load (0.5ms)[0m  SELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.7ms)[0m  UPDATE `open_cctv_servers` SET `status` = 'Unknown', `updated_at` = '2016-09-02 08:00:20' WHERE `open_cctv_servers`.`id` = 1
+  [1m[36m (3.8ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.4ms)[0m  BEGIN
+  [1m[36m (0.3ms)[0m  [1mCOMMIT[0m
+Redirected to http://localhost:3000/open_cctv_servers/1
+Completed 302 Found in 10022ms (ActiveRecord: 6.6ms)
+
+
+Started GET "/open_cctv_servers/1" for 172.18.0.1 at 2016-09-02 08:00:20 +0000
+Processing by OpenCctvServersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mOpenCctvServer Load (0.7ms)[0m  SELECT  `open_cctv_servers`.* FROM `open_cctv_servers`  WHERE `open_cctv_servers`.`id` = 1 LIMIT 1
+  [1m[36mUser Load (0.5ms)[0m  [1mSELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35mOpenCctvServer Load (0.6ms)[0m  SELECT  `open_cctv_servers`.* FROM `open_cctv_servers`   ORDER BY `open_cctv_servers`.`id` DESC LIMIT 1
+  [1m[36m (0.4ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.4ms)[0m  COMMIT
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.3ms)[0m  COMMIT
+  Rendered open_cctv_servers/_info.html.erb (1.4ms)
+  Rendered open_cctv_servers/show.html.erb within layouts/application (3.2ms)
+  [1m[36m (0.5ms)[0m  [1mSELECT COUNT(*) FROM `group_users` INNER JOIN `org_group_users` ON `org_group_users`.`group_user_id` = `group_users`.`id` INNER JOIN `org_users` ON `org_users`.`id` = `org_group_users`.`org_user_id` WHERE `group_users`.`org_id` IS NULL AND `group_users`.`role_id` = 2 AND `org_users`.`user_id` = 1[0m
+Completed 200 OK in 10172ms (Views: 152.1ms | ActiveRecord: 3.7ms)
+DEPRECATION WARNING: [Devise] config.email_regexp will have a new default on Devise 4.1
+To keep the current behavior please set in your config/initializers/devise.rb the following:
+
+  Devise.setup do |config|
+    config.email_regexp = /\A[^@\s]+@([^@\s]+\.)+[^@\W]+\z/
+  end
+
+If you want to use the new default:
+
+  Devise.setup do |config|
+    config.email_regexp = /\A[^@\s]+@[^@\s]+\z/
+  end
+. (called from <top (required)> at /myapp/config/initializers/devise.rb:3)
+DEPRECATION WARNING: [Devise] config.email_regexp will have a new default on Devise 4.1
+To keep the current behavior please set in your config/initializers/devise.rb the following:
+
+  Devise.setup do |config|
+    config.email_regexp = /\A[^@\s]+@([^@\s]+\.)+[^@\W]+\z/
+  end
+
+If you want to use the new default:
+
+  Devise.setup do |config|
+    config.email_regexp = /\A[^@\s]+@[^@\s]+\z/
+  end
+. (called from <top (required)> at /myapp/config/initializers/devise.rb:3)
+  [1m[36m (19.6ms)[0m  [1mCREATE TABLE `schema_migrations` (`version` varchar(255) NOT NULL) ENGINE=InnoDB[0m
+  [1m[35m (39.8ms)[0m  CREATE UNIQUE INDEX `unique_schema_migrations`  ON `schema_migrations` (`version`) 
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+Migrating to CreateVmsConnectors (20150522122038)
+  [1m[35m (27.6ms)[0m  CREATE TABLE `vms_connectors` (`id` int(11) auto_increment PRIMARY KEY, `name` varchar(255), `description` text, `filename` varchar(255), `verified` tinyint(1) DEFAULT 0 NOT NULL, `log` text, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36m (0.4ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (1.3ms)[0m  INSERT INTO `schema_migrations` (`version`) VALUES ('20150522122038')
+  [1m[36m (0.8ms)[0m  [1mCOMMIT[0m
+Migrating to CreateAnalytics (20150527120611)
+  [1m[35m (24.6ms)[0m  CREATE TABLE `analytics` (`id` int(11) auto_increment PRIMARY KEY, `name` varchar(255), `description` text, `filename` varchar(255), `verified` tinyint(1) DEFAULT 0 NOT NULL, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36m (0.4ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO `schema_migrations` (`version`) VALUES ('20150527120611')
+  [1m[36m (0.7ms)[0m  [1mCOMMIT[0m
+Migrating to AddLogToAnalytics (20150527134927)
+  [1m[35m (80.1ms)[0m  ALTER TABLE `analytics` ADD `log` text
+  [1m[36m (1.4ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO `schema_migrations` (`version`) VALUES ('20150527134927')
+  [1m[36m (0.9ms)[0m  [1mCOMMIT[0m
+Migrating to CreateAnalyticInputStreams (20150527155212)
+  [1m[35m (33.0ms)[0m  CREATE TABLE `analytic_input_streams` (`id` int(11) auto_increment PRIMARY KEY, `name` varchar(255), `description` text, `analytic_id` int(11), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36m (38.1ms)[0m  [1mCREATE  INDEX `index_analytic_input_streams_on_analytic_id`  ON `analytic_input_streams` (`analytic_id`) [0m
+  [1m[35m (0.5ms)[0m  BEGIN
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20150527155212')[0m
+  [1m[35m (0.8ms)[0m  COMMIT
+Migrating to CreateAnalyticInstances (20150528093353)
+  [1m[36m (31.9ms)[0m  [1mCREATE TABLE `analytic_instances` (`id` int(11) auto_increment PRIMARY KEY, `name` varchar(255), `description` text, `analytic_id` int(11), `notification_id` int(11), `user_id` int(11), `group_user_id` int(11), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [1m[35m (34.6ms)[0m  CREATE  INDEX `index_analytic_instances_on_analytic_id`  ON `analytic_instances` (`analytic_id`) 
+  [1m[36m (25.5ms)[0m  [1mCREATE  INDEX `index_analytic_instances_on_notification_id`  ON `analytic_instances` (`notification_id`) [0m
+  [1m[35m (24.0ms)[0m  CREATE  INDEX `index_analytic_instances_on_user_id`  ON `analytic_instances` (`user_id`) 
+  [1m[36m (24.1ms)[0m  [1mCREATE  INDEX `index_analytic_instances_on_group_user_id`  ON `analytic_instances` (`group_user_id`) [0m
+  [1m[35m (0.5ms)[0m  BEGIN
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20150528093353')[0m
+  [1m[35m (0.6ms)[0m  COMMIT
+Migrating to CreateOpenCctvServers (20150529103436)
+  [1m[36m (21.8ms)[0m  [1mCREATE TABLE `open_cctv_servers` (`id` int(11) auto_increment PRIMARY KEY, `name` varchar(255), `host` varchar(255), `port` int(11), `status` varchar(255), `pid` int(11), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [1m[35m (0.4ms)[0m  BEGIN
+  [1m[36mSQL (0.8ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20150529103436')[0m
+  [1m[35m (2.1ms)[0m  COMMIT
+Migrating to CreateVmses (20150529125518)
+  [1m[36m (36.0ms)[0m  [1mCREATE TABLE `vmses` (`id` int(11) auto_increment PRIMARY KEY, `name` varchar(255), `description` text, `server_ip` varchar(255), `server_port` int(11), `username` varchar(255), `password` varchar(255), `verified` tinyint(1) DEFAULT 0 NOT NULL, `vms_connector_id` int(11), `user_id` int(11), `group_user_id` int(11), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [1m[35m (39.9ms)[0m  CREATE  INDEX `index_vmses_on_vms_connector_id`  ON `vmses` (`vms_connector_id`) 
+  [1m[36m (25.6ms)[0m  [1mCREATE  INDEX `index_vmses_on_user_id`  ON `vmses` (`user_id`) [0m
+  [1m[35m (25.8ms)[0m  CREATE  INDEX `index_vmses_on_group_user_id`  ON `vmses` (`group_user_id`) 
+  [1m[36m (0.4ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO `schema_migrations` (`version`) VALUES ('20150529125518')
+  [1m[36m (0.6ms)[0m  [1mCOMMIT[0m
+Migrating to CreateCameras (20150529125733)
+  [1m[35m (20.9ms)[0m  CREATE TABLE `cameras` (`id` int(11) auto_increment PRIMARY KEY, `name` varchar(255), `camera_id` varchar(255), `description` text, `verified` tinyint(1) DEFAULT 0 NOT NULL, `vms_id` int(11), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36m (35.0ms)[0m  [1mCREATE  INDEX `index_cameras_on_vms_id`  ON `cameras` (`vms_id`) [0m
+  [1m[35m (0.4ms)[0m  BEGIN
+  [1m[36mSQL (0.5ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20150529125733')[0m
+  [1m[35m (0.7ms)[0m  COMMIT
+Migrating to CreateStreams (20150529130119)
+  [1m[36m (30.0ms)[0m  [1mCREATE TABLE `streams` (`id` int(11) auto_increment PRIMARY KEY, `name` varchar(255), `description` text, `width` int(11), `height` int(11), `keep_aspect_ratio` tinyint(1), `allow_upsizing` tinyint(1), `compression_rate` int(11), `verified` tinyint(1) DEFAULT 0 NOT NULL, `camera_id` int(11), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [1m[35m (37.7ms)[0m  CREATE  INDEX `index_streams_on_camera_id`  ON `streams` (`camera_id`) 
+  [1m[36m (0.7ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO `schema_migrations` (`version`) VALUES ('20150529130119')
+  [1m[36m (0.7ms)[0m  [1mCOMMIT[0m
+Migrating to CreateAnalyticInstanceStreams (20150529141736)
+  [1m[35m (21.0ms)[0m  CREATE TABLE `analytic_instance_streams` (`id` int(11) auto_increment PRIMARY KEY, `analytic_instance_id` int(11), `analytic_input_stream_id` int(11), `stream_id` int(11), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36m (32.4ms)[0m  [1mCREATE  INDEX `index_analytic_instance_streams_on_analytic_instance_id`  ON `analytic_instance_streams` (`analytic_instance_id`) [0m
+  [1m[35m (28.2ms)[0m  CREATE  INDEX `index_analytic_instance_streams_on_analytic_input_stream_id`  ON `analytic_instance_streams` (`analytic_input_stream_id`) 
+  [1m[36m (22.2ms)[0m  [1mCREATE  INDEX `index_analytic_instance_streams_on_stream_id`  ON `analytic_instance_streams` (`stream_id`) [0m
+  [1m[35m (0.7ms)[0m  BEGIN
+  [1m[36mSQL (0.5ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20150529141736')[0m
+  [1m[35m (0.7ms)[0m  COMMIT
+Migrating to AddVmsTypeToVmses (20150602024820)
+  [1m[36m (72.5ms)[0m  [1mALTER TABLE `vmses` ADD `vms_type` varchar(255)[0m
+  [1m[35m (0.6ms)[0m  BEGIN
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20150602024820')[0m
+  [1m[35m (0.9ms)[0m  COMMIT
+Migrating to DeviseCreateUsers (20160317101914)
+  [1m[36m (49.2ms)[0m  [1mCREATE TABLE `users` (`id` int(11) auto_increment PRIMARY KEY, `email` varchar(255) DEFAULT '' NOT NULL, `encrypted_password` varchar(255) DEFAULT '' NOT NULL, `reset_password_token` varchar(255), `reset_password_sent_at` datetime, `remember_created_at` datetime, `sign_in_count` int(11) DEFAULT 0 NOT NULL, `current_sign_in_at` datetime, `last_sign_in_at` datetime, `current_sign_in_ip` varchar(255), `last_sign_in_ip` varchar(255), `vms_id` int(11), `notification_id` int(11), `analytic_instance_id` int(11), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [1m[35m (32.8ms)[0m  CREATE  INDEX `index_users_on_vms_id`  ON `users` (`vms_id`) 
+  [1m[36m (28.9ms)[0m  [1mCREATE  INDEX `index_users_on_notification_id`  ON `users` (`notification_id`) [0m
+  [1m[35m (27.2ms)[0m  CREATE  INDEX `index_users_on_analytic_instance_id`  ON `users` (`analytic_instance_id`) 
+  [1m[36m (27.2ms)[0m  [1mCREATE UNIQUE INDEX `index_users_on_email`  ON `users` (`email`) [0m
+  [1m[35m (43.9ms)[0m  CREATE UNIQUE INDEX `index_users_on_reset_password_token`  ON `users` (`reset_password_token`) 
+  [1m[36m (0.8ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (1.1ms)[0m  INSERT INTO `schema_migrations` (`version`) VALUES ('20160317101914')
+  [1m[36m (0.8ms)[0m  [1mCOMMIT[0m
+Migrating to CreateNotifications (20160318042026)
+  [1m[35m (40.5ms)[0m  CREATE TABLE `notifications` (`id` int(11) auto_increment PRIMARY KEY, `title` varchar(255), `email` text, `to_user` text, `user_id` int(11), `group_user_id` int(11), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36m (30.9ms)[0m  [1mCREATE  INDEX `index_notifications_on_user_id`  ON `notifications` (`user_id`) [0m
+  [1m[35m (23.3ms)[0m  CREATE  INDEX `index_notifications_on_group_user_id`  ON `notifications` (`group_user_id`) 
+  [1m[36m (0.4ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO `schema_migrations` (`version`) VALUES ('20160318042026')
+  [1m[36m (0.7ms)[0m  [1mCOMMIT[0m
+Migrating to CreateOrgUsers (20160318063311)
+  [1m[35m (21.2ms)[0m  CREATE TABLE `org_users` (`id` int(11) auto_increment PRIMARY KEY, `user_id` int(11), `org_id` int(11), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36m (36.5ms)[0m  [1mCREATE  INDEX `index_org_users_on_user_id`  ON `org_users` (`user_id`) [0m
+  [1m[35m (21.2ms)[0m  CREATE  INDEX `index_org_users_on_org_id`  ON `org_users` (`org_id`) 
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO `schema_migrations` (`version`) VALUES ('20160318063311')
+  [1m[36m (0.7ms)[0m  [1mCOMMIT[0m
+Migrating to CreateOrgGroupUsers (20160318063714)
+  [1m[35m (20.5ms)[0m  CREATE TABLE `org_group_users` (`id` int(11) auto_increment PRIMARY KEY, `org_user_id` int(11), `group_user_id` int(11), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36m (38.6ms)[0m  [1mCREATE  INDEX `index_org_group_users_on_org_user_id`  ON `org_group_users` (`org_user_id`) [0m
+  [1m[35m (21.6ms)[0m  CREATE  INDEX `index_org_group_users_on_group_user_id`  ON `org_group_users` (`group_user_id`) 
+  [1m[36m (0.5ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO `schema_migrations` (`version`) VALUES ('20160318063714')
+  [1m[36m (0.8ms)[0m  [1mCOMMIT[0m
+Migrating to CreateOrgs (20160321022634)
+  [1m[35m (21.6ms)[0m  CREATE TABLE `orgs` (`id` int(11) auto_increment PRIMARY KEY, `title` varchar(255), `detail` text, `password` varchar(255), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36m (0.4ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (1.9ms)[0m  INSERT INTO `schema_migrations` (`version`) VALUES ('20160321022634')
+  [1m[36m (1.9ms)[0m  [1mCOMMIT[0m
+Migrating to CreateGroupUsers (20160321022811)
+  [1m[35m (33.3ms)[0m  CREATE TABLE `group_users` (`id` int(11) auto_increment PRIMARY KEY, `title` varchar(255), `detail` text, `org_id` int(11), `role_id` int(11), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36m (45.2ms)[0m  [1mCREATE  INDEX `index_group_users_on_org_id`  ON `group_users` (`org_id`) [0m
+  [1m[35m (22.4ms)[0m  CREATE  INDEX `index_group_users_on_role_id`  ON `group_users` (`role_id`) 
+  [1m[36m (0.4ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO `schema_migrations` (`version`) VALUES ('20160321022811')
+  [1m[36m (0.6ms)[0m  [1mCOMMIT[0m
+Migrating to AddTokenToUsers (20160321025242)
+  [1m[35m (73.3ms)[0m  ALTER TABLE `users` ADD `token` varchar(255)
+  [1m[36m (0.4ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO `schema_migrations` (`version`) VALUES ('20160321025242')
+  [1m[36m (0.6ms)[0m  [1mCOMMIT[0m
+Migrating to CreateGoogleTokens (20160321031655)
+  [1m[35m (19.8ms)[0m  CREATE TABLE `google_tokens` (`id` int(11) auto_increment PRIMARY KEY, `reg_token` varchar(255), `analytic_id` int(11), `user_id` int(11), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36m (43.4ms)[0m  [1mCREATE  INDEX `index_google_tokens_on_user_id`  ON `google_tokens` (`user_id`) [0m
+  [1m[35m (0.4ms)[0m  BEGIN
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20160321031655')[0m
+  [1m[35m (0.6ms)[0m  COMMIT
+Migrating to AddPhonenumberToUsers (20160321085354)
+  [1m[36m (73.1ms)[0m  [1mALTER TABLE `users` ADD `phone_number` varchar(255)[0m
+  [1m[35m (0.4ms)[0m  BEGIN
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20160321085354')[0m
+  [1m[35m (0.6ms)[0m  COMMIT
+Migrating to AddIsAdminToUser (20160323070338)
+  [1m[36m (76.7ms)[0m  [1mALTER TABLE `users` ADD `isAdmin` tinyint(1)[0m
+  [1m[35m (0.4ms)[0m  BEGIN
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20160323070338')[0m
+  [1m[35m (0.9ms)[0m  COMMIT
+Migrating to CreateStatuses (20160325044233)
+  [1m[36m (20.2ms)[0m  [1mCREATE TABLE `statuses` (`id` int(11) auto_increment PRIMARY KEY, `status` varchar(255), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [1m[35m (0.5ms)[0m  BEGIN
+  [1m[36mSQL (2.4ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20160325044233')[0m
+  [1m[35m (1.5ms)[0m  COMMIT
+Migrating to AddCreatedByToOrg (20160325065841)
+  [1m[36m (69.2ms)[0m  [1mALTER TABLE `orgs` ADD `created_by` int(11)[0m
+  [1m[35m (0.5ms)[0m  BEGIN
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20160325065841')[0m
+  [1m[35m (0.8ms)[0m  COMMIT
+Migrating to CreateRoles (20160325100950)
+  [1m[36m (33.6ms)[0m  [1mCREATE TABLE `roles` (`id` int(11) auto_increment PRIMARY KEY, `title` varchar(255), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [1m[35m (0.4ms)[0m  BEGIN
+  [1m[36mSQL (0.7ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20160325100950')[0m
+  [1m[35m (1.1ms)[0m  COMMIT
+Migrating to CreateRequests (20160328161531)
+  [1m[36m (38.2ms)[0m  [1mCREATE TABLE `requests` (`id` int(11) auto_increment PRIMARY KEY, `status_id` int(11), `org_id` int(11), `user_id` int(11), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [1m[35m (37.1ms)[0m  CREATE  INDEX `index_requests_on_status_id`  ON `requests` (`status_id`) 
+  [1m[36m (22.1ms)[0m  [1mCREATE  INDEX `index_requests_on_org_id`  ON `requests` (`org_id`) [0m
+  [1m[35m (22.9ms)[0m  CREATE  INDEX `index_requests_on_user_id`  ON `requests` (`user_id`) 
+  [1m[36m (0.4ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO `schema_migrations` (`version`) VALUES ('20160328161531')
+  [1m[36m (0.7ms)[0m  [1mCOMMIT[0m
+Migrating to AddUsernameToUser (20160329031233)
+  [1m[35m (73.6ms)[0m  ALTER TABLE `users` ADD `username` varchar(255)
+  [1m[36m (76.2ms)[0m  [1mALTER TABLE `users` ADD `lastname` varchar(255)[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20160329031233')[0m
+  [1m[35m (0.6ms)[0m  COMMIT
+Migrating to CreateAuthTokens (20160409145503)
+  [1m[36m (18.5ms)[0m  [1mCREATE TABLE `auth_tokens` (`id` int(11) auto_increment PRIMARY KEY, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20160409145503')[0m
+  [1m[35m (0.7ms)[0m  COMMIT
+Migrating to CreateApiSessionTokens (20160411071206)
+  [1m[36m (31.2ms)[0m  [1mCREATE TABLE `api_session_tokens` (`id` int(11) auto_increment PRIMARY KEY, `token` varchar(255), `user_id` int(11), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [1m[35m (37.2ms)[0m  CREATE  INDEX `index_api_session_tokens_on_user_id`  ON `api_session_tokens` (`user_id`) 
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO `schema_migrations` (`version`) VALUES ('20160411071206')
+  [1m[36m (0.8ms)[0m  [1mCOMMIT[0m
+Migrating to CreateMobileNotifications (20160415163314)
+  [1m[35m (34.1ms)[0m  CREATE TABLE `mobile_notifications` (`id` int(11) auto_increment PRIMARY KEY, `analytic_id` int(11), `google_project_id` int(11), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36m (27.6ms)[0m  [1mCREATE  INDEX `index_mobile_notifications_on_analytic_id`  ON `mobile_notifications` (`analytic_id`) [0m
+  [1m[35m (20.9ms)[0m  CREATE  INDEX `index_mobile_notifications_on_google_project_id`  ON `mobile_notifications` (`google_project_id`) 
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO `schema_migrations` (`version`) VALUES ('20160415163314')
+  [1m[36m (0.8ms)[0m  [1mCOMMIT[0m
+Migrating to CreateGoogleProjects (20160415171456)
+  [1m[35m (20.9ms)[0m  CREATE TABLE `google_projects` (`id` int(11) auto_increment PRIMARY KEY, `application_name` varchar(255), `project_number` varchar(255), `api_key` varchar(255), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36m (6.4ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.6ms)[0m  INSERT INTO `schema_migrations` (`version`) VALUES ('20160415171456')
+  [1m[36m (1.3ms)[0m  [1mCOMMIT[0m
+Migrating to AddStatusToAnalyticInstance (20160822071607)
+  [1m[35m (79.3ms)[0m  ALTER TABLE `analytic_instances` ADD `status` tinyint(1) DEFAULT 0
+  [1m[36m (0.5ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO `schema_migrations` (`version`) VALUES ('20160822071607')
+  [1m[36m (0.7ms)[0m  [1mCOMMIT[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.3ms)[0m  SELECT `schema_migrations`.* FROM `schema_migrations`
+DEPRECATION WARNING: [Devise] config.email_regexp will have a new default on Devise 4.1
+To keep the current behavior please set in your config/initializers/devise.rb the following:
+
+  Devise.setup do |config|
+    config.email_regexp = /\A[^@\s]+@([^@\s]+\.)+[^@\W]+\z/
+  end
+
+If you want to use the new default:
+
+  Devise.setup do |config|
+    config.email_regexp = /\A[^@\s]+@[^@\s]+\z/
+  end
+. (called from <top (required)> at /myapp/config/initializers/devise.rb:3)
+  [1m[36mActiveRecord::SchemaMigration Load (1.4ms)[0m  [1mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mUser Exists (0.4ms)[0m  [1mSELECT  1 AS one FROM `users`  WHERE `users`.`email` = BINARY 'admin@example.com' LIMIT 1[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO `users` (`created_at`, `email`, `encrypted_password`, `isAdmin`, `lastname`, `updated_at`, `username`) VALUES ('2016-09-06 06:33:55', 'admin@example.com', '$2a$10$VJs7RdJlrHU2aJi6EPs/bOuUUC6jhELYepKl/LkGpc8HfBrtdVHlC', 1, 'openCCTV', '2016-09-06 06:33:55', 'admin')
+  [1m[36m (0.8ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mUser Exists (0.4ms)[0m  [1mSELECT  1 AS one FROM `users`  WHERE `users`.`email` = BINARY 'user@example.com' LIMIT 1[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO `users` (`created_at`, `email`, `encrypted_password`, `lastname`, `updated_at`, `username`) VALUES ('2016-09-06 06:33:55', 'user@example.com', '$2a$10$L2rBk/UQxHRum28Hk.9AC.HwJ4JFgYi8dOKXdcgi8Mc2MRcQtiR3a', 'CSIM', '2016-09-06 06:33:55', 'user')
+  [1m[36m (0.8ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36mUser Exists (0.4ms)[0m  [1mSELECT  1 AS one FROM `users`  WHERE `users`.`email` = BINARY 'user2@example.com' LIMIT 1[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO `users` (`created_at`, `email`, `encrypted_password`, `lastname`, `updated_at`, `username`) VALUES ('2016-09-06 06:33:55', 'user2@example.com', '$2a$10$ya/zuhcfqsUk4pAKQjJxN.pWAOrWyapoklw7F.uw2pdHlIy8YwCXe', 'CSIM', '2016-09-06 06:33:55', 'user2')
+  [1m[36m (0.8ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO `statuses` (`created_at`, `status`, `updated_at`) VALUES ('2016-09-06 06:33:55', 'Approved', '2016-09-06 06:33:55')[0m
+  [1m[35m (0.9ms)[0m  COMMIT
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO `statuses` (`created_at`, `status`, `updated_at`) VALUES ('2016-09-06 06:33:55', 'Rejected', '2016-09-06 06:33:55')
+  [1m[36m (0.7ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO `statuses` (`created_at`, `status`, `updated_at`) VALUES ('2016-09-06 06:33:55', 'Pending', '2016-09-06 06:33:55')[0m
+  [1m[35m (0.8ms)[0m  COMMIT
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO `roles` (`created_at`, `title`, `updated_at`) VALUES ('2016-09-06 06:33:55', 'OpenCCTVAdmin', '2016-09-06 06:33:55')
+  [1m[36m (0.8ms)[0m  [1mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO `roles` (`created_at`, `title`, `updated_at`) VALUES ('2016-09-06 06:33:55', 'OrganizationAdmin', '2016-09-06 06:33:55')[0m
+  [1m[35m (1.0ms)[0m  COMMIT
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO `roles` (`created_at`, `title`, `updated_at`) VALUES ('2016-09-06 06:33:55', 'ResourceAdmin', '2016-09-06 06:33:55')
+  [1m[36m (0.8ms)[0m  [1mCOMMIT[0m
+DEPRECATION WARNING: [Devise] config.email_regexp will have a new default on Devise 4.1
+To keep the current behavior please set in your config/initializers/devise.rb the following:
+
+  Devise.setup do |config|
+    config.email_regexp = /\A[^@\s]+@([^@\s]+\.)+[^@\W]+\z/
+  end
+
+If you want to use the new default:
+
+  Devise.setup do |config|
+    config.email_regexp = /\A[^@\s]+@[^@\s]+\z/
+  end
+. (called from <top (required)> at /myapp/config/initializers/devise.rb:3)
+
+
+Started GET "/" for 172.18.0.1 at 2016-09-06 06:34:15 +0000
+  [1m[36mActiveRecord::SchemaMigration Load (1.6ms)[0m  [1mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+Processing by AboutController#index as HTML
+  Rendered about/index.html.erb within layouts/application (10.0ms)
+Completed 200 OK in 1500ms (Views: 1446.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/bootstrap/button.js?body=1" for 172.18.0.1 at 2016-09-06 06:34:17 +0000
+
+
+Started GET "/assets/jquery.js?body=1" for 172.18.0.1 at 2016-09-06 06:34:16 +0000
+
+
+Started GET "/assets/bootstrap/alert.js?body=1" for 172.18.0.1 at 2016-09-06 06:34:16 +0000
+
+
+Started GET "/assets/bootstrap/affix.js?body=1" for 172.18.0.1 at 2016-09-06 06:34:17 +0000
+
+
+Started GET "/assets/bootstrap/carousel.js?body=1" for 172.18.0.1 at 2016-09-06 06:34:17 +0000
+
+
+Started GET "/assets/application.css?body=1" for 172.18.0.1 at 2016-09-06 06:34:17 +0000
+
+
+Started GET "/assets/bootstrap/collapse.js?body=1" for 172.18.0.1 at 2016-09-06 06:34:18 +0000
+
+
+Started GET "/assets/bootstrap/dropdown.js?body=1" for 172.18.0.1 at 2016-09-06 06:34:18 +0000
+
+
+Started GET "/assets/bootstrap/tab.js?body=1" for 172.18.0.1 at 2016-09-06 06:34:19 +0000
+
+
+Started GET "/assets/bootstrap/transition.js?body=1" for 172.18.0.1 at 2016-09-06 06:34:19 +0000
+
+
+Started GET "/assets/bootstrap/scrollspy.js?body=1" for 172.18.0.1 at 2016-09-06 06:34:19 +0000
+
+
+Started GET "/assets/bootstrap/modal.js?body=1" for 172.18.0.1 at 2016-09-06 06:34:20 +0000
+
+
+Started GET "/assets/bootstrap/tooltip.js?body=1" for 172.18.0.1 at 2016-09-06 06:34:20 +0000
+
+
+Started GET "/assets/bootstrap/popover.js?body=1" for 172.18.0.1 at 2016-09-06 06:34:21 +0000
+
+
+Started GET "/assets/bootstrap-sprockets.js?body=1" for 172.18.0.1 at 2016-09-06 06:34:21 +0000
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 172.18.0.1 at 2016-09-06 06:34:21 +0000
+
+
+Started GET "/assets/turbolinks.js?body=1" for 172.18.0.1 at 2016-09-06 06:34:22 +0000
+
+
+Started GET "/assets/about.js?body=1" for 172.18.0.1 at 2016-09-06 06:34:22 +0000
+
+
+Started GET "/assets/analytic_input_streams.js?body=1" for 172.18.0.1 at 2016-09-06 06:34:22 +0000
+
+
+Started GET "/assets/analytic_instance_streams.js?body=1" for 172.18.0.1 at 2016-09-06 06:34:23 +0000
+
+
+Started GET "/assets/analytic_instances.js?body=1" for 172.18.0.1 at 2016-09-06 06:34:23 +0000
+
+
+Started GET "/assets/analytics.js?body=1" for 172.18.0.1 at 2016-09-06 06:34:23 +0000
+
+
+Started GET "/assets/cameras.js?body=1" for 172.18.0.1 at 2016-09-06 06:34:24 +0000
+
+
+Started GET "/assets/download.js?body=1" for 172.18.0.1 at 2016-09-06 06:34:24 +0000
+
+
+Started GET "/assets/open_cctv_servers.js?body=1" for 172.18.0.1 at 2016-09-06 06:34:24 +0000
+
+
+Started GET "/assets/streams.js?body=1" for 172.18.0.1 at 2016-09-06 06:34:25 +0000
+
+
+Started GET "/assets/test.js?body=1" for 172.18.0.1 at 2016-09-06 06:34:25 +0000
+
+
+Started GET "/assets/vms_connectors.js?body=1" for 172.18.0.1 at 2016-09-06 06:34:25 +0000
+
+
+Started GET "/assets/vmses.js?body=1" for 172.18.0.1 at 2016-09-06 06:34:26 +0000
+
+
+Started GET "/assets/application.js?body=1" for 172.18.0.1 at 2016-09-06 06:34:26 +0000
+
+
+Started GET "/users/sign_in" for 172.18.0.1 at 2016-09-06 06:34:31 +0000
+Processing by Devise::SessionsController#new as HTML
+DEPRECATION WARNING: [Devise] Changing the sanitized parameters through "Devise::ParameterSanitizer#for(sign_up) is deprecated and it will be removed from Devise 4.1.
+Please use the `permit` method:
+
+  devise_parameter_sanitizer.permit(:sign_up) do |user|
+    # Your block here.
+  end
+ (called from update_sanitized_params at /myapp/app/controllers/application_controller.rb:11)
+  Rendered devise/shared/_links.html.erb (1.7ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (164.5ms)
+Completed 200 OK in 1178ms (Views: 1145.7ms | ActiveRecord: 8.1ms)
+
+
+Started POST "/users/sign_in" for 172.18.0.1 at 2016-09-06 06:34:42 +0000
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"4Wxg1GXG25VGfTuLTgXsD4ixi8Bfo+KEVh3i0oRhizo=", "user"=>{"email"=>"admin@example.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+DEPRECATION WARNING: [Devise] Changing the sanitized parameters through "Devise::ParameterSanitizer#for(sign_up) is deprecated and it will be removed from Devise 4.1.
+Please use the `permit` method:
+
+  devise_parameter_sanitizer.permit(:sign_up) do |user|
+    # Your block here.
+  end
+ (called from update_sanitized_params at /myapp/app/controllers/application_controller.rb:11)
+  [1m[35mUser Load (0.5ms)[0m  SELECT  `users`.* FROM `users`  WHERE `users`.`email` = 'admin@example.com'  ORDER BY `users`.`id` ASC LIMIT 1
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.6ms)[0m  UPDATE `users` SET `current_sign_in_at` = '2016-09-06 06:34:42', `current_sign_in_ip` = '172.18.0.1', `last_sign_in_at` = '2016-09-06 06:34:42', `last_sign_in_ip` = '172.18.0.1', `sign_in_count` = 1, `updated_at` = '2016-09-06 06:34:42' WHERE `users`.`id` = 1
+  [1m[36m (1.9ms)[0m  [1mCOMMIT[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 213ms (ActiveRecord: 3.2ms)
+
+
+Started GET "/" for 172.18.0.1 at 2016-09-06 06:34:42 +0000
+Processing by AboutController#index as HTML
+  Rendered about/index.html.erb within layouts/application (0.1ms)
+  [1m[35mUser Load (0.6ms)[0m  SELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1
+  [1m[36m (2.2ms)[0m  [1mSELECT COUNT(*) FROM `group_users` INNER JOIN `org_group_users` ON `org_group_users`.`group_user_id` = `group_users`.`id` INNER JOIN `org_users` ON `org_users`.`id` = `org_group_users`.`org_user_id` WHERE `group_users`.`org_id` IS NULL AND `group_users`.`role_id` = 2 AND `org_users`.`user_id` = 1[0m
+Completed 200 OK in 1283ms (Views: 1265.6ms | ActiveRecord: 16.4ms)
+
+
+Started GET "/vms_connectors/new" for 172.18.0.1 at 2016-09-06 06:42:36 +0000
+Processing by VmsConnectorsController#new as HTML
+  [1m[35mUser Load (1.9ms)[0m  SELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1
+  Rendered vms_connectors/_form.html.erb (23.9ms)
+  Rendered vms_connectors/new.html.erb within layouts/application (39.7ms)
+  [1m[36m (1.0ms)[0m  [1mSELECT COUNT(*) FROM `group_users` INNER JOIN `org_group_users` ON `org_group_users`.`group_user_id` = `group_users`.`id` INNER JOIN `org_users` ON `org_users`.`id` = `org_group_users`.`org_user_id` WHERE `group_users`.`org_id` IS NULL AND `group_users`.`role_id` = 2 AND `org_users`.`user_id` = 1[0m
+Completed 200 OK in 961ms (Views: 883.2ms | ActiveRecord: 25.2ms)
+
+
+Started POST "/vms_connectors" for 172.18.0.1 at 2016-09-06 06:46:15 +0000
+Processing by VmsConnectorsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"4DFXH9d3zk9q8ciTgUHB1goFvUpEMn4pxWLwsDET/4A=", "vms_connector"=>{"name"=>"Lilin", "description"=>"Adapted from hikvisoin connector", "file"=>#<ActionDispatch::Http::UploadedFile:0x00559930a88238 @tempfile=#<Tempfile:/tmp/RackMultipart20160906-19-15uwmil>, @original_filename="lilin-vms-connector.zip", @content_type="application/zip", @headers="Content-Disposition: form-data; name=\"vms_connector[file]\"; filename=\"lilin-vms-connector.zip\"\r\nContent-Type: application/zip\r\n">}, "commit"=>"Upload and save VMS connector"}
+  [1m[35mUser Load (0.5ms)[0m  SELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1
+Unpermitted parameters: file
+Completed 500 Internal Server Error in 20ms
+
+Errno::ENOENT (No such file or directory - /myapp/app/assets/programs/PluginArchiveValidator/Release/PluginArchiveValidator):
+  app/models/vms_connector.rb:11:in `validate_plugin_archive'
+  app/controllers/vms_connectors_controller.rb:20:in `create'
+
+
+  Rendered /usr/local/bundle/gems/actionpack-4.1.5/lib/action_dispatch/middleware/templates/rescues/_source.erb (0.7ms)
+  Rendered /usr/local/bundle/gems/actionpack-4.1.5/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.2ms)
+  Rendered /usr/local/bundle/gems/actionpack-4.1.5/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.1ms)
+  Rendered /usr/local/bundle/gems/actionpack-4.1.5/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (33.3ms)
+DEPRECATION WARNING: [Devise] config.email_regexp will have a new default on Devise 4.1
+To keep the current behavior please set in your config/initializers/devise.rb the following:
+
+  Devise.setup do |config|
+    config.email_regexp = /\A[^@\s]+@([^@\s]+\.)+[^@\W]+\z/
+  end
+
+If you want to use the new default:
+
+  Devise.setup do |config|
+    config.email_regexp = /\A[^@\s]+@[^@\s]+\z/
+  end
+. (called from <top (required)> at /myapp/config/initializers/devise.rb:3)
+DEPRECATION WARNING: [Devise] config.email_regexp will have a new default on Devise 4.1
+To keep the current behavior please set in your config/initializers/devise.rb the following:
+
+  Devise.setup do |config|
+    config.email_regexp = /\A[^@\s]+@([^@\s]+\.)+[^@\W]+\z/
+  end
+
+If you want to use the new default:
+
+  Devise.setup do |config|
+    config.email_regexp = /\A[^@\s]+@[^@\s]+\z/
+  end
+. (called from <top (required)> at /myapp/config/initializers/devise.rb:3)
+
+
+Started GET "/vms_connectors/new" for 172.18.0.1 at 2016-09-06 07:32:13 +0000
+  [1m[36mActiveRecord::SchemaMigration Load (9.3ms)[0m  [1mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+Processing by VmsConnectorsController#new as HTML
+  [1m[35mUser Load (0.4ms)[0m  SELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1
+  Rendered vms_connectors/_form.html.erb (67.0ms)
+  Rendered vms_connectors/new.html.erb within layouts/application (92.4ms)
+  [1m[36m (5.0ms)[0m  [1mSELECT COUNT(*) FROM `group_users` INNER JOIN `org_group_users` ON `org_group_users`.`group_user_id` = `group_users`.`id` INNER JOIN `org_users` ON `org_users`.`id` = `org_group_users`.`org_user_id` WHERE `group_users`.`org_id` IS NULL AND `group_users`.`role_id` = 2 AND `org_users`.`user_id` = 1[0m
+Completed 200 OK in 1774ms (Views: 1621.5ms | ActiveRecord: 67.5ms)
+
+
+Started POST "/vms_connectors" for 172.18.0.1 at 2016-09-06 07:32:19 +0000
+Processing by VmsConnectorsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"4DFXH9d3zk9q8ciTgUHB1goFvUpEMn4pxWLwsDET/4A=", "vms_connector"=>{"name"=>"Lilin", "description"=>"Adapted from hikvisoin connector", "file"=>#<ActionDispatch::Http::UploadedFile:0x005558ac0c77b8 @tempfile=#<Tempfile:/tmp/RackMultipart20160906-8-tmtmw>, @original_filename="lilin-vms-connector.zip", @content_type="application/zip", @headers="Content-Disposition: form-data; name=\"vms_connector[file]\"; filename=\"lilin-vms-connector.zip\"\r\nContent-Type: application/zip\r\n">}, "commit"=>"Upload and save VMS connector"}
+  [1m[35mUser Load (0.7ms)[0m  SELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1
+Unpermitted parameters: file
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.6ms)[0m  INSERT INTO `vms_connectors` (`created_at`, `description`, `filename`, `name`, `updated_at`) VALUES ('2016-09-06 07:32:19', 'Adapted from hikvisoin connector', '3bf4b24c-2b1d-4d57-b5b7-e7b4fe27a5cb', 'Lilin', '2016-09-06 07:32:19')
+  [1m[36m (1.2ms)[0m  [1mCOMMIT[0m
+Redirected to http://localhost:3000/vms_connectors/1
+Completed 302 Found in 366ms (ActiveRecord: 2.7ms)
+
+
+Started GET "/vms_connectors/1" for 172.18.0.1 at 2016-09-06 07:32:19 +0000
+Processing by VmsConnectorsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mVmsConnector Load (0.4ms)[0m  SELECT  `vms_connectors`.* FROM `vms_connectors`  WHERE `vms_connectors`.`id` = 1 LIMIT 1
+  [1m[36mUser Load (0.4ms)[0m  [1mSELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1[0m
+  Rendered vms_connectors/_info.html.erb (0.7ms)
+  Rendered vms_connectors/show.html.erb within layouts/application (32.2ms)
+Completed 500 Internal Server Error in 88ms
+
+ActionView::Template::Error (undefined method `html_safe' for nil:NilClass):
+    20:   <% else %>
+    21:       <div class="alert alert-danger">
+    22:         <samp>
+    23:           <%= @vms_connector.log.html_safe %>
+    24:         </samp>
+    25:       </div>
+    26:   <% end %>
+  app/views/vms_connectors/show.html.erb:23:in `_app_views_vms_connectors_show_html_erb___3444726709752928620_46919665339540'
+  app/controllers/vms_connectors_controller.rb:38:in `show'
+
+
+  Rendered /usr/local/bundle/gems/actionpack-4.1.5/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.4ms)
+  Rendered /usr/local/bundle/gems/actionpack-4.1.5/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.0ms)
+  Rendered /usr/local/bundle/gems/actionpack-4.1.5/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (24.0ms)
+DEPRECATION WARNING: [Devise] config.email_regexp will have a new default on Devise 4.1
+To keep the current behavior please set in your config/initializers/devise.rb the following:
+
+  Devise.setup do |config|
+    config.email_regexp = /\A[^@\s]+@([^@\s]+\.)+[^@\W]+\z/
+  end
+
+If you want to use the new default:
+
+  Devise.setup do |config|
+    config.email_regexp = /\A[^@\s]+@[^@\s]+\z/
+  end
+. (called from <top (required)> at /myapp/config/initializers/devise.rb:3)
+
+
+Started GET "/vms_connectors/new" for 172.18.0.1 at 2016-09-06 07:39:26 +0000
+  [1m[36mActiveRecord::SchemaMigration Load (1.8ms)[0m  [1mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+Processing by VmsConnectorsController#new as HTML
+  [1m[35mUser Load (0.6ms)[0m  SELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1
+  Rendered vms_connectors/_form.html.erb (65.2ms)
+  Rendered vms_connectors/new.html.erb within layouts/application (94.4ms)
+  [1m[36m (1.5ms)[0m  [1mSELECT COUNT(*) FROM `group_users` INNER JOIN `org_group_users` ON `org_group_users`.`group_user_id` = `group_users`.`id` INNER JOIN `org_users` ON `org_users`.`id` = `org_group_users`.`org_user_id` WHERE `group_users`.`org_id` IS NULL AND `group_users`.`role_id` = 2 AND `org_users`.`user_id` = 1[0m
+Completed 200 OK in 1621ms (Views: 1470.6ms | ActiveRecord: 30.8ms)
+
+
+Started GET "/vms_connectors" for 172.18.0.1 at 2016-09-06 07:39:32 +0000
+Processing by VmsConnectorsController#index as HTML
+  [1m[35mUser Load (0.5ms)[0m  SELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1
+  [1m[36m (0.6ms)[0m  [1mSELECT COUNT(*) FROM `vms_connectors`[0m
+  [1m[35mVmsConnector Load (0.6ms)[0m  SELECT `vms_connectors`.* FROM `vms_connectors`
+  Rendered vms_connectors/index.html.erb within layouts/application (9.8ms)
+  [1m[36m (0.5ms)[0m  [1mSELECT COUNT(*) FROM `group_users` INNER JOIN `org_group_users` ON `org_group_users`.`group_user_id` = `group_users`.`id` INNER JOIN `org_users` ON `org_users`.`id` = `org_group_users`.`org_user_id` WHERE `group_users`.`org_id` IS NULL AND `group_users`.`role_id` = 2 AND `org_users`.`user_id` = 1[0m
+Completed 200 OK in 789ms (Views: 783.4ms | ActiveRecord: 2.3ms)
+
+
+Started GET "/vms_connectors/1" for 172.18.0.1 at 2016-09-06 07:39:40 +0000
+Processing by VmsConnectorsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mVmsConnector Load (0.5ms)[0m  SELECT  `vms_connectors`.* FROM `vms_connectors`  WHERE `vms_connectors`.`id` = 1 LIMIT 1
+  [1m[36mUser Load (0.5ms)[0m  [1mSELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1[0m
+  Rendered vms_connectors/_info.html.erb (0.7ms)
+  Rendered vms_connectors/show.html.erb within layouts/application (39.5ms)
+Completed 500 Internal Server Error in 89ms
+
+ActionView::Template::Error (undefined method `raw' for nil:NilClass):
+    20:   <% else %>
+    21:       <div class="alert alert-danger">
+    22:         <samp>
+    23:           <%= @vms_connector.log.raw() %>
+    24:         </samp>
+    25:       </div>
+    26:   <% end %>
+  app/views/vms_connectors/show.html.erb:23:in `_app_views_vms_connectors_show_html_erb__3446266107090018577_47447539751660'
+  app/controllers/vms_connectors_controller.rb:38:in `show'
+
+
+  Rendered /usr/local/bundle/gems/actionpack-4.1.5/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (3.0ms)
+  Rendered /usr/local/bundle/gems/actionpack-4.1.5/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.8ms)
+  Rendered /usr/local/bundle/gems/actionpack-4.1.5/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (18.8ms)
+DEPRECATION WARNING: [Devise] config.email_regexp will have a new default on Devise 4.1
+To keep the current behavior please set in your config/initializers/devise.rb the following:
+
+  Devise.setup do |config|
+    config.email_regexp = /\A[^@\s]+@([^@\s]+\.)+[^@\W]+\z/
+  end
+
+If you want to use the new default:
+
+  Devise.setup do |config|
+    config.email_regexp = /\A[^@\s]+@[^@\s]+\z/
+  end
+. (called from <top (required)> at /myapp/config/initializers/devise.rb:3)
+
+
+Started GET "/vms_connectors/1" for 172.18.0.1 at 2016-09-06 07:43:17 +0000
+  [1m[36mActiveRecord::SchemaMigration Load (1.4ms)[0m  [1mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+Processing by VmsConnectorsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[35mVmsConnector Load (0.5ms)[0m  SELECT  `vms_connectors`.* FROM `vms_connectors`  WHERE `vms_connectors`.`id` = 1 LIMIT 1
+  [1m[36mUser Load (0.5ms)[0m  [1mSELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1[0m
+  Rendered vms_connectors/_info.html.erb (0.8ms)
+  Rendered vms_connectors/show.html.erb within layouts/application (55.3ms)
+Completed 500 Internal Server Error in 286ms
+
+ActionView::Template::Error (undefined method `html_safe' for nil:NilClass):
+    20:   <% else %>
+    21:       <div class="alert alert-danger">
+    22:         <samp>
+    23:           <%= @vms_connector.log.html_safe %>
+    24:         </samp>
+    25:       </div>
+    26:   <% end %>
+  app/views/vms_connectors/show.html.erb:23:in `_app_views_vms_connectors_show_html_erb__582551231434310177_47328001604500'
+  app/controllers/vms_connectors_controller.rb:38:in `show'
+
+
+  Rendered /usr/local/bundle/gems/actionpack-4.1.5/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (3.0ms)
+  Rendered /usr/local/bundle/gems/actionpack-4.1.5/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.9ms)
+  Rendered /usr/local/bundle/gems/actionpack-4.1.5/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (17.3ms)
+
+
+Started GET "/vms_connectors/new" for 172.18.0.1 at 2016-09-06 07:43:32 +0000
+Processing by VmsConnectorsController#new as HTML
+  [1m[35mUser Load (0.7ms)[0m  SELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1
+  Rendered vms_connectors/_form.html.erb (61.7ms)
+  Rendered vms_connectors/new.html.erb within layouts/application (81.2ms)
+  [1m[36m (2.0ms)[0m  [1mSELECT COUNT(*) FROM `group_users` INNER JOIN `org_group_users` ON `org_group_users`.`group_user_id` = `group_users`.`id` INNER JOIN `org_users` ON `org_users`.`id` = `org_group_users`.`org_user_id` WHERE `group_users`.`org_id` IS NULL AND `group_users`.`role_id` = 2 AND `org_users`.`user_id` = 1[0m
+Completed 200 OK in 1674ms (Views: 1655.3ms | ActiveRecord: 14.7ms)
+
+
+Started GET "/vms_connectors/" for 172.18.0.1 at 2016-09-06 07:43:34 +0000
+Processing by VmsConnectorsController#index as HTML
+  [1m[35mUser Load (0.5ms)[0m  SELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1
+  [1m[36m (0.5ms)[0m  [1mSELECT COUNT(*) FROM `vms_connectors`[0m
+  [1m[35mVmsConnector Load (0.6ms)[0m  SELECT `vms_connectors`.* FROM `vms_connectors`
+  Rendered vms_connectors/index.html.erb within layouts/application (10.5ms)
+  [1m[36m (0.9ms)[0m  [1mSELECT COUNT(*) FROM `group_users` INNER JOIN `org_group_users` ON `org_group_users`.`group_user_id` = `group_users`.`id` INNER JOIN `org_users` ON `org_users`.`id` = `org_group_users`.`org_user_id` WHERE `group_users`.`org_id` IS NULL AND `group_users`.`role_id` = 2 AND `org_users`.`user_id` = 1[0m
+Completed 200 OK in 818ms (Views: 812.1ms | ActiveRecord: 2.5ms)
+
+
+Started DELETE "/vms_connectors/1" for 172.18.0.1 at 2016-09-06 07:43:39 +0000
+Processing by VmsConnectorsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"4DFXH9d3zk9q8ciTgUHB1goFvUpEMn4pxWLwsDET/4A=", "id"=>"1"}
+  [1m[35mVmsConnector Load (0.6ms)[0m  SELECT  `vms_connectors`.* FROM `vms_connectors`  WHERE `vms_connectors`.`id` = 1 LIMIT 1
+  [1m[36mUser Load (0.7ms)[0m  [1mSELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36mVms Load (1.2ms)[0m  [1mSELECT `vmses`.* FROM `vmses`  WHERE `vmses`.`vms_connector_id` = 1[0m
+  [1m[35mSQL (0.6ms)[0m  DELETE FROM `vms_connectors` WHERE `vms_connectors`.`id` = 1
+  [1m[36m (1.6ms)[0m  [1mCOMMIT[0m
+Redirected to http://localhost:3000/vms_connectors
+Completed 302 Found in 143ms (ActiveRecord: 7.4ms)
+
+
+Started GET "/vms_connectors" for 172.18.0.1 at 2016-09-06 07:43:39 +0000
+Processing by VmsConnectorsController#index as HTML
+  [1m[35mUser Load (0.5ms)[0m  SELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1
+  [1m[36m (0.9ms)[0m  [1mSELECT COUNT(*) FROM `vms_connectors`[0m
+  Rendered vms_connectors/index.html.erb within layouts/application (3.7ms)
+  [1m[35m (0.6ms)[0m  SELECT COUNT(*) FROM `group_users` INNER JOIN `org_group_users` ON `org_group_users`.`group_user_id` = `group_users`.`id` INNER JOIN `org_users` ON `org_users`.`id` = `org_group_users`.`org_user_id` WHERE `group_users`.`org_id` IS NULL AND `group_users`.`role_id` = 2 AND `org_users`.`user_id` = 1
+Completed 200 OK in 819ms (Views: 813.6ms | ActiveRecord: 2.0ms)
+
+
+Started GET "/vms_connectors/new" for 172.18.0.1 at 2016-09-06 07:44:53 +0000
+Processing by VmsConnectorsController#new as HTML
+  [1m[36mUser Load (0.6ms)[0m  [1mSELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1[0m
+  Rendered vms_connectors/_form.html.erb (1.8ms)
+  Rendered vms_connectors/new.html.erb within layouts/application (19.0ms)
+  [1m[35m (0.6ms)[0m  SELECT COUNT(*) FROM `group_users` INNER JOIN `org_group_users` ON `org_group_users`.`group_user_id` = `group_users`.`id` INNER JOIN `org_users` ON `org_users`.`id` = `org_group_users`.`org_user_id` WHERE `group_users`.`org_id` IS NULL AND `group_users`.`role_id` = 2 AND `org_users`.`user_id` = 1
+Completed 200 OK in 993ms (Views: 987.4ms | ActiveRecord: 1.2ms)
+
+
+Started POST "/vms_connectors" for 172.18.0.1 at 2016-09-06 07:45:16 +0000
+Processing by VmsConnectorsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"4DFXH9d3zk9q8ciTgUHB1goFvUpEMn4pxWLwsDET/4A=", "vms_connector"=>{"name"=>"Lilin", "description"=>"Adam from Hikvision", "file"=>#<ActionDispatch::Http::UploadedFile:0x005616d0e29ef0 @tempfile=#<Tempfile:/tmp/RackMultipart20160906-41-nevfmk>, @original_filename="lilin-vms-connector.zip", @content_type="application/zip", @headers="Content-Disposition: form-data; name=\"vms_connector[file]\"; filename=\"lilin-vms-connector.zip\"\r\nContent-Type: application/zip\r\n">}, "commit"=>"Upload and save VMS connector"}
+  [1m[36mUser Load (0.5ms)[0m  [1mSELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1[0m
+Unpermitted parameters: file
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36mSQL (0.5ms)[0m  [1mINSERT INTO `vms_connectors` (`created_at`, `description`, `filename`, `name`, `updated_at`) VALUES ('2016-09-06 07:45:16', 'Adam from Hikvision', '8f308ce4-c7d6-4e9d-b8ef-b1307e286387', 'Lilin', '2016-09-06 07:45:16')[0m
+  [1m[35m (1.2ms)[0m  COMMIT
+Redirected to http://localhost:3000/vms_connectors/2
+Completed 302 Found in 131ms (ActiveRecord: 2.5ms)
+
+
+Started GET "/vms_connectors/2" for 172.18.0.1 at 2016-09-06 07:45:16 +0000
+Processing by VmsConnectorsController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mVmsConnector Load (0.7ms)[0m  [1mSELECT  `vms_connectors`.* FROM `vms_connectors`  WHERE `vms_connectors`.`id` = 2 LIMIT 1[0m
+  [1m[35mUser Load (0.5ms)[0m  SELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1
+  Rendered vms_connectors/_info.html.erb (0.2ms)
+  Rendered vms_connectors/show.html.erb within layouts/application (33.3ms)
+Completed 500 Internal Server Error in 88ms
+
+ActionView::Template::Error (undefined method `html_safe' for nil:NilClass):
+    20:   <% else %>
+    21:       <div class="alert alert-danger">
+    22:         <samp>
+    23:           <%= @vms_connector.log.html_safe %>
+    24:         </samp>
+    25:       </div>
+    26:   <% end %>
+  app/views/vms_connectors/show.html.erb:23:in `_app_views_vms_connectors_show_html_erb__582551231434310177_47328001604500'
+  app/controllers/vms_connectors_controller.rb:38:in `show'
+
+
+  Rendered /usr/local/bundle/gems/actionpack-4.1.5/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.2ms)
+  Rendered /usr/local/bundle/gems/actionpack-4.1.5/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.9ms)
+  Rendered /usr/local/bundle/gems/actionpack-4.1.5/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (25.6ms)
+
+
+Started GET "/vms_connectors/2" for 172.18.0.1 at 2016-09-06 07:46:06 +0000
+Processing by VmsConnectorsController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mVmsConnector Load (0.6ms)[0m  [1mSELECT  `vms_connectors`.* FROM `vms_connectors`  WHERE `vms_connectors`.`id` = 2 LIMIT 1[0m
+  [1m[35mUser Load (1.0ms)[0m  SELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1
+  Rendered vms_connectors/_info.html.erb (0.2ms)
+  Rendered vms_connectors/show.html.erb within layouts/application (29.6ms)
+Completed 500 Internal Server Error in 72ms
+
+ActionView::Template::Error (undefined method `html_safe' for nil:NilClass):
+    14:     <% if(@vms_connector.verified?) %>
+    15:       <div class="alert alert-success">
+    16:         <samp>
+    17:           <%= @vms_connector.log.html_safe %>
+    18:         </samp>
+    19:       </div>
+    20:   <% else %>
+  app/views/vms_connectors/show.html.erb:17:in `_app_views_vms_connectors_show_html_erb__582551231434310177_47328001604500'
+  app/controllers/vms_connectors_controller.rb:38:in `show'
+
+
+  Rendered /usr/local/bundle/gems/actionpack-4.1.5/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.2ms)
+  Rendered /usr/local/bundle/gems/actionpack-4.1.5/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.9ms)
+  Rendered /usr/local/bundle/gems/actionpack-4.1.5/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (17.9ms)
+
+
+Started GET "/vms_connectors/2" for 172.18.0.1 at 2016-09-06 07:49:29 +0000
+Processing by VmsConnectorsController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mVmsConnector Load (0.6ms)[0m  [1mSELECT  `vms_connectors`.* FROM `vms_connectors`  WHERE `vms_connectors`.`id` = 2 LIMIT 1[0m
+  [1m[35mUser Load (0.6ms)[0m  SELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1
+  Rendered vms_connectors/_info.html.erb (0.3ms)
+  Rendered vms_connectors/show.html.erb within layouts/application (25.7ms)
+Completed 500 Internal Server Error in 73ms
+
+ActionView::Template::Error (undefined method `html_safe' for nil:NilClass):
+    14:     <% if(@vms_connector.verified?) %>
+    15:       <div class="alert alert-success">
+    16:         <samp>
+    17:           <%= @vms_connector.log.html_safe %>
+    18:         </samp>
+    19:       </div>
+    20:   <% else %>
+  app/views/vms_connectors/show.html.erb:17:in `_app_views_vms_connectors_show_html_erb__582551231434310177_47328001604500'
+  app/controllers/vms_connectors_controller.rb:38:in `show'
+
+
+  Rendered /usr/local/bundle/gems/actionpack-4.1.5/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.0ms)
+  Rendered /usr/local/bundle/gems/actionpack-4.1.5/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.9ms)
+  Rendered /usr/local/bundle/gems/actionpack-4.1.5/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (22.4ms)
+
+
+Started GET "/vms_connectors/" for 172.18.0.1 at 2016-09-06 07:49:37 +0000
+Processing by VmsConnectorsController#index as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1mSELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35m (0.4ms)[0m  SELECT COUNT(*) FROM `vms_connectors`
+  [1m[36mVmsConnector Load (0.6ms)[0m  [1mSELECT `vms_connectors`.* FROM `vms_connectors`[0m
+  Rendered vms_connectors/index.html.erb within layouts/application (5.5ms)
+  [1m[35m (0.7ms)[0m  SELECT COUNT(*) FROM `group_users` INNER JOIN `org_group_users` ON `org_group_users`.`group_user_id` = `group_users`.`id` INNER JOIN `org_users` ON `org_users`.`id` = `org_group_users`.`org_user_id` WHERE `group_users`.`org_id` IS NULL AND `group_users`.`role_id` = 2 AND `org_users`.`user_id` = 1
+Completed 200 OK in 793ms (Views: 787.4ms | ActiveRecord: 2.1ms)
+
+
+Started GET "/vms_connectors" for 172.18.0.1 at 2016-09-06 07:49:38 +0000
+Processing by VmsConnectorsController#index as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1mSELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35m (0.3ms)[0m  SELECT COUNT(*) FROM `vms_connectors`
+  [1m[36mVmsConnector Load (0.5ms)[0m  [1mSELECT `vms_connectors`.* FROM `vms_connectors`[0m
+  Rendered vms_connectors/index.html.erb within layouts/application (4.8ms)
+  [1m[35m (0.6ms)[0m  SELECT COUNT(*) FROM `group_users` INNER JOIN `org_group_users` ON `org_group_users`.`group_user_id` = `group_users`.`id` INNER JOIN `org_users` ON `org_users`.`id` = `org_group_users`.`org_user_id` WHERE `group_users`.`org_id` IS NULL AND `group_users`.`role_id` = 2 AND `org_users`.`user_id` = 1
+Completed 200 OK in 796ms (Views: 791.3ms | ActiveRecord: 1.9ms)
+
+
+Started GET "/vms_connectors/2" for 172.18.0.1 at 2016-09-06 07:49:45 +0000
+Processing by VmsConnectorsController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mVmsConnector Load (0.5ms)[0m  [1mSELECT  `vms_connectors`.* FROM `vms_connectors`  WHERE `vms_connectors`.`id` = 2 LIMIT 1[0m
+  [1m[35mUser Load (0.5ms)[0m  SELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1
+  Rendered vms_connectors/_info.html.erb (0.2ms)
+  Rendered vms_connectors/show.html.erb within layouts/application (26.6ms)
+Completed 500 Internal Server Error in 70ms
+
+ActionView::Template::Error (undefined method `html_safe' for nil:NilClass):
+    14:     <% if(@vms_connector.verified?) %>
+    15:       <div class="alert alert-success">
+    16:         <samp>
+    17:           <%= @vms_connector.log.html_safe %>
+    18:         </samp>
+    19:       </div>
+    20:   <% else %>
+  app/views/vms_connectors/show.html.erb:17:in `_app_views_vms_connectors_show_html_erb__582551231434310177_47328001604500'
+  app/controllers/vms_connectors_controller.rb:38:in `show'
+
+
+  Rendered /usr/local/bundle/gems/actionpack-4.1.5/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (0.9ms)
+  Rendered /usr/local/bundle/gems/actionpack-4.1.5/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.8ms)
+  Rendered /usr/local/bundle/gems/actionpack-4.1.5/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (15.6ms)
+DEPRECATION WARNING: [Devise] config.email_regexp will have a new default on Devise 4.1
+To keep the current behavior please set in your config/initializers/devise.rb the following:
+
+  Devise.setup do |config|
+    config.email_regexp = /\A[^@\s]+@([^@\s]+\.)+[^@\W]+\z/
+  end
+
+If you want to use the new default:
+
+  Devise.setup do |config|
+    config.email_regexp = /\A[^@\s]+@[^@\s]+\z/
+  end
+. (called from <top (required)> at /myapp/config/initializers/devise.rb:3)
+
+
+Started GET "/vms_connectors/new" for 172.18.0.1 at 2016-09-06 07:58:41 +0000
+  [1m[36mActiveRecord::SchemaMigration Load (1.7ms)[0m  [1mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+Processing by VmsConnectorsController#new as HTML
+  [1m[35mUser Load (0.5ms)[0m  SELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1
+  Rendered vms_connectors/_form.html.erb (61.8ms)
+  Rendered vms_connectors/new.html.erb within layouts/application (96.1ms)
+  [1m[36m (1.7ms)[0m  [1mSELECT COUNT(*) FROM `group_users` INNER JOIN `org_group_users` ON `org_group_users`.`group_user_id` = `group_users`.`id` INNER JOIN `org_users` ON `org_users`.`id` = `org_group_users`.`org_user_id` WHERE `group_users`.`org_id` IS NULL AND `group_users`.`role_id` = 2 AND `org_users`.`user_id` = 1[0m
+Completed 200 OK in 1831ms (Views: 1687.2ms | ActiveRecord: 37.1ms)
+
+
+Started POST "/vms_connectors" for 172.18.0.1 at 2016-09-06 07:58:54 +0000
+Processing by VmsConnectorsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"4DFXH9d3zk9q8ciTgUHB1goFvUpEMn4pxWLwsDET/4A=", "vms_connector"=>{"name"=>"Lilin2", "description"=>"", "file"=>#<ActionDispatch::Http::UploadedFile:0x0056093eb7d228 @tempfile=#<Tempfile:/tmp/RackMultipart20160906-61-1wkmsoj>, @original_filename="lilin-vms-connector.zip", @content_type="application/zip", @headers="Content-Disposition: form-data; name=\"vms_connector[file]\"; filename=\"lilin-vms-connector.zip\"\r\nContent-Type: application/zip\r\n">}, "commit"=>"Upload and save VMS connector"}
+  [1m[35mUser Load (0.7ms)[0m  SELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1
+Unpermitted parameters: file
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.8ms)[0m  INSERT INTO `vms_connectors` (`created_at`, `description`, `filename`, `name`, `updated_at`) VALUES ('2016-09-06 07:58:55', '', '05df26ca-c69e-4e2a-8a41-9d125e34475b', 'Lilin2', '2016-09-06 07:58:55')
+  [1m[36m (1.0ms)[0m  [1mCOMMIT[0m
+Redirected to http://localhost:3000/vms_connectors/3
+Completed 302 Found in 162ms (ActiveRecord: 2.9ms)
+
+
+Started GET "/vms_connectors/3" for 172.18.0.1 at 2016-09-06 07:58:55 +0000
+Processing by VmsConnectorsController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[35mVmsConnector Load (0.6ms)[0m  SELECT  `vms_connectors`.* FROM `vms_connectors`  WHERE `vms_connectors`.`id` = 3 LIMIT 1
+  [1m[36mUser Load (0.6ms)[0m  [1mSELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1[0m
+  Rendered vms_connectors/_info.html.erb (0.7ms)
+  Rendered vms_connectors/show.html.erb within layouts/application (30.6ms)
+Completed 500 Internal Server Error in 89ms
+
+ActionView::Template::Error (undefined method `html_safe' for nil:NilClass):
+    20:   <% else %>
+    21:       <div class="alert alert-danger">
+    22:         <samp>
+    23:           <%= @vms_connector.log.html_safe %>
+    24:         </samp>
+    25:       </div>
+    26:   <% end %>
+  app/views/vms_connectors/show.html.erb:23:in `_app_views_vms_connectors_show_html_erb___3053827795631604439_47298852834660'
+  app/controllers/vms_connectors_controller.rb:38:in `show'
+
+
+  Rendered /usr/local/bundle/gems/actionpack-4.1.5/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.6ms)
+  Rendered /usr/local/bundle/gems/actionpack-4.1.5/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.9ms)
+  Rendered /usr/local/bundle/gems/actionpack-4.1.5/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (21.1ms)
+DEPRECATION WARNING: [Devise] config.email_regexp will have a new default on Devise 4.1
+To keep the current behavior please set in your config/initializers/devise.rb the following:
+
+  Devise.setup do |config|
+    config.email_regexp = /\A[^@\s]+@([^@\s]+\.)+[^@\W]+\z/
+  end
+
+If you want to use the new default:
+
+  Devise.setup do |config|
+    config.email_regexp = /\A[^@\s]+@[^@\s]+\z/
+  end
+. (called from <top (required)> at /myapp/config/initializers/devise.rb:3)
+
+
+Started GET "/vms_connectors/new" for 172.18.0.1 at 2016-09-06 08:19:50 +0000
+  [1m[36mActiveRecord::SchemaMigration Load (1.4ms)[0m  [1mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+Processing by VmsConnectorsController#new as HTML
+  [1m[35mUser Load (0.5ms)[0m  SELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1
+  Rendered vms_connectors/_form.html.erb (77.0ms)
+  Rendered vms_connectors/new.html.erb within layouts/application (106.1ms)
+  [1m[36m (2.4ms)[0m  [1mSELECT COUNT(*) FROM `group_users` INNER JOIN `org_group_users` ON `org_group_users`.`group_user_id` = `group_users`.`id` INNER JOIN `org_users` ON `org_users`.`id` = `org_group_users`.`org_user_id` WHERE `group_users`.`org_id` IS NULL AND `group_users`.`role_id` = 2 AND `org_users`.`user_id` = 1[0m
+Completed 200 OK in 2426ms (Views: 2245.9ms | ActiveRecord: 35.9ms)
+
+
+Started POST "/vms_connectors" for 172.18.0.1 at 2016-09-06 08:21:29 +0000
+Processing by VmsConnectorsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"4DFXH9d3zk9q8ciTgUHB1goFvUpEMn4pxWLwsDET/4A=", "vms_connector"=>{"name"=>"MileStone", "description"=>"", "file"=>#<ActionDispatch::Http::UploadedFile:0x0056282c26a188 @tempfile=#<Tempfile:/tmp/RackMultipart20160906-112-1edai88>, @original_filename="milestone.zip", @content_type="application/zip", @headers="Content-Disposition: form-data; name=\"vms_connector[file]\"; filename=\"milestone.zip\"\r\nContent-Type: application/zip\r\n">}, "commit"=>"Upload and save VMS connector"}
+  [1m[35mUser Load (0.4ms)[0m  SELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1
+Unpermitted parameters: file
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO `vms_connectors` (`created_at`, `description`, `filename`, `log`, `name`, `updated_at`, `verified`) VALUES ('2016-09-06 08:21:30', '', 'b88b876b-772b-48b6-b3a8-a757af9dfcc5', '<strong>All the files</strong><p>zip<br>libMilestoneVmsConnectorPlugin.so<br></p>\n<strong>Shared Library found</strong><p>libMilestoneVmsConnectorPlugin.so</p>', 'MileStone', '2016-09-06 08:21:30', 1)
+  [1m[36m (1.3ms)[0m  [1mCOMMIT[0m
+Redirected to http://localhost:3000/vms_connectors/4
+Completed 302 Found in 109ms (ActiveRecord: 2.5ms)
+
+
+Started GET "/vms_connectors/4" for 172.18.0.1 at 2016-09-06 08:21:30 +0000
+Processing by VmsConnectorsController#show as HTML
+  Parameters: {"id"=>"4"}
+  [1m[35mVmsConnector Load (0.8ms)[0m  SELECT  `vms_connectors`.* FROM `vms_connectors`  WHERE `vms_connectors`.`id` = 4 LIMIT 1
+  [1m[36mUser Load (0.5ms)[0m  [1mSELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1[0m
+  Rendered vms_connectors/_info.html.erb (0.7ms)
+  Rendered vms_connectors/show.html.erb within layouts/application (15.3ms)
+  [1m[35m (0.6ms)[0m  SELECT COUNT(*) FROM `group_users` INNER JOIN `org_group_users` ON `org_group_users`.`group_user_id` = `group_users`.`id` INNER JOIN `org_users` ON `org_users`.`id` = `org_group_users`.`org_user_id` WHERE `group_users`.`org_id` IS NULL AND `group_users`.`role_id` = 2 AND `org_users`.`user_id` = 1
+Completed 200 OK in 712ms (Views: 704.0ms | ActiveRecord: 1.9ms)
+
+
+Started GET "/vms_connectors" for 172.18.0.1 at 2016-09-06 08:22:00 +0000
+Processing by VmsConnectorsController#index as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1mSELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1[0m
+  [1m[35m (0.4ms)[0m  SELECT COUNT(*) FROM `vms_connectors`
+  [1m[36mVmsConnector Load (0.4ms)[0m  [1mSELECT `vms_connectors`.* FROM `vms_connectors`[0m
+  Rendered vms_connectors/index.html.erb within layouts/application (6.7ms)
+  [1m[35m (0.8ms)[0m  SELECT COUNT(*) FROM `group_users` INNER JOIN `org_group_users` ON `org_group_users`.`group_user_id` = `group_users`.`id` INNER JOIN `org_users` ON `org_users`.`id` = `org_group_users`.`org_user_id` WHERE `group_users`.`org_id` IS NULL AND `group_users`.`role_id` = 2 AND `org_users`.`user_id` = 1
+Completed 200 OK in 881ms (Views: 875.3ms | ActiveRecord: 2.2ms)
+
+
+Started GET "/vms_connectors/4" for 172.18.0.1 at 2016-09-06 08:22:04 +0000
+Processing by VmsConnectorsController#show as HTML
+  Parameters: {"id"=>"4"}
+  [1m[36mVmsConnector Load (0.5ms)[0m  [1mSELECT  `vms_connectors`.* FROM `vms_connectors`  WHERE `vms_connectors`.`id` = 4 LIMIT 1[0m
+  [1m[35mUser Load (0.6ms)[0m  SELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1
+  Rendered vms_connectors/_info.html.erb (0.2ms)
+  Rendered vms_connectors/show.html.erb within layouts/application (13.0ms)
+  [1m[36m (1.4ms)[0m  [1mSELECT COUNT(*) FROM `group_users` INNER JOIN `org_group_users` ON `org_group_users`.`group_user_id` = `group_users`.`id` INNER JOIN `org_users` ON `org_users`.`id` = `org_group_users`.`org_user_id` WHERE `group_users`.`org_id` IS NULL AND `group_users`.`role_id` = 2 AND `org_users`.`user_id` = 1[0m
+Completed 200 OK in 905ms (Views: 896.9ms | ActiveRecord: 2.5ms)
+
+
+Started GET "/vms_connectors" for 172.18.0.1 at 2016-09-06 08:22:07 +0000
+Processing by VmsConnectorsController#index as HTML
+  [1m[35mUser Load (0.6ms)[0m  SELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1
+  [1m[36m (0.4ms)[0m  [1mSELECT COUNT(*) FROM `vms_connectors`[0m
+  [1m[35mVmsConnector Load (1.0ms)[0m  SELECT `vms_connectors`.* FROM `vms_connectors`
+  Rendered vms_connectors/index.html.erb within layouts/application (7.2ms)
+  [1m[36m (0.8ms)[0m  [1mSELECT COUNT(*) FROM `group_users` INNER JOIN `org_group_users` ON `org_group_users`.`group_user_id` = `group_users`.`id` INNER JOIN `org_users` ON `org_users`.`id` = `org_group_users`.`org_user_id` WHERE `group_users`.`org_id` IS NULL AND `group_users`.`role_id` = 2 AND `org_users`.`user_id` = 1[0m
+Completed 200 OK in 995ms (Views: 988.7ms | ActiveRecord: 2.7ms)
+
+
+Started GET "/vms_connectors/new" for 172.18.0.1 at 2016-09-06 08:22:09 +0000
+Processing by VmsConnectorsController#new as HTML
+  [1m[35mUser Load (0.5ms)[0m  SELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1
+  Rendered vms_connectors/_form.html.erb (2.4ms)
+  Rendered vms_connectors/new.html.erb within layouts/application (15.9ms)
+  [1m[36m (0.5ms)[0m  [1mSELECT COUNT(*) FROM `group_users` INNER JOIN `org_group_users` ON `org_group_users`.`group_user_id` = `group_users`.`id` INNER JOIN `org_users` ON `org_users`.`id` = `org_group_users`.`org_user_id` WHERE `group_users`.`org_id` IS NULL AND `group_users`.`role_id` = 2 AND `org_users`.`user_id` = 1[0m
+Completed 200 OK in 741ms (Views: 737.2ms | ActiveRecord: 1.0ms)
+
+
+Started POST "/vms_connectors" for 172.18.0.1 at 2016-09-06 08:22:24 +0000
+Processing by VmsConnectorsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"4DFXH9d3zk9q8ciTgUHB1goFvUpEMn4pxWLwsDET/4A=", "vms_connector"=>{"name"=>"MileStone2", "description"=>"", "file"=>#<ActionDispatch::Http::UploadedFile:0x0056282b8f6bb0 @tempfile=#<Tempfile:/tmp/RackMultipart20160906-112-u72bin>, @original_filename="libMilestoneVmsConnectorPlugin.so.zip", @content_type="application/zip", @headers="Content-Disposition: form-data; name=\"vms_connector[file]\"; filename=\"libMilestoneVmsConnectorPlugin.so.zip\"\r\nContent-Type: application/zip\r\n">}, "commit"=>"Upload and save VMS connector"}
+  [1m[35mUser Load (0.5ms)[0m  SELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1
+Unpermitted parameters: file
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.7ms)[0m  INSERT INTO `vms_connectors` (`created_at`, `description`, `filename`, `log`, `name`, `updated_at`, `verified`) VALUES ('2016-09-06 08:22:25', '', 'd7c6e75a-bb51-43ed-90f0-9d4769b0fdb5', '<strong>All the files</strong><p>zip<br>libMilestoneVmsConnectorPlugin.so<br></p>\n<strong>Shared Library found</strong><p>libMilestoneVmsConnectorPlugin.so</p>', 'MileStone2', '2016-09-06 08:22:25', 1)
+  [1m[36m (0.9ms)[0m  [1mCOMMIT[0m
+Redirected to http://localhost:3000/vms_connectors/5
+Completed 302 Found in 90ms (ActiveRecord: 2.4ms)
+
+
+Started GET "/vms_connectors/5" for 172.18.0.1 at 2016-09-06 08:22:25 +0000
+Processing by VmsConnectorsController#show as HTML
+  Parameters: {"id"=>"5"}
+  [1m[35mVmsConnector Load (0.5ms)[0m  SELECT  `vms_connectors`.* FROM `vms_connectors`  WHERE `vms_connectors`.`id` = 5 LIMIT 1
+  [1m[36mUser Load (0.5ms)[0m  [1mSELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1[0m
+  Rendered vms_connectors/_info.html.erb (0.2ms)
+  Rendered vms_connectors/show.html.erb within layouts/application (15.2ms)
+  [1m[35m (0.6ms)[0m  SELECT COUNT(*) FROM `group_users` INNER JOIN `org_group_users` ON `org_group_users`.`group_user_id` = `group_users`.`id` INNER JOIN `org_users` ON `org_users`.`id` = `org_group_users`.`org_user_id` WHERE `group_users`.`org_id` IS NULL AND `group_users`.`role_id` = 2 AND `org_users`.`user_id` = 1
+Completed 200 OK in 781ms (Views: 773.6ms | ActiveRecord: 1.6ms)
+DEPRECATION WARNING: [Devise] config.email_regexp will have a new default on Devise 4.1
+To keep the current behavior please set in your config/initializers/devise.rb the following:
+
+  Devise.setup do |config|
+    config.email_regexp = /\A[^@\s]+@([^@\s]+\.)+[^@\W]+\z/
+  end
+
+If you want to use the new default:
+
+  Devise.setup do |config|
+    config.email_regexp = /\A[^@\s]+@[^@\s]+\z/
+  end
+. (called from <top (required)> at /myapp/config/initializers/devise.rb:3)
+
+
+Started GET "/" for 172.18.0.1 at 2016-09-13 04:24:20 +0000
+  [1m[36mActiveRecord::SchemaMigration Load (13.2ms)[0m  [1mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+Processing by AboutController#index as HTML
+  Rendered about/index.html.erb within layouts/application (8.1ms)
+Completed 200 OK in 1475ms (Views: 1429.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 172.18.0.1 at 2016-09-13 04:24:23 +0000
+
+
+Started GET "/assets/application.css?body=1" for 172.18.0.1 at 2016-09-13 04:24:23 +0000
+
+
+Started GET "/assets/bootstrap/carousel.js?body=1" for 172.18.0.1 at 2016-09-13 04:24:23 +0000
+
+
+Started GET "/assets/bootstrap/affix.js?body=1" for 172.18.0.1 at 2016-09-13 04:24:24 +0000
+
+
+Started GET "/assets/bootstrap/alert.js?body=1" for 172.18.0.1 at 2016-09-13 04:24:24 +0000
+
+
+Started GET "/assets/bootstrap/button.js?body=1" for 172.18.0.1 at 2016-09-13 04:24:25 +0000
+
+
+Started GET "/assets/bootstrap/collapse.js?body=1" for 172.18.0.1 at 2016-09-13 04:24:25 +0000
+
+
+Started GET "/assets/bootstrap/dropdown.js?body=1" for 172.18.0.1 at 2016-09-13 04:24:25 +0000
+
+
+Started GET "/assets/bootstrap/tab.js?body=1" for 172.18.0.1 at 2016-09-13 04:24:26 +0000
+
+
+Started GET "/assets/bootstrap/transition.js?body=1" for 172.18.0.1 at 2016-09-13 04:24:26 +0000
+
+
+Started GET "/assets/bootstrap/scrollspy.js?body=1" for 172.18.0.1 at 2016-09-13 04:24:26 +0000
+
+
+Started GET "/assets/bootstrap/modal.js?body=1" for 172.18.0.1 at 2016-09-13 04:24:27 +0000
+
+
+Started GET "/assets/bootstrap/tooltip.js?body=1" for 172.18.0.1 at 2016-09-13 04:24:27 +0000
+
+
+Started GET "/assets/bootstrap/popover.js?body=1" for 172.18.0.1 at 2016-09-13 04:24:27 +0000
+
+
+Started GET "/assets/bootstrap-sprockets.js?body=1" for 172.18.0.1 at 2016-09-13 04:24:28 +0000
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 172.18.0.1 at 2016-09-13 04:24:28 +0000
+
+
+Started GET "/assets/turbolinks.js?body=1" for 172.18.0.1 at 2016-09-13 04:24:28 +0000
+
+
+Started GET "/assets/about.js?body=1" for 172.18.0.1 at 2016-09-13 04:24:29 +0000
+
+
+Started GET "/assets/analytic_input_streams.js?body=1" for 172.18.0.1 at 2016-09-13 04:24:29 +0000
+
+
+Started GET "/assets/analytic_instance_streams.js?body=1" for 172.18.0.1 at 2016-09-13 04:24:30 +0000
+
+
+Started GET "/assets/analytic_instances.js?body=1" for 172.18.0.1 at 2016-09-13 04:24:30 +0000
+
+
+Started GET "/assets/analytics.js?body=1" for 172.18.0.1 at 2016-09-13 04:24:30 +0000
+
+
+Started GET "/assets/cameras.js?body=1" for 172.18.0.1 at 2016-09-13 04:24:31 +0000
+
+
+Started GET "/assets/download.js?body=1" for 172.18.0.1 at 2016-09-13 04:24:31 +0000
+
+
+Started GET "/assets/open_cctv_servers.js?body=1" for 172.18.0.1 at 2016-09-13 04:24:32 +0000
+
+
+Started GET "/assets/streams.js?body=1" for 172.18.0.1 at 2016-09-13 04:24:33 +0000
+
+
+Started GET "/assets/test.js?body=1" for 172.18.0.1 at 2016-09-13 04:24:34 +0000
+
+
+Started GET "/assets/vms_connectors.js?body=1" for 172.18.0.1 at 2016-09-13 04:24:35 +0000
+
+
+Started GET "/assets/vmses.js?body=1" for 172.18.0.1 at 2016-09-13 04:24:36 +0000
+
+
+Started GET "/assets/application.js?body=1" for 172.18.0.1 at 2016-09-13 04:24:37 +0000

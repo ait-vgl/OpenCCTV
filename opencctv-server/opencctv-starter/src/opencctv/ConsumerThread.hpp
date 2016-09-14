@@ -12,10 +12,11 @@ namespace opencctv {
 class ConsumerThread {
 private:
 	ImageMulticaster* _pImageMulticaster;
-	ConcurrentQueue<Image>* _pQueue;
+	ConcurrentQueue<Image>* _pQueue; // should be deleted in Producer
 public:
 	ConsumerThread(unsigned int iStreamId, ImageMulticaster* pImageMulticaster);
 	void operator()();
+	~ConsumerThread();
 };
 
 } /* namespace opencctv */

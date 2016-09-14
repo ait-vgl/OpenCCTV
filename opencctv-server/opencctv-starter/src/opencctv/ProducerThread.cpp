@@ -27,7 +27,8 @@ void ProducerThread::operator ()()
 		opencctv::util::log::Loggers::getDefaultLogger()->info("Producer Thread started.");
 		try
 		{
-			_pVmsConn->produceImageObjects(_pQueue);
+				_pVmsConn->produceImageObjects(_pQueue);
+
 		}
 		catch(std::exception &e)
 		{
@@ -53,5 +54,30 @@ bool ProducerThread::isStillRunning()
 	}
 	return (bVmsConnectorIsActive && _bActive);
 }
+
+ProducerThread::~ProducerThread(){
+
+	// Delete ?
+	// _pVmsConn (Interface Vms Connectore)
+	// _pQueue => in pModel
+	// _pPluginLoader
+
+
+	std::cout << "2. Producer Thread : destructor called" << std::endl;
+
+	if(isStillRunning()){
+
+		if(_pVmsConn){
+
+			delete _pVmsConn;
+			_pVmsConn = NULL;
+
+			_bActive = false;
+
+			std::cout << "2.1 Start delete _pVmsConn" << std::endl;
+		}
+	}
+}
+
 
 } /* namespace opencctv */

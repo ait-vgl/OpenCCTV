@@ -30,7 +30,7 @@ private:
 	bool send(mq::Sender* pMqSender, Image* pImage);
 public:
 	ImageMulticaster(unsigned int iStreamId);
-	void addDestination(const dto::AnalyticInstanceStream& analyticInstance);
+	void addDestination(dto::AnalyticInstanceStream& analyticInstance);
 	size_t getNumberOfDestinations();
 	void start();
 	void stop();

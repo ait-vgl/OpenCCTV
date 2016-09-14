@@ -2,40 +2,40 @@
 # Automatically-generated file. Do not edit!
 ################################################################################
 
-O_SRCS := 
-CPP_SRCS := 
 C_UPPER_SRCS := 
-C_SRCS := 
-S_UPPER_SRCS := 
-OBJ_SRCS := 
-ASM_SRCS := 
 CXX_SRCS := 
 C++_SRCS := 
+OBJ_SRCS := 
 CC_SRCS := 
-OBJS := 
-C++_DEPS := 
-C_DEPS := 
+ASM_SRCS := 
+C_SRCS := 
+CPP_SRCS := 
+O_SRCS := 
+S_UPPER_SRCS := 
 CC_DEPS := 
-CPP_DEPS := 
+C++_DEPS := 
 EXECUTABLES := 
-CXX_DEPS := 
+OBJS := 
 C_UPPER_DEPS := 
+CXX_DEPS := 
+C_DEPS := 
+CPP_DEPS := 
 
 # Every subdirectory with source files must be described here
 SUBDIRS := \
-src/test/gateway \
-src/opencctv/util/xml \
-src/opencctv/util/serialization/gpb \
-src/opencctv/util/serialization \
-src/opencctv/util/log/colored \
-src/opencctv/util/log \
-src/opencctv/util/flow \
-src/opencctv/util \
-src/opencctv/mq \
-src/opencctv/dto \
-src/opencctv/db \
-src/opencctv \
-src \
-src/analytic/xml \
 src/analytic \
+src/analytic/xml \
+src \
+src/opencctv \
+src/opencctv/db \
+src/opencctv/dto \
+src/opencctv/mq \
+src/opencctv/util \
+src/opencctv/util/flow \
+src/opencctv/util/log \
+src/opencctv/util/log/colored \
+src/opencctv/util/serialization \
+src/opencctv/util/serialization/gpb \
+src/opencctv/util/xml \
+src/test/gateway \
 

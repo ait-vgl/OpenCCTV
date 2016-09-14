@@ -19,6 +19,7 @@ public:
 	ProducerThread(unsigned int iStreamId, opencctv::api::VmsConnector* pVmsConn);
 	void operator()();
 	bool isStillRunning();
+	~ProducerThread();
 };
 
 } /* namespace opencctv */
