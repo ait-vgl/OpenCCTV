@@ -4,5 +4,5 @@
 
 USER_OBJS :=
 
-LIBS :=
+LIBS := -lvlc -lopencv_core -lopencv_highgui -lboost_thread -lboost_system
 

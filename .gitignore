@@ -1,6 +1,4 @@
 .DS_Store
-Debug/src/
-Debug/src/
-Release/src/
+Debug/
 Release/src/
 .settings/
