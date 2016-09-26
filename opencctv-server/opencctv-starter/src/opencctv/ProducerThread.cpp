@@ -74,6 +74,9 @@ ProducerThread::~ProducerThread(){
 
 			_bActive = false;
 
+			//if(_pQueue)
+				//_pQueue->empty();
+
 			std::cout << "2.1 Start delete _pVmsConn" << std::endl;
 		}
 	}

@@ -10367,3 +10367,694 @@ main error: Failed to set on top
 main error: Failed to change source AR
 main error: ES_OUT_SET_(GROUP_)PCR  is called too late (pts_delay increased to 1000 ms)
 main error: ES_OUT_RESET_PCR called
+﻿-- logger module started --
+h264 error: this doesn't look like a H264 ES stream, continuing anyway
+main error: Invalid PCR value in ES_OUT_SET_(GROUP_)PCR !
+main error: Failed to change zoom
+main error: Failed to set on top
+main error: Failed to change source AR
+﻿-- logger module started --
+h264 error: this doesn't look like a H264 ES stream, continuing anyway
+main error: Invalid PCR value in ES_OUT_SET_(GROUP_)PCR !
+main error: Failed to change zoom
+main error: Failed to set on top
+main error: Failed to change source AR
+﻿-- logger module started --
+h264 error: this doesn't look like a H264 ES stream, continuing anyway
+main error: Invalid PCR value in ES_OUT_SET_(GROUP_)PCR !
+main error: Failed to change zoom
+main error: Failed to set on top
+main error: Failed to change source AR
+﻿-- logger module started --
+h264 error: this doesn't look like a H264 ES stream, continuing anyway
+main error: Invalid PCR value in ES_OUT_SET_(GROUP_)PCR !
+main error: Failed to change zoom
+main error: Failed to set on top
+main error: Failed to change source AR
+﻿-- logger module started --
+h264 error: this doesn't look like a H264 ES stream, continuing anyway
+main error: Invalid PCR value in ES_OUT_SET_(GROUP_)PCR !
+main error: Failed to change zoom
+main error: Failed to set on top
+main error: Failed to change source AR
+-- logger module stopped --
+﻿-- logger module started --
+h264 error: this doesn't look like a H264 ES stream, continuing anyway
+main error: Invalid PCR value in ES_OUT_SET_(GROUP_)PCR !
+main error: Failed to change zoom
+main error: Failed to set on top
+main error: Failed to change source AR
+-- logger module stopped --
+﻿-- logger module started --
+﻿-- logger module started --
+h264 error: this doesn't look like a H264 ES stream, continuing anyway
+main error: Invalid PCR value in ES_OUT_SET_(GROUP_)PCR !
+main error: Failed to change zoom
+main error: Failed to set on top
+main error: Failed to change source AR
+-- logger module stopped --
+﻿-- logger module started --
+﻿-- logger module started --
+h264 error: this doesn't look like a H264 ES stream, continuing anyway
+main error: Invalid PCR value in ES_OUT_SET_(GROUP_)PCR !
+main error: Failed to change zoom
+main error: Failed to set on top
+main error: Failed to change source AR
+-- logger module stopped --
+﻿-- logger module started --
+﻿-- logger module started --
+h264 error: this doesn't look like a H264 ES stream, continuing anyway
+main error: Invalid PCR value in ES_OUT_SET_(GROUP_)PCR !
+main error: Failed to change zoom
+main error: Failed to set on top
+main error: Failed to change source AR
+-- logger module stopped --
+﻿-- logger module started --
+﻿-- logger module started --
+h264 error: this doesn't look like a H264 ES stream, continuing anyway
+main error: Invalid PCR value in ES_OUT_SET_(GROUP_)PCR !
+main error: Failed to change zoom
+main error: Failed to set on top
+main error: Failed to change source AR
+main error: Failed to change zoom
+main error: Failed to change source AR
+-- logger module stopped --
+﻿-- logger module started --
+h264 error: this doesn't look like a H264 ES stream, continuing anyway
+main error: Invalid PCR value in ES_OUT_SET_(GROUP_)PCR !
+main error: Failed to change zoom
+main error: Failed to set on top
+main error: Failed to change source AR
+-- logger module stopped --
+﻿-- logger module started --
+h264 error: this doesn't look like a H264 ES stream, continuing anyway
+main error: Invalid PCR value in ES_OUT_SET_(GROUP_)PCR !
+main error: Failed to change zoom
+main error: Failed to set on top
+main error: Failed to change source AR
+-- logger module stopped --
+﻿-- logger module started --
+h264 error: this doesn't look like a H264 ES stream, continuing anyway
+main error: Invalid PCR value in ES_OUT_SET_(GROUP_)PCR !
+main error: Failed to change zoom
+main error: Failed to set on top
+main error: Failed to change source AR
+-- logger module stopped --
+﻿-- logger module started --
+h264 error: this doesn't look like a H264 ES stream, continuing anyway
+main error: Invalid PCR value in ES_OUT_SET_(GROUP_)PCR !
+main error: Failed to change zoom
+main error: Failed to set on top
+main error: Failed to change source AR
+-- logger module stopped --
+﻿-- logger module started --
+h264 error: this doesn't look like a H264 ES stream, continuing anyway
+main error: Invalid PCR value in ES_OUT_SET_(GROUP_)PCR !
+main error: Failed to change zoom
+main error: Failed to set on top
+main error: Failed to change source AR
+-- logger module stopped --
+﻿-- logger module started --
+h264 error: this doesn't look like a H264 ES stream, continuing anyway
+main error: Invalid PCR value in ES_OUT_SET_(GROUP_)PCR !
+main error: Failed to change zoom
+main error: Failed to set on top
+main error: Failed to change source AR
+-- logger module stopped --
+﻿-- logger module started --
+main error: connection failed: Connection refused
+access_http error: cannot connect to 192.41.170.252:8021
+main error: connection failed: Connection refused
+access_mms error: cannot connect to 192.41.170.252:8021
+main error: open of `http://admin:@192.41.170.252:8021/getstream0' failed
+main error: Your input can't be opened
+main error: VLC is unable to open the MRL 'http://admin:@192.41.170.252:8021/getstream0'. Check the log for details.
+﻿-- logger module started --
+h264 error: this doesn't look like a H264 ES stream, continuing anyway
+main error: Invalid PCR value in ES_OUT_SET_(GROUP_)PCR !
+main error: Failed to change zoom
+main error: Failed to set on top
+main error: Failed to change source AR
+-- logger module stopped --
+﻿-- logger module started --
+h264 error: this doesn't look like a H264 ES stream, continuing anyway
+main error: Invalid PCR value in ES_OUT_SET_(GROUP_)PCR !
+main error: Failed to change zoom
+main error: Failed to set on top
+main error: Failed to change source AR
+-- logger module stopped --
+﻿-- logger module started --
+h264 error: this doesn't look like a H264 ES stream, continuing anyway
+main error: Invalid PCR value in ES_OUT_SET_(GROUP_)PCR !
+main error: Failed to change zoom
+main error: Failed to set on top
+main error: Failed to change source AR
+-- logger module stopped --
+﻿-- logger module started --
+h264 error: this doesn't look like a H264 ES stream, continuing anyway
+main error: Invalid PCR value in ES_OUT_SET_(GROUP_)PCR !
+main error: Failed to change zoom
+main error: Failed to set on top
+main error: Failed to change source AR
+-- logger module stopped --
+﻿-- logger module started --
+﻿-- logger module started --
+h264 error: this doesn't look like a H264 ES stream, continuing anyway
+main error: Invalid PCR value in ES_OUT_SET_(GROUP_)PCR !
+main error: Failed to change zoom
+main error: Failed to set on top
+main error: Failed to change source AR
+h264 error: this doesn't look like a H264 ES stream, continuing anyway
+main error: Invalid PCR value in ES_OUT_SET_(GROUP_)PCR !
+main error: Failed to change zoom
+main error: Failed to set on top
+main error: Failed to change source AR
+-- logger module stopped --
+﻿-- logger module started --
+﻿-- logger module started --
+h264 error: this doesn't look like a H264 ES stream, continuing anyway
+main error: Invalid PCR value in ES_OUT_SET_(GROUP_)PCR !
+main error: Failed to change zoom
+main error: Failed to set on top
+main error: Failed to change source AR
+h264 error: this doesn't look like a H264 ES stream, continuing anyway
+main error: Invalid PCR value in ES_OUT_SET_(GROUP_)PCR !
+main error: Failed to change zoom
+main error: Failed to set on top
+main error: Failed to change source AR
+﻿-- logger module started --
+﻿-- logger module started --
+h264 error: this doesn't look like a H264 ES stream, continuing anyway
+main error: Invalid PCR value in ES_OUT_SET_(GROUP_)PCR !
+main error: Failed to change zoom
+main error: Failed to set on top
+main error: Failed to change source AR
+h264 error: this doesn't look like a H264 ES stream, continuing anyway
+main error: Invalid PCR value in ES_OUT_SET_(GROUP_)PCR !
+main error: Failed to change zoom
+main error: Failed to set on top
+main error: Failed to change source AR
+-- logger module stopped --
+﻿-- logger module started --
+﻿-- logger module started --
+h264 error: this doesn't look like a H264 ES stream, continuing anyway
+main error: Invalid PCR value in ES_OUT_SET_(GROUP_)PCR !
+main error: Failed to change zoom
+main error: Failed to set on top
+main error: Failed to change source AR
+h264 error: this doesn't look like a H264 ES stream, continuing anyway
+main error: Invalid PCR value in ES_OUT_SET_(GROUP_)PCR !
+main error: Failed to change zoom
+main error: Failed to set on top
+main error: Failed to change source AR
+main error: pictures leaked, trying to workaround
+avcodec error: more than 5 seconds of late video -> dropping frame (computer too slow ?)
+main error: pictures leaked, trying to workaround
+main error: pictures leaked, trying to workaround
+main error: pictures leaked, trying to workaround
+﻿-- logger module started --
+﻿-- logger module started --
+h264 error: this doesn't look like a H264 ES stream, continuing anyway
+main error: Invalid PCR value in ES_OUT_SET_(GROUP_)PCR !
+main error: Failed to change zoom
+main error: Failed to set on top
+main error: Failed to change source AR
+h264 error: this doesn't look like a H264 ES stream, continuing anyway
+main error: Invalid PCR value in ES_OUT_SET_(GROUP_)PCR !
+main error: Failed to change zoom
+main error: Failed to set on top
+main error: Failed to change source AR
+-- logger module stopped --
+main error: ES_OUT_SET_(GROUP_)PCR  is called too late (pts_delay increased to 1000 ms)
+main error: ES_OUT_RESET_PCR called
+﻿-- logger module started --
+﻿-- logger module started --
+h264 error: this doesn't look like a H264 ES stream, continuing anyway
+main error: Invalid PCR value in ES_OUT_SET_(GROUP_)PCR !
+main error: Failed to change zoom
+main error: Failed to set on top
+main error: Failed to change source AR
+h264 error: this doesn't look like a H264 ES stream, continuing anyway
+main error: Invalid PCR value in ES_OUT_SET_(GROUP_)PCR !
+main error: Failed to change zoom
+main error: Failed to set on top
+main error: Failed to change source AR
+-- logger module stopped --
+-- logger module stopped --
+﻿-- logger module started --
+﻿-- logger module started --
+h264 error: this doesn't look like a H264 ES stream, continuing anyway
+h264 error: this doesn't look like a H264 ES stream, continuing anyway
+main error: Invalid PCR value in ES_OUT_SET_(GROUP_)PCR !
+main error: Failed to change zoom
+main error: Failed to set on top
+main error: Failed to change source AR
+main error: Invalid PCR value in ES_OUT_SET_(GROUP_)PCR !
+main error: Failed to change zoom
+main error: Failed to set on top
+main error: Failed to change source AR
+-- logger module stopped --
+-- logger module stopped --
+﻿-- logger module started --
+﻿-- logger module started --
+h264 error: this doesn't look like a H264 ES stream, continuing anyway
+h264 error: this doesn't look like a H264 ES stream, continuing anyway
+main error: Invalid PCR value in ES_OUT_SET_(GROUP_)PCR !
+main error: Invalid PCR value in ES_OUT_SET_(GROUP_)PCR !
+main error: Failed to change zoom
+main error: Failed to set on top
+main error: Failed to change source AR
+main error: Failed to change zoom
+main error: Failed to set on top
+main error: Failed to change source AR
+-- logger module stopped --
+-- logger module stopped --
+﻿-- logger module started --
+﻿-- logger module started --
+h264 error: this doesn't look like a H264 ES stream, continuing anyway
+h264 error: this doesn't look like a H264 ES stream, continuing anyway
+main error: Invalid PCR value in ES_OUT_SET_(GROUP_)PCR !
+main error: Invalid PCR value in ES_OUT_SET_(GROUP_)PCR !
+main error: Failed to change zoom
+main error: Failed to set on top
+main error: Failed to change source AR
+main error: Failed to change zoom
+main error: Failed to set on top
+main error: Failed to change source AR
+﻿-- logger module started --
+﻿-- logger module started --
+h264 error: this doesn't look like a H264 ES stream, continuing anyway
+h264 error: this doesn't look like a H264 ES stream, continuing anyway
+main error: Invalid PCR value in ES_OUT_SET_(GROUP_)PCR !
+main error: Invalid PCR value in ES_OUT_SET_(GROUP_)PCR !
+main error: Failed to change zoom
+main error: Failed to set on top
+main error: Failed to change source AR
+main error: Failed to change zoom
+main error: Failed to set on top
+main error: Failed to change source AR
+main error: Failed to change zoom
+main error: Failed to change source AR
+-- logger module stopped --
+-- logger module stopped --
+﻿-- logger module started --
+﻿-- logger module started --
+h264 error: this doesn't look like a H264 ES stream, continuing anyway
+h264 error: this doesn't look like a H264 ES stream, continuing anyway
+main error: Invalid PCR value in ES_OUT_SET_(GROUP_)PCR !
+main error: Invalid PCR value in ES_OUT_SET_(GROUP_)PCR !
+main error: Failed to change zoom
+main error: Failed to set on top
+main error: Failed to change source AR
+main error: Failed to change zoom
+main error: Failed to set on top
+main error: Failed to change source AR
+﻿-- logger module started --
+﻿-- logger module started --
+h264 error: this doesn't look like a H264 ES stream, continuing anyway
+h264 error: this doesn't look like a H264 ES stream, continuing anyway
+main error: Invalid PCR value in ES_OUT_SET_(GROUP_)PCR !
+main error: Failed to change zoom
+main error: Failed to set on top
+main error: Failed to change source AR
+main error: Invalid PCR value in ES_OUT_SET_(GROUP_)PCR !
+main error: Failed to change zoom
+main error: Failed to set on top
+main error: Failed to change source AR
+-- logger module stopped --
+-- logger module stopped --
+﻿-- logger module started --
+﻿-- logger module started --
+h264 error: this doesn't look like a H264 ES stream, continuing anyway
+h264 error: this doesn't look like a H264 ES stream, continuing anyway
+main error: Invalid PCR value in ES_OUT_SET_(GROUP_)PCR !
+main error: Invalid PCR value in ES_OUT_SET_(GROUP_)PCR !
+main error: Failed to change zoom
+main error: Failed to set on top
+main error: Failed to change source AR
+main error: Failed to change zoom
+main error: Failed to set on top
+main error: Failed to change source AR
+-- logger module stopped --
+-- logger module stopped --
+﻿-- logger module started --
+﻿-- logger module started --
+h264 error: this doesn't look like a H264 ES stream, continuing anyway
+h264 error: this doesn't look like a H264 ES stream, continuing anyway
+main error: Invalid PCR value in ES_OUT_SET_(GROUP_)PCR !
+main error: Invalid PCR value in ES_OUT_SET_(GROUP_)PCR !
+main error: Failed to change zoom
+main error: Failed to set on top
+main error: Failed to change source AR
+main error: Failed to change zoom
+main error: Failed to set on top
+main error: Failed to change source AR
+-- logger module stopped --
+-- logger module stopped --
+﻿-- logger module started --
+﻿-- logger module started --
+h264 error: this doesn't look like a H264 ES stream, continuing anyway
+h264 error: this doesn't look like a H264 ES stream, continuing anyway
+main error: Invalid PCR value in ES_OUT_SET_(GROUP_)PCR !
+main error: Invalid PCR value in ES_OUT_SET_(GROUP_)PCR !
+main error: Failed to change zoom
+main error: Failed to set on top
+main error: Failed to change source AR
+main error: Failed to change zoom
+main error: Failed to set on top
+main error: Failed to change source AR
+-- logger module stopped --
+-- logger module stopped --
+﻿-- logger module started --
+﻿-- logger module started --
+access_http error: cannot connect to 192.41.170.252:8021
+access_http error: cannot connect to 192.41.170.252:8021
+access_mms error: cannot connect to 192.41.170.252:8021
+main error: open of `http://admin:@192.41.170.252:8021/getstream0' failed
+main error: Your input can't be opened
+main error: VLC is unable to open the MRL 'http://admin:@192.41.170.252:8021/getstream0'. Check the log for details.
+access_mms error: cannot connect to 192.41.170.252:8021
+main error: open of `http://admin:@192.41.170.252:8021/getstream1' failed
+main error: Your input can't be opened
+main error: VLC is unable to open the MRL 'http://admin:@192.41.170.252:8021/getstream1'. Check the log for details.
+-- logger module stopped --
+-- logger module stopped --
+﻿-- logger module started --
+﻿-- logger module started --
+access_http error: cannot connect to 192.41.170.252:8021
+access_http error: cannot connect to 192.41.170.252:8021
+access_mms error: cannot connect to 192.41.170.252:8021
+main error: open of `http://admin:@192.41.170.252:8021/getstream0' failed
+main error: Your input can't be opened
+main error: VLC is unable to open the MRL 'http://admin:@192.41.170.252:8021/getstream0'. Check the log for details.
+access_mms error: cannot connect to 192.41.170.252:8021
+main error: open of `http://admin:@192.41.170.252:8021/getstream1' failed
+main error: Your input can't be opened
+main error: VLC is unable to open the MRL 'http://admin:@192.41.170.252:8021/getstream1'. Check the log for details.
+﻿-- logger module started --
+main error: connection failed: Connection refused
+access_http error: cannot connect to 192.41.170.252:8021
+main error: connection failed: Connection refused
+access_mms error: cannot connect to 192.41.170.252:8021
+main error: open of `http://admin:@192.41.170.252:8021/getstream0' failed
+main error: Your input can't be opened
+main error: VLC is unable to open the MRL 'http://admin:@192.41.170.252:8021/getstream0'. Check the log for details.
+﻿-- logger module started --
+main error: connection failed: Connection refused
+access_http error: cannot connect to 192.41.170.252:8021
+main error: connection failed: Connection refused
+access_mms error: cannot connect to 192.41.170.252:8021
+main error: open of `http://admin:@192.41.170.252:8021/getstream1' failed
+main error: Your input can't be opened
+main error: VLC is unable to open the MRL 'http://admin:@192.41.170.252:8021/getstream1'. Check the log for details.
+﻿-- logger module started --
+﻿-- logger module started --
+h264 error: this doesn't look like a H264 ES stream, continuing anyway
+h264 error: this doesn't look like a H264 ES stream, continuing anyway
+main error: Invalid PCR value in ES_OUT_SET_(GROUP_)PCR !
+main error: Invalid PCR value in ES_OUT_SET_(GROUP_)PCR !
+main error: Failed to change zoom
+main error: Failed to set on top
+main error: Failed to change source AR
+main error: Failed to change zoom
+main error: Failed to set on top
+main error: Failed to change source AR
+-- logger module stopped --
+-- logger module stopped --
+﻿-- logger module started --
+﻿-- logger module started --
+h264 error: this doesn't look like a H264 ES stream, continuing anyway
+h264 error: this doesn't look like a H264 ES stream, continuing anyway
+main error: Invalid PCR value in ES_OUT_SET_(GROUP_)PCR !
+main error: Invalid PCR value in ES_OUT_SET_(GROUP_)PCR !
+main error: Failed to change zoom
+main error: Failed to set on top
+main error: Failed to change source AR
+main error: Failed to change zoom
+main error: Failed to set on top
+main error: Failed to change source AR
+-- logger module stopped --
+-- logger module stopped --
+﻿-- logger module started --
+﻿-- logger module started --
+h264 error: this doesn't look like a H264 ES stream, continuing anyway
+main error: Invalid PCR value in ES_OUT_SET_(GROUP_)PCR !
+main error: Failed to change zoom
+main error: Failed to set on top
+main error: Failed to change source AR
+h264 error: this doesn't look like a H264 ES stream, continuing anyway
+main error: Invalid PCR value in ES_OUT_SET_(GROUP_)PCR !
+main error: Failed to change zoom
+main error: Failed to set on top
+main error: Failed to change source AR
+-- logger module stopped --
+-- logger module stopped --
+﻿-- logger module started --
+﻿-- logger module started --
+h264 error: this doesn't look like a H264 ES stream, continuing anyway
+h264 error: this doesn't look like a H264 ES stream, continuing anyway
+main error: Invalid PCR value in ES_OUT_SET_(GROUP_)PCR !
+main error: Invalid PCR value in ES_OUT_SET_(GROUP_)PCR !
+main error: Failed to change zoom
+main error: Failed to set on top
+main error: Failed to change source AR
+main error: Failed to change zoom
+main error: Failed to set on top
+main error: Failed to change source AR
+-- logger module stopped --
+﻿-- logger module started --
+﻿-- logger module started --
+h264 error: this doesn't look like a H264 ES stream, continuing anyway
+h264 error: this doesn't look like a H264 ES stream, continuing anyway
+main error: Invalid PCR value in ES_OUT_SET_(GROUP_)PCR !
+main error: Invalid PCR value in ES_OUT_SET_(GROUP_)PCR !
+main error: Failed to change zoom
+main error: Failed to set on top
+main error: Failed to change source AR
+main error: Failed to change zoom
+main error: Failed to set on top
+main error: Failed to change source AR
+-- logger module stopped --
+-- logger module stopped --
+﻿-- logger module started --
+﻿-- logger module started --
+h264 error: this doesn't look like a H264 ES stream, continuing anyway
+h264 error: this doesn't look like a H264 ES stream, continuing anyway
+main error: Invalid PCR value in ES_OUT_SET_(GROUP_)PCR !
+main error: Invalid PCR value in ES_OUT_SET_(GROUP_)PCR !
+main error: Failed to change zoom
+main error: Failed to set on top
+main error: Failed to change source AR
+main error: Failed to change zoom
+main error: Failed to set on top
+main error: Failed to change source AR
+﻿-- logger module started --
+h264 error: this doesn't look like a H264 ES stream, continuing anyway
+main error: Invalid PCR value in ES_OUT_SET_(GROUP_)PCR !
+main error: Failed to change zoom
+main error: Failed to set on top
+main error: Failed to change source AR
+﻿-- logger module started --
+h264 error: this doesn't look like a H264 ES stream, continuing anyway
+main error: Invalid PCR value in ES_OUT_SET_(GROUP_)PCR !
+main error: Failed to change zoom
+main error: Failed to set on top
+main error: Failed to change source AR
+﻿-- logger module started --
+﻿-- logger module started --
+h264 error: this doesn't look like a H264 ES stream, continuing anyway
+main error: Invalid PCR value in ES_OUT_SET_(GROUP_)PCR !
+main error: Failed to change zoom
+main error: Failed to set on top
+main error: Failed to change source AR
+﻿-- logger module started --
+﻿-- logger module started --
+h264 error: this doesn't look like a H264 ES stream, continuing anyway
+main error: Invalid PCR value in ES_OUT_SET_(GROUP_)PCR !
+main error: Failed to change zoom
+main error: Failed to set on top
+main error: Failed to change source AR
+﻿-- logger module started --
+h264 error: this doesn't look like a H264 ES stream, continuing anyway
+﻿-- logger module started --
+﻿-- logger module started --
+﻿-- logger module started --
+﻿-- logger module started --
+﻿-- logger module started --
+﻿-- logger module started --
+h264 error: this doesn't look like a H264 ES stream, continuing anyway
+main error: Invalid PCR value in ES_OUT_SET_(GROUP_)PCR !
+main error: Failed to change zoom
+main error: Failed to set on top
+main error: Failed to change source AR
+main error: Failed to change zoom
+main error: Failed to change source AR
+-- logger module stopped --
+﻿-- logger module started --
+h264 error: this doesn't look like a H264 ES stream, continuing anyway
+main error: Invalid PCR value in ES_OUT_SET_(GROUP_)PCR !
+main error: Failed to change zoom
+main error: Failed to set on top
+main error: Failed to change source AR
+﻿-- logger module started --
+﻿-- logger module started --
+h264 error: this doesn't look like a H264 ES stream, continuing anyway
+main error: Invalid PCR value in ES_OUT_SET_(GROUP_)PCR !
+main error: Failed to change zoom
+main error: Failed to set on top
+main error: Failed to change source AR
+-- logger module stopped --
+﻿-- logger module started --
+h264 error: this doesn't look like a H264 ES stream, continuing anyway
+main error: Invalid PCR value in ES_OUT_SET_(GROUP_)PCR !
+main error: Failed to change zoom
+main error: Failed to set on top
+main error: Failed to change source AR
+﻿-- logger module started --
+h264 error: this doesn't look like a H264 ES stream, continuing anyway
+main error: Invalid PCR value in ES_OUT_SET_(GROUP_)PCR !
+main error: Failed to change zoom
+main error: Failed to set on top
+main error: Failed to change source AR
+-- logger module stopped --
+﻿-- logger module started --
+h264 error: this doesn't look like a H264 ES stream, continuing anyway
+main error: Invalid PCR value in ES_OUT_SET_(GROUP_)PCR !
+main error: Failed to change zoom
+main error: Failed to set on top
+main error: Failed to change source AR
+﻿-- logger module started --
+﻿-- logger module started --
+h264 error: this doesn't look like a H264 ES stream, continuing anyway
+main error: Invalid PCR value in ES_OUT_SET_(GROUP_)PCR !
+main error: Failed to change zoom
+main error: Failed to set on top
+main error: Failed to change source AR
+﻿-- logger module started --
+-- logger module stopped --
+﻿-- logger module started --
+﻿-- logger module started --
+h264 error: this doesn't look like a H264 ES stream, continuing anyway
+main error: Invalid PCR value in ES_OUT_SET_(GROUP_)PCR !
+main error: Failed to change zoom
+main error: Failed to set on top
+main error: Failed to change source AR
+-- logger module stopped --
+﻿-- logger module started --
+h264 error: this doesn't look like a H264 ES stream, continuing anyway
+main error: Invalid PCR value in ES_OUT_SET_(GROUP_)PCR !
+main error: Failed to change zoom
+main error: Failed to set on top
+main error: Failed to change source AR
+﻿-- logger module started --
+h264 error: this doesn't look like a H264 ES stream, continuing anyway
+main error: Invalid PCR value in ES_OUT_SET_(GROUP_)PCR !
+main error: Failed to change zoom
+main error: Failed to set on top
+main error: Failed to change source AR
+-- logger module stopped --
+﻿-- logger module started --
+h264 error: this doesn't look like a H264 ES stream, continuing anyway
+main error: Invalid PCR value in ES_OUT_SET_(GROUP_)PCR !
+main error: Failed to change zoom
+main error: Failed to set on top
+main error: Failed to change source AR
+﻿-- logger module started --
+h264 error: this doesn't look like a H264 ES stream, continuing anyway
+main error: Invalid PCR value in ES_OUT_SET_(GROUP_)PCR !
+main error: Failed to change zoom
+main error: Failed to set on top
+main error: Failed to change source AR
+﻿-- logger module started --
+h264 error: this doesn't look like a H264 ES stream, continuing anyway
+main error: Invalid PCR value in ES_OUT_SET_(GROUP_)PCR !
+main error: Failed to change zoom
+main error: Failed to set on top
+main error: Failed to change source AR
+﻿-- logger module started --
+h264 error: this doesn't look like a H264 ES stream, continuing anyway
+main error: Invalid PCR value in ES_OUT_SET_(GROUP_)PCR !
+main error: Failed to change zoom
+main error: Failed to set on top
+main error: Failed to change source AR
+-- logger module stopped --
+﻿-- logger module started --
+﻿-- logger module started --
+﻿-- logger module started --
+h264 error: this doesn't look like a H264 ES stream, continuing anyway
+main error: Invalid PCR value in ES_OUT_SET_(GROUP_)PCR !
+main error: Failed to change zoom
+main error: Failed to set on top
+main error: Failed to change source AR
+-- logger module stopped --
+﻿-- logger module started --
+h264 error: this doesn't look like a H264 ES stream, continuing anyway
+main error: Invalid PCR value in ES_OUT_SET_(GROUP_)PCR !
+main error: Failed to change zoom
+main error: Failed to set on top
+main error: Failed to change source AR
+﻿-- logger module started --
+h264 error: this doesn't look like a H264 ES stream, continuing anyway
+main error: Invalid PCR value in ES_OUT_SET_(GROUP_)PCR !
+main error: Failed to change zoom
+main error: Failed to set on top
+main error: Failed to change source AR
+-- logger module stopped --
+﻿-- logger module started --
+h264 error: this doesn't look like a H264 ES stream, continuing anyway
+main error: Invalid PCR value in ES_OUT_SET_(GROUP_)PCR !
+main error: Failed to change zoom
+main error: Failed to set on top
+main error: Failed to change source AR
+﻿-- logger module started --
+h264 error: this doesn't look like a H264 ES stream, continuing anyway
+main error: Invalid PCR value in ES_OUT_SET_(GROUP_)PCR !
+main error: Failed to change zoom
+main error: Failed to set on top
+main error: Failed to change source AR
+-- logger module stopped --
+﻿-- logger module started --
+h264 error: this doesn't look like a H264 ES stream, continuing anyway
+main error: Invalid PCR value in ES_OUT_SET_(GROUP_)PCR !
+main error: Failed to change zoom
+main error: Failed to set on top
+main error: Failed to change source AR
+﻿-- logger module started --
+h264 error: this doesn't look like a H264 ES stream, continuing anyway
+main error: Invalid PCR value in ES_OUT_SET_(GROUP_)PCR !
+main error: Failed to change zoom
+main error: Failed to set on top
+main error: Failed to change source AR
+-- logger module stopped --
+﻿-- logger module started --
+h264 error: this doesn't look like a H264 ES stream, continuing anyway
+main error: Invalid PCR value in ES_OUT_SET_(GROUP_)PCR !
+main error: Failed to change zoom
+main error: Failed to set on top
+main error: Failed to change source AR
+﻿-- logger module started --
+h264 error: this doesn't look like a H264 ES stream, continuing anyway
+main error: Invalid PCR value in ES_OUT_SET_(GROUP_)PCR !
+main error: Failed to change zoom
+main error: Failed to set on top
+main error: Failed to change source AR
+-- logger module stopped --
+﻿-- logger module started --
+h264 error: this doesn't look like a H264 ES stream, continuing anyway
+main error: Invalid PCR value in ES_OUT_SET_(GROUP_)PCR !
+main error: Failed to change zoom
+main error: Failed to set on top
+main error: Failed to change source AR
+﻿-- logger module started --
+h264 error: this doesn't look like a H264 ES stream, continuing anyway
+main error: Invalid PCR value in ES_OUT_SET_(GROUP_)PCR !
+main error: Failed to change zoom
+main error: Failed to set on top
+main error: Failed to change source AR
+-- logger module stopped --
+﻿-- logger module started --
+h264 error: this doesn't look like a H264 ES stream, continuing anyway
+main error: Invalid PCR value in ES_OUT_SET_(GROUP_)PCR !
+main error: Failed to change zoom
+main error: Failed to set on top
+main error: Failed to change source AR

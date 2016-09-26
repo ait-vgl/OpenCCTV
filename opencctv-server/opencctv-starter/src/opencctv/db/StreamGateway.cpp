@@ -30,6 +30,7 @@ StreamGateway::StreamGateway()
 	{
 		_pDbConnPtr = DbConnector::getConnection();
 		_pStatement = (*_pDbConnPtr).createStatement();
+		_pStatementPtr = NULL;
 	}catch(sql::SQLException &e)
 	{
 		std::string sErrorMsg = "Error while initializing the StreamGateway - .";

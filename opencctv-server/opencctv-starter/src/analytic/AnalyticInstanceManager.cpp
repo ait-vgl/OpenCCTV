@@ -102,12 +102,46 @@ bool AnalyticInstanceManager::killAllAnalyticInstances()
 	return bDone;
 }
 
+std::map<unsigned int, AnalyticData*>& AnalyticInstanceManager::getAnalyticInstances(){
+		return _mAnalyticInstances;
+}
+
+void AnalyticInstanceManager::setAnalyticInstances(unsigned int iAnalyticInstanceId, AnalyticData* analyticData) {
+
+		_mAnalyticInstances[iAnalyticInstanceId] = analyticData; // bool for status, it may be full of analytic data class
+}
+
+AnalyticData* AnalyticInstanceManager::getAanalyticData(const unsigned int& iAnalyticInstanceId){
+
+	std::map<unsigned int, AnalyticData*>::iterator it = _mAnalyticInstances.find(iAnalyticInstanceId);
+	if (it != _mAnalyticInstances.end()) {
+		return it->second;
+	}
+
+	return NULL;
+}
+
+bool AnalyticInstanceManager::isMultipleStreamPerAnalytic(const unsigned int& iAnalyticInstanceId){
+
+	std::map<unsigned int, AnalyticData*>::iterator it = _mAnalyticInstances.find(iAnalyticInstanceId);
+	if (it != _mAnalyticInstances.end()) {
+
+		if( !(it->second->vStreamId.empty()) && it->second->vStreamId.size() > 1){
+			return true;
+		}
+	}
+	return false;
+}
+
 AnalyticInstanceManager::~AnalyticInstanceManager() {
 	if(_pSocket)
 	{
 		_pSocket->close();
 		delete _pSocket;
 	}
+
+
+
 }
 
 } /* namespace analytic */

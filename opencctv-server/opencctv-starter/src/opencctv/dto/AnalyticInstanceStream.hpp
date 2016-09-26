@@ -10,6 +10,7 @@ class AnalyticInstanceStream {
 private:
 	unsigned int _iId;
 	unsigned int _iAnalyticInstanceId;
+	//unsigned int _iStreamId;
 	std::string _sInputName;
 	std::string _sAnalyticDirLocation;
 	std::string _sAnalyticFilename;
@@ -19,6 +20,10 @@ public:
 	void setId(unsigned int iId);
 	unsigned int getId() const;
 	void setAnalyticInstanceId(unsigned int iId);
+
+	//unsigned int getStreamId() const;
+	//void setStreamId(unsigned int iStreamId);
+
 	unsigned int getAnalyticInstanceId() const;
 	void setInputName(const std::string& sInputName);
 	const std::string& getInputName() const;

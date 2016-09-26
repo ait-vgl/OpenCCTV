@@ -14,7 +14,6 @@ ThreadPool::ThreadPool() {
 	// TODO Auto-generated constructor stub
 }
 
-
 ThreadPool* ThreadPool::getInstance() {
 	if (!_pThreadPool) {
 		_pThreadPool = new ThreadPool();
@@ -22,173 +21,160 @@ ThreadPool* ThreadPool::getInstance() {
 	return _pThreadPool;
 }
 
+void ThreadPool::stopAll(int analyticServerId) {
 
-void ThreadPool::interruptAll(){
-	consumerInterruptAll();
-	producerInterruptAll();
+	consumerThreadStopAll();
+
+	resultRouterThreadStopAll();
+
+
+
+	producerThreadStopAll(analyticServerId);
 }
 
+void ThreadPool::consumerThreadStopAll() {
 
-void ThreadPool::joinAll(){
+	std::cout << "1.0 start to stop consumer" << std::endl;
 
-	resultRouterThreadJoinAll();
-
-	consumerThreadJoinAll();
-
-	producerThreadJoinAll();
-
-
-}
-
-
-
-void ThreadPool::consumerThreadJoinAll(){
-
+	// TODO:: Check delete per analytic server
 	std::map<unsigned int, boost::thread*>::iterator it;
+
+
+	// For all consumer in opencctv
+
+	std::cout << "1.0.1 Consumer all thread size " << _mConsumerThreadManagers.size() << std::endl;
 
 	for (it = _mConsumerThreadManagers.begin(); it != _mConsumerThreadManagers.end(); ++it) {
 
 		boost::thread* pConsumerThread = it->second;
 
-		//if (pConsumerThread->joinable()){
-		//	pConsumerThread->join();
-		//}
-
 		pthread_t id;
 
-		if(pConsumerThread){
-		   	//
+		if (pConsumerThread) {
 
-		    id = pConsumerThread->native_handle();
-		    pConsumerThread->detach();
-
-		    pthread_cancel(id);
-
-		    if(pConsumerThread){
-		    	delete pConsumerThread;
-		    	pConsumerThread = NULL;
-		    }
-			opencctv::util::log::Loggers::getDefaultLogger()->error("1. Delete Consumer");
-		}
-
-	}
-}
-
-void ThreadPool::producerThreadJoinAll(){
-
-	std::map<unsigned int, boost::thread*>::iterator it;
-
-	for (it = _mProducerThreadManagers.begin(); it != _mProducerThreadManagers.end(); ++it) {
-
-		boost::thread* pProducerThread = it->second;
-
-		//if (pProducerThread->joinable()){
-		//	pProducerThread->join();
-		//}
-		pthread_t id;
-		if(pProducerThread){
-
-			id = pProducerThread->native_handle();
-
-			pProducerThread->detach();
+			id = pConsumerThread->native_handle();
+			pConsumerThread->detach();
 
 			pthread_cancel(id);
 
-			if(pProducerThread){
-				delete pProducerThread;
-				pProducerThread = NULL;
+			if (pConsumerThread) {
+				delete pConsumerThread;
+				pConsumerThread = NULL;
 			}
-			opencctv::util::log::Loggers::getDefaultLogger()->error("2. Delete Producer");
+
+
+		//	_mConsumerThreadManagers.erase(it->first);
+			opencctv::util::log::Loggers::getDefaultLogger()->error("1. Delete Consumer");
 		}
 	}
 }
 
+void ThreadPool::producerThreadStopAll(int iAnalyticServerid) {
 
-void ThreadPool::resultRouterThreadJoinAll(){
+	std::cout << "2.0 start to stop producer" << std::endl;
+
+	// TODO:: Check delete per analytic server
 
 	std::map<unsigned int, boost::thread*>::iterator it;
 
-	for (it = _mResultRouterThreadManagers.begin(); it != _mResultRouterThreadManagers.end(); ++it) {
+	// Get stream manage check and delete
+
+
+	std::map<unsigned int, std::vector<unsigned int> > mStreamManagers = ApplicationModel::getInstance()->getStreamManages();
+
+
+	// for All stream in opencctv
+	for (it = _mProducerThreadManagers.begin(); it != _mProducerThreadManagers.end(); ++it) {
+
+		if (ApplicationModel::getInstance()->isStreamRunning(it->first)) {
+
+			std::cout << "Before delete producer " << it->first << " : " << mStreamManagers[it->first].size() << std::endl;
+
+		//	if (mStreamManagers[it->first] > 1) { // Check analytic per stream is more than one, it's meant that other analytics are using.
+		//		mStreamManagers[it->first]--; // reduce value of analytic running count
+		//	}else {
+				boost::thread* pProducerThread = it->second;
+
+				pthread_t id;
+				if (pProducerThread) {
+
+					id = pProducerThread->native_handle();
+
+					pProducerThread->detach();
+
+					pthread_cancel(id);
+
+					if (pProducerThread) {
+						delete pProducerThread;
+						pProducerThread = NULL;
+					}
+
+					// Delete Stream when there is only one analytic per stream
+					ApplicationModel::getInstance()->removeDataByStreamId(it->first);
+
+					opencctv::util::log::Loggers::getDefaultLogger()->error("2. Delete Producer");
+
+				}
+
+			//}
+
+			//	_mProducerThreadManagers.erase(it->first);
+		}
+	}
+}
+
+void ThreadPool::resultRouterThreadStopAll() {
+
+	std::map<unsigned int, boost::thread*>::iterator it;
+
+	for (it = _mResultRouterThreadManagers.begin();
+			it != _mResultRouterThreadManagers.end(); ++it) {
 
 		boost::thread* pResultRouterTherad = it->second;
 
-
 		pthread_t id;
-		if(pResultRouterTherad){
+		if (pResultRouterTherad) {
 
 			id = pResultRouterTherad->native_handle();
 			pResultRouterTherad->detach();
 
 			pthread_cancel(id);
 
-			if(pResultRouterTherad){
+			if (pResultRouterTherad) {
 				delete pResultRouterTherad;
 				pResultRouterTherad = NULL;
 			}
 
-			opencctv::util::log::Loggers::getDefaultLogger()->error("3. Delete Result router ");
+
+		//	_mResultRouterThreadManagers.erase(it->first);
+			opencctv::util::log::Loggers::getDefaultLogger()->error(
+					"3. Delete Result router ");
 		}
 	}
 }
 
 
+void ThreadPool::setConsumerThreadManagers(unsigned int streamId, boost::thread* pConsumerThread) {
 
- void ThreadPool::consumerInterruptAll(){
-
-	 opencctv::util::log::Loggers::getDefaultLogger()->error("Consumer interruption size: " + _mConsumerThreadManagers.size());
-
-	std::map<unsigned int, boost::thread*>::iterator it;
-
-	for (it = _mConsumerThreadManagers.begin(); it != _mConsumerThreadManagers.end(); ++it) {
-
-		boost::thread* pConsumerThread = it->second;
-
-		if (!pConsumerThread->interruption_requested()){
-			pConsumerThread->interrupt();
-		}
+	if((_mConsumerThreadManagers.find(streamId)) == _mConsumerThreadManagers.end()){
+		_mConsumerThreadManagers[streamId] = pConsumerThread;
 	}
 }
 
+void ThreadPool::setProducerThreadManagers(unsigned int streamId,boost::thread* pProducerThread) {
 
-
-void ThreadPool::producerInterruptAll(){
-
-	opencctv::util::log::Loggers::getDefaultLogger()->error("Producer interruption size: " + _mProducerThreadManagers.size());
-
-	std::map<unsigned int, boost::thread*>::iterator it;
-
-	for (it = _mProducerThreadManagers.begin(); it != _mProducerThreadManagers.end(); ++it) {
-
-		boost::thread* pProducerThread = it->second;
-
-		if (!pProducerThread->interruption_requested()){
-			pProducerThread->interrupt();
-		}
+	if((_mProducerThreadManagers.find(streamId)) == _mProducerThreadManagers.end()){
+		_mProducerThreadManagers[streamId] = pProducerThread;
 	}
 }
 
-
-
-/*void ThreadPool::setResultRouterThreadManagers(unsigned int analyticId, const std::map<unsigned int, ::ResultRouterThread*>& resultRouterThreadManagers) {
-	//_mResultRouterThreadManagers[analyticId] = resultRouterThreadManagers;
-}*/
-
-void ThreadPool::setConsumerThreadManagers( unsigned int analyticId, boost::thread* pConsumerThread) {
-	_mConsumerThreadManagers[analyticId] = pConsumerThread;
-}
-
-void ThreadPool::setProducerThreadManagers(unsigned int analyticId, boost::thread* pProducerThread) {
-	_mProducerThreadManagers[analyticId] = pProducerThread;
-}
-
-void ThreadPool::setResultRouterThreadManagers(unsigned int analyticId, boost::thread* pResulterThread){
+void ThreadPool::setResultRouterThreadManagers(unsigned int analyticId,
+		boost::thread* pResulterThread) {
 	_mResultRouterThreadManagers[analyticId] = pResulterThread;
 }
-
 
 ThreadPool::~ThreadPool() {
 	// TODO Auto-generated destructor stub
 }
-
 
 } /* namespace  */

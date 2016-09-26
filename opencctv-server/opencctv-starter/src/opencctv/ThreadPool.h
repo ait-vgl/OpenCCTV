@@ -27,28 +27,28 @@ private:
 	std::map<unsigned int, boost::thread*> _mConsumerThreadManagers;
 	std::map<unsigned int, boost::thread*> _mResultRouterThreadManagers;
 
-	void consumerThreadJoinAll();
-	void consumerInterruptAll();
-	void producerThreadJoinAll();
-	void producerInterruptAll();
+	void consumerThreadStopAll();
+	//void consumerInterruptAll();
+	void producerThreadStopAll(int analyticServerId);
+	//void producerInterruptAll();
 
-	void resultRouterThreadJoinAll();
+	void resultRouterThreadStopAll();
 
 public:
 
 	ThreadPool();
 	virtual ~ThreadPool();
 
-	void interruptAll();
-	void joinAll();
+	//void interruptAll();
+	void stopAll(int analyticServerId);
 
 
 
 	//void setResultRouterThreadManagers(unsigned int analyticId, const std::map<unsigned int, ::ResultRouterThread*>& resultRouterThreadManagers);
 
-	void setConsumerThreadManagers(unsigned int analyticId, boost::thread* pConsumerThread);
+	void setConsumerThreadManagers(unsigned int streamId, boost::thread* pConsumerThread);
 
-	void setProducerThreadManagers(unsigned int analyticId, boost::thread* pProducerThread);
+	void setProducerThreadManagers(unsigned int streamId, boost::thread* pProducerThread);
 
 	void setResultRouterThreadManagers(unsigned int analyticId, boost::thread* pResulterThread);
 

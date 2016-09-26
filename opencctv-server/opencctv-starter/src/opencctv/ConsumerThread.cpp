@@ -29,17 +29,21 @@ ConsumerThread::~ConsumerThread(){
 	// _pImageMulticaster
 	// _pQueue ==> in pModel
 
-	std::cout << "1. Consumer destructure called." << std::endl;
+	std::cout << "1. Consumer destructor called." << std::endl;
 
 	// TODO: delete Multicater
 
-/*
-	if(_pImageMulticaster && _pQueue){
-		delete _pImageMulticaster;
-		_pImageMulticaster = NULL;
 
+	if(_pImageMulticaster && _pImageMulticaster->isStart()){
+
+		_pImageMulticaster->stop();
+
+		if(_pImageMulticaster){
+			delete _pImageMulticaster;
+			_pImageMulticaster = NULL;
+		}
 		std::cout << "1.1 delete _pImageMulticaster." << std::endl;
-	}*/
+	}
 }
 
 } /* namespace opencctv */

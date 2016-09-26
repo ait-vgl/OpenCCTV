@@ -99,7 +99,7 @@ ResultRouterThread::~ResultRouterThread(){
 	// inside pModel
 		// _pFlowController
 		// _pSerializer
-	std::cout << "3. Result Router Therad destructure called." << std::endl;}
+	std::cout << "3. Result Router Therad destructor called." << std::endl;}
 
 
 } /* namespace opencctv */

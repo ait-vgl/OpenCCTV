@@ -1,12 +1,9 @@
 .DS_Store
-Debug/src/
-Debug/src/
-Release/src/
-Release/src/
-.settings/
 
 #for web 
 
 app/uploads/vms_connectors/*
+app/assets/images/
+app/uploads/analytics/
 .idea
 tmp/

@@ -3,21 +3,21 @@
 ################################################################################
 
 # Add inputs and outputs from these tool invocations to the build variables 
-CC_SRCS += \
-../src/opencctv/util/serialization/gpb/analytic_result.pb.cc \
-../src/opencctv/util/serialization/gpb/image.pb.cc 
-
 CPP_SRCS += \
 ../src/opencctv/util/serialization/gpb/ProtoBuf.cpp 
 
-CC_DEPS += \
-./src/opencctv/util/serialization/gpb/analytic_result.pb.d \
-./src/opencctv/util/serialization/gpb/image.pb.d 
+CC_SRCS += \
+../src/opencctv/util/serialization/gpb/analytic_result.pb.cc \
+../src/opencctv/util/serialization/gpb/image.pb.cc 
 
 OBJS += \
 ./src/opencctv/util/serialization/gpb/ProtoBuf.o \
 ./src/opencctv/util/serialization/gpb/analytic_result.pb.o \
 ./src/opencctv/util/serialization/gpb/image.pb.o 
+
+CC_DEPS += \
+./src/opencctv/util/serialization/gpb/analytic_result.pb.d \
+./src/opencctv/util/serialization/gpb/image.pb.d 
 
 CPP_DEPS += \
 ./src/opencctv/util/serialization/gpb/ProtoBuf.d 
@@ -27,14 +27,14 @@ CPP_DEPS += \
 src/opencctv/util/serialization/gpb/%.o: ../src/opencctv/util/serialization/gpb/%.cpp
 	@echo 'Building file: $<'
 	@echo 'Invoking: Cross G++ Compiler'
-	g++ -I/usr/local/include/boost -O3 -Wall -c -fmessage-length=0 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@)" -o "$@" "$<"
+	g++ -O3 -Wall -c -fmessage-length=0 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -o "$@" "$<"
 	@echo 'Finished building: $<'
 	@echo ' '
 
 src/opencctv/util/serialization/gpb/%.o: ../src/opencctv/util/serialization/gpb/%.cc
 	@echo 'Building file: $<'
 	@echo 'Invoking: Cross G++ Compiler'
-	g++ -I/usr/local/include/boost -O3 -Wall -c -fmessage-length=0 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@)" -o "$@" "$<"
+	g++ -O3 -Wall -c -fmessage-length=0 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -o "$@" "$<"
 	@echo 'Finished building: $<'
 	@echo ' '
 

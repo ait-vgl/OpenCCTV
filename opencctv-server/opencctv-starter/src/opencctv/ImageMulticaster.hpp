@@ -24,7 +24,7 @@ private:
 		std::string sInputName;
 	} Element;
 	unsigned int _iStreamId;
-	std::map<unsigned int, Element> _mAISInfo; // Analytic Instance Stream ID as key
+	std::map<unsigned int, Element> _mAISInfo; // Analytic Instance  ID as key // before it user analytic instance stream
 	bool _bEnable;
 	util::serialization::Serializable* _pSerializer;
 	bool send(mq::Sender* pMqSender, Image* pImage);
@@ -34,6 +34,8 @@ public:
 	size_t getNumberOfDestinations();
 	void start();
 	void stop();
+	const bool& isStart();
+	void removeElement(unsigned int iAnalyticInstanceStreamId);
 	virtual ~ImageMulticaster();
 };
 
