@@ -38,7 +38,7 @@ void AnalyticInstanceStream::setInputName(const std::string& sInputName) {
 	_sInputName = sInputName;
 }
 
-const std::string& AnalyticInstanceStream::getInputName() const {
+std::string AnalyticInstanceStream::getInputName() const {
 	return _sInputName;
 }
 

@@ -9,19 +9,84 @@
 #define ANALYTICDATA_H_
 
 #include <vector>
+#include <map> // for NULL
+
+#include "../opencctv/util/flow/FlowController.hpp"
+
+#include <boost/thread/thread.hpp>
+
 
 namespace analytic {
 class AnalyticData {
+	unsigned int _iId;
+	bool _bStatus;
+	std::vector<unsigned int> _vStreamIds;  // list of  stream id per analytic
+	boost::thread* _pResultRouterThread;
+
+	std::string _sAnalyticQueueInAddress;
+	std::string _sAnalyticQueueOutAddress;
+	opencctv::util::flow::FlowController* _pFlowController;
+
 
 public:
-
-	bool bStatus;
-	std::vector<unsigned int> vAnalyticInstanceStreamId; // list of analytic instance stream id per analytic
-	std::vector<unsigned int> vStreamId;  // list of  stream id per analytic
-
-	AnalyticData();
+	AnalyticData(int iAnalyticInstanceId);
 	virtual ~AnalyticData();
+
+	bool isAnalyticQueueInAddress();
+	bool isAnalyticQueueOutAddress();
+	bool isMultipleStream();
+	bool isFlowController();
+
+	opencctv::util::flow::FlowController* getFlowController() const {
+		return _pFlowController;
+	}
+
+	void setFlowController(opencctv::util::flow::FlowController* flowController) {
+		_pFlowController = flowController;
+	}
+
+	boost::thread* getResultRouterThread() const {
+		return _pResultRouterThread;
+	}
+
+	void setResultRouterThread(boost::thread* resultRouterThread) {
+		_pResultRouterThread = resultRouterThread;
+	}
+
+	std::string getAnalyticQueueOutAddress() {
+		return _sAnalyticQueueOutAddress;
+	}
+
+	void setAnalyticQueueOutAddress(std::string& analyticQueueOutAddress) {
+		_sAnalyticQueueOutAddress = analyticQueueOutAddress;
+	}
+
+	std::string getAnalyticQueueInAddress() {
+		return _sAnalyticQueueInAddress;
+	}
+
+	void setAnalyticQueueInAddress(std::string& imageInputQueueAddress) {
+		_sAnalyticQueueInAddress = imageInputQueueAddress;
+	}
+
+	bool isStatus() const {
+		return _bStatus;
+	}
+
+	void setStatus(bool status) {
+		_bStatus = status;
+	}
+
+	/*const std::vector<unsigned int>& getStreamIds() const {
+		return _vStreamIds;
+	}*/
+
+	void setStreamId(unsigned int streamId) {
+		_vStreamIds.push_back(streamId);
+	}
 };
 
-#endif /* ANALYTICDATA_H_ */
+
 } // end namespace analytic
+
+#endif /* ANALYTICDATA_H_ */

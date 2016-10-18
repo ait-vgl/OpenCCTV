@@ -34,6 +34,7 @@ src/opencctv/util \
 src/opencctv/mq \
 src/opencctv/dto \
 src/opencctv/db \
+src/opencctv/controller \
 src/opencctv \
 src \
 src/analytic/xml \

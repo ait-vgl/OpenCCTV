@@ -4,7 +4,7 @@ namespace opencctv {
 
 ApplicationModel* ApplicationModel::_pModel = NULL;
 
-ApplicationModel* ApplicationModel::getInstance() {
+/*ApplicationModel* ApplicationModel::getInstance() {
 	if (!_pModel) {
 		_pModel = new ApplicationModel();
 	}
@@ -98,6 +98,15 @@ std::map<unsigned int, analytic::AnalyticInstanceManager*>& ApplicationModel::ge
 	return _mAnalyticInstanceManagers;
 }
 
+std::map<unsigned int, analytic::AnalyticInstanceManager*>* a = getAnalytic()
+std::map<unsigned int, analytic::AnalyticInstanceManager*> a = getAnalytic()
+a.
+
+
+std::map<unsigned int, analytic::AnalyticInstanceManager*>& ApplicationModel::getAnalyticInstanceManagers() {
+	return &_mAnalyticInstanceManagers;
+}
+
 std::map<unsigned int, std::vector<unsigned int> >& ApplicationModel::getStreamManages() {
 
 	return _mStreamManagers;
@@ -159,7 +168,7 @@ bool ApplicationModel::isStreamRunning(unsigned int iStreamId) {
 	}
 
 	return false;
-}
+}*/
 
 ApplicationModel::~ApplicationModel() {
 	if (_pModel) {

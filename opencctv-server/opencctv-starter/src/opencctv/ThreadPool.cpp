@@ -5,7 +5,7 @@
  *      Author: nhutumdai
  */
 
-#include "ThreadPool.h"
+#include "ThreadPool.hpp"
 
 namespace opencctv {
 
@@ -23,15 +23,15 @@ ThreadPool* ThreadPool::getInstance() {
 
 void ThreadPool::stopAll(int analyticServerId) {
 
-	consumerThreadStopAll();
+	//consumerThreadStopAll();
 
-	resultRouterThreadStopAll();
+	//resultRouterThreadStopAll();
 
 
 
-	producerThreadStopAll(analyticServerId);
+	//producerThreadStopAll(analyticServerId);
 }
-
+/*
 void ThreadPool::consumerThreadStopAll() {
 
 	std::cout << "1.0 start to stop consumer" << std::endl;
@@ -80,15 +80,15 @@ void ThreadPool::producerThreadStopAll(int iAnalyticServerid) {
 	// Get stream manage check and delete
 
 
-	std::map<unsigned int, std::vector<unsigned int> > mStreamManagers = ApplicationModel::getInstance()->getStreamManages();
+	////std::map<unsigned int, std::vector<unsigned int> > mStreamManagers = ApplicationModel::getInstance()->getStreamManages();
 
 
 	// for All stream in opencctv
 	for (it = _mProducerThreadManagers.begin(); it != _mProducerThreadManagers.end(); ++it) {
 
-		if (ApplicationModel::getInstance()->isStreamRunning(it->first)) {
+		////if (ApplicationModel::getInstance()->isStreamRunning(it->first)) {
 
-			std::cout << "Before delete producer " << it->first << " : " << mStreamManagers[it->first].size() << std::endl;
+			////std::cout << "Before delete producer " << it->first << " : " << mStreamManagers[it->first].size() << std::endl;
 
 		//	if (mStreamManagers[it->first] > 1) { // Check analytic per stream is more than one, it's meant that other analytics are using.
 		//		mStreamManagers[it->first]--; // reduce value of analytic running count
@@ -110,7 +110,7 @@ void ThreadPool::producerThreadStopAll(int iAnalyticServerid) {
 					}
 
 					// Delete Stream when there is only one analytic per stream
-					ApplicationModel::getInstance()->removeDataByStreamId(it->first);
+					////ApplicationModel::getInstance()->removeDataByStreamId(it->first);
 
 					opencctv::util::log::Loggers::getDefaultLogger()->error("2. Delete Producer");
 
@@ -172,7 +172,7 @@ void ThreadPool::setResultRouterThreadManagers(unsigned int analyticId,
 		boost::thread* pResulterThread) {
 	_mResultRouterThreadManagers[analyticId] = pResulterThread;
 }
-
+*/
 ThreadPool::~ThreadPool() {
 	// TODO Auto-generated destructor stub
 }

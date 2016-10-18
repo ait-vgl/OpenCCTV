@@ -7,3 +7,4 @@ app/assets/images/
 app/uploads/analytics/
 .idea
 tmp/
+log/

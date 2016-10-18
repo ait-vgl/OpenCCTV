@@ -4,12 +4,21 @@
 namespace opencctv {
 
 ResultRouterThread::ResultRouterThread(unsigned int iAnalyticInstanceId) {
-	ApplicationModel* pModel = ApplicationModel::getInstance();
+
+
+
+	int iAnalyticServerId = 1;
+	_pAS = analytic::AnalyticServerManager::getInstance()->getAnalyticServer(iAnalyticServerId);
+
+	_pAD = _pAS->getAnalyticData(iAnalyticInstanceId);
+
 	_pFlowController = NULL;
-	if(pModel->containsFlowController(iAnalyticInstanceId))
+	if(_pAD and _pAD->isFlowController())
 	{
-		_pFlowController = pModel->getFlowControllers()[iAnalyticInstanceId];
+		_pFlowController = _pAD->getFlowController();
 	}
+
+
 	_pSerializer = util::serialization::Serializers::getInstanceOfDefaultSerializer();
 	_iAnalyticInstanceId = iAnalyticInstanceId;
 }
@@ -17,15 +26,15 @@ ResultRouterThread::ResultRouterThread(unsigned int iAnalyticInstanceId) {
 void ResultRouterThread::operator()()
 {
 	util::Config* pConfig = util::Config::getInstance();
-	ApplicationModel* pModel = ApplicationModel::getInstance();
-	if(pModel->containsResultsOutputQueueAddress(_iAnalyticInstanceId))
+
+	if(_pAD and _pAD->isAnalyticQueueOutAddress())
 	{
 		//Initialize the ZMQ connection to the analytic instance's output queue
 		bool bConnected = false;
 		mq::TcpMqReceiver receiver;
 		try
 		{
-			receiver.connectToMq(pConfig->get(util::PROPERTY_ANALYTIC_SERVER_IP), pModel->getResultsOutputQueueAddresses()[_iAnalyticInstanceId]);
+			receiver.connectToMq(pConfig->get(util::PROPERTY_ANALYTIC_SERVER_IP), _pAD->getAnalyticQueueOutAddress());
 			bConnected = true;
 		}
 		catch(Exception &e)

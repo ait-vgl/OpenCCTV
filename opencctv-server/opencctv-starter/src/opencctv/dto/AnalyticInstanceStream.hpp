@@ -26,7 +26,7 @@ public:
 
 	unsigned int getAnalyticInstanceId() const;
 	void setInputName(const std::string& sInputName);
-	const std::string& getInputName() const;
+	std::string getInputName() const;
 	void setAnalyticDirLocation(const std::string& sLocation);
 	const std::string& getAnalyticDirLocation() const;
 	void setAnalyticFilename(const std::string& sFilename);
