@@ -2,7 +2,7 @@
 
 #for web 
 
-app/uploads/vms_connectors/*
+app/uploads/vms_connectors/
 app/assets/images/
 app/uploads/analytics/
 .idea
