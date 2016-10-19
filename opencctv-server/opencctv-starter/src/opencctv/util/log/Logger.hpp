@@ -17,10 +17,10 @@ protected:
 	/* boost::mutex::scoped_lock lock(_mutex);
 	 * lock.unlock(); */
 public:
-	virtual void error(const std::string& sMessage) = 0;
-	virtual void warn(const std::string& sMessage) = 0;
-	virtual void info(const std::string& sMessage) = 0;
-	virtual void debug(const std::string& sMessage) = 0;
+	virtual void error( std::string sMessage) = 0;
+	virtual void warn( std::string sMessage) = 0;
+	virtual void info( std::string sMessage) = 0;
+	virtual void debug( std::string sMessage) = 0;
 	virtual ~Logger(){}
 };
 

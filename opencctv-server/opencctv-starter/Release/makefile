@@ -8,12 +8,21 @@ RM := rm -rf
 
 # All of the sources participating in the build are defined here
 -include sources.mk
+-include src/test/gateway/subdir.mk
 -include src/opencctv/util/xml/subdir.mk
+-include src/opencctv/util/serialization/gpb/subdir.mk
+-include src/opencctv/util/serialization/subdir.mk
 -include src/opencctv/util/log/colored/subdir.mk
 -include src/opencctv/util/log/subdir.mk
+-include src/opencctv/util/flow/subdir.mk
 -include src/opencctv/util/subdir.mk
 -include src/opencctv/mq/subdir.mk
+-include src/opencctv/dto/subdir.mk
+-include src/opencctv/db/subdir.mk
+-include src/opencctv/controller/subdir.mk
 -include src/opencctv/subdir.mk
+-include src/analytic/xml/subdir.mk
+-include src/analytic/subdir.mk
 -include src/subdir.mk
 -include subdir.mk
 -include objects.mk
@@ -44,19 +53,19 @@ endif
 # Add inputs and outputs from these tool invocations to the build variables 
 
 # All Target
-all: OpenCCTVServer_Starter
+all: opencctv-starter
 
 # Tool invocations
-OpenCCTVServer_Starter: $(OBJS) $(USER_OBJS)
+opencctv-starter: $(OBJS) $(USER_OBJS)
 	@echo 'Building target: $@'
-	@echo 'Invoking: GCC C++ Linker'
-	g++ -L/usr/local/lib -o "OpenCCTVServer_Starter" $(OBJS) $(USER_OBJS) $(LIBS)
+	@echo 'Invoking: Cross G++ Linker'
+	g++  -o "opencctv-starter" $(OBJS) $(USER_OBJS) $(LIBS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 
 # Other Targets
 clean:
-	-$(RM) $(OBJS)$(C++_DEPS)$(C_DEPS)$(CC_DEPS)$(CPP_DEPS)$(EXECUTABLES)$(CXX_DEPS)$(C_UPPER_DEPS) OpenCCTVServer_Starter
+	-$(RM) $(C++_DEPS)$(OBJS)$(C_DEPS)$(CC_DEPS)$(CPP_DEPS)$(EXECUTABLES)$(CXX_DEPS)$(C_UPPER_DEPS) opencctv-starter
 	-@echo ' '
 
 .PHONY: all clean dependents

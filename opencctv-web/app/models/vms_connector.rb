@@ -8,6 +8,8 @@ class VmsConnector < ActiveRecord::Base
     if(!self.filename.empty?)
       cmd = "#{Rails.root}/app/assets/programs/PluginArchiveValidator/Release/PluginArchiveValidator " +
           "#{Rails.root}/app/uploads/vms_connectors " + "#{self.filename}.zip " + "#{self.filename} " + 'vms'
+          
+      puts cmd
       stdin, stdout, stderr = Open3.popen3(cmd)
       output = stdout.readline
       if(!output.nil? && (output.start_with?("<")))

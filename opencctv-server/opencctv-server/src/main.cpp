@@ -22,6 +22,8 @@
 
 
 void terminateHandler(int signum); // Terminate signal handler
+void userDefined1Handler(int signum); // Start/stop analytic process
+
 
 int main()
 {
@@ -88,10 +90,11 @@ int main()
 		opencctv::util::log::Loggers::getDefaultLogger()->error(sErrMsg);
 		return -1;
 	}
-	for(size_t i = 0; i < vStreams.size(); ++i)
+	/*for(size_t i = 0; i < vStreams.size(); ++i)
 	{
 		opencctv::dto::Stream stream = vStreams[i];
 		opencctv::ImageMulticaster* pMulticaster = new opencctv::ImageMulticaster(stream.getId());
+		// If a analytic instance use same stream, it should not create new stream variable.
 		std::vector<opencctv::dto::AnalyticInstanceStream> vAnalyticInstances;
 		try
 		{
@@ -261,11 +264,18 @@ int main()
 					_producerThreadGroup.add_thread(pProducerThread);
 				}
 			}
-		}
-	}
+		}*/
+	//}
 	_resultsRouterThreadGroup.join_all();
 	// _consumerThreadGroup.join_all();
 	// _producerThreadGroup.join_all();
+
+
+		  for (;;) {
+		        printf("\nSleeping for ~3 seconds\n");
+		        sleep(3); // Later to be replaced with a SIGALRM
+		    }
+
 	return 0;
 }
 
@@ -282,7 +292,6 @@ void terminateHandler(int signum) {
 				delete pAnalyticInstanceManager;
 				pAnalyticInstanceManager = NULL;
 			}
-			mAnalyticInstanceManagers.erase(it++); //remove analytic instance manager from the model
 		}
 		else
 		{
@@ -298,4 +307,4 @@ void terminateHandler(int signum) {
 		opencctv::util::log::Loggers::getDefaultLogger()->info("Reset all the Analytic Servers.");
 	}
 	exit(signum);
-}
+	}

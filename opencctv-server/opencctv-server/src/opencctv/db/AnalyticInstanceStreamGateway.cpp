@@ -10,7 +10,14 @@
 namespace opencctv {
 namespace db {
 
-const std::string AnalyticInstanceStreamGateway::_SELECT_ANALYTIC_INSTANCE_STREAM_SQL = "SELECT ainsts.id, ainsts.analytic_instance_id, ainps.name, a.filename FROM analytic_instance_streams AS ainsts, analytic_input_streams AS ainps, analytics AS a WHERE (ainsts.stream_id = ?) AND (ainsts.analytic_input_stream_id = ainps.id ) AND (ainps.analytic_id = a.id)";
+//"SELECT ainsts.id, ainsts.analytic_instance_id, ainps.name, a.filename FROM analytic_instance_streams AS ainsts, analytic_input_streams AS ainps, analytics AS a WHERE (ainsts.stream_id = ?) AND (ainsts.analytic_input_stream_id = ainps.id ) AND (ainps.analytic_id = a.id)";
+
+const std::string AnalyticInstanceStreamGateway::_SELECT_ANALYTIC_INSTANCE_STREAM_SQL = "SELECT ainsts.id, ainsts.analytic_instance_id, ainps.name, a.filename "
+"FROM analytic_instance_streams AS ainsts, analytic_input_streams AS ainps, analytics AS a, analytic_instances As ai "
+"WHERE (ainsts.stream_id = ?) AND (ai.status = true) "
+"AND (ainsts.analytic_input_stream_id = ainps.id ) "
+"AND (ainps.analytic_id = a.id) "
+"AND (ai.id = ainsts.analytic_instance_id); ";
 
 AnalyticInstanceStreamGateway::AnalyticInstanceStreamGateway()
 {

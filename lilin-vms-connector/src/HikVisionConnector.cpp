@@ -34,10 +34,10 @@ bool HikVisionConnector::init(const opencctv::api::VmsConnectInfo& info, const s
 	        "dummy",
 	        "--ignore-config",
 	        "--extraintf=logger",
-	        "--verbose=2",
-			"--no-plugins-cache",
-			"--demux=h264",
-			"--h264-fps=25.000000",
+	       // "--verbose=2",
+		"--no-plugins-cache",
+		"--demux=h264",
+		"--h264-fps=25.000000",
 	    };
 
 	_pVlcInstance = libvlc_new(sizeof(aChVlcArgs) / sizeof(aChVlcArgs[0]), aChVlcArgs);
@@ -53,10 +53,13 @@ bool HikVisionConnector::init(const opencctv::api::VmsConnectInfo& info, const s
 void HikVisionConnector::produceImageObjects(opencctv::ConcurrentQueue<opencctv::Image>* pQueue)
 {
 	_pQueue = pQueue;
+
+
 	libvlc_media_player_play(_pVlcMediaPlayer);
+	//std::cout << "Start vlc player" << std::endl;
 	pause();
-	_bEnable = false;
-	_pQueue = NULL;
+	//_bEnable = false;
+	//_pQueue = NULL;
 }
 
 bool HikVisionConnector::isStillProducingImages()
@@ -79,21 +82,20 @@ void HikVisionConnector::unlock(void *data, void *id, void * const *p_pixels)
 }
 void HikVisionConnector::display(void *data, void *id)
 {
-	if(_pQueue)
-	{
-		struct ctx *ctx = (struct ctx*)data;
-		IplImage *pImageDisplay = ctx->pImage;
-		cv::Mat matImage(pImageDisplay, false);
-		if(!matImage.empty())
-		{
-			opencctv::Image* pImage = new opencctv::Image();
-			std::vector<unsigned char> vTemp;
-			cv::imencode(".jpg", matImage, vTemp);
-			pImage->setImageData(vTemp);
-			pImage->setTimestamp(currentDateTime());
-			_pQueue->push(pImage);
-		}
-	}
+			std::cout << "VLC display." << std::endl;
+
+			struct ctx *ctx = (struct ctx*)data;
+			IplImage *pImageDisplay = ctx->pImage;
+			cv::Mat matImage(pImageDisplay, false);
+			if(!matImage.empty())
+			{
+				opencctv::Image* pImage = new opencctv::Image();
+				std::vector<unsigned char> vTemp;
+				cv::imencode(".jpg", matImage, vTemp);
+				pImage->setImageData(vTemp);
+				pImage->setTimestamp(currentDateTime());
+				_pQueue->push(pImage);
+			}
 }
 
 // Get current date/time in ISO 8601 format (YYYYMMDDTHHmmssZ)
@@ -110,10 +112,70 @@ std::string HikVisionConnector::currentDateTime()
 }
 
 HikVisionConnector::~HikVisionConnector() {
+
+	// Cannot have any text output, it effects to "Pluglinvalidater in Web"
+
+	//std::cout<< "test xxxxxxxxxxxxxxxxxxxxxxxxxxx" << std::endl;
+
 	if(_pContext)
 	{
-		delete _pContext;
-		_pContext = NULL;
+		// clear media player
+
+		std::cout << "5. Linin connector: destructure called" << std::endl;
+
+		libvlc_media_release (_pVlcMedia);
+		libvlc_media_player_stop(_pVlcMediaPlayer);
+		libvlc_media_player_release(_pVlcMediaPlayer);
+		libvlc_release(_pVlcInstance);
+
+
+		/*if(libvlc_media_player_is_playing(_pVlcMediaPlayer)){
+
+			if(libvlc_media_player_can_pause(_pVlcMediaPlayer)){
+				libvlc_media_player_pause(_pVlcMediaPlayer);
+				std::cout << "5.0.1 pause _pVlcMediaPlayer" << std::endl;
+			}
+
+
+			//libvlc_media_player_release(_pVlcMediaPlayer);
+			//libvlc_release(_pVlcInstance);
+			std::cout << "5.0  Stop _pVlcMediaPlayer" << std::endl;
+		}
+
+
+
+		if(_pVlcInstance){
+			//delete _pVlcInstance;
+			//_pVlcInstance = NULL;
+
+			std::cout << "5.3 delete _pVlcInstance" << std::endl;
+		}
+
+
+		if(_pVlcMedia){
+			//delete _pVlcMedia->libvlc_media_t;
+			//_pVlcMedia = NULL;
+
+			std::cout << "5.1 delete _pVlcMedia" << std::endl;
+		}
+
+		if(_pVlcMediaPlayer){
+			//delete _pVlcMediaPlayer;
+			//_pVlcMediaPlayer = NULL;
+
+			std::cout << "5.2 delete _pVlcMediaPlayer" << std::endl;
+		}
+
+
+
+
+
+
+		std::cout << "5.5 Finish Destructor" << std::endl;
+		//delete _pContext;
+		//_pContext = NULL;*/
+
+		//_bEnable = false;
 	}
 }
 

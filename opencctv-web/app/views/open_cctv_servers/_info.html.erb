@@ -47,14 +47,14 @@
   </div>
 
   <br/>
-  <% if @open_cctv_server.status.eql? 'Stopped' %>
-      <%= link_to 'Start Server', open_cctv_servers_start_path(@open_cctv_server), :class => "btn btn-success"%>
-  <%elsif @open_cctv_server.status.eql? 'Running'%>
-      <%= link_to 'Stop Server', open_cctv_servers_stop_path(@open_cctv_server), :class => "btn btn-danger"%>
-      <%= link_to 'Check Server Status', open_cctv_server_path(@open_cctv_server), :class => "btn btn-success"%>
-  <%else%>
-      <%= link_to 'Restart Server', open_cctv_servers_restart_path(@open_cctv_server), :class => "btn btn-warning"%>
-      <%= link_to 'Check Server Status', open_cctv_server_path(@open_cctv_server), :class => "btn btn-success"%>
-  <%end%>
+  <%# if @open_cctv_server.status.eql? 'Stopped' %>
+      <%= link_to 'Start all analytic', open_cctv_servers_start_path(@open_cctv_server), :class => "btn btn-success"%>
+  <%#elsif @open_cctv_server.status.eql? 'Running'%>
+      <%= link_to 'Stop all analytic', open_cctv_servers_stop_path(@open_cctv_server), :class => "btn btn-danger"%>
+      <%#= link_to 'Check Server Status', open_cctv_server_path(@open_cctv_server), :class => "btn btn-success"%>
+  <%#else%>
+      <%#= link_to 'Restart Server', open_cctv_servers_restart_path(@open_cctv_server), :class => "btn btn-warning"%>
+      <%#= link_to 'Check Server Status', open_cctv_server_path(@open_cctv_server), :class => "btn btn-success"%>
+  <%#end%>
 
 </div>

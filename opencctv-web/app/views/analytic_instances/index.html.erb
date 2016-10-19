@@ -30,7 +30,8 @@
             <th>Name</th>
             <th>Analytic Type</th>
             <th>Description</th>
-            <th colspan="3"></th>
+
+            <th colspan="4"></th>
           </tr>
           </thead>
 
@@ -44,6 +45,7 @@
                 <td><%= analytic_instance.analytic.name %></td>
                 <td><%= analytic_instance.description %></td>
 
+
                 <% if isOrganization? %>
 
                     <td><%= link_to 'Show', group_user_analytic_instance_path(analytic_instance.group_user_id, analytic_instance), :class => "btn btn-xs btn-default" %></td>
@@ -52,9 +54,22 @@
 
                 <% else %>
 
+                    <% if analytic_instance.status == false %>
+
+                        <td><%= link_to 'Start', start_analytic_instance_path(analytic_instance), :class => "btn btn-xs btn-warning" %></td>
+
+                    <%else %>
+
+                        <td><%= link_to 'Stop', stop_analytic_instance_path(analytic_instance), :class => "btn btn-xs btn-danger", data: {confirm: 'Are you sure?'} %></td>
+
+                    <% end %>
+
+
+
                     <td><%= link_to 'Show', analytic_instance, :class => "btn btn-xs btn-default" %></td>
                     <td><%= link_to 'Edit', edit_analytic_instance_path(analytic_instance), :class => "btn btn-xs btn-warning" %></td>
                     <td><%= link_to 'Destroy', analytic_instance, method: :delete, :class => "btn btn-xs btn-danger", data: {confirm: 'Are you sure?'} %></td>
+
 
                 <% end %>
 

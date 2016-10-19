@@ -24,6 +24,7 @@
 #include <vector>
 #include <sstream>
 
+
 namespace opencctv {
 
 using namespace std;
@@ -39,6 +40,7 @@ private:
 	static unsigned int _iOpenCCTVServerPort;
 	static Process*_pProcess;
 
+
 	ServerController();
 	ServerController(ServerController const&);
 	void operator=(ServerController const&);
@@ -52,6 +54,9 @@ public:
 	void sendStatusReply();
 	void sendErrorReply(const string& sMessageContent);
 	string readMessage();
+
+	void startAnalytic();
+	void testReply();
 };
 
 } /* namespace opencctv */

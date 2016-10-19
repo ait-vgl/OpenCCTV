@@ -94,6 +94,10 @@ Rails.application.routes.draw do
     resources :analytic_input_streams
   end
 
+
+  get '/analytic_instance/:id/start', to: "analytic_instances#startAnalytic", as: 'start_analytic_instance'
+  get '/analytic_instance/:id/stop', to: "analytic_instances#stopAnalytic", as: 'stop_analytic_instance'
+
   resources :analytic_instances do
     resources :analytic_instance_streams
   end
