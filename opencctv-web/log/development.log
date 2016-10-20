@@ -62674,3 +62674,357 @@ Processing by OpenCctvServersController#show as HTML
   Rendered open_cctv_servers/show.html.erb within layouts/application (20.1ms)
   [1m[36m (1.4ms)[0m  [1mSELECT COUNT(*) FROM `group_users` INNER JOIN `org_group_users` ON `org_group_users`.`group_user_id` = `group_users`.`id` INNER JOIN `org_users` ON `org_users`.`id` = `org_group_users`.`org_user_id` WHERE `group_users`.`org_id` IS NULL AND `group_users`.`role_id` = 2 AND `org_users`.`user_id` = 1[0m
 Completed 200 OK in 571ms (Views: 525.7ms | ActiveRecord: 8.6ms)
+DEPRECATION WARNING: [Devise] config.email_regexp will have a new default on Devise 4.1
+To keep the current behavior please set in your config/initializers/devise.rb the following:
+
+  Devise.setup do |config|
+    config.email_regexp = /\A[^@\s]+@([^@\s]+\.)+[^@\W]+\z/
+  end
+
+If you want to use the new default:
+
+  Devise.setup do |config|
+    config.email_regexp = /\A[^@\s]+@[^@\s]+\z/
+  end
+. (called from <top (required)> at /myapp/config/initializers/devise.rb:3)
+DEPRECATION WARNING: [Devise] config.email_regexp will have a new default on Devise 4.1
+To keep the current behavior please set in your config/initializers/devise.rb the following:
+
+  Devise.setup do |config|
+    config.email_regexp = /\A[^@\s]+@([^@\s]+\.)+[^@\W]+\z/
+  end
+
+If you want to use the new default:
+
+  Devise.setup do |config|
+    config.email_regexp = /\A[^@\s]+@[^@\s]+\z/
+  end
+. (called from <top (required)> at /myapp/config/initializers/devise.rb:3)
+DEPRECATION WARNING: [Devise] config.email_regexp will have a new default on Devise 4.1
+To keep the current behavior please set in your config/initializers/devise.rb the following:
+
+  Devise.setup do |config|
+    config.email_regexp = /\A[^@\s]+@([^@\s]+\.)+[^@\W]+\z/
+  end
+
+If you want to use the new default:
+
+  Devise.setup do |config|
+    config.email_regexp = /\A[^@\s]+@[^@\s]+\z/
+  end
+. (called from <top (required)> at /myapp/config/initializers/devise.rb:3)
+
+
+Started GET "/" for 172.18.0.1 at 2016-10-20 04:04:48 +0000
+  [1m[36mActiveRecord::SchemaMigration Load (16.2ms)[0m  [1mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+Processing by AboutController#index as HTML
+  Rendered about/index.html.erb within layouts/application (8.9ms)
+Completed 200 OK in 2926ms (Views: 2891.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/application.css?body=1" for 172.18.0.1 at 2016-10-20 04:04:51 +0000
+
+
+Started GET "/assets/bootstrap/affix.js?body=1" for 172.18.0.1 at 2016-10-20 04:04:52 +0000
+
+
+Started GET "/assets/jquery.js?body=1" for 172.18.0.1 at 2016-10-20 04:04:52 +0000
+
+
+Started GET "/assets/bootstrap/carousel.js?body=1" for 172.18.0.1 at 2016-10-20 04:04:52 +0000
+
+
+Started GET "/assets/bootstrap/button.js?body=1" for 172.18.0.1 at 2016-10-20 04:04:53 +0000
+
+
+Started GET "/assets/bootstrap/alert.js?body=1" for 172.18.0.1 at 2016-10-20 04:04:53 +0000
+
+
+Started GET "/assets/bootstrap/collapse.js?body=1" for 172.18.0.1 at 2016-10-20 04:04:53 +0000
+
+
+Started GET "/assets/bootstrap/dropdown.js?body=1" for 172.18.0.1 at 2016-10-20 04:04:54 +0000
+
+
+Started GET "/assets/bootstrap/tab.js?body=1" for 172.18.0.1 at 2016-10-20 04:04:54 +0000
+
+
+Started GET "/assets/bootstrap/transition.js?body=1" for 172.18.0.1 at 2016-10-20 04:04:54 +0000
+
+
+Started GET "/assets/bootstrap/scrollspy.js?body=1" for 172.18.0.1 at 2016-10-20 04:04:54 +0000
+
+
+Started GET "/assets/bootstrap/modal.js?body=1" for 172.18.0.1 at 2016-10-20 04:04:55 +0000
+
+
+Started GET "/assets/bootstrap/tooltip.js?body=1" for 172.18.0.1 at 2016-10-20 04:04:55 +0000
+
+
+Started GET "/assets/bootstrap/popover.js?body=1" for 172.18.0.1 at 2016-10-20 04:04:55 +0000
+
+
+Started GET "/assets/bootstrap-sprockets.js?body=1" for 172.18.0.1 at 2016-10-20 04:04:56 +0000
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 172.18.0.1 at 2016-10-20 04:04:56 +0000
+
+
+Started GET "/assets/turbolinks.js?body=1" for 172.18.0.1 at 2016-10-20 04:04:56 +0000
+
+
+Started GET "/assets/application.js?body=1" for 172.18.0.1 at 2016-10-20 04:04:57 +0000
+
+
+Started GET "/users/sign_in" for 172.18.0.1 at 2016-10-20 04:05:52 +0000
+Processing by Devise::SessionsController#new as HTML
+DEPRECATION WARNING: [Devise] Changing the sanitized parameters through "Devise::ParameterSanitizer#for(sign_up) is deprecated and it will be removed from Devise 4.1.
+Please use the `permit` method:
+
+  devise_parameter_sanitizer.permit(:sign_up) do |user|
+    # Your block here.
+  end
+ (called from update_sanitized_params at /myapp/app/controllers/application_controller.rb:11)
+  Rendered devise/shared/_links.html.erb (2.8ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (144.5ms)
+Completed 200 OK in 551ms (Views: 511.8ms | ActiveRecord: 11.1ms)
+
+
+Started GET "/users/sign_in" for 172.18.0.1 at 2016-10-20 04:05:53 +0000
+Processing by Devise::SessionsController#new as HTML
+DEPRECATION WARNING: [Devise] Changing the sanitized parameters through "Devise::ParameterSanitizer#for(sign_up) is deprecated and it will be removed from Devise 4.1.
+Please use the `permit` method:
+
+  devise_parameter_sanitizer.permit(:sign_up) do |user|
+    # Your block here.
+  end
+ (called from update_sanitized_params at /myapp/app/controllers/application_controller.rb:11)
+  Rendered devise/shared/_links.html.erb (0.6ms)
+  Rendered devise/sessions/new.html.erb within layouts/application (16.5ms)
+Completed 200 OK in 306ms (Views: 304.3ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/sign_in" for 172.18.0.1 at 2016-10-20 04:06:07 +0000
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"+KlIJ5VFDcyZDAid2vQXkEjNI63Ums6UL/+2+lNc4U4=", "user"=>{"email"=>"admin@example.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+DEPRECATION WARNING: [Devise] Changing the sanitized parameters through "Devise::ParameterSanitizer#for(sign_up) is deprecated and it will be removed from Devise 4.1.
+Please use the `permit` method:
+
+  devise_parameter_sanitizer.permit(:sign_up) do |user|
+    # Your block here.
+  end
+ (called from update_sanitized_params at /myapp/app/controllers/application_controller.rb:11)
+  [1m[35mUser Load (2.8ms)[0m  SELECT  `users`.* FROM `users`  WHERE `users`.`email` = 'admin@example.com'  ORDER BY `users`.`id` ASC LIMIT 1
+  [1m[36m (0.4ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (3.2ms)[0m  UPDATE `users` SET `current_sign_in_at` = '2016-10-20 04:06:08', `last_sign_in_at` = '2016-09-29 05:26:43', `sign_in_count` = 9, `updated_at` = '2016-10-20 04:06:08' WHERE `users`.`id` = 1
+  [1m[36m (1.1ms)[0m  [1mCOMMIT[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 207ms (ActiveRecord: 7.5ms)
+
+
+Started GET "/" for 172.18.0.1 at 2016-10-20 04:06:08 +0000
+Processing by AboutController#index as HTML
+  Rendered about/index.html.erb within layouts/application (0.1ms)
+  [1m[35mUser Load (0.6ms)[0m  SELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1
+  [1m[36m (3.8ms)[0m  [1mSELECT COUNT(*) FROM `group_users` INNER JOIN `org_group_users` ON `org_group_users`.`group_user_id` = `group_users`.`id` INNER JOIN `org_users` ON `org_users`.`id` = `org_group_users`.`org_user_id` WHERE `group_users`.`org_id` IS NULL AND `group_users`.`role_id` = 2 AND `org_users`.`user_id` = 1[0m
+Completed 200 OK in 390ms (Views: 368.1ms | ActiveRecord: 20.8ms)
+
+
+Started GET "/open_cctv_servers" for 172.18.0.1 at 2016-10-20 04:06:20 +0000
+Processing by OpenCctvServersController#index as HTML
+  [1m[35mUser Load (0.6ms)[0m  SELECT  `users`.* FROM `users`  WHERE `users`.`id` = 1  ORDER BY `users`.`id` ASC LIMIT 1
+  [1m[36mOpenCctvServer Load (0.6ms)[0m  [1mSELECT  `open_cctv_servers`.* FROM `open_cctv_servers`   ORDER BY `open_cctv_servers`.`id` DESC LIMIT 1[0m
+  [1m[35m (0.3ms)[0m  BEGIN
+  [1m[36mSQL (0.5ms)[0m  [1mUPDATE `open_cctv_servers` SET `status` = 'Unknown', `updated_at` = '2016-10-20 04:06:30' WHERE `open_cctv_servers`.`id` = 1[0m
+  [1m[35m (1.1ms)[0m  COMMIT
+  [1m[36m (0.7ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.4ms)[0m  COMMIT
+  Rendered open_cctv_servers/_info.html.erb (2.6ms)
+  Rendered open_cctv_servers/index.html.erb within layouts/application (29.1ms)
+  [1m[36m (1.2ms)[0m  [1mSELECT COUNT(*) FROM `group_users` INNER JOIN `org_group_users` ON `org_group_users`.`group_user_id` = `group_users`.`id` INNER JOIN `org_users` ON `org_users`.`id` = `org_group_users`.`org_user_id` WHERE `group_users`.`org_id` IS NULL AND `group_users`.`role_id` = 2 AND `org_users`.`user_id` = 1[0m
+Completed 200 OK in 10411ms (Views: 333.2ms | ActiveRecord: 19.8ms)
+DEPRECATION WARNING: [Devise] config.email_regexp will have a new default on Devise 4.1
+To keep the current behavior please set in your config/initializers/devise.rb the following:
+
+  Devise.setup do |config|
+    config.email_regexp = /\A[^@\s]+@([^@\s]+\.)+[^@\W]+\z/
+  end
+
+If you want to use the new default:
+
+  Devise.setup do |config|
+    config.email_regexp = /\A[^@\s]+@[^@\s]+\z/
+  end
+. (called from <top (required)> at /myapp/config/initializers/devise.rb:3)
+DEPRECATION WARNING: [Devise] config.email_regexp will have a new default on Devise 4.1
+To keep the current behavior please set in your config/initializers/devise.rb the following:
+
+  Devise.setup do |config|
+    config.email_regexp = /\A[^@\s]+@([^@\s]+\.)+[^@\W]+\z/
+  end
+
+If you want to use the new default:
+
+  Devise.setup do |config|
+    config.email_regexp = /\A[^@\s]+@[^@\s]+\z/
+  end
+. (called from <top (required)> at /myapp/config/initializers/devise.rb:3)
+  [1m[36mActiveRecord::SchemaMigration Load (3.0ms)[0m  [1mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+Migrating to CreateAnalyticServers (20161020043610)
+DEPRECATION WARNING: [Devise] config.email_regexp will have a new default on Devise 4.1
+To keep the current behavior please set in your config/initializers/devise.rb the following:
+
+  Devise.setup do |config|
+    config.email_regexp = /\A[^@\s]+@([^@\s]+\.)+[^@\W]+\z/
+  end
+
+If you want to use the new default:
+
+  Devise.setup do |config|
+    config.email_regexp = /\A[^@\s]+@[^@\s]+\z/
+  end
+. (called from <top (required)> at /myapp/config/initializers/devise.rb:3)
+  [1m[36mActiveRecord::SchemaMigration Load (1.9ms)[0m  [1mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+Migrating to CreateAnalyticServers (20161020043610)
+DEPRECATION WARNING: [Devise] config.email_regexp will have a new default on Devise 4.1
+To keep the current behavior please set in your config/initializers/devise.rb the following:
+
+  Devise.setup do |config|
+    config.email_regexp = /\A[^@\s]+@([^@\s]+\.)+[^@\W]+\z/
+  end
+
+If you want to use the new default:
+
+  Devise.setup do |config|
+    config.email_regexp = /\A[^@\s]+@[^@\s]+\z/
+  end
+. (called from <top (required)> at /myapp/config/initializers/devise.rb:3)
+  [1m[36mActiveRecord::SchemaMigration Load (1.8ms)[0m  [1mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+Migrating to CreateAnalyticServers (20161020043610)
+DEPRECATION WARNING: [Devise] config.email_regexp will have a new default on Devise 4.1
+To keep the current behavior please set in your config/initializers/devise.rb the following:
+
+  Devise.setup do |config|
+    config.email_regexp = /\A[^@\s]+@([^@\s]+\.)+[^@\W]+\z/
+  end
+
+If you want to use the new default:
+
+  Devise.setup do |config|
+    config.email_regexp = /\A[^@\s]+@[^@\s]+\z/
+  end
+. (called from <top (required)> at /myapp/config/initializers/devise.rb:3)
+  [1m[36mActiveRecord::SchemaMigration Load (1.4ms)[0m  [1mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+Migrating to CreateAnalyticServers (20161020043610)
+DEPRECATION WARNING: [Devise] config.email_regexp will have a new default on Devise 4.1
+To keep the current behavior please set in your config/initializers/devise.rb the following:
+
+  Devise.setup do |config|
+    config.email_regexp = /\A[^@\s]+@([^@\s]+\.)+[^@\W]+\z/
+  end
+
+If you want to use the new default:
+
+  Devise.setup do |config|
+    config.email_regexp = /\A[^@\s]+@[^@\s]+\z/
+  end
+. (called from <top (required)> at /myapp/config/initializers/devise.rb:3)
+  [1m[36mActiveRecord::SchemaMigration Load (2.5ms)[0m  [1mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+Migrating to CreateAnalyticServers (20161020043610)
+DEPRECATION WARNING: [Devise] config.email_regexp will have a new default on Devise 4.1
+To keep the current behavior please set in your config/initializers/devise.rb the following:
+
+  Devise.setup do |config|
+    config.email_regexp = /\A[^@\s]+@([^@\s]+\.)+[^@\W]+\z/
+  end
+
+If you want to use the new default:
+
+  Devise.setup do |config|
+    config.email_regexp = /\A[^@\s]+@[^@\s]+\z/
+  end
+. (called from <top (required)> at /myapp/config/initializers/devise.rb:3)
+  [1m[36mActiveRecord::SchemaMigration Load (1.5ms)[0m  [1mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+Migrating to CreateAnalyticServers (20161020043610)
+DEPRECATION WARNING: [Devise] config.email_regexp will have a new default on Devise 4.1
+To keep the current behavior please set in your config/initializers/devise.rb the following:
+
+  Devise.setup do |config|
+    config.email_regexp = /\A[^@\s]+@([^@\s]+\.)+[^@\W]+\z/
+  end
+
+If you want to use the new default:
+
+  Devise.setup do |config|
+    config.email_regexp = /\A[^@\s]+@[^@\s]+\z/
+  end
+. (called from <top (required)> at /myapp/config/initializers/devise.rb:3)
+  [1m[36mActiveRecord::SchemaMigration Load (1.8ms)[0m  [1mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+Migrating to CreateAnalyticServers (20161020043610)
+  [1m[35m (37.6ms)[0m  CREATE TABLE `analytic_servers` (`id` int(11) auto_increment PRIMARY KEY, `name` varchar(255), `ip` varchar(255), `port` int(11), `status` varchar(255), `pid` int(11), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36m (0.5ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (1.4ms)[0m  INSERT INTO `schema_migrations` (`version`) VALUES ('20161020043610')
+  [1m[36m (1.1ms)[0m  [1mCOMMIT[0m
+Migrating to AddIpToCamera (20161020064659)
+  [1m[35m (95.2ms)[0m  ALTER TABLE `cameras` ADD `ip` varchar(255)
+  [1m[36m (74.6ms)[0m  [1mALTER TABLE `cameras` ADD `port` int(11)[0m
+  [1m[35m (70.2ms)[0m  ALTER TABLE `cameras` ADD `username` varchar(255)
+  [1m[36m (90.0ms)[0m  [1mALTER TABLE `cameras` ADD `password` varchar(255)[0m
+  [1m[35m (0.6ms)[0m  BEGIN
+  [1m[36mSQL (0.5ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20161020064659')[0m
+  [1m[35m (0.9ms)[0m  COMMIT
+Migrating to CreateAnalyticInstanceConfigs (20161020064853)
+  [1m[36m (21.6ms)[0m  [1mCREATE TABLE `analytic_instance_configs` (`id` int(11) auto_increment PRIMARY KEY, `name` varchar(255), `fileName` varchar(255), `data` mediumtext, `analytic_instance_id` int(11), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [1m[35m (33.1ms)[0m  CREATE  INDEX `index_analytic_instance_configs_on_analytic_instance_id`  ON `analytic_instance_configs` (`analytic_instance_id`) 
+  [1m[36m (0.6ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO `schema_migrations` (`version`) VALUES ('20161020064853')
+  [1m[36m (0.8ms)[0m  [1mCOMMIT[0m
+Migrating to AddReferencesToVms (20161020065421)
+  [1m[35m (91.5ms)[0m  ALTER TABLE `vmses` ADD `open_cctv_server_id` int(11)
+  [1m[36m (27.4ms)[0m  [1mCREATE  INDEX `index_vmses_on_open_cctv_server_id`  ON `vmses` (`open_cctv_server_id`) [0m
+  [1m[35m (0.5ms)[0m  BEGIN
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20161020065421')[0m
+  [1m[35m (0.6ms)[0m  COMMIT
+Migrating to AddReferencesToAnalyticInstance (20161020065511)
+  [1m[36m (89.3ms)[0m  [1mALTER TABLE `analytic_instances` ADD `analytic_server_id` int(11)[0m
+  [1m[35m (29.7ms)[0m  CREATE  INDEX `index_analytic_instances_on_analytic_server_id`  ON `analytic_instances` (`analytic_server_id`) 
+  [1m[36m (0.5ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.6ms)[0m  INSERT INTO `schema_migrations` (`version`) VALUES ('20161020065511')
+  [1m[36m (2.1ms)[0m  [1mCOMMIT[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.3ms)[0m  SELECT `schema_migrations`.* FROM `schema_migrations`
+DEPRECATION WARNING: [Devise] config.email_regexp will have a new default on Devise 4.1
+To keep the current behavior please set in your config/initializers/devise.rb the following:
+
+  Devise.setup do |config|
+    config.email_regexp = /\A[^@\s]+@([^@\s]+\.)+[^@\W]+\z/
+  end
+
+If you want to use the new default:
+
+  Devise.setup do |config|
+    config.email_regexp = /\A[^@\s]+@[^@\s]+\z/
+  end
+. (called from <top (required)> at /myapp/config/initializers/devise.rb:3)
+  [1m[36mActiveRecord::SchemaMigration Load (2.2ms)[0m  [1mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+Migrating to AddisStreamToVms (20161020071323)
+  [1m[35m (0.5ms)[0m  BEGIN
+  [1m[36mSQL (0.6ms)[0m  [1mINSERT INTO `schema_migrations` (`version`) VALUES ('20161020071323')[0m
+  [1m[35m (1.1ms)[0m  COMMIT
+Migrating to AddisStreamToAnalytic (20161020071344)
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO `schema_migrations` (`version`) VALUES ('20161020071344')
+  [1m[36m (0.7ms)[0m  [1mCOMMIT[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.3ms)[0m  SELECT `schema_migrations`.* FROM `schema_migrations`
+DEPRECATION WARNING: [Devise] config.email_regexp will have a new default on Devise 4.1
+To keep the current behavior please set in your config/initializers/devise.rb the following:
+
+  Devise.setup do |config|
+    config.email_regexp = /\A[^@\s]+@([^@\s]+\.)+[^@\W]+\z/
+  end
+
+If you want to use the new default:
+
+  Devise.setup do |config|
+    config.email_regexp = /\A[^@\s]+@[^@\s]+\z/
+  end
+. (called from <top (required)> at /myapp/config/initializers/devise.rb:3)

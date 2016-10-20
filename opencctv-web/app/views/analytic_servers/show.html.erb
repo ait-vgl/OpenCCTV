@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @analytic_server.name %>
+</p>
+
+<p>
+  <strong>Ip:</strong>
+  <%= @analytic_server.ip %>
+</p>
+
+<p>
+  <strong>Port:</strong>
+  <%= @analytic_server.port %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @analytic_server.status %>
+</p>
+
+<p>
+  <strong>Pid:</strong>
+  <%= @analytic_server.pid %>
+</p>
+
+<%= link_to 'Edit', edit_analytic_server_path(@analytic_server) %> |
+<%= link_to 'Back', analytic_servers_path %>

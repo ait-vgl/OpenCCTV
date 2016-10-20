@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160822071607) do
+ActiveRecord::Schema.define(version: 20161020071344) do
 
   create_table "analytic_input_streams", force: true do |t|
     t.string   "name"
@@ -22,6 +22,17 @@ ActiveRecord::Schema.define(version: 20160822071607) do
   end
 
   add_index "analytic_input_streams", ["analytic_id"], name: "index_analytic_input_streams_on_analytic_id", using: :btree
+
+  create_table "analytic_instance_configs", force: true do |t|
+    t.string   "name"
+    t.string   "fileName"
+    t.text     "data",                 limit: 16777215
+    t.integer  "analytic_instance_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "analytic_instance_configs", ["analytic_instance_id"], name: "index_analytic_instance_configs_on_analytic_instance_id", using: :btree
 
   create_table "analytic_instance_streams", force: true do |t|
     t.integer  "analytic_instance_id"
@@ -44,13 +55,25 @@ ActiveRecord::Schema.define(version: 20160822071607) do
     t.integer  "group_user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "status",          default: false
+    t.boolean  "status",             default: false
+    t.integer  "analytic_server_id"
   end
 
   add_index "analytic_instances", ["analytic_id"], name: "index_analytic_instances_on_analytic_id", using: :btree
+  add_index "analytic_instances", ["analytic_server_id"], name: "index_analytic_instances_on_analytic_server_id", using: :btree
   add_index "analytic_instances", ["group_user_id"], name: "index_analytic_instances_on_group_user_id", using: :btree
   add_index "analytic_instances", ["notification_id"], name: "index_analytic_instances_on_notification_id", using: :btree
   add_index "analytic_instances", ["user_id"], name: "index_analytic_instances_on_user_id", using: :btree
+
+  create_table "analytic_servers", force: true do |t|
+    t.string   "name"
+    t.string   "ip"
+    t.integer  "port"
+    t.string   "status"
+    t.integer  "pid"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "analytics", force: true do |t|
     t.string   "name"
@@ -84,6 +107,10 @@ ActiveRecord::Schema.define(version: 20160822071607) do
     t.integer  "vms_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "ip"
+    t.integer  "port"
+    t.string   "username"
+    t.string   "password"
   end
 
   add_index "cameras", ["vms_id"], name: "index_cameras_on_vms_id", using: :btree
@@ -266,16 +293,18 @@ ActiveRecord::Schema.define(version: 20160822071607) do
     t.integer  "server_port"
     t.string   "username"
     t.string   "password"
-    t.boolean  "verified",         default: false, null: false
+    t.boolean  "verified",            default: false, null: false
     t.integer  "vms_connector_id"
     t.integer  "user_id"
     t.integer  "group_user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "vms_type"
+    t.integer  "open_cctv_server_id"
   end
 
   add_index "vmses", ["group_user_id"], name: "index_vmses_on_group_user_id", using: :btree
+  add_index "vmses", ["open_cctv_server_id"], name: "index_vmses_on_open_cctv_server_id", using: :btree
   add_index "vmses", ["user_id"], name: "index_vmses_on_user_id", using: :btree
   add_index "vmses", ["vms_connector_id"], name: "index_vmses_on_vms_connector_id", using: :btree
 

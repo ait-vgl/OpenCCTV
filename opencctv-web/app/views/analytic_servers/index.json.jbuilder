@@ -1,0 +1,1 @@
+json.array! @analytic_servers, partial: 'analytic_servers/analytic_server', as: :analytic_server

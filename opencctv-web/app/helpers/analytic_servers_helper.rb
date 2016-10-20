@@ -1,0 +1,2 @@
+module AnalyticServersHelper
+end

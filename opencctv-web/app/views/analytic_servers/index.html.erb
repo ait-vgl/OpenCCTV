@@ -1,0 +1,33 @@
+<h1>Listing analytic_servers</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Ip</th>
+      <th>Port</th>
+      <th>Status</th>
+      <th>Pid</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @analytic_servers.each do |analytic_server| %>
+      <tr>
+        <td><%= analytic_server.name %></td>
+        <td><%= analytic_server.ip %></td>
+        <td><%= analytic_server.port %></td>
+        <td><%= analytic_server.status %></td>
+        <td><%= analytic_server.pid %></td>
+        <td><%= link_to 'Show', analytic_server %></td>
+        <td><%= link_to 'Edit', edit_analytic_server_path(analytic_server) %></td>
+        <td><%= link_to 'Destroy', analytic_server, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Analytic server', new_analytic_server_path %>

@@ -1,0 +1,1 @@
+json.partial! "analytic_servers/analytic_server", analytic_server: @analytic_server

@@ -1,0 +1,37 @@
+<%= form_for(@analytic_server) do |f| %>
+  <% if @analytic_server.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@analytic_server.errors.count, "error") %> prohibited this analytic_server from being saved:</h2>
+
+      <ul>
+      <% @analytic_server.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :ip %><br>
+    <%= f.text_field :ip %>
+  </div>
+  <div class="field">
+    <%= f.label :port %><br>
+    <%= f.text_field :port %>
+  </div>
+  <div class="field">
+    <%= f.label :status %><br>
+    <%= f.text_field :status %>
+  </div>
+  <div class="field">
+    <%= f.label :pid %><br>
+    <%= f.text_field :pid %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
