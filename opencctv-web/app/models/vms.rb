@@ -227,6 +227,31 @@ class Vms < ActiveRecord::Base
     return false
   end
 
+  def validate_camera_http(response)
+    if (!response.nil?)
+      if (response.code == '200')
+        return true
+      else
+        return false
+      end
+    end
+    return false
+  end
+
+  def connect_camera_with_basic_auth(url, port_number, username, password)
+    uri = URI.parse(url)
+    http = Net::HTTP.new(uri.host, port_number)
+    http.open_timeout = 5
+    http.read_timeout = 5
+    request = Net::HTTP::Get.new(uri.request_uri)
+    request.basic_auth(username, password)
+    begin
+      return http.request(request)
+    rescue
+      return false
+    end
+  end
+
 
   ### Add Camera after testing by trying to connect with the device
 
@@ -356,13 +381,13 @@ class Vms < ActiveRecord::Base
 
   def lilin_add_monitors(response)
 
-    puts("ppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp")
+    puts("kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk")
 
     result = response.body
 
     if !result.to_s.empty?
 
-      puts "Startttttttttttt"
+      #puts "Startttttttttttt"
       groupAllowMax = findValueResult(result, "groupallowmax").to_s.to_i
       puts groupAllowMax
 
@@ -372,19 +397,18 @@ class Vms < ActiveRecord::Base
       chkMaxGroup = 0
       for i in 0..groupMax
 
-        puts "iii  #{i}"
-        puts chkMaxGroup
+       # puts "iii  #{i}"
+        #puts chkMaxGroup
 
         if chkMaxGroup == groupAllowMax
           break
         end
 
         if findValueResult(result, "group#{i}allow").to_s.to_i == 1 ## is allowed
-          puts findValueResult(result, "group#{i}chused")
+          #puts findValueResult(result, "group#{i}chused")
           channels = findValueResult(result, "group#{i}chused").to_s
           count = 0
           channels.to_s.each_char do |channel|
-
             if channel == '1'
 
               url = "http://#{self.server_ip}/cmd=getchannelinfo&ch=#{count}"
@@ -394,12 +418,21 @@ class Vms < ActiveRecord::Base
 
                 cameraResult = response.body
 
+                puts "Camera result xxxxxxxxxxxxxxxxxxxxxxx"
+                puts cameraResult
+
                 #puts "http://192.41.170.243:8080/cmd=getchannelinfo&ch=#{count}"
 
                 camera = Camera.new
                 camera.camera_id = "getstream#{count}"
-                camera.description =  "Width and height is fixed at 720x480. The camera channel is #{count}"
+                camera.description =  "The camera channel is #{count}"
                 camera.name = findValueResult(cameraResult, "name").to_s
+                camera.ip = findValueResult(cameraResult, "ip").to_s
+                camera.username = findValueResult(cameraResult, "user").to_s.strip
+                camera.password = findValueResult(cameraResult, "pass").to_s.strip
+                camera.http_port = findValueResult(cameraResult, "httpport")
+                camera.video_port = findValueResult(cameraResult, "videoport")
+
 
                 camera.verified = true
 
@@ -407,17 +440,72 @@ class Vms < ActiveRecord::Base
 
                 camera.lilin_grab_default_frame
 
-                stream = Stream.new
-                stream.name = "Channel: #{count} - #{camera.name}"
-                stream.width = 720
-                stream.height = 480
-                stream.compression_rate = 100
-                stream.keep_aspect_ratio = false
-                stream.allow_upsizing = false
-                stream.camera = camera
+                urlProfile = "http://#{camera.ip}/getprofile"
+                responseProfile = connect_camera_with_basic_auth(urlProfile, camera.http_port, camera.username, camera.password)
 
-                stream.save
-                stream.update(:verified => true)
+                #puts camera.username
+                #puts camera.password
+
+                #puts urlProfile
+                #puts responseProfile
+                # http://192.41.170.252/getprofile
+
+                if (responseProfile && validate_camera_http(responseProfile))
+                    profileResult = responseProfile.body
+
+                    puts "profile result xxxxxxxxxxxxxxxxxxxxxxx"
+                    puts profileResult
+
+                    #puts "jjjjjjjjjjjjjjjjjjjjjjjjj"
+                    #puts  findValueResult(profileResult, "profileno_range").to_s
+                  #loop with all profile
+                  #
+
+                    range = findValueResult(profileResult, "profileno_range").to_s.split(",")
+                   # puts range.first
+                    #puts range.last
+                    #puts range.count
+                    #TODO please fix when VMS have empty camera, what to do then
+                    for j in 0..(range.count-1)
+
+                      puts "Loop in profile #{j}"
+
+                      #out of profile range
+                      if(findValueResult(profileResult, "profile_0#{j}_name").to_s == "")
+                        break
+                      end
+
+
+                      stream = Stream.new
+                      stream.name = findValueResult(profileResult, "profile_0#{j}_name").to_s
+                      stream.width = findValueResult(profileResult, "profile_0#{j}_res").to_s.split("x")[0]
+                      stream.height = findValueResult(profileResult, "profile_0#{j}_res").to_s.split("x")[1]
+                      stream.fps = findValueResult(profileResult, "profile_0#{j}_fps")
+
+
+                      # 0 = H.264, 1 = JPEG
+                      #TODO profile type mismatch
+                      #puts "profile type"
+                      #puts findValueResult(profileResult, "profile_0#{j}_type")
+                      #puts (findValueResult(profileResult, "profile_0#{j}_type") == "0")
+
+                      stream.codec = (findValueResult(profileResult, "profile_0#{j}_type") == "0") ? "H.264" : "JPEG"
+                      stream.protocol = "rtsp"
+
+
+                      stream.url = "rtsp://#{camera.ip}:#{camera.video_port}/rtsp#{(stream.name).downcase}"
+
+                      stream.compression_rate = 100
+                      stream.keep_aspect_ratio = false
+                      stream.allow_upsizing = false
+                      stream.camera = camera
+
+                      stream.save
+                      stream.update(:verified => true)
+                  end
+                else
+                    puts "Failed to connect to camera ip #{camera.ip}, named #{camera.name}."
+                end
               else
                 raise 'Failed to connect to Lilin server.'
               end
@@ -438,7 +526,7 @@ class Vms < ActiveRecord::Base
       # puts line.split('=')[0]
       #puts line.split('=')[1]
       if line.split('=')[0] == search
-        return line.split('=')[1]
+        return (line.split('=')[1]).split("\n")[0]
       end
     end
 

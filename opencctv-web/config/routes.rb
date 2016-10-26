@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :analytic_servers
+
   get 'test/createTest', to: "test#createTest"
   get 'test/clearTest'
 
