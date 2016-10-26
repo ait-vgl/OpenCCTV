@@ -6,6 +6,6 @@
 [subrepo]
 	remote = git@github.com:ait-vgl/opencctv-web.git
 	branch = develop
-	commit = 1afa726ca25715ece8fdd5b413095d871f05aa8e
-	parent = 10b2bacb0552503be7ba1cb29b406196f09daf19
+	commit = 40c4b67aeb8b6ca11fa5c045a99d070218263550
+	parent = 227dd7d32f3126acd588746173f7622fcdd54599
 	cmdver = 0.3.0
