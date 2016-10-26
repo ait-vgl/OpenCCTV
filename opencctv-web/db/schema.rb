@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161020071344) do
+ActiveRecord::Schema.define(version: 20161021070450) do
 
   create_table "analytic_input_streams", force: true do |t|
     t.string   "name"
@@ -111,6 +111,8 @@ ActiveRecord::Schema.define(version: 20161020071344) do
     t.integer  "port"
     t.string   "username"
     t.string   "password"
+    t.integer  "http_port"
+    t.integer  "video_port"
   end
 
   add_index "cameras", ["vms_id"], name: "index_cameras_on_vms_id", using: :btree
@@ -243,6 +245,10 @@ ActiveRecord::Schema.define(version: 20161020071344) do
     t.integer  "camera_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "codec"
+    t.string   "protocol"
+    t.string   "url"
+    t.integer  "fps"
   end
 
   add_index "streams", ["camera_id"], name: "index_streams_on_camera_id", using: :btree
