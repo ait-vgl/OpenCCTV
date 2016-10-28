@@ -1,0 +1,13 @@
+<div class="container">
+  <ol class="breadcrumb">
+    <li><%= link_to 'Home', root_path %></li>
+    <li><%= link_to 'Analytic instance', analytic_instance_path(@analytic_instance) %></li>
+    <li class="active">VMS</li>
+  </ol>
+</div>
+
+<div class="container">
+<%= render 'info' %>
+<%= render 'form' %>
+
+</div>

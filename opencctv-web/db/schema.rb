@@ -11,7 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161021070450) do
+ActiveRecord::Schema.define(version: 20161027030008) do
+
+  create_table "analytic_configs", force: true do |t|
+    t.string   "name"
+    t.string   "fileName"
+    t.text     "data",        limit: 16777215
+    t.integer  "analytic_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "analytic_configs", ["analytic_id"], name: "index_analytic_configs_on_analytic_id", using: :btree
 
   create_table "analytic_input_streams", force: true do |t|
     t.string   "name"

@@ -1,6 +1,0 @@
-      invoke  active_record
-      create    db/migrate/20161020064853_create_analytic_instance_configs.rb
-      create    app/models/analytic_instance_config.rb
-      invoke    test_unit
-      create      test/models/analytic_instance_config_test.rb
-      create      test/fixtures/analytic_instance_configs.yml

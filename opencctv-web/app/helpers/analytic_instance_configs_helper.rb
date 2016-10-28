@@ -1,0 +1,2 @@
+module AnalyticInstanceConfigsHelper
+end

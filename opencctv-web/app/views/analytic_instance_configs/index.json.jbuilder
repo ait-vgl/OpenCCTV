@@ -1,0 +1,1 @@
+json.array! @analytic_instance_configs, partial: 'analytic_instance_configs/analytic_instance_config', as: :analytic_instance_config

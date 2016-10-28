@@ -1,0 +1,1 @@
+json.partial! "analytic_instance_configs/analytic_instance_config", analytic_instance_config: @analytic_instance_config

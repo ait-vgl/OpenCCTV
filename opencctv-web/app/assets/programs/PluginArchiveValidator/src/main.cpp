@@ -17,15 +17,30 @@ void appendHtmlTitle(const std::string& sTitle, std::stringstream& ss)
 	ss << "<strong>" << sTitle << "</strong>";
 }
 
-std::string generatePluginValidatorOutput(bool bVerified, const std::string& sHtmlOutput, const std::string& sAnalyticInputs)
+std::string generatePluginValidatorOutput(bool bVerified, const std::string& sHtmlOutput, const std::string& sAnalyticInputs, const std::string& sAnalyticConfigs)
 {
 	std::stringstream ss;
 	ss << "<pluginvalidatorreply>";
 		ss << "<verified>" << bVerified << "</verified>";
 		ss << "<html>" << sHtmlOutput << "</html>";
-		ss << "<analytic>" << sAnalyticInputs << "</analytic>";
+		ss << "<analytic>" << sAnalyticConfigs << sAnalyticInputs << "</analytic>";
 	ss << "</pluginvalidatorreply>";
 	return ss.str();
+}
+
+std::string generateConfigFileNameXml(std::map<std::string, std::string>& mConfigFileNames)
+{
+	std::string sXml = "<configfiles>";
+	std::map<std::string, std::string>::iterator it;
+	for(it = mConfigFileNames.begin(); it != mConfigFileNames.end(); ++it)
+	{
+		sXml.append("<configfile>");
+		sXml.append("<name>").append(it->first).append("</name>");
+		sXml.append("<filename>").append(it->second).append("</filename>");
+		sXml.append("</configfile>");
+	}
+	sXml.append("</configfiles>");
+	return sXml;
 }
 
 int main(int argc, char* argv[])
@@ -69,6 +84,9 @@ int main(int argc, char* argv[])
 		appendHtmlTitle("Error:", ssHtmlOutput);
 		ssHtmlOutput << "<p>" << e.what() << "</p>";
 	}
+
+	std::map<std::string, std::string> mConfigFileNames;
+	std::string sAnalyticConfigs;
 	if(bUnzipped)
 	{
 		appendHtmlTitle("All the files", ssHtmlOutput);
@@ -77,8 +95,13 @@ int main(int argc, char* argv[])
 		for(size_t i = 0; i < files.size(); ++i)
 		{
 			ssHtmlOutput << files[i] << "<br/>";
+
+			if(files[i] != "zip")
+				mConfigFileNames[files[i]] = files[i] ;
 		}
 		ssHtmlOutput << "</p>";
+		sAnalyticConfigs = generateConfigFileNameXml(mConfigFileNames);
+
 	}
 	else
 	{
@@ -136,5 +159,5 @@ int main(int argc, char* argv[])
 		appendHtmlTitle("Shared Library not found. Invalid plugin archive!", ssHtmlOutput);
 	}
 	unzipper.removeUnzippedFiles();
-	std::cout << generatePluginValidatorOutput(bVerified, ssHtmlOutput.str(), sAnalyticInputs) << std::endl;
+	std::cout << generatePluginValidatorOutput(bVerified, ssHtmlOutput.str(), sAnalyticInputs, sAnalyticConfigs) << std::endl;
 }

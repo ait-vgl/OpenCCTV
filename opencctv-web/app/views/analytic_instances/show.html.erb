@@ -55,6 +55,46 @@
         </div>
     <%end%>
   </div>
+
+  <div class="media">
+
+
+    <%if @analytic_configs.empty?%>
+        <div class="alert alert-warning">
+          Currently no analytic  config files are upload with the analytic.
+        </div>
+    <%else%>
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4>Analytic Instance Input Streams</h4>
+          </div>
+          <div class="media">
+            <table class="table table-hover">
+              <thead>
+              <tr>
+                <th>#</th>
+                <th>File name</th>
+                <th colspan="2"></th>
+              </tr>
+              </thead>
+
+              <tbody>
+              <% i = 1 %>
+              <% @analytic_configs.each do |analytic_instance_config| %>
+                  <tr>
+                    <td><%= i %></td>
+                    <td><%= analytic_instance_config.fileName %></td>
+                    <td><%= link_to 'Show', analytic_instance_analytic_instance_config_path(@analytic_instance.id, analytic_instance_config.id), class: "btn btn-xs btn-default"%></td>
+                    <td><%= link_to 'Edit', edit_analytic_instance_analytic_instance_config_path(@analytic_instance.id, analytic_instance_config.id), class: "btn btn-xs btn-warning" %>
+                    <td><%#= link_to 'Destroy', analytic_instance_analytic_instance_stream_path(@analytic_instance,input_stream), method: :delete, class: "btn btn-xs btn-danger", data: { confirm: 'Are you sure?' } %></td>
+                  </tr>
+                  <% i = i + 1 %>
+              <% end %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+    <%end%>
+  </div>
+
 </div>
-
-

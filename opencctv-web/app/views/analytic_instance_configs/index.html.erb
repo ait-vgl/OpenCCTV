@@ -1,0 +1,23 @@
+<h1>Listing analytic_instance_configs</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @analytic_instance_configs.each do |analytic_instance_config| %>
+      <tr>
+        <td><%= link_to 'Show', analytic_instance_config %></td>
+        <td><%= link_to 'Edit', edit_analytic_instance_config_path(analytic_instance_config) %></td>
+        <td><%= link_to 'Destroy', analytic_instance_config, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Analytic instance config', new_analytic_instance_config_path %>

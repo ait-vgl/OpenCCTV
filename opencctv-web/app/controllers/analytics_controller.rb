@@ -56,6 +56,13 @@ class AnalyticsController < ApplicationController
         end
       end
 
+      if (!@analytic.errors.any?)
+        analytic_configs = validation_result[:analytic_configs]
+        analytic_configs.each do |in_analytic_config|
+          @analytic.analytic_configs.push(in_analytic_config)
+        end
+      end
+
     else
       flash[:error] = 'Failed to upload the new analytic. No analytic plugin archive (.zip) file was selected or invalid file type.'
     end

@@ -1,0 +1,12 @@
+<div class="container">
+  <ol class="breadcrumb">
+    <li><%= link_to 'Home', root_path %></li>
+    <li><%= link_to  'Analytic instance', analytic_instance_path(@analytic_instance) %></li>
+    <li class="active">Edit configruation file</li>
+  </ol>
+</div>
+
+<div class="container">
+  <h1>Edit configuration file</h1>
+  <%= render 'form' %>
+</div>

@@ -24,6 +24,7 @@ class AnalyticInstancesController < ApplicationController
 
   # GET /analytic_instances/1
   def show
+    @analytic_configs = AnalyticInstanceConfig.where(analytic_instance_id: @analytic_instance.id)
     respond_with(@analytic_instance)
   end
 
@@ -67,7 +68,20 @@ class AnalyticInstancesController < ApplicationController
                                                 :notification_id => params[:analytic_instance][:notification_id],
                                                 :user_id => current_user.id)
       @analytic_instance.save
+
       respond_with(@analytic_instance)
+    end
+
+
+    #save  first analytic configs
+    @analytic_configs = Analytic.joins(:analytic_configs).where(analytics: {id: @analytic_instance.analytic_id}).select('analytic_configs.name, analytic_configs.fileName, analytic_configs.data')
+    analytic_config_array = Array.new
+    @analytic_configs.each do |analytic_config|
+      analytic_instance_config_db = AnalyticInstanceConfig.new
+      analytic_instance_config_db.name = analytic_config.name
+      analytic_instance_config_db.fileName = analytic_config.fileName
+      analytic_instance_config_db.data = analytic_config.data
+      @analytic_instance.analytic_instance_configs.push(analytic_instance_config_db)
     end
 
   end

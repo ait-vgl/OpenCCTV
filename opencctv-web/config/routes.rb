@@ -2,6 +2,10 @@ Rails.application.routes.draw do
 
   resources :analytic_servers
 
+resources :analytic_instances do
+  resources :analytic_instance_configs do
+  end
+end
   get 'test/createTest', to: "test#createTest"
   get 'test/clearTest'
 

@@ -1,0 +1,34 @@
+<%= form_for([@analytic_instance,@analytic_instance_config]) do |f| %>
+  <% if @analytic_instance_config.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@analytic_instance_config.errors.count, "error") %> prohibited this analytic_instance_config from being saved:</h2>
+
+      <ul>
+      <% @analytic_instance_config.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+  <!--Form fields-->
+  <div class="field">
+    <%= f.label 'File name: ' %>     <%= @analytic_instance_config.fileName %>
+  </div>
+  <div class="field">
+    <%#= f.label  'Configruation data'%><br>
+    <%= f.text_area :data, cols: "150", rows: "50", :disabled => params[:action]!="edit"%>
+
+  </div>
+
+  <!--Submit button-->
+  <% if params[:action]== "edit" %>
+  <p>
+  <div class="actions">
+    <%= f.submit 'Save config file', :class => 'btn btn-success btn-mini'%>
+    <%= link_to 'Cancel', @analytic_instance, :class => "btn btn-danger" %>
+  </div>
+  </p>
+  <% end %>
+<% end %>
