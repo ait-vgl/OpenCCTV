@@ -1,32 +1,43 @@
 <%= form_for([@analytic_instance, @analytic_instance_stream]) do |f| %>
-  <!--Report errors if any-->
-  <% if @analytic_instance_stream.errors.any? %>
+    <!--Report errors if any-->
+    <% if @analytic_instance_stream.errors.any? %>
         <div id="error_explanation" class="alert alert-danger" role="alert">
-      <h2><%= pluralize(@analytic_instance_stream.errors.count, "error") %> prohibited this analytic_instance_stream from being saved:</h2>
+          <h2><%= pluralize(@analytic_instance_stream.errors.count, "error") %> prohibited this analytic_instance_stream
+            from being saved:</h2>
 
-      <ul>
-      <% @analytic_instance_stream.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+          <ul>
+            <% @analytic_instance_stream.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <!--Form fields-->
+    <div class="field">
+      <%= f.label :analytic_input_stream_id, "Analytic Input Stream" %><br>
+      <%= f.collection_select(:analytic_input_stream_id, @analytic_instance.analytic.analytic_input_streams, :id, :name, {prompt: 'Select Input Stream Type'}, :disabled => params[:action]=="show")  %>
     </div>
-  <% end %>
+    <div class="field">
+      <%= f.label :stream_id, "Stream" %><br>
+      <%= f.collection_select(:stream_id, @streams, :id, :name, {prompt: 'Select the Stream'}, :disabled => params[:action]=="show")  %>
+    </div>
+    <br/>
+    <% if params[:action]!= "new" %>
+        <div class="field">
+          <%= f.label :config, "Config" %><br>
+          <%= f.text_area :config, cols: "60", rows: "20", :disabled => params[:action]=="show" %>
+        </div>
+        <br/>
+    <% end %>
+    <!--Submit button-->
+    <p>
+      <% if params[:action]!= "show" %>
+        <div class="actions">
+          <%= f.submit class: "btn btn-success btn-mini" %>
+              <%= link_to 'Cancel', @analytic_instance, :class => "btn btn-danger" %>
+              </div>
 
-  <!--Form fields-->
-  <div class="field">
-    <%= f.label :analytic_input_stream_id, "Analytic Input Stream"%><br>
-    <%= f.collection_select( :analytic_input_stream_id, @analytic_instance.analytic.analytic_input_streams, :id, :name, {prompt: 'Select Input Stream Type'})%>
-  </div>
-  <div class="field">
-    <%= f.label :stream_id, "Stream"%><br>
-    <%= f.collection_select( :stream_id, @streams, :id, :name, {prompt: 'Select the Stream'})%>
-  </div>
-  <br/>
-  <!--Submit button-->
-  <p>
-  <div class="actions">
-    <%= f.submit class: "btn btn-success btn-mini"%>
-    <%= link_to 'Cancel', @analytic_instance, :class => "btn btn-danger" %>
-  </div>
-  </p>
-<% end %> <!--Form ends-->
+      <% end %>
+    </p>
+    <% end %> <!--Form ends-->

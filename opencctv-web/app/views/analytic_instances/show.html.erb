@@ -43,6 +43,7 @@
                     <td><%= i %></td>
                     <td><%= input_stream.analytic_input_stream.name %></td>
                     <td><%= input_stream.stream.name %></td>
+
                     <td><%= link_to 'Show', analytic_instance_analytic_instance_stream_path(@analytic_instance,input_stream), class: "btn btn-xs btn-default"%></td>
                     <td><%= link_to 'Edit', edit_analytic_instance_analytic_instance_stream_path(@analytic_instance,input_stream), class: "btn btn-xs btn-warning" %>
                     <td><%= link_to 'Destroy', analytic_instance_analytic_instance_stream_path(@analytic_instance,input_stream), method: :delete, class: "btn btn-xs btn-danger", data: { confirm: 'Are you sure?' } %></td>

@@ -62,6 +62,8 @@ class Analytic < ActiveRecord::Base
     validation_result[:analytic_configs] = analytic_configs
 
     return validation_result
+
+
   end
 
 end

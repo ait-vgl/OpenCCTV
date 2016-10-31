@@ -1,6 +1,7 @@
 class AnalyticInstanceStreamsController < ApplicationController
   before_action :set_analytic_instance_stream, only: [:show, :edit, :update, :destroy]
   before_action :set_analytic_instance, only: [:index, :new, :create, :edit, :show, :update, :destroy]
+  before_action :set_stream, only: [:edit, :new, :show]
   before_action :authenticate_user!
   #before_action :isOpenCCTVPageAdmin?
   respond_to :html
@@ -22,7 +23,9 @@ class AnalyticInstanceStreamsController < ApplicationController
     @analytic_instance_stream.analytic_instance = @analytic_instance
 
     #@vmses = Vms.where(user_id: current_user.id)
-    @streams = Vms.where(user_id: current_user.id).joins(cameras: :streams).select("streams.id,streams.name")
+
+
+    #TODO: add filter by group
 
     respond_with(@analytic_instance_stream)
   end
@@ -45,11 +48,15 @@ class AnalyticInstanceStreamsController < ApplicationController
       @analytic_instance_stream.stream = Stream.find(params[:analytic_instance_stream][:stream_id])
     end
 
+    @analytic_instance_stream.config = File.read(Rails.root.join('app/uploads/configs', 'framegraber.yml'))
     @analytic_instance_stream.save
 
     if @analytic_instance_stream.errors.any?
-      respond_with(@analytic_instance_stream)
+      flash[:alert] = "Error: Cannot save analytic instance stream input. For more details: #{@analytic_instance_stream.errors.messages}"
+      #puts @analytic_instance_stream.errors.messages
+      respond_with(@analytic_instance)
     else
+      flash[:info] = "Analytic instance input stream added successfully"
       redirect_to analytic_instance_path(@analytic_instance)
     end
   end
@@ -80,6 +87,16 @@ class AnalyticInstanceStreamsController < ApplicationController
 
     def set_analytic_instance
       @analytic_instance = AnalyticInstance.find(params[:analytic_instance_id])
+    end
+
+    def set_stream
+      if isOrganization?
+        #@groupList = GroupUser.getGroupUserList(session[:org_id], current_user.id)
+        @streams = Vms.where(group_user_id: session[:org_id]).joins(cameras: :streams).select("streams.id,streams.name")
+      else
+        @streams = Vms.where(user_id: current_user.id).joins(cameras: :streams).select("streams.id,streams.name")
+      end
+
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

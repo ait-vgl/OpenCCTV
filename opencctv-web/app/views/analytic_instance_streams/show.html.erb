@@ -7,6 +7,11 @@
   </ol>
 </div>
 
-<%= render 'analytic_instances/info' %>
+<div class="container">
+<%#= render 'analytic_instances/info' %>
 
-<%= render 'info' %>
+<%#= render 'info' %>
+  <h3>Analytic Input Stream Information: <%= link_to 'Edit', edit_analytic_instance_analytic_instance_stream_path(@analytic_instance,@analytic_instance_stream), class: 'btn btn-xs btn-warning' %> </h3>
+<%= render 'form' %>
+      <%#= link_to 'Input Stream List', analytic_instance_path(@analytic_instance), class: 'btn btn-xs btn-default'%>
+</div>

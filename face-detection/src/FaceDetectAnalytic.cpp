@@ -83,6 +83,9 @@ void FaceDetectAnalytic::process(analytic::ConcurrentQueue<analytic::api::Image_
 	/* Analytic process starts from here */
 	while(pHaarCascade)
 	{
+
+
+
 		/* 1. get a image from input queue */
 		api::Image_t image = pInputQueue->pop();
 		cv::Mat matInputImage = image.matImage; // got it
@@ -144,4 +147,3 @@ FaceDetectAnalytic::~FaceDetectAnalytic() {
 		pHaarCascade = NULL;
 	}
 }
-

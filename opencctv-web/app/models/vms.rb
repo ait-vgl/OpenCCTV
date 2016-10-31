@@ -534,6 +534,8 @@ class Vms < ActiveRecord::Base
 
   end
 
+
+
   # Private methods end
 
 end

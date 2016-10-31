@@ -2,6 +2,11 @@ Rails.application.routes.draw do
 
   resources :analytic_servers
 
+  resources :analytic_instance_streams do
+    resources :analytic_instance_stream_configs do
+    end
+  end
+
 resources :analytic_instances do
   resources :analytic_instance_configs do
   end
