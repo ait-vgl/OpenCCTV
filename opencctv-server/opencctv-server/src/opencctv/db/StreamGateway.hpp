@@ -11,6 +11,7 @@
 #include <vector>
 #include <cppconn/statement.h>
 #include <cppconn/resultset.h>
+#include <cppconn/prepared_statement.h>
 #include "DbConnector.hpp"
 #include "../dto/Stream.hpp"
 #include "../Exception.hpp"
@@ -24,6 +25,7 @@ class StreamGateway {
 private:
 	sql::Connection* _pDbConnPtr;
 	sql::Statement* _pStatement;
+	sql::PreparedStatement* _pStatementPtr;
 	static const std::string _SELECT_STREAM_SQL;
 
 public:
@@ -31,6 +33,7 @@ public:
 	virtual ~StreamGateway();
 	//std::vector<opencctv::dto::Stream> findAll();
 	void findAll(std::vector<opencctv::dto::Stream>& vToStoreStreams);
+	void findAllByAnalyticInstanceId(std::vector<opencctv::dto::Stream>& vToStoreStreams, unsigned int analyticInstanceId);
 };
 
 } /* namespace db */

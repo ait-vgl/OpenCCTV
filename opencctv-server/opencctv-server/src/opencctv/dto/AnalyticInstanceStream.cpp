@@ -16,6 +16,16 @@ unsigned int AnalyticInstanceStream::getId() const {
 	return _iId;
 }
 
+/*
+unsigned int AnalyticInstanceStream::getStreamId() const{
+	return _iStreamId;
+}
+
+void AnalyticInstanceStream::setStreamId(unsigned int iStreamId){
+	_iStreamId = iStreamId;
+}
+*/
+
 void AnalyticInstanceStream::setAnalyticInstanceId(unsigned int iId) {
 	_iAnalyticInstanceId = iId;
 }
@@ -28,7 +38,7 @@ void AnalyticInstanceStream::setInputName(const std::string& sInputName) {
 	_sInputName = sInputName;
 }
 
-const std::string& AnalyticInstanceStream::getInputName() const {
+std::string AnalyticInstanceStream::getInputName() const {
 	return _sInputName;
 }
 

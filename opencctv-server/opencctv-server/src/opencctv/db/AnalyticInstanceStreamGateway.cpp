@@ -12,7 +12,7 @@ namespace db {
 
 //"SELECT ainsts.id, ainsts.analytic_instance_id, ainps.name, a.filename FROM analytic_instance_streams AS ainsts, analytic_input_streams AS ainps, analytics AS a WHERE (ainsts.stream_id = ?) AND (ainsts.analytic_input_stream_id = ainps.id ) AND (ainps.analytic_id = a.id)";
 
-const std::string AnalyticInstanceStreamGateway::_SELECT_ANALYTIC_INSTANCE_STREAM_SQL = "SELECT ainsts.id, ainsts.analytic_instance_id, ainps.name, a.filename "
+const std::string AnalyticInstanceStreamGateway::_SELECT_ANALYTIC_INSTANCE_STREAM_SQL = "SELECT ainsts.id, ainsts.analytic_instance_id, ainps.name, a.filename " //, ainsts.stream_id "
 "FROM analytic_instance_streams AS ainsts, analytic_input_streams AS ainps, analytics AS a, analytic_instances As ai "
 "WHERE (ainsts.stream_id = ?) AND (ai.status = true) "
 "AND (ainsts.analytic_input_stream_id = ainps.id ) "
@@ -58,6 +58,7 @@ void AnalyticInstanceStreamGateway::findAllForStream(unsigned int iStreamId, std
 			ais.setInputName((*pResultsPtr).getString("name"));
 			ais.setAnalyticFilename((*pResultsPtr).getString("filename"));
 			ais.setAnalyticDirLocation((*pResultsPtr).getString("filename"));
+			//ais.setStreamId((*pResultsPtr).getInt("stream_id"));
 
 			vToStoreAIS.push_back(ais);
 			//ainsts.id, ainsts.analytic_instance_id, ainsts.analytic_input_stream_id, ainps.name, a.filename

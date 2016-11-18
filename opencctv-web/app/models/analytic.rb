@@ -20,6 +20,7 @@ class Analytic < ActiveRecord::Base
             "#{Rails.root}/app/uploads/analytics " + "#{self.filename}.zip " + "#{self.filename} " + 'analytic'
       stdin, stdout, stderr = Open3.popen3(cmd)
       output = stdout.readline
+      puts cmd
       if(!output.nil? && (output.start_with?("<")))
         xml = Nokogiri::XML(output)
 

@@ -6,10 +6,10 @@ namespace util {
 Config* Config::_pConfig = NULL;
 
 Config::Config() {
-	std::string sConfigFilename = "./opencctv-server.config";
+	std::string sConfigFilename = "./opencctv-server-starter.config";
 	std::ifstream ifstrConfig(sConfigFilename.c_str());
 	if (!ifstrConfig) {
-		throw opencctv::Exception("Cannot open OpenCCTV server configuration file.");
+		throw opencctv::Exception("Cannot open OpenCCTV Server starter configuration file.");
 	}
 	std::set<std::string> setOptions;
 	setOptions.insert("*");
@@ -18,7 +18,7 @@ Config::Config() {
 			_mConfigDetails[i->string_key] = i->value[0];
 		}
 	} catch (std::exception& e) {
-		std::string sErrMsg = "Failed to extract configuration details from OpenCCTV server configuration file. ";
+		std::string sErrMsg = "Failed to extract configuration details from OpenCCTV Server starter configuration file. ";
 		sErrMsg.append(e.what());
 		throw opencctv::Exception(sErrMsg);
 	}

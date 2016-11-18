@@ -18,8 +18,8 @@ namespace analytic {
 namespace util {
 
 const std::string PROPERTY_STARTER_PORT = "analytic_starter_port";
-const std::string PROPERTY_ANALYTIC_RUNNER_DIR = "analytic_runner_directory";
-const std::string PROPERTY_ANALYTIC_RUNNER_FILENAME = "analytic_runner_filename";
+const std::string PROPERTY_ANALYTIC_RUNNER_DIR = "analytic_server_directory";
+const std::string PROPERTY_ANALYTIC_RUNNER_FILENAME = "analytic_server_filename";
 
 class Config {
 private:

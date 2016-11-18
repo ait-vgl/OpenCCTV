@@ -14,9 +14,10 @@ $ sudo apt-get -y install unzip
 $ cd ~/Downloads/
 $ mkdir zmq
 $ cd zmq/
-$ wget http://download.zeromq.org/zeromq-4.0.5.tar.gz
-$ tar -xvzf zeromq-4.0.5.tar.gz
-$ cd zeromq-4.0.5
+$ wget https://github.com/zeromq/zeromq4-1/releases/download/v4.1.6/zeromq-4.1.6.tar.gz
+$ tar -xvzf zeromq-4.1.6.tar.gz
+$ cd zeromq-4.1.6
+
 ```
 
 #### 3. Install zmq

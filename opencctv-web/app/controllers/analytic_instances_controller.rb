@@ -152,6 +152,6 @@ class AnalyticInstancesController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def analytic_instance_params
-    params.require(:analytic_instance).permit(:name, :description, :analytic_id, :notification_id, :group_user_id)
+    params.require(:analytic_instance).permit(:name, :description, :analytic_id, :notification_id, :group_user_id, :analytic_server_id)
   end
 end

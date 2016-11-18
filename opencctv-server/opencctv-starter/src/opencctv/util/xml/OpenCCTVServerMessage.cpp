@@ -51,42 +51,6 @@ int OpenCCTVServerMessage::extractMessageDetails(const string& sRequest, string&
 	return result;
 }
 
-
-int OpenCCTVServerMessage::extractMessageDetailWithData(const string& sRequest, string& sMessageType, string& sData)
-{
-	int result = 1;
-
-	ptree pt;
-	istringstream iss(sRequest);
-
-	try
-	{
-		read_xml(iss, pt);
-		sMessageType = pt.get<string>("opencctvmsg.type");
-		trim(sMessageType);
-
-		try{
-			sData = pt.get<string>("opencctvmsg.data");
-			trim(sData);
-		}catch(const std::exception &e){ // (...)
-
-		}
-
-	} catch(boost::property_tree::xml_parser::xml_parser_error &e)
-	{
-		result = -1;
-		string sMessage = "OpenCCTV Server: XML parsing error ";
-		throw opencctv::Exception(sMessage.append(e.what()));
-	} catch(boost::property_tree::ptree_bad_path &e)
-	{
-		result = -1;
-		string sMessage = "OpenCCTV Server: XML parsing error ";
-		throw opencctv::Exception(sMessage.append(e.what()));
-	}
-
-	return result;
-}
-
 int  OpenCCTVServerMessage::createStatusReply(const string& sContent, const string serverStatus, const pid_t serverProcessId, string& sReplyMessage )
 {
 	int result = 1;

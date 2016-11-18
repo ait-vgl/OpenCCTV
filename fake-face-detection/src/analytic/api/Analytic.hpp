@@ -1,10 +1,10 @@
-
 #ifndef ANALYTIC_ANALYTIC_HPP_
 #define ANALYTIC_ANALYTIC_HPP_
 
 #include "../ConcurrentQueue.hpp"
 #include <string>
 #include <opencv2/core/core.hpp>
+#include <FrameGrabberWrapper.h>
 #include <map>
 
 namespace analytic {
@@ -24,8 +24,11 @@ class Analytic
 {
 public:
 	Analytic(){}
-	virtual bool init(const std::string& sAnalyticPluginDirLocation) = 0;
-	virtual void process(analytic::ConcurrentQueue<analytic::api::Image_t>* pInputQueue, analytic::ConcurrentQueue<analytic::api::Image_t>* pOutputQueue) = 0;
+	//Load config, module. Check before starting
+	virtual bool init(const std::string& sAnalyticPluginDirLocation, std::map<string,FileStorage*> mConfigFiles, std::map<string,FrameGrabberWrapper*> mFrameGrabbers) = 0;
+	
+	//Start process
+	virtual void process(analytic::ConcurrentQueue<analytic::api::Image_t>* pOutputQueue) = 0;
 	virtual std::string getInputStreamNames()
 	{
 		std::map<std::string, std::string> mInputStreams;
@@ -48,19 +51,6 @@ protected:
 		}
 		sXml.append("</inputstreams>");
 		return sXml;
-	}
-
-	void generateAnalyticResultXml(std::map<std::string, std::string>& mTagValuePair, std::string& sToStoreXml) {
-		std::stringstream ssXml;
-		ssXml << "<result>";
-		std::map<std::string, std::string>::iterator it;
-		for (it = mTagValuePair.begin(); it != mTagValuePair.end(); ++it) {
-			ssXml << "<" << it->first << ">";
-			ssXml << it->second;
-			ssXml << "</" << it->first << ">";
-		}
-		ssXml << "</result>";
-		sToStoreXml = ssXml.str();
 	}
 };
 

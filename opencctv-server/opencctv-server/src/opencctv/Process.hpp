@@ -10,20 +10,22 @@
 #include "Exception.hpp"
 #include "util/Util.hpp"
 #include <sys/wait.h>
+#include <fcntl.h>
+#include <errno.h>
+#include "util/TypeDefinitions.hpp"
 
 namespace opencctv {
 
 class Process {
 protected:
-	FILE* _pReadStream;
+	//FILE* _pReadStream;
 	pid_t _pid;
 public:
 	Process();
-	bool start(const std::string& sPathToExecutable, const std::string& sCommandLineParams);
+	bool start(const std::string& sPathToExecutable, const std::vector<std::string>& vParamList);
 	bool stop();
-	bool close();
 	pid_t getPid();
-	bool readLine(std::string& sStreamOutput);
+	bool readStatus(int& iStatus);
 	virtual ~Process();
 };
 

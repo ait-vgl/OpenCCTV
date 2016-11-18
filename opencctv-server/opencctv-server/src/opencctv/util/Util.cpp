@@ -40,7 +40,7 @@ int Util::parseLine(char* line) {
 	return i;
 }
 
-bool Util::findSharedLibOfPlugin(const std::string& sPathToPluginDir, std::string& sFullPathToSharedLibFile) {
+bool Util::findSharedLibOfPlugin(const std::string& sPathToPluginDir, std::string& sPathToSharedLibFile) {
 	namespace bf = boost::filesystem;
 	std::string sDirToScan = sPathToPluginDir;
 	while (true) {
@@ -54,7 +54,7 @@ bool Util::findSharedLibOfPlugin(const std::string& sPathToPluginDir, std::strin
 			if (iFileCount == 1 && bf::is_directory(lastFilePath)) {
 				sDirToScan = sLastFilePath;
 			} else if (iSharedLibFileCount == 1) {
-				sFullPathToSharedLibFile = sLastSharedLibFilePath;
+				sPathToSharedLibFile = sLastSharedLibFilePath;
 				return true;
 			} else
 				break;

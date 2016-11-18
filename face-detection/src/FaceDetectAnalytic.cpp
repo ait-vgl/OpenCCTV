@@ -78,22 +78,20 @@ bool FaceDetectAnalytic::init(const std::string& sAnalyticPluginDirLocation)
 	return true;
 }
 
-void FaceDetectAnalytic::process(analytic::ConcurrentQueue<analytic::api::Image_t>* pInputQueue, analytic::ConcurrentQueue<analytic::api::Image_t>* pOutputQueue)
+void FaceDetectAnalytic:: process(std::map<string,FileStorage*> mConfigFiles, std::map<string,FrameGrabberWrapper*> mFramegrabbers)
 {
-	/* Analytic process starts from here */
+  
+	// Analytic process starts from here 
 	while(pHaarCascade)
 	{
-
-
-
-		/* 1. get a image from input queue */
+		// 1. get a image from input queue
 		api::Image_t image = pInputQueue->pop();
 		cv::Mat matInputImage = image.matImage; // got it
-		/* 2. clone the input image */
+		// 2. clone the input image 
 		cv::Mat matToBeProcessed = matInputImage.clone();
-		/* 3. release the input image */
+		// 3. release the input image
 		matInputImage.release(); //please do this release!
-		/* 4. OK, now use cloned image for analysis */
+		// 4. OK, now use cloned image for analysis 
 
 		// Start processing
 		cv::Mat matGray;
@@ -118,15 +116,17 @@ void FaceDetectAnalytic::process(analytic::ConcurrentQueue<analytic::api::Image_
 		matGray.release();
 		matToBeProcessed.release();
 
-		/* 5. set output */
+		// 5. set output 
 		if(vFaces.size() > 0)
 		{
 			image.bGenerateAnalyticEvent = true;
 			resultXml(vFaces, image.sCustomTextResult);
 		}
-		/* 6. push into output queue */
+		// 6. push into output queue 
 		pOutputQueue->push(image);
 	}
+	
+
 }
 
 void FaceDetectAnalytic::resultXml(vector<Rect_<int> > vBoundingBoxes, std::string& sToStoreXml)

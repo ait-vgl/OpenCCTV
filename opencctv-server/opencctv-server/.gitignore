@@ -2,3 +2,4 @@
 Debug
 Release/src/
 .settings/
+*.kdev4

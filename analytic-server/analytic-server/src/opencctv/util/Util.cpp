@@ -110,6 +110,7 @@ pid_t Util::getPid(const std::string& sPidMessage)
 	pid_t pid = 0;
 	boost::property_tree::ptree pt;
 	std::istringstream iss(sPidMessage);
+    std::cout << "From Starter Util: getPid: sPidMessage" + sPidMessage << std::endl;
 	try {
 		read_xml(iss, pt);
 		pid = pt.get<pid_t>("pid");

@@ -3,29 +3,36 @@
 
 namespace opencctv {
 
-ResultRouterThread::ResultRouterThread(unsigned int iAnalyticInstanceId) {
-	ApplicationModel* pModel = ApplicationModel::getInstance();
-	_pFlowController = NULL;
-	if(pModel->containsFlowController(iAnalyticInstanceId))
-	{
-		_pFlowController = pModel->getFlowControllers()[iAnalyticInstanceId];
-	}
+ResultRouterThread::ResultRouterThread( analytic::AnalyticData*  pAD) {
+
+    //_iAnalyticInstanceId = iAnalyticInstanceId;
+	_pAD = pAD;
+
+	//_pFlowController = NULL;
+	//if(_pAD and _pAD->isFlowController())
+	//{
+	//	_pFlowController = _pAD->getFlowController();
+	//}
+
+
 	_pSerializer = util::serialization::Serializers::getInstanceOfDefaultSerializer();
-	_iAnalyticInstanceId = iAnalyticInstanceId;
 }
 
 void ResultRouterThread::operator()()
 {
 	util::Config* pConfig = util::Config::getInstance();
-	ApplicationModel* pModel = ApplicationModel::getInstance();
-	if(pModel->containsResultsOutputQueueAddress(_iAnalyticInstanceId))
+    //analytic::AnalyticServer*  _pAS = 
+
+	//analytic::AnalyticData*_pAD = _pAS->getAnalyticData(_iAnalyticInstanceId);
+
+	if(_pAD and _pAD->isAnalyticQueueOutAddress())
 	{
 		//Initialize the ZMQ connection to the analytic instance's output queue
 		bool bConnected = false;
 		mq::TcpMqReceiver receiver;
 		try
 		{
-			receiver.connectToMq(pConfig->get(util::PROPERTY_ANALYTIC_SERVER_IP), pModel->getResultsOutputQueueAddresses()[_iAnalyticInstanceId]);
+			receiver.connectToMq(pConfig->get(util::PROPERTY_ANALYTIC_SERVER_IP), _pAD->getAnalyticQueueOutAddress());
 			bConnected = true;
 		}
 		catch(Exception &e)
@@ -49,41 +56,57 @@ void ResultRouterThread::operator()()
 		//Start inserting the analytic instance's results to the results DB
 		while(bConnected && _pFlowController && _pAnalyticResultGateway)
 		{
-			std::string* pSSerializedResult = receiver.receive();
-			analytic::AnalyticResult result = _pSerializer->deserializeAnalyticResult(*pSSerializedResult);
-			std::string sMsg;
-			/*
-			ssMsg = "\t\tReceived Result of ";
-			sMsg.append(result.getTimestamp());
-			util::log::Loggers::getDefaultLogger()->debug(sMsg);
-			*/
 
-			//Saving to DB
-			if(result.getWriteToDatabase())
-			{
-				try
-				{
-					opencctv::db::AnalyticResultGateway analyticResultGateway;
-					analyticResultGateway.insertResults(_iAnalyticInstanceId, result);
-					sMsg = "\t\tResult written to the database: ";
-					sMsg.append(result.getTimestamp());
-					util::log::Loggers::getDefaultLogger()->info(sMsg);
+			//try{
 
-				}catch(opencctv::Exception &e)
+				//boost::this_thread::interruption_point(); // Interruption
+
+				std::string* pSSerializedResult = receiver.receive();
+				analytic::AnalyticResult result = _pSerializer->deserializeAnalyticResult(*pSSerializedResult);
+				std::string sMsg;
+				/*
+				ssMsg = "\t\tReceived Result of ";
+				sMsg.append(result.getTimestamp());
+				util::log::Loggers::getDefaultLogger()->debug(sMsg);
+				*/
+
+				//Saving to DB
+				if(result.getWriteToDatabase())
 				{
-					std::ostringstream sErrorMessage;
-					sErrorMessage << "Failed to write results to the results database : Analytic ID - ";
-					sErrorMessage << _iAnalyticInstanceId;
-					sMsg = sErrorMessage.str();
-					util::log::Loggers::getDefaultLogger()->error(sMsg);
+					try
+					{
+						opencctv::db::AnalyticResultGateway analyticResultGateway;
+						analyticResultGateway.insertResults(_iAnalyticInstanceId, result);
+						sMsg = "\t\tResult written to the database: ";
+						sMsg.append(result.getTimestamp());
+						util::log::Loggers::getDefaultLogger()->info(sMsg);
+
+					}catch(opencctv::Exception &e)
+					{
+						std::ostringstream sErrorMessage;
+						sErrorMessage << "Failed to write results to the results database : Analytic ID - ";
+						sErrorMessage << _iAnalyticInstanceId;
+						sMsg = sErrorMessage.str();
+						util::log::Loggers::getDefaultLogger()->error(sMsg);
+					}
 				}
-			}
 
-			_pFlowController->received();
-			if(pSSerializedResult) delete pSSerializedResult;
+				_pFlowController->received();
+				if(pSSerializedResult) delete pSSerializedResult;
+
+			//}catch (boost::thread_interrupted&) {
+				//opencctv::util::log::Loggers::getDefaultLogger()->error("Result router Thread interrupted.");
+			//}
 		}
 	}
-	opencctv::util::log::Loggers::getDefaultLogger()->info("Results Router Thread stopped.");
+
 }
+
+ResultRouterThread::~ResultRouterThread(){
+	// inside pModel
+		// _pFlowController
+		// _pSerializer
+	std::cout << "3. Result Router Therad destructor called." << std::endl;}
+
 
 } /* namespace opencctv */

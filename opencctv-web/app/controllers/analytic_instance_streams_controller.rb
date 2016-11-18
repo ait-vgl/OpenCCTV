@@ -63,7 +63,7 @@ class AnalyticInstanceStreamsController < ApplicationController
 
   # PATCH/PUT /analytic_instance_streams/1
   def update
-    @analytic_instance_stream.update(analytic_input_stream_id: params[:analytic_instance_stream][:analytic_input_stream_id], stream_id: params[:analytic_instance_stream][:stream_id]   )
+    @analytic_instance_stream.update(analytic_input_stream_id: params[:analytic_instance_stream][:analytic_input_stream_id], stream_id: params[:analytic_instance_stream][:stream_id], config: params[:analytic_instance_stream][:config] )
 
     if @analytic_instance_stream.errors.any?
       respond_with(@analytic_instance_stream)

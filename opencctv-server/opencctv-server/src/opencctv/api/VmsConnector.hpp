@@ -37,7 +37,10 @@ public:
 	{
 		_bEnable = false;
 	}
-	virtual ~VmsConnector(){}
+	virtual ~VmsConnector(){
+		std::cout << "4. VmsConnector (parent): destructure called" << std::endl;
+
+	}
 	virtual bool init(const VmsConnectInfo& info, const std::string sPathToVmsConnectorDir)
 	{
 		/* Read a file from your dir */
@@ -55,6 +58,9 @@ public:
 		_bEnable = true;
 		while(_bEnable)
 		{
+
+			//boost::this_thread::interruption_point(); // Do in child class
+
 			// get image data from VMS
 			// populate pVImage with image data
 			opencctv::Image* pImage = new opencctv::Image(); // use new operator to construct Images

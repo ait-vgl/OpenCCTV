@@ -81,6 +81,7 @@ ActiveRecord::Schema.define(version: 20161031081358) do
     t.string   "name"
     t.string   "ip"
     t.integer  "port"
+    t.string   "tag"
     t.string   "status"
     t.integer  "pid"
     t.datetime "created_at"

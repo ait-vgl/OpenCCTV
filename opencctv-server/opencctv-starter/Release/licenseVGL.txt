@@ -1,0 +1,12 @@
+ID: XBXcS6GeQrpNqC9U-HfSwg
+Application: libVGL
+Expiration: 2018-11-01
+Licensed to: sornrak_mac
+Host identifier: eth0:00:1c:42:9f:7f:7d
+PDyIe412a2DRJSq8vMCf32aJ+sLwESbvbMGl1b1Z012rZSv7J7E9PodS8aHS
+h+dJRoucxuVYh0CJp5gQOtejmXaqNE3z+NsD0Ao12X+e02NYgC0JNAOIgKjC
+dsB9zkGnMM9T5S2e53OFxQJQ8If3AtXEY1ivL1q6C4ZA86UKLcYUBuqMGg4V
+fR8QNA2YJetuV2IbMbNQybknhWSO9OsZ2WY+hOKXh9qSluThenpyJuanym9I
+sf50nv24QXiEj48DtaTtsvkiHcr9qp5T9fmcf/val9/QfyvkZGdGcS6Vaite
+OlbYO+N9jjk4cWsXdwpKQZED8TTpaN9Nx7pLharZZQ==
+

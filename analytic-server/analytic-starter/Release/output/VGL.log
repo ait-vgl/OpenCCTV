@@ -1,0 +1,18 @@
+[ Fri Nov 18 03:52:08 2016 ] -- VGL -- <WARNING: 1151> Fri_Nov_18_03:52:08_2016 <*Camera : Image is not set.>
+[ Fri Nov 18 03:52:08 2016 ] -- VGL -- <WARNING: 1051> Fri_Nov_18_03:52:08_2016 <*CameraAccessor : Grabbed image is null.>
+[ Fri Nov 18 05:43:10 2016 ] -- VGL -- <WARNING: 1151> Fri_Nov_18_05:43:10_2016 <*Camera : Image is not set.>
+[ Fri Nov 18 05:43:10 2016 ] -- VGL -- <WARNING: 1051> Fri_Nov_18_05:43:10_2016 <*CameraAccessor : Grabbed image is null.>
+[ Fri Nov 18 05:43:13 2016 ] -- VGL -- <WARNING: 1151> Fri_Nov_18_05:43:13_2016 <*Camera : Image is not set.>
+[ Fri Nov 18 05:43:13 2016 ] -- VGL -- <WARNING: 1051> Fri_Nov_18_05:43:13_2016 <*CameraAccessor : Grabbed image is null.>
+[ Fri Nov 18 05:43:15 2016 ] -- VGL -- <WARNING: 1151> Fri_Nov_18_05:43:15_2016 <*Camera : Image is not set.>
+[ Fri Nov 18 05:43:15 2016 ] -- VGL -- <WARNING: 1051> Fri_Nov_18_05:43:15_2016 <*CameraAccessor : Grabbed image is null.>
+[ Fri Nov 18 06:12:25 2016 ] -- VGL -- <WARNING: 1151> Fri_Nov_18_06:12:25_2016 <*Camera : Image is not set.>
+[ Fri Nov 18 06:12:25 2016 ] -- VGL -- <WARNING: 1051> Fri_Nov_18_06:12:25_2016 <*CameraAccessor : Grabbed image is null.>
+[ Fri Nov 18 06:30:58 2016 ] -- VGL -- FG0, End Time :Fri_18_Nov_2016_06-30-58
+[ Fri Nov 18 06:30:58 2016 ] -- VGL -- 	No. of frames grabbed:4
+[ Fri Nov 18 06:30:58 2016 ] -- VGL -- 
+Frame rate
+IPCam: fFramesPerSec = 1.23385 fps.
+Note: Ignored frames not taken into account, so the fps may be slightly off.
+The value is incorrect when the processing is paused during system execution.
+

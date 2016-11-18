@@ -18,3 +18,8 @@ If you want to create a new user and grant permissions, follow instructions give
 $ sudo apt-get install libmysqlcppconn-dev
 $ sudo apt-get install libmysqlclient-dev
 ```
+
+#### Grant permission for test ####
+CREATE USER 'username'@'%' IDENTIFIED BY 'password';
+GRANT ALL PRIVILEGES ON *.* TO 'username'@'%';
+FLUSH PRIVILEGES;

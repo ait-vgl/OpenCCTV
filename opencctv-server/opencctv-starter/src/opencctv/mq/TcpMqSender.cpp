@@ -23,7 +23,8 @@ bool TcpMqSender::createMq(const std::string& serverPortStr) {
 	return false;
 }
 
-bool TcpMqSender::connectToMq(const std::string& serverName, const std::string& serverPortStr) {
+bool TcpMqSender::connectToMq(const std::string& serverName,
+		const std::string& serverPortStr) {
 	try
 	{
 		_pSocket = MqUtil::connectToMq(serverName, serverPortStr, ZMQ_PUSH);
