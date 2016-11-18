@@ -1,7 +1,7 @@
 version: '2'
 services:
   web:
-    image: opencctv/server:web
+    image: opencctv-web
     links:
       - mysql:db
     working_dir: /myapp
@@ -15,7 +15,6 @@ services:
       - /usr/local/opencctv/analytics:/usr/local/opencctv/analytics
       - /usr/local/opencctv/vms_connectors:/usr/local/opencctv/vms_connectors
       - ~/workspace/OpenCCTV/opencctv-web:/myapp
-    #  - /Users/Nhutumdai//workspace/OpenCCTV/opencctv-web/app/assets/programs/PluginArchiveValidator:/myapp/app/assets/programs/PluginArchiveValidator
     ports:
       - "3000:3000"
     depends_on:
@@ -26,20 +25,15 @@ services:
     stdin_open: true
   
   opencctv:
-    image: opencctv/server:opencctv
+    image: opencctv
     #links:
     #  - analytic
     #  - mysql:db
-    working_dir: /usr/local/opencctv/OpenCCTVServerStarter
-    #command: mkdir -p /usr/local/opencctv/analytics
-    #command: mkdir -p /usr/local/opencctv/vms_connectors
+    working_dir: /usr/local/opencctv/opencctv-starter
     volumes:
-      - /usr/local/opencctv/analytics:/usr/local/opencctv/analytics
       - /usr/local/opencctv/vms_connectors:/usr/local/opencctv/vms_connectors
-      - ~/workspace/OpenCCTV/opencctv-server/opencctv-starter/Release:/usr/local/opencctv/OpenCCTVServerStarter
-      - ~/workspace/OpenCCTV/opencctv-server/opencctv-server/Release:/usr/local/opencctv/OpenCCTVServer
-      - ~/workspace/OpenCCTV/opencctv-server/opencctv-server/Release:/usr/local/opencctv/Release
-      - ~/workspace/OpenCCTV/opencctv-server/opencctv-server/src:/usr/local/opencctv/src
+      - ~/workspace/OpenCCTV/opencctv-server/opencctv-starter/Release:/usr/local/opencctv/opencctv-starter
+      - ~/workspace/OpenCCTV/opencctv-server/opencctv-server/Release:/usr/local/opencctv/opencctv-server
     depends_on:
       - mysql
       - analytic
@@ -51,18 +45,16 @@ services:
 
     
   analytic:
-    image: opencctv/server:analytic
-    working_dir: /usr/local/opencctv/AnalyticStarter
-    #command: mkdir -p /usr/local/opencctv/analytics
-    #command: mkdir -p /usr/local/opencctv/vms_connectors
+    image: opencctv
+    working_dir: /usr/local/opencctv/analytic-starter
     ports:
       - "5555:5555"
+    depends_on:
+      - mysql
     volumes:
       - /usr/local/opencctv/analytics:/usr/local/opencctv/analytics
-      - /usr/local/opencctv/vms_connectors:/usr/local/opencctv/vms_connectors
-      - ~/workspace/OpenCCTV/analytic-server/analytic-starter/Release:/usr/local/opencctv/AnalyticStarter
-      - ~/workspace/OpenCCTV/analytic-server/analytic-server/Release:/usr/local/opencctv/AnalyticRunner
-      #- /home/nhamphu/Workspaces/OpenCCTV/opencctv-dependencies/dependencies:/root/dependencies
+      - ~/workspace/OpenCCTV/analytic-server/analytic-starter/Release:/usr/local/opencctv/analytic-starter
+      - ~/workspace/OpenCCTV/analytic-server/analytic-server/Release:/usr/local/opencctv/analytic-server
     container_name: analytic
     network_mode: "host"
     command: /bin/bash

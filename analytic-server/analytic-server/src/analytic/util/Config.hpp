@@ -20,6 +20,12 @@ namespace util {
 
 const std::string PROPERTY_ANALYTIC_PLUGIN_DIR = "analytic_plugin_directory";
 
+const std::string PROPERTY_DB_SERVER_NAME = "db_server_name";
+const std::string PROPERTY_DB_PORT = "db_port";
+const std::string PROPERTY_DB_NAME = "db_name";
+const std::string PROPERTY_DB_USERNAME = "db_username";
+const std::string PROPERTY_DB_PASSWORD = "db_password";
+
 class Config {
 private:
 	static Config* _pConfig;

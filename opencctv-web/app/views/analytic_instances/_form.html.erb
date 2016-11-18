@@ -16,6 +16,11 @@
 
     <!--Form fields-->
     <div class="field">
+      <%= f.label :analytic_server_id, 'Analytic server' %><br>
+      <%= f.collection_select(:analytic_server_id, AnalyticServer.all, :id, :name, {prompt: 'Select Analytic Server'}) %>
+    </div>
+
+    <div class="field">
       <%= f.label :analytic_id, 'Analytic Type' %><br>
       <%= f.collection_select(:analytic_id, Analytic.where(verified: true), :id, :name, {prompt: 'Select Analytic Type'}, {:disabled => params[:action]=="edit"}) %>
     </div>

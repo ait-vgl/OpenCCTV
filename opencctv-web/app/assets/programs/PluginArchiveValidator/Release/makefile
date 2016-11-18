@@ -1,61 +1,52 @@
-################################################################################
-# Automatically-generated file. Do not edit!
-################################################################################
+# the program to build
+NAME		:= PluginArchiveValidator
 
--include ../makefile.init
+#Path
+BASE 		:= ../src/
+O		:= ${BASE}opencctv/
+O_UTIL		:= ${O}util/
 
-RM := rm -rf
+LibVGL		:= ~/workspace/vgl/libVGL/
 
-# All of the sources participating in the build are defined here
--include sources.mk
--include src/opencctv/util/subdir.mk
--include src/opencctv/subdir.mk
--include src/subdir.mk
--include subdir.mk
--include objects.mk
 
-ifneq ($(MAKECMDGOALS),clean)
-ifneq ($(strip $(C++_DEPS)),)
--include $(C++_DEPS)
-endif
-ifneq ($(strip $(C_DEPS)),)
--include $(C_DEPS)
-endif
-ifneq ($(strip $(CC_DEPS)),)
--include $(CC_DEPS)
-endif
-ifneq ($(strip $(CPP_DEPS)),)
--include $(CPP_DEPS)
-endif
-ifneq ($(strip $(CXX_DEPS)),)
--include $(CXX_DEPS)
-endif
-ifneq ($(strip $(C_UPPER_DEPS)),)
--include $(C_UPPER_DEPS)
-endif
-endif
+# Build tools and flags
+CXX		:= /usr/bin/g++
+LD		:= /usr/bin/g++
 
--include ../makefile.defs
+PKG_CONFIG_LIBS =
 
-# Add inputs and outputs from these tool invocations to the build variables 
+CPPFLAGS	:= -I /usr/local/opencv-2.4.9/include \
+				-I /usr/local/opencv-2.4.9/include/opencv \
+				-I /usr/include \
+				-I /usr/include/ImageMagick \
+				-I ${LibVGL}include/ \
+				-I ./ 
+				
+CXXFLAGS	:=  -O3 -fPIC #e.g., CXXFLAGS=-g -O0 for debugging
 
-# All Target
-all: PluginArchiveValidator
+# To keep the makefile for 32 and 64 in sync we add 64 and 32-bit library path
+# If you are targeting only 32 bit for you can remove the entries containing "64"
+LDFLAGS		:= -L/usr/local/opencv-2.4.9/lib \
+				-L/usr/lib \
+				-L ${LibVGL}libVGL/lib \
+				-L./
 
-# Tool invocations
-PluginArchiveValidator: $(OBJS) $(USER_OBJS)
-	@echo 'Building target: $@'
-	@echo 'Invoking: GCC C++ Linker'
-	g++ -L/usr/local/lib -o "PluginArchiveValidator" $(OBJS) $(USER_OBJS) $(LIBS)
-	@echo 'Finished building target: $@'
-	@echo ' '
+LIBS		:= -ldl -lboost_filesystem -lboost_system
+all		: $(NAME)
+Other_L		:= ${O}Exception.o ${O_UTIL}Unzipper.o ${O_UTIL}Util.o ${O_UTIL}SharedLibLoader.o
 
-# Other Targets
-clean:
-	-$(RM) $(OBJS)$(C++_DEPS)$(C_DEPS)$(CC_DEPS)$(CPP_DEPS)$(EXECUTABLES)$(CXX_DEPS)$(C_UPPER_DEPS) PluginArchiveValidator
-	-@echo ' '
 
-.PHONY: all clean dependents
-.SECONDARY:
+$(NAME)		: ${BASE}${NAME}.o ${Other_L}
+	$(LD) $(LDFLAGS) -o $@ $^ $(LIBS)
+	
+ProjectIncludes := /*.h	
+%.o 		: %.cpp ${ProjectIncludes}
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c -o $@ $<
 
--include ../makefile.targets
+#Clean
+DIRS := . $(shell find $(BASE) -type d)
+GARBAGE_PATTERNS := *.o 
+#*~ core .depend .*.cmd *.ko *.mod.c
+GARBAGE := $(foreach DIR,$(DIRS),$(addprefix $(DIR)/,$(GARBAGE_PATTERNS)))	
+clean	:
+	rm -rf $(GARBAGE) $(NAME)

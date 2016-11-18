@@ -13,6 +13,7 @@ private:
 	std::string _sTimestamp;
 	std::string _sCustomText;
 	bool _bWriteToDatabase;
+
 public:
 	AnalyticResult();
 	AnalyticResult(unsigned int iStreamId, const std::string& sInputName, std::string sTimestamp, std::string sCustomText, bool bWriteToDatabase);

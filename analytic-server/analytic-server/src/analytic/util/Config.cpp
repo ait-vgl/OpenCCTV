@@ -6,7 +6,7 @@ namespace util {
 Config* Config::_pConfig = NULL;
 
 Config::Config() {
-	std::string sConfigFilename = "./analytic-runner.config";
+	std::string sConfigFilename = "./analytic-server.config";
 	std::ifstream ifstrConfig(sConfigFilename.c_str());
 	if (!ifstrConfig) {
 		throw opencctv::Exception("Cannot open Analytic Runner configuration file.");

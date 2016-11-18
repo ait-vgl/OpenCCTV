@@ -4,6 +4,7 @@ class CreateAnalyticServers < ActiveRecord::Migration
       t.string :name
       t.string :ip
       t.integer :port
+      t.string  :tag
       t.string :status
       t.integer :pid
 

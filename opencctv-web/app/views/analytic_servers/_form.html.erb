@@ -15,23 +15,29 @@
     <%= f.label :name %><br>
     <%= f.text_field :name %>
   </div>
+    <br>
   <div class="field">
     <%= f.label :ip %><br>
     <%= f.text_field :ip %>
   </div>
+    <br>
   <div class="field">
     <%= f.label :port %><br>
     <%= f.text_field :port %>
   </div>
+    <br>
   <div class="field">
     <%= f.label :status %><br>
     <%= f.text_field :status %>
   </div>
+    <br>
   <div class="field">
     <%= f.label :pid %><br>
     <%= f.text_field :pid %>
   </div>
+    <br>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "Save analytic server"  , :class => "btn btn-success btn-mini" %>
+    <%= link_to 'Cancel', :back, :class => "btn btn-danger" %>
   </div>
 <% end %>

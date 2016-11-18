@@ -1,3 +1,12 @@
+<div class="container">
+  <ol class="breadcrumb">
+    <li><%= link_to 'Home', root_path %></li>
+    <li class="active">Analytic servers</li>
+  </ol>
+</div>
+
+<div class="container">
+
 <h1>Listing analytic_servers</h1>
 
 <table>
@@ -20,9 +29,9 @@
         <td><%= analytic_server.port %></td>
         <td><%= analytic_server.status %></td>
         <td><%= analytic_server.pid %></td>
-        <td><%= link_to 'Show', analytic_server %></td>
-        <td><%= link_to 'Edit', edit_analytic_server_path(analytic_server) %></td>
-        <td><%= link_to 'Destroy', analytic_server, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', analytic_server , :class => "btn btn-xs btn-default" %></td>
+        <td><%= link_to 'Edit', edit_analytic_server_path(analytic_server), :class => "btn btn-xs btn-warning" %></td>
+        <td><%= link_to 'Destroy', analytic_server, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-xs btn-danger", data: {confirm: 'Are you sure?'} %></td>
       </tr>
     <% end %>
   </tbody>
@@ -31,3 +40,5 @@
 <br>
 
 <%= link_to 'New Analytic server', new_analytic_server_path %>
+
+</div>

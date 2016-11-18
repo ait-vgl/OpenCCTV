@@ -1,5 +1,5 @@
 # Installing Boost Libraries
-## Version 1.57.0
+## Version 1.54.0
 ### Linux
 
 #### 1. Install dependencies of boost
@@ -13,9 +13,9 @@ $ sudo apt-get -y install build-essential g++ python-dev autotools-dev libicu-de
 $ cd ~/Downloads/
 $ mkdir boost
 $ cd boost/
-$ wget http://sourceforge.net/projects/boost/files/boost/1.57.0/boost_1_57_0.tar.gz
-$ tar -xvzf boost_1_57_0.tar.gz
-$ cd boost_1_57_0
+$ wget http://sourceforge.net/projects/boost/files/boost/1.54.0/boost_1_54_0.tar.gz
+$ tar -xvzf boost_1_54_0.tar.gz
+$ cd boost_1_54_0
 ```
 
 #### 3. Init installation

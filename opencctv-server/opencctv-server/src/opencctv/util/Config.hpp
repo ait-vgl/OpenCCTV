@@ -17,6 +17,9 @@ namespace pod = boost::program_options::detail;
 
 namespace opencctv {
 namespace util {
+// for starter to start the process
+const std::string PROPERTY_OPENCCTV_SERVER_PORT = "opencctv_server_port";
+//const std::string PROPERTY_OPENCCTV_SERVER_DIR = "opencctv_server_path";
 
 const std::string PROPERTY_ANALYTIC_SERVER_IP = "analytic_server_ip";
 const std::string PROPERTY_ANALYTIC_SERVER_PORT = "analytic_server_port";

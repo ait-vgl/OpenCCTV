@@ -1,4 +1,4 @@
 [Project]
 CreatedFrom=fake-face-detection
-Manager=KDevCustomBuildSystem
+Manager=KDevGenericManager
 Name=fake-face-detection
