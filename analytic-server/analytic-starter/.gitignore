@@ -2,3 +2,6 @@
 Debug
 Release/src/
 .settings/
+*.kdev4
+Release/licenseVGL.txt
+Release/output

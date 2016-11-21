@@ -1,1 +1,0 @@
-# hikvision-vms-connector

@@ -13,6 +13,7 @@ bool Process::start(const std::string& sPathToExecutable, const std::string& sCo
 	std::stringstream ssCommand;
 	ssCommand << sPathToExecutable << " ";
 	ssCommand << sCommandLineParams;
+    //std::cout << "From Process:start(): "<< ssCommand.str().data() << std::endl;
 	_pReadStream = popen(ssCommand.str().data(), "r");
 	if (!_pReadStream) {
 		std::string sErrMsg = "Failed to start Analytic process. Failed to execute command: ";
@@ -22,10 +23,17 @@ bool Process::start(const std::string& sPathToExecutable, const std::string& sCo
 		const int iBufSize = 1024;
 		char buf[iBufSize];
 		char* pCh = fgets(buf, iBufSize, _pReadStream);
+         //  std::cout << "From Process: pCh: "<< pCh << std::endl;
+           // std::cout << "From Process: _pReadStream: "<< _pReadStream << std::endl;
+           //std::cout << "From Process: buf: "<< buf << std::endl;
+        	//std::string sStreamOutput = std::string(buf);
+             //std::cout << "From Process: sStreamOutput: "<< sStreamOutput << std::endl;
+     
 		if (pCh) {
-			std::string sStreamOutput = std::string(buf);
+		   	std::string sStreamOutput = std::string(buf);
 			try {
 				_pid = util::Util::getPid(sStreamOutput);
+                //std::cout << "From Process: return pid: "<<_pid << std::endl;
 			} catch (opencctv::Exception &e) {
 				std::string sErrMsg = "Failed to retrieve PID of Analytic process. Analytic process output: ";
 				sErrMsg.append(sStreamOutput);
