@@ -12,10 +12,10 @@ namespace log {
 class ColorLogger : public Logger {
 public:
 	ColorLogger();
-	void error(std::string sMessage);
-	void warn(std::string sMessage);
-	void info(std::string sMessage);
-	void debug(std::string sMessage);
+	void error(const std::string& sMessage);
+	void warn(const std::string& sMessage);
+	void info(const std::string& sMessage);
+	void debug(const std::string& sMessage);
 	virtual ~ColorLogger();
 };
 

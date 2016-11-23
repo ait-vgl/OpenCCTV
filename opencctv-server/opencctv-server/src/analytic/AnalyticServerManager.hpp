@@ -19,12 +19,13 @@ class AnalyticServerManager {
 
 	AnalyticServerManager();
 	static AnalyticServerManager* _pASM; // Analytic Server Manager
-	map<unsigned int, AnalyticServer*> _mAnalayticServers; // Analytic server id as key
+	map<unsigned int, AnalyticServer*> _mAnalyticServers; // Analytic server id as key
 
 public:
 	static AnalyticServerManager* getInstance();
 
 	AnalyticServer* getAnalyticServer(int iAnalyticServerId);
+    //AnalyticServer* getAnalyticServerByAIId(unsigned int iAnalyticInstanceId);
 	const map<unsigned int, AnalyticServer*>& getAllAnalyticServer();
 	void setAnalyticServer(int iAnalyticServerId, AnalyticServer* pAnalyticServer);
 

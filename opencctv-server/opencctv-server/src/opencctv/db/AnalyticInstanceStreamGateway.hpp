@@ -29,7 +29,8 @@ private:
 
 public:
 	AnalyticInstanceStreamGateway();
-	void findAllForStream(unsigned int iStreamId, std::vector<opencctv::dto::AnalyticInstanceStream>& vToStoreAIS);
+    	void findAllForStream(unsigned int iStreamId, std::vector<opencctv::dto::AnalyticInstanceStream>& vToStoreAIS);
+	void findAllForStreamByAnalyticInstanceId(unsigned int iStreamId, std::vector<opencctv::dto::AnalyticInstanceStream>& vToStoreAIS, unsigned int iAnalyticInstanceId);
 	virtual ~AnalyticInstanceStreamGateway();
 };
 

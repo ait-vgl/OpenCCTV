@@ -15,6 +15,7 @@ namespace xml {
 
 const std::string OPERATION_START_ANALYTIC = "startanalytic";
 const std::string OPERATION_KILL_ALL_ANALYTICS = "killallanalytics";
+const std::string OPERATION_STOP_ANALYTIC = "stopanalytic";
 
 class AnalyticMessage {
 public:
