@@ -54,14 +54,16 @@
 
                 <% else %>
 
-                    <% if analytic_instance.status == false %>
+                    <% if analytic_instance.status == 0 %>
 
                         <td><%= link_to 'Start', start_analytic_instance_path(analytic_instance), :class => "btn btn-xs btn-warning" %></td>
 
-                    <%else %>
+                    <%elsif analytic_instance.status == 2 %>
 
                         <td><%= link_to 'Stop', stop_analytic_instance_path(analytic_instance), :class => "btn btn-xs btn-danger", data: {confirm: 'Are you sure?'} %></td>
 
+                    <%else%>
+                        <td><%= link_to 'Pending',"#" ,:class => "btn btn-xs btn-info" %></td>
                     <% end %>
 
 

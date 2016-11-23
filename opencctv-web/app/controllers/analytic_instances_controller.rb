@@ -106,19 +106,34 @@ class AnalyticInstancesController < ApplicationController
 
 
   def startAnalytic
-    @analytic_instance.update(status: 'true')
-
-    #puts "xxxxx"
     @openCctvServer = OpenCctvServer.first()
-    sendToServerWithData(@openCctvServer,"StartAnalytic",@analytic_instance.id)
+    @openCctvServer.port = 4445
+    msg_reply = sendToServerWithData(@openCctvServer,"StartAnalytic",@analytic_instance.id, @analytic_instance.analytic_server_id)
+
+    if(msg_reply[:type].eql? 'Error')
+      flash[:error] = "#{msg_reply[:content]}"
+    else
+      flash[:notice] = "Start request sent"
+      @analytic_instance.update(status: '1') # 0 = stop
+    end
+
     redirect_to :back
   end
 
 
   def stopAnalytic
-    @analytic_instance.update(status: 'false')
+
     @openCctvServer = OpenCctvServer.first()
-    sendToServerWithData(@openCctvServer,"StopAnalytic",@analytic_instance.id)
+    @openCctvServer.port = 4445
+    msg_reply = sendToServerWithData(@openCctvServer,"StopAnalytic",@analytic_instance.id, @analytic_instance.analytic_server_id)
+
+    if(msg_reply[:type].eql? 'Error')
+      flash[:error] = "#{msg_reply[:content]}"
+    else
+      flash[:notice] = "Stop request sent"
+      @analytic_instance.update(status: '1') # 0 = stop
+    end
+
     redirect_to :back
   end
 

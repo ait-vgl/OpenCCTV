@@ -27,6 +27,7 @@ private:
 	sql::Statement* _pStatement;
 	sql::PreparedStatement* _pStatementPtr;
 	static const std::string _SELECT_STREAM_SQL;
+    static const std::string _SELECT_STREAM_BY_ID_SQL ;
 
 public:
 	StreamGateway();

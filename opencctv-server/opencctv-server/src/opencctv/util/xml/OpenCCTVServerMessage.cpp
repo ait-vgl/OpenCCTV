@@ -7,9 +7,12 @@
 
 #include "OpenCCTVServerMessage.hpp"
 
-namespace opencctv {
-namespace util {
-namespace xml {
+namespace opencctv
+{
+namespace util
+{
+namespace xml
+{
 
 /**
  * All the messages sent to OpenCCTV server will have the following format
@@ -24,7 +27,7 @@ namespace xml {
  *
  */
 
-int OpenCCTVServerMessage::extractMessageDetails(const string& sRequest, string& sMessageType)
+int OpenCCTVServerMessage::extractMessageDetails(const string &sRequest, string &sMessageType)
 {
 	int result = 1;
 
@@ -36,12 +39,14 @@ int OpenCCTVServerMessage::extractMessageDetails(const string& sRequest, string&
 		read_xml(iss, pt);
 		sMessageType = pt.get<string>("opencctvmsg.type");
 		trim(sMessageType);
-	} catch(boost::property_tree::xml_parser::xml_parser_error &e)
+	}
+	catch (boost::property_tree::xml_parser::xml_parser_error &e)
 	{
 		result = -1;
 		string sMessage = "OpenCCTV Server: XML parsing error ";
 		throw opencctv::Exception(sMessage.append(e.what()));
-	} catch(boost::property_tree::ptree_bad_path &e)
+	}
+	catch (boost::property_tree::ptree_bad_path &e)
 	{
 		result = -1;
 		string sMessage = "OpenCCTV Server: XML parsing error ";
@@ -52,7 +57,7 @@ int OpenCCTVServerMessage::extractMessageDetails(const string& sRequest, string&
 }
 
 
-int OpenCCTVServerMessage::extractMessageDetailWithData(const string& sRequest, string& sMessageType, string& sData)
+int OpenCCTVServerMessage::extractMessageDetailWithData(const string &sRequest, string &sMessageType, unsigned int &iAIId, int &iASId)
 {
 	int result = 1;
 
@@ -65,19 +70,18 @@ int OpenCCTVServerMessage::extractMessageDetailWithData(const string& sRequest, 
 		sMessageType = pt.get<string>("opencctvmsg.type");
 		trim(sMessageType);
 
-		try{
-			sData = pt.get<string>("opencctvmsg.data");
-			trim(sData);
-		}catch(const std::exception &e){ // (...)
+		iAIId = pt.get<unsigned int> ("opencctvmsg.AIId");
+		iASId = pt.get<unsigned int> ("opencctvmsg.ASId");
+		//}catch(const std::exception &e){ // (...)}
 
-		}
-
-	} catch(boost::property_tree::xml_parser::xml_parser_error &e)
+	}
+	catch (boost::property_tree::xml_parser::xml_parser_error &e)
 	{
 		result = -1;
 		string sMessage = "OpenCCTV Server: XML parsing error ";
 		throw opencctv::Exception(sMessage.append(e.what()));
-	} catch(boost::property_tree::ptree_bad_path &e)
+	}
+	catch (boost::property_tree::ptree_bad_path &e)
 	{
 		result = -1;
 		string sMessage = "OpenCCTV Server: XML parsing error ";
@@ -87,7 +91,7 @@ int OpenCCTVServerMessage::extractMessageDetailWithData(const string& sRequest, 
 	return result;
 }
 
-int  OpenCCTVServerMessage::createStatusReply(const string& sContent, const string serverStatus, const pid_t serverProcessId, string& sReplyMessage )
+int  OpenCCTVServerMessage::createStatusReply(const string &sContent, const string serverStatus, const pid_t serverProcessId, string &sReplyMessage)
 {
 	int result = 1;
 	sReplyMessage = "";
@@ -99,6 +103,7 @@ int  OpenCCTVServerMessage::createStatusReply(const string& sContent, const stri
 	pt.put("opencctvmsg.serverpid", serverProcessId);
 
 	std::ostringstream oss;
+
 	try
 	{
 		write_xml(oss, pt);
@@ -114,7 +119,7 @@ int  OpenCCTVServerMessage::createStatusReply(const string& sContent, const stri
 	return result;
 }
 
-int OpenCCTVServerMessage::createInvalidMessageReply(const string& sContent, const string serverStatus, const pid_t serverProcessId, string& sReplyMessage )
+int OpenCCTVServerMessage::createInvalidMessageReply(const string &sContent, const string serverStatus, const pid_t serverProcessId, string &sReplyMessage)
 {
 	int result = 1;
 	sReplyMessage = "";
@@ -126,6 +131,7 @@ int OpenCCTVServerMessage::createInvalidMessageReply(const string& sContent, con
 	pt.put("opencctvmsg.serverpid", serverProcessId);
 
 	std::ostringstream oss;
+
 	try
 	{
 		write_xml(oss, pt);
@@ -141,7 +147,7 @@ int OpenCCTVServerMessage::createInvalidMessageReply(const string& sContent, con
 	return result;
 }
 
-int OpenCCTVServerMessage::createStartMessageReply(const string& sContent, const string serverStatus, const pid_t serverProcessId, string& sReplyMessage)
+int OpenCCTVServerMessage::createStartMessageReply(const string &sContent, const string serverStatus, const pid_t serverProcessId, string &sReplyMessage)
 {
 	int result = 1;
 
@@ -154,6 +160,7 @@ int OpenCCTVServerMessage::createStartMessageReply(const string& sContent, const
 	pt.put("opencctvmsg.serverpid", serverProcessId);
 
 	std::ostringstream oss;
+
 	try
 	{
 		write_xml(oss, pt);
@@ -170,7 +177,7 @@ int OpenCCTVServerMessage::createStartMessageReply(const string& sContent, const
 
 }
 
-int OpenCCTVServerMessage::createStopMessageReply(const string& sContent, const string serverStatus, const pid_t serverProcessId, string& sReplyMessage)
+int OpenCCTVServerMessage::createStopMessageReply(const string &sContent, const string serverStatus, const pid_t serverProcessId, string &sReplyMessage)
 {
 	int result = 1;
 
@@ -183,6 +190,7 @@ int OpenCCTVServerMessage::createStopMessageReply(const string& sContent, const 
 	pt.put("opencctvmsg.serverpid", serverProcessId);
 
 	std::ostringstream oss;
+
 	try
 	{
 		write_xml(oss, pt);

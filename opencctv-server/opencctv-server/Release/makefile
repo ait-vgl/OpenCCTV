@@ -42,7 +42,7 @@ all		: $(NAME)
 Other_L		:=${A}AnalyticServerManager.o ${A}AnalyticServer.o ${A}AnalyticServer.o ${A}xml/AnalyticMessage.o ${A}AnalyticData.o ${A}AnalyticResult.o \
 		${O}ResultRouterThread.o ${O}OpenCCTVServerManager.o ${O}OpenCCTVServer.o ${O}Exception.o ${O}Image.o ${O}ServerController.o ${O}Process.o \
 		${O_UTIL}log/Loggers.o ${O_UTIL}xml/OpenCCTVServerMessage.o ${O_UTIL}Config.o ${O_UTIL}serialization/Serializers.o ${O_UTIL}serialization/gpb/ProtoBuf.o ${O_UTIL}serialization/gpb/image.pb.o ${O_UTIL}serialization/gpb/analytic_result.pb.o ${O_UTIL}log/colored/ColorLogger.o ${O_MQ}MqUtil.o ${O_MQ}TcpMqReceiver.o \
-		${O_DB}AnalyticServerGateway.o ${O_DB}AnalyticResultGateway.o ${O_DB}DbConnector.o ${O_DB}AnalyticServerGateway.o ${O_DB}StreamGateway.o ${O_DB}AnalyticInstanceStreamGateway.o ${O_DTO}AnalyticServerDTO.o ${O_DTO}AnalyticInstanceStream.o ${O_DTO}Stream.o
+		${O_DB}AnalyticServerGateway.o ${O_DB}AnalyticResultGateway.o ${O_DB}DbConnector.o ${O_DB}AnalyticServerGateway.o ${O_DB}StreamGateway.o ${O_DB}AnalyticInstanceStreamGateway.o ${O_DB}AnalyticInstanceGateway.o ${O_DTO}AnalyticServerDTO.o ${O_DTO}AnalyticInstanceStream.o ${O_DTO}Stream.o
 		
 			 
 
