@@ -25,16 +25,16 @@ class AnalyticData {
 	boost::thread* _pResultRouterThread;
 
 	//std::string _sAnalyticQueueInAddress;
-	std::string _sAnalyticQueueOutAddress;
+//	std::string _sAnalyticQueueOutPort;
 	//opencctv::util::flow::FlowController* _pFlowController;
 
 
 public:
-	AnalyticData(int iAnalyticInstanceId);
+	AnalyticData();
 	virtual ~AnalyticData();
 
 	//bool isAnalyticQueueInAddress();
-	bool isAnalyticQueueOutAddress();
+	//bool isAnalyticQueueOutPort();
 	//bool isMultipleStream();
 	//bool isFlowController();
 /*
@@ -53,15 +53,15 @@ public:
 	void setResultRouterThread(boost::thread* resultRouterThread) {
 		_pResultRouterThread = resultRouterThread;
 	}
-
-	std::string getAnalyticQueueOutAddress() {
-		return _sAnalyticQueueOutAddress;
-	}
-
-	void setAnalyticQueueOutAddress(std::string& analyticQueueOutAddress) {
-		_sAnalyticQueueOutAddress = analyticQueueOutAddress;
-	}
 /*
+	std::string getAnalyticQueueOutAddress() {
+		return _sAnalyticQueueOutPort;
+	}
+
+	void setAnalyticQueueOutAddress(std::string& analyticQueueOutPort) {
+		_sAnalyticQueueOutPort = analyticQueueOutPort;
+	}
+
 	std::string getAnalyticQueueInAddress() {
 		return _sAnalyticQueueInAddress;
 	}

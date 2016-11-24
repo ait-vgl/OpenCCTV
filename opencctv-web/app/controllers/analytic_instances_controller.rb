@@ -113,7 +113,7 @@ class AnalyticInstancesController < ApplicationController
     if(msg_reply[:type].eql? 'Error')
       flash[:error] = "#{msg_reply[:content]}"
     else
-      flash[:notice] = "Start request sent"
+      flash[:notice] = "Start request was sent"
       @analytic_instance.update(status: '1') # 0 = stop
     end
 
@@ -130,7 +130,7 @@ class AnalyticInstancesController < ApplicationController
     if(msg_reply[:type].eql? 'Error')
       flash[:error] = "#{msg_reply[:content]}"
     else
-      flash[:notice] = "Stop request sent"
+      flash[:notice] = "Stop request was sent"
       @analytic_instance.update(status: '1') # 0 = stop
     end
 

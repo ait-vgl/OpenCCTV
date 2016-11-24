@@ -22,12 +22,14 @@ namespace opencctv {
 class ResultRouterThread {
 private:
 	unsigned int _iAnalyticInstanceId;
-    analytic::AnalyticData* _pAD ;
-	util::flow::FlowController* _pFlowController;
+   // analytic::AnalyticData* _pAD ;
+	//util::flow::FlowController* _pFlowController;
+    std::string _sAnalyticServerIp;
+    std::string _sAnalyticQueueOutPort;
 	util::serialization::Serializable* _pSerializer;
 
 public:
-	ResultRouterThread(analytic::AnalyticData* pAD);
+	ResultRouterThread(unsigned int iAnalyticInstanceId, std::string sAnalyticServerIp, std::string sAnalyticQueueOutPort);
 	void operator()();
 	~ResultRouterThread();
 };

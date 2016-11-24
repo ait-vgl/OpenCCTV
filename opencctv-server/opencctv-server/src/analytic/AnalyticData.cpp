@@ -9,35 +9,35 @@
 
 namespace analytic
 {
-AnalyticData::AnalyticData(int iId)
+AnalyticData::AnalyticData()
 {
 	//this->_iId = iId;
 	//this->_bStatus = true;
 	//this->_sAnalyticQueueInAddress = "";
-	this->_sAnalyticQueueOutAddress = "";
+	//this->_sAnalyticQueueOutPort = "";
 	//this->_pFlowController = NULL;
 	this->_pResultRouterThread = NULL;
 }
 /*
 bool AnalyticData::isAnalyticQueueInAddress() {
 
-	if (_sAnalyticQueueOutAddress != "") {
+	if (_sAnalyticQueueOutPort != "") {
 		return true;
 	} else
 		return false;
 }
-*/
-bool AnalyticData::isAnalyticQueueOutAddress()
+
+bool AnalyticData::isAnalyticQueueOutPort()
 {
 
-	if (_sAnalyticQueueOutAddress != "")
+	if (_sAnalyticQueueOutPort != "")
 	{
 		return true;
 	}
 	else
 		return false;
 }
-/*
+
 bool AnalyticData::isMultipleStream() {
 	if (!(this->_vStreamIds.empty()) && this->_vStreamIds.size() > 1) {
 		return true;
@@ -71,7 +71,7 @@ AnalyticData::~AnalyticData()
 			_pResultRouterThread = NULL;
 		}
 
-		opencctv::util::log::Loggers::getDefaultLogger()->debug("Clear Result router thread at AnalaticData.");
+		opencctv::util::log::Loggers::getDefaultLogger()->debug("Clear Result router thread at AnalyticData.");
 	}
 }
 

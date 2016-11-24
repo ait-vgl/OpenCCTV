@@ -80,6 +80,8 @@ int main()
 			util::log::Loggers::getDefaultLogger()->error(sErrMsg);
 		}
 
+		opencctv::util::log::Loggers::getDefaultLogger()->debug(sRequest);
+		
 		std::string sOperation;
 
 		try
@@ -172,6 +174,7 @@ int main()
 				try
 				{
 					bASRSent = opencctv::mq::MqUtil::writeToSocket(pSocket, sReply);
+                    opencctv::util::log::Loggers::getDefaultLogger()->debug("Finished starting analytic instance, replied");
 				}
 				catch (std::runtime_error &e)
 				{
@@ -200,7 +203,7 @@ int main()
 
 			try
 			{
-                // Use same as startRequest message
+				// Use same as startRequest message
 				analytic::xml::AnalyticMessage::extractAnalyticStopRequestData(sRequest, iAnalyticInstanceId);
 			}
 			catch (Exception &e)
@@ -216,7 +219,7 @@ int main()
 			std::map<unsigned int, analytic::AnalyticProcess *> mAnalyticProcesses = analytic::ApplicationModel::getInstance()->getAnalyticProcesses();
 			std::map<unsigned int, analytic::AnalyticProcess *>::iterator it =  mAnalyticProcesses.find(iAnalyticInstanceId);
 
-			if( it != mAnalyticProcesses.end())
+			if (it != mAnalyticProcesses.end())
 			{
 				analytic::AnalyticProcess *pAnalyticProcess = it->second;
 
@@ -228,21 +231,19 @@ int main()
 						pAnalyticProcess = NULL;
 					}
 
-					mAnalyticProcesses.erase(it++); //remove analytic process from the model
-                    bDone = true; // stopped the analytic
-                    break;
+					mAnalyticProcesses.erase(it); //remove analytic process from the model
+					bDone = true; // stopped the analytic
 				}
 			}
 
-			// Sending Kill all analytic processes reply
 			try
 			{
-				//TODO: may update this message
-				sReply = analytic::xml::AnalyticMessage::getKillAllAnalyticProcessesReply(bDone);
+				sReply = analytic::xml::AnalyticMessage::getStopAnalyticProcessesReply(bDone);
+                opencctv::util::log::Loggers::getDefaultLogger()->debug("Finished stopping analytic instance, replied");
 			}
 			catch (Exception &e)
 			{
-				std::string sErrMsg = "Failed to create Kill All Analytics Reply. ";
+				std::string sErrMsg = "Failed to create stop Analytic Reply. ";
 				sErrMsg.append(e.what());
 				util::log::Loggers::getDefaultLogger()->error(sErrMsg);
 			}
@@ -316,6 +317,7 @@ int main()
 			try
 			{
 				sReply = analytic::xml::AnalyticMessage::getKillAllAnalyticProcessesReply(bDone);
+                 opencctv::util::log::Loggers::getDefaultLogger()->debug("Finished stopping all analytic instances, replied");
 			}
 			catch (Exception &e)
 			{

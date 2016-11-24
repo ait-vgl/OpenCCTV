@@ -157,7 +157,7 @@ int main(int argc, char *argv[])
 					else
 					{
 						// Received message is ok and reponse to Web and let web
-						opencctv::util::log::Loggers::getDefaultLogger()->debug("Started analytic instance: " + boost::lexical_cast<std::string>(iAIId) + " server:  " + boost::lexical_cast<std::string>(iASId));
+						opencctv::util::log::Loggers::getDefaultLogger()->debug("Strting analytic instance: " + boost::lexical_cast<std::string>(iAIId) + " server:  " + boost::lexical_cast<std::string>(iASId));
 						_pServerController->replyMessage("ok");
 
 						if (pAnalyticServer->startAnalyticInstanceAction(iAIId))
@@ -191,7 +191,7 @@ int main(int argc, char *argv[])
 					if (pAnalyticServer->isAnalyticInstance(iAIId)) // check dupplicate analytic insance running
 					{
 						// Received message is ok and reponse to Web and let web
-						opencctv::util::log::Loggers::getDefaultLogger()->debug("Started analytic instance: " + boost::lexical_cast<std::string>(iAIId) + " server:  " + boost::lexical_cast<std::string>(iASId));
+						opencctv::util::log::Loggers::getDefaultLogger()->debug("Stopping analytic instance: " + boost::lexical_cast<std::string>(iAIId) + " server:  " + boost::lexical_cast<std::string>(iASId));
 						_pServerController->replyMessage("ok");
 
 						if (pAnalyticServer->stopAnalyticInstanceAction(iAIId))
@@ -239,6 +239,7 @@ int main(int argc, char *argv[])
 			opencctv::util::log::Loggers::getDefaultLogger()->error(e.what());
 		}
 	}
+	
 
 	opencctv::util::log::Loggers::getDefaultLogger()->info("OpenCCTV server finish working, bye !!!.");
 	return 0;
@@ -269,7 +270,7 @@ void exitHandler(int iSignum)
 		}
 	}
 
-	cout << "Terminate OpenCCTV server from exitHandler" << endl;
+	opencctv::util::log::Loggers::getDefaultLogger()->info("Terminate OpenCCTV server from exitHandler");
 
 	exit(iSignum);
 }
