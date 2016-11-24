@@ -122,7 +122,6 @@ class AnalyticInstancesController < ApplicationController
 
 
   def stopAnalytic
-
     @openCctvServer = OpenCctvServer.first()
     @openCctvServer.port = 4445
     msg_reply = sendToServerWithData(@openCctvServer,"StopAnalytic",@analytic_instance.id, @analytic_instance.analytic_server_id)

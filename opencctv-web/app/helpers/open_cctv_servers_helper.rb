@@ -45,7 +45,6 @@ module OpenCctvServersHelper
 
 
   private
-
   def parse_reply (xml_string)
     #Example reply messages :
     #successfull : <?xml version="1.0" encoding="utf-8"?><opencctvmsg><type>StartReply</type><content>OpenCCTV Server Started</content><serverstatus>Running</serverstatus><serverpid>17287</serverpid></opencctvmsg>
