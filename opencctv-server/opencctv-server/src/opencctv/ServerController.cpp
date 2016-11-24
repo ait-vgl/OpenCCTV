@@ -229,12 +229,38 @@ void ServerController::sendErrorReply(const string& sMessageContent)
 	}
 }
 
-void ServerController::testReply(){
-	string sContent = "testReply";
+void ServerController::replyMessage(string sMessage){
+	string sContent = sMessage;
 	string sReplyMessage;
-	_sServerStatus = opencctv::util::SVR_STATUS_STOPPED;
-	opencctv::util::xml::OpenCCTVServerMessage::createStopMessageReply(sContent, _sServerStatus, _pProcess->getPid(), sReplyMessage);
-	opencctv::mq::MqUtil::writeToSocket(_tcpMq, sReplyMessage);
+	_sServerStatus = opencctv::util::SVR_STATUS_RUNNING;
+    
+	try
+	{
+        opencctv::util::xml::OpenCCTVServerMessage::createStopMessageReply(sContent, _sServerStatus, 9999, sReplyMessage);
+	}
+	catch(opencctv::Exception &e)
+	{
+		ostringstream ossReply;
+		ossReply << "<?xml version=\"1.0\" encoding=\"utf-8\"?> <opencctvmsg><type>Error</type><content>";
+		ossReply << e.what();
+		ossReply << "</content><serverstatus>";
+		ossReply << _sServerStatus;
+		ossReply << "</serverstatus><serverpid>";
+		ossReply << "xxx";
+		ossReply << "</serverpid></opencctvmsg>";
+
+		sReplyMessage = ossReply.str();
+	}
+
+    
+    try
+	{
+		opencctv::mq::MqUtil::writeToSocket(_tcpMq, sReplyMessage);
+	}
+	catch(std::runtime_error &e)
+	{
+		opencctv::util::log::Loggers::getDefaultLogger()->error(e.what());
+	}
 }
 
 //void ServerController::startAnalytic(){

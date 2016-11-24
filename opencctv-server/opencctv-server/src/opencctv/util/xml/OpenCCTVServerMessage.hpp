@@ -28,7 +28,7 @@ namespace xml {
 class OpenCCTVServerMessage {
 public:
 	int static extractMessageDetails(const string& sRequest, string& sMessageType);
-	int static extractMessageDetailWithData(const string& sRequest, string& sMessageType, string& sData);
+	int static extractMessageDetailWithData(const string &sRequest, string &sMessageType, unsigned int &iAIId, int &iASId);
 	int static createInvalidMessageReply(const string& sContent, const string serverStatus, const pid_t serverProcessId, string& sReplyMessage );
 	int static createStartMessageReply(const string& sContent, const string serverStatus, const pid_t serverProcessId, string& sReplyMessage);
 	int static createStopMessageReply(const string& sContent, const string serverStatus, const pid_t serverProcessId, string& sReplyMessage);

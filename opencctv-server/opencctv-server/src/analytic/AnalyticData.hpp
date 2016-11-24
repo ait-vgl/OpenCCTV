@@ -14,29 +14,30 @@
 #include "../opencctv/util/flow/FlowController.hpp"
 
 #include <boost/thread/thread.hpp>
+#include "../opencctv/util/log/Loggers.hpp"
 
 
 namespace analytic {
 class AnalyticData {
-	unsigned int _iId;
-	bool _bStatus;
-	std::vector<unsigned int> _vStreamIds;  // list of  stream id per analytic
+	//unsigned int _iId;
+	//bool _bStatus;
+	//std::vector<unsigned int> _vStreamIds;  // list of  stream id per analytic
 	boost::thread* _pResultRouterThread;
 
-	std::string _sAnalyticQueueInAddress;
-	std::string _sAnalyticQueueOutAddress;
-	opencctv::util::flow::FlowController* _pFlowController;
+	//std::string _sAnalyticQueueInAddress;
+//	std::string _sAnalyticQueueOutPort;
+	//opencctv::util::flow::FlowController* _pFlowController;
 
 
 public:
-	AnalyticData(int iAnalyticInstanceId);
+	AnalyticData();
 	virtual ~AnalyticData();
 
-	bool isAnalyticQueueInAddress();
-	bool isAnalyticQueueOutAddress();
-	bool isMultipleStream();
-	bool isFlowController();
-
+	//bool isAnalyticQueueInAddress();
+	//bool isAnalyticQueueOutPort();
+	//bool isMultipleStream();
+	//bool isFlowController();
+/*
 	opencctv::util::flow::FlowController* getFlowController() const {
 		return _pFlowController;
 	}
@@ -44,7 +45,7 @@ public:
 	void setFlowController(opencctv::util::flow::FlowController* flowController) {
 		_pFlowController = flowController;
 	}
-
+*/
 	boost::thread* getResultRouterThread() const {
 		return _pResultRouterThread;
 	}
@@ -52,13 +53,13 @@ public:
 	void setResultRouterThread(boost::thread* resultRouterThread) {
 		_pResultRouterThread = resultRouterThread;
 	}
-
+/*
 	std::string getAnalyticQueueOutAddress() {
-		return _sAnalyticQueueOutAddress;
+		return _sAnalyticQueueOutPort;
 	}
 
-	void setAnalyticQueueOutAddress(std::string& analyticQueueOutAddress) {
-		_sAnalyticQueueOutAddress = analyticQueueOutAddress;
+	void setAnalyticQueueOutAddress(std::string& analyticQueueOutPort) {
+		_sAnalyticQueueOutPort = analyticQueueOutPort;
 	}
 
 	std::string getAnalyticQueueInAddress() {
@@ -68,7 +69,8 @@ public:
 	void setAnalyticQueueInAddress(std::string& imageInputQueueAddress) {
 		_sAnalyticQueueInAddress = imageInputQueueAddress;
 	}
-
+*/
+/*
 	bool isStatus() const {
 		return _bStatus;
 	}
@@ -76,14 +78,16 @@ public:
 	void setStatus(bool status) {
 		_bStatus = status;
 	}
+*/
 
 	/*const std::vector<unsigned int>& getStreamIds() const {
 		return _vStreamIds;
 	}*/
-
+/*
 	void setStreamId(unsigned int streamId) {
 		_vStreamIds.push_back(streamId);
 	}
+	*/
 };
 
 

@@ -15,19 +15,27 @@ namespace xml {
 
 const std::string OPERATION_START_ANALYTIC = "startanalytic";
 const std::string OPERATION_KILL_ALL_ANALYTICS = "killallanalytics";
+const std::string OPERATION_STOP_ANALYTIC = "stopanalytic";
 
 class AnalyticMessage {
 public:
 	static std::string extractAnalyticRequestOperation(const std::string& sAnalyticRequest);
+    
 	static std::string getAnalyticStartRequest(unsigned int iAnalyticInstanceId, const std::string& sAnalyticPluginDirLocation, const std::string& sAnalyticPluginFilename);
-	static std::string getAnalyticStartReply(const std::string& sAnalyticQueueInAddress,const std::string& sAnalyticQueueOutAddress);
-	static std::string getPidMessage(pid_t pid);
+   // static void extractAnalyticStartRequestData(const std::string& sAnalyticStartRequest, unsigned int& iAnalyticInstanceId, std::string& sAnalyticDirLocation, std::string& sAnalyticFilename);
+    
+    //static std::string getAnalyticStartReply(const std::string& sAnalyticQueueInAddress,const std::string& sAnalyticQueueOutAddress);
+    static void extractAnalyticStartReplyData(const std::string& sAnalyticStartReply, std::string& sAnalyticQueueInAddress, std::string& sAnalyticQueueOutAddress);
+    
+    static std::string getAnalyticStopRequest(unsigned int iAnalyticInstanceId);
+    static void parseStopAnalyticInstanceReply(const std::string& sReply, bool& sDone);
+    
 	static std::string getKillAllAnalyticProcessesRequest();
-	static std::string getKillAllAnalyticProcessesReply(bool bDone);
-	static void extractAnalyticStartRequestData(const std::string& sAnalyticStartRequest, unsigned int& iAnalyticInstanceId, std::string& sAnalyticDirLocation, std::string& sAnalyticFilename);
-	static void extractAnalyticStartReplyData(const std::string& sAnalyticStartReply, std::string& sAnalyticQueueInAddress, std::string& sAnalyticQueueOutAddress);
+	//static std::string getKillAllAnalyticProcessesReply(bool bDone);
 	static void parseKillAllAnalyticProcessesReply(const std::string& sReply, bool& sDone);
-	static pid_t getPid(const std::string& sPidMessage);
+	
+    //static pid_t getPid(const std::string& sPidMessage);
+    //static std::string getPidMessage(pid_t pid);
 };
 
 } /* namespace xml */

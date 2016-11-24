@@ -3,3 +3,4 @@ Debug
 Release/src/
 .settings/
 *.kdev4
+*.o
