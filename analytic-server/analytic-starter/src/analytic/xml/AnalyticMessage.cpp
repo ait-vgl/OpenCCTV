@@ -19,7 +19,7 @@ std::string AnalyticMessage::extractAnalyticRequestOperation(const std::string& 
 	boost::algorithm::trim (sRet);
 	return sRet;
 }
-
+/*
 std::string AnalyticMessage::getKillAllAnalyticProcessesRequest()
 {
 	boost::property_tree::ptree pt;
@@ -35,7 +35,7 @@ std::string AnalyticMessage::getKillAllAnalyticProcessesRequest()
 	std::string message = oss.str();
 	return message;
 }
-
+*/
 std::string AnalyticMessage::getKillAllAnalyticProcessesReply(bool bDone)
 {
 	boost::property_tree::ptree pt;
@@ -52,7 +52,7 @@ std::string AnalyticMessage::getKillAllAnalyticProcessesReply(bool bDone)
 	std::string message = oss.str();
 	return message;
 }
-
+/*
 std::string AnalyticMessage::getAnalyticStartRequest(unsigned int iAnalyticInstanceId, const std::string& sAnalyticPluginDirLocation, const std::string& sAnalyticPluginFilename) {
 	boost::property_tree::ptree pt;
 	pt.put("analyticrequest.operation", OPERATION_START_ANALYTIC);
@@ -70,7 +70,7 @@ std::string AnalyticMessage::getAnalyticStartRequest(unsigned int iAnalyticInsta
 	std::string message = oss.str();
 	return message;
 }
-
+*/
 std::string AnalyticMessage::getAnalyticStartReply(const std::string& sAnalyticQueueInAddress,const std::string& sAnalyticQueueOutAddress)
 {
 	boost::property_tree::ptree pt;
@@ -89,23 +89,6 @@ std::string AnalyticMessage::getAnalyticStartReply(const std::string& sAnalyticQ
 	return message;
 }
 
-std::string AnalyticMessage::getPidMessage(pid_t pid)
-{
-	boost::property_tree::ptree pt;
-	pt.put("pid", pid);
-	std::ostringstream oss;
-	try {
-		write_xml(oss, pt);
-	} catch (boost::property_tree::xml_parser::xml_parser_error &e) {
-		std::string sErrMsg = "Failed to generate PID message. ";
-		sErrMsg.append(e.what());
-		throw opencctv::Exception(sErrMsg);
-	}
-	std::string message = oss.str();
-	boost::replace_all(message, "\n", "");
-	message.append("\n");
-	return message;
-}
 
 void AnalyticMessage::extractAnalyticStartRequestData(const std::string& sAnalyticStartRequest, unsigned int& iAnalyticInstanceId, std::string& sAnalyticDirLocation, std::string& sAnalyticFilename)
 {
@@ -125,6 +108,37 @@ void AnalyticMessage::extractAnalyticStartRequestData(const std::string& sAnalyt
 	}
 }
 
+void AnalyticMessage::extractAnalyticStopRequestData(const std::string& sAnalyticStartRequest, unsigned int& iAnalyticInstanceId)
+{
+	boost::property_tree::ptree pt;
+	std::istringstream iss(sAnalyticStartRequest);
+	try {
+		read_xml(iss, pt);
+		iAnalyticInstanceId = pt.get<unsigned int>("analyticrequest.analyticinstanceid");
+	} catch (boost::property_tree::xml_parser::xml_parser_error &e) {
+		std::string sErrMsg = "Failed to parse Analytic Stop Request. ";
+		sErrMsg.append(e.what());
+		throw opencctv::Exception(sErrMsg);
+	}
+}
+std::string AnalyticMessage::getStopAnalyticProcessesReply(bool bDone)
+{
+	boost::property_tree::ptree pt;
+	pt.put("analyticreply.operation", OPERATION_STOP_ANALYTIC);
+	pt.put("analyticreply.done", bDone);
+	std::ostringstream oss;
+	try {
+		write_xml(oss, pt);
+	} catch (boost::property_tree::xml_parser::xml_parser_error &e) {
+		std::string sErrMsg = "Failed to generate Stop Analytic Processs Reply. ";
+		sErrMsg.append(e.what());
+		throw opencctv::Exception(sErrMsg);
+	}
+	std::string message = oss.str();
+	return message;
+}
+
+/*
 void AnalyticMessage::extractAnalyticStartReplyData(const std::string& sAnalyticStartReply, std::string& sAnalyticQueueInAddress, std::string& sAnalyticQueueOutAddress)
 {
 	boost::property_tree::ptree pt;
@@ -171,6 +185,26 @@ pid_t AnalyticMessage::getPid(const std::string& sPidMessage)
 	}
 	return pid;
 }
+
+
+std::string AnalyticMessage::getPidMessage(pid_t pid)
+{
+	boost::property_tree::ptree pt;
+	pt.put("pid", pid);
+	std::ostringstream oss;
+	try {
+		write_xml(oss, pt);
+	} catch (boost::property_tree::xml_parser::xml_parser_error &e) {
+		std::string sErrMsg = "Failed to generate PID message. ";
+		sErrMsg.append(e.what());
+		throw opencctv::Exception(sErrMsg);
+	}
+	std::string message = oss.str();
+	boost::replace_all(message, "\n", "");
+	message.append("\n");
+	return message;
+}
+*/
 
 } /* namespace xml */
 } /* namespace analytic */

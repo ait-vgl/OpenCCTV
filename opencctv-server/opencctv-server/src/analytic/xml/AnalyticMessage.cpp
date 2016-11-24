@@ -35,7 +35,7 @@ std::string AnalyticMessage::getKillAllAnalyticProcessesRequest()
 	std::string message = oss.str();
 	return message;
 }
-
+/*
 std::string AnalyticMessage::getKillAllAnalyticProcessesReply(bool bDone)
 {
 	boost::property_tree::ptree pt;
@@ -52,6 +52,7 @@ std::string AnalyticMessage::getKillAllAnalyticProcessesReply(bool bDone)
 	std::string message = oss.str();
 	return message;
 }
+*/
 
 std::string AnalyticMessage::getAnalyticStartRequest(unsigned int iAnalyticInstanceId, const std::string& sAnalyticPluginDirLocation, const std::string& sAnalyticPluginFilename) {
 	boost::property_tree::ptree pt;
@@ -71,6 +72,22 @@ std::string AnalyticMessage::getAnalyticStartRequest(unsigned int iAnalyticInsta
 	return message;
 }
 
+std::string AnalyticMessage::getAnalyticStopRequest(unsigned int iAnalyticInstanceId) {
+	boost::property_tree::ptree pt;
+	pt.put("analyticrequest.operation", OPERATION_STOP_ANALYTIC);
+	pt.put("analyticrequest.analyticinstanceid", iAnalyticInstanceId);
+	std::ostringstream oss;
+	try {
+		write_xml(oss, pt);
+	} catch (boost::property_tree::xml_parser::xml_parser_error &e) {
+		std::string sErrMsg = "Failed to generate Analytic Start Request. ";
+		sErrMsg.append(e.what());
+		throw opencctv::Exception(sErrMsg);
+	}
+	std::string message = oss.str();
+	return message;
+}
+/*
 std::string AnalyticMessage::getAnalyticStartReply(const std::string& sAnalyticQueueInAddress,const std::string& sAnalyticQueueOutAddress)
 {
 	boost::property_tree::ptree pt;
@@ -86,24 +103,6 @@ std::string AnalyticMessage::getAnalyticStartReply(const std::string& sAnalyticQ
 		throw opencctv::Exception(sErrMsg);
 	}
 	std::string message = oss.str();
-	return message;
-}
-
-std::string AnalyticMessage::getPidMessage(pid_t pid)
-{
-	boost::property_tree::ptree pt;
-	pt.put("pid", pid);
-	std::ostringstream oss;
-	try {
-		write_xml(oss, pt);
-	} catch (boost::property_tree::xml_parser::xml_parser_error &e) {
-		std::string sErrMsg = "Failed to generate PID message. ";
-		sErrMsg.append(e.what());
-		throw opencctv::Exception(sErrMsg);
-	}
-	std::string message = oss.str();
-	boost::replace_all(message, "\n", "");
-	message.append("\n");
 	return message;
 }
 
@@ -124,7 +123,7 @@ void AnalyticMessage::extractAnalyticStartRequestData(const std::string& sAnalyt
 		throw opencctv::Exception(sErrMsg);
 	}
 }
-
+*/
 void AnalyticMessage::extractAnalyticStartReplyData(const std::string& sAnalyticStartReply, std::string& sAnalyticQueueInAddress, std::string& sAnalyticQueueOutAddress)
 {
 	boost::property_tree::ptree pt;
@@ -156,6 +155,20 @@ void AnalyticMessage::parseKillAllAnalyticProcessesReply(const std::string& sRep
 	}
 }
 
+void AnalyticMessage::parseStopAnalyticInstanceReply(const std::string& sReply, bool& sDone)
+{
+	boost::property_tree::ptree pt;
+	std::istringstream iss(sReply);
+	try {
+		read_xml(iss, pt);
+		sDone = pt.get<bool>("analyticreply.done");
+	} catch (boost::property_tree::xml_parser::xml_parser_error &e) {
+		std::string sErrMsg = "Failed to parse Stop  Analytic Process Reply. ";
+		sErrMsg.append(e.what());
+		throw opencctv::Exception(sErrMsg);
+	}
+}
+/*
 pid_t AnalyticMessage::getPid(const std::string& sPidMessage)
 {
 	pid_t pid = 0;
@@ -172,5 +185,23 @@ pid_t AnalyticMessage::getPid(const std::string& sPidMessage)
 	return pid;
 }
 
+std::string AnalyticMessage::getPidMessage(pid_t pid)
+{
+	boost::property_tree::ptree pt;
+	pt.put("pid", pid);
+	std::ostringstream oss;
+	try {
+		write_xml(oss, pt);
+	} catch (boost::property_tree::xml_parser::xml_parser_error &e) {
+		std::string sErrMsg = "Failed to generate PID message. ";
+		sErrMsg.append(e.what());
+		throw opencctv::Exception(sErrMsg);
+	}
+	std::string message = oss.str();
+	boost::replace_all(message, "\n", "");
+	message.append("\n");
+	return message;
+}
+*/
 } /* namespace xml */
 } /* namespace analytic */

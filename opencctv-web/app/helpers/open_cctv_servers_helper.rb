@@ -1,6 +1,6 @@
 module OpenCctvServersHelper
 
-  def sendToServerWithData(openCctvServer,message_type,data)
+  def sendToServerWithData(openCctvServer, message_type, aIID, aSID)
 
     puts openCctvServer.port
     puts openCctvServer.host
@@ -23,7 +23,7 @@ module OpenCctvServersHelper
 
       #Connects to the socket
       rc = requester.connect("tcp://#{openCctvServer.host}:#{openCctvServer.port}")
-      message = "<?xml version=\"1.0\" encoding=\"utf-8\"?><opencctvmsg><type>#{message_type}</type><data>#{data}</data></opencctvmsg>"
+      message = "<?xml version=\"1.0\" encoding=\"utf-8\"?><opencctvmsg><type>#{message_type}</type><AIId>#{aIID}</AIId><ASId>#{aSID}</ASId></opencctvmsg>"
 
       #Send a request
       rc = requester.send_string(message) unless zmq_error_check(rc)
@@ -38,14 +38,46 @@ module OpenCctvServersHelper
 
     puts reply
 
-    #reply.nil? ? msg_details = parse_reply(error_reply) : msg_details = parse_reply(reply)
-    #return msg_details
+    reply.nil? ? msg_details = parse_reply(error_reply) : msg_details = parse_reply(reply)
+    return msg_details
 
   end
 
 
   private
-  def zmq_error_check(rc)
+
+  def parse_reply (xml_string)
+    #Example reply messages :
+    #successfull : <?xml version="1.0" encoding="utf-8"?><opencctvmsg><type>StartReply</type><content>OpenCCTV Server Started</content><serverstatus>Running</serverstatus><serverpid>17287</serverpid></opencctvmsg>
+    #failed : <?xml version="1.0" encoding="utf-8"?> <opencctvmsg><type>Error</type><content>Unknown message type received</content><serverstatus>Unknown</serverstatus><serverpid>0</serverpid></opencctvmsg>
+
+    #<?xml version="1.0" encoding="utf-8"?><opencctvmsg><type>StopReply</type><content>ok</content><serverstatus>Running</serverstatus><serverpid>9999</serverpid></opencctvmsg>
+
+    type = nil
+    content = nil
+    server_status = nil
+    server_pid = nil
+
+    msg_details = {}
+
+    if(!xml_string.nil? && xml_string.start_with?("<"))
+      doc = Nokogiri::XML(xml_string)
+      type = doc.xpath('//opencctvmsg//type')[0].content.to_s.strip
+      content = doc.xpath('//opencctvmsg//content')[0].content.to_s.strip
+      server_status = doc.xpath('//opencctvmsg//serverstatus')[0].content.to_s.strip
+      server_pid = doc.xpath('//opencctvmsg//serverpid')[0].content.to_s.strip
+
+      msg_details[:type] = type
+      msg_details[:content] = content
+      msg_details[:server_status] = server_status
+      msg_details[:server_pid] = server_pid
+    end
+
+    return msg_details
+
+    end
+
+    def zmq_error_check(rc)
     if ZMQ::Util.resultcode_ok?(rc)
       false
     else

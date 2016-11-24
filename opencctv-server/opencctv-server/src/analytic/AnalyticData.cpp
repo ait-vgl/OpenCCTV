@@ -7,29 +7,34 @@
 
 #include "AnalyticData.hpp"
 
-namespace analytic {
-AnalyticData::AnalyticData(int iId) {
-	this->_iId = iId;
-	this->_bStatus = true;
-	this->_sAnalyticQueueInAddress = "";
-	this->_sAnalyticQueueOutAddress = "";
-	this->_pFlowController = NULL;
+namespace analytic
+{
+AnalyticData::AnalyticData()
+{
+	//this->_iId = iId;
+	//this->_bStatus = true;
+	//this->_sAnalyticQueueInAddress = "";
+	//this->_sAnalyticQueueOutPort = "";
+	//this->_pFlowController = NULL;
 	this->_pResultRouterThread = NULL;
 }
-
+/*
 bool AnalyticData::isAnalyticQueueInAddress() {
 
-	if (_sAnalyticQueueOutAddress != "") {
+	if (_sAnalyticQueueOutPort != "") {
 		return true;
 	} else
 		return false;
 }
 
-bool AnalyticData::isAnalyticQueueOutAddress() {
+bool AnalyticData::isAnalyticQueueOutPort()
+{
 
-	if (_sAnalyticQueueOutAddress != "") {
+	if (_sAnalyticQueueOutPort != "")
+	{
 		return true;
-	} else
+	}
+	else
 		return false;
 }
 
@@ -46,9 +51,30 @@ bool AnalyticData::isFlowController(){
 	else
 		return false;
 }
+*/
 
-AnalyticData::~AnalyticData() {
-	// TODO Auto-generated destructor stub
+AnalyticData::~AnalyticData()
+{
+	pthread_t id;
+
+	if (_pResultRouterThread)
+	{
+
+		id = _pResultRouterThread->native_handle();
+		_pResultRouterThread->detach();
+
+		pthread_cancel(id);
+
+		if (_pResultRouterThread)
+		{
+			delete _pResultRouterThread;
+			_pResultRouterThread = NULL;
+		}
+
+		opencctv::util::log::Loggers::getDefaultLogger()->debug("Clear Result router thread at AnalyticData.");
+	}
 }
+
+
 
 } // end namespace analytic

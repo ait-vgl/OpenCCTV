@@ -49,6 +49,7 @@ int main(int argc, char *argv[])
     // Registering signal SIGINT and signal handler
 	signal(SIGINT, exitHandler); // for Ctrl + C keyboard interrupt
 	signal(SIGTERM, exitHandler); // for Terminate signal
+    signal(SIGKILL, exitHandler); // for SIGKILL
     
 	if (argc < 6)
 	{
@@ -323,7 +324,7 @@ std::cout << "Starting config FrameGrabber, with " << vAnalyticInstanceStream.si
 void exitHandler(int iSignum)
 {
 
-	opencctv::util::log::Loggers::getDefaultLogger()->info("Exiting inside anlaytic instance...");
+	
 
 	std::map<std::string , FrameGrabber *>::iterator it;
 
@@ -336,5 +337,6 @@ void exitHandler(int iSignum)
 
     }
 
+    opencctv::util::log::Loggers::getDefaultLogger()->info("This analytic instance resources were release from exitHandler befor the analytic instance was terminated.");
 	exit(iSignum);
 }

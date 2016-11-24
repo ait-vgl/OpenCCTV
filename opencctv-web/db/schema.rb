@@ -67,7 +67,7 @@ ActiveRecord::Schema.define(version: 20161031081358) do
     t.integer  "group_user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "status",             default: false
+    t.integer  "status",             default: 0
     t.integer  "analytic_server_id"
   end
 
