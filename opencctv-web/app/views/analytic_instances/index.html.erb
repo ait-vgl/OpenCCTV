@@ -54,6 +54,7 @@
 
                 <% else %>
 
+<<<<<<< HEAD
                     <% if analytic_instance.status == 0 %>
 
                         <td><%= link_to 'Start', start_analytic_instance_path(analytic_instance), :class => "btn btn-xs btn-warning" %></td>
@@ -65,8 +66,6 @@
                     <%else%>
                         <td><%= link_to 'Pending',"#" ,:class => "btn btn-xs btn-info" %></td>
                     <% end %>
-
-
 
                     <td><%= link_to 'Show', analytic_instance, :class => "btn btn-xs btn-default" %></td>
                     <td><%= link_to 'Edit', edit_analytic_instance_path(analytic_instance), :class => "btn btn-xs btn-warning" %></td>
