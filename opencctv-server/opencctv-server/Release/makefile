@@ -36,7 +36,7 @@ LDFLAGS		:= -L/usr/local/opencv-2.4.9/lib \
 				-L/usr/lib \
 				-L./
 
-LIBS		:=  -lboost_thread -lboost_system -lboost_program_options -lboost_filesystem -lprotobuf -lzmq -ldl -lmysqlcppconn
+LIBS		:=  -lboost_thread -lboost_system -lboost_program_options -lboost_filesystem -lprotobuf -lzmq -ldl -lmysqlcppconn -pthread
 
 all		: $(NAME)
 Other_L		:=${A}AnalyticServerManager.o ${A}AnalyticServer.o ${A}AnalyticServer.o ${A}xml/AnalyticMessage.o ${A}AnalyticData.o ${A}AnalyticResult.o \

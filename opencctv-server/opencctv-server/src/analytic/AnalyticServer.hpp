@@ -31,6 +31,7 @@ namespace analytic {
 class AnalyticServer {
 private:
 	int _iServerId;
+    std::string _sAnalyticServerIp;
 	zmq::socket_t* _pSocket;
 	std::map<unsigned int, AnalyticData*> _mAnalyticDatas; // Key is analytic instance id, Value is analytic data
     bool startAnalyticInstance(unsigned int iAnalyticInstanceId, const std::string& sAnalyticPluginDirLocation, const std::string& sAnalyticPluginFilename, std::string& sAnalyticQueueInAddress, std::string& sAnalyticQueueOutAddress);
