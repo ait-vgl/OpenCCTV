@@ -13,7 +13,7 @@ bool Process::start(const std::string& sPathToExecutable, const std::string& sCo
 	std::stringstream ssCommand;
 	ssCommand << sPathToExecutable << " ";
 	ssCommand << sCommandLineParams;
-    //std::cout << "From Process:start(): "<< ssCommand.str().data() << std::endl;
+    std::cout << "From Process:start(): "<< ssCommand.str().data() << std::endl;
 	_pReadStream = popen(ssCommand.str().data(), "r");
 	if (!_pReadStream) {
 		std::string sErrMsg = "Failed to start Analytic process. Failed to execute command: ";

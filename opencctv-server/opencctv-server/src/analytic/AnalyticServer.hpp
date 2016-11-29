@@ -22,7 +22,8 @@
 
 #include "../opencctv/db/StreamGateway.hpp"
 //#include "../opencctv/db/AnalyticServerGateway.hpp"
-#include "../opencctv/db/AnalyticInstanceStreamGateway.hpp"
+#include "../opencctv/db/AnalyticInstanceGateway.hpp"
+
 
 #include "../opencctv/ResultRouterThread.hpp"
 

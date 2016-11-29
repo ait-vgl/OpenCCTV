@@ -8,7 +8,7 @@ AnalyticServer::AnalyticServer(const int &analyticServerId, const std::string &s
 	try
 	{
 		_iServerId = analyticServerId;
-        _sAnalyticServerIp = sAnalyticServerIp;
+		_sAnalyticServerIp = sAnalyticServerIp;
 		_pSocket = opencctv::mq::MqUtil::connectToMq(sAnalyticServerIp, sAnalyticServerPort, ZMQ_REQ);
 	}
 	catch (std::runtime_error &e)
@@ -21,51 +21,12 @@ AnalyticServer::AnalyticServer(const int &analyticServerId, const std::string &s
 
 bool AnalyticServer::startAllAnalyticInstanceAction()
 {
-	opencctv::util::Config *pConfig;
-	opencctv::db::StreamGateway *pStreamGateway = NULL;
+
+	opencctv::db::AnalyticInstanceGateway *pAnalyticInstanceGateway = NULL;
 
 	try
 	{
-		pStreamGateway = new opencctv::db::StreamGateway();
-	}
-	catch (opencctv::Exception &e)
-	{
-		std::string sErrMsg = "Failed to create StreamGateway -  ";
-		sErrMsg.append(e.what());
-		opencctv::util::log::Loggers::getDefaultLogger()->error(sErrMsg);
-		return false;
-	}
-
-	pConfig = opencctv::util::Config::getInstance();
-
-	//size_t internalQueueSize = boost::lexical_cast<size_t>(pConfig->get(util::PROPERTY_INTERNAL_QUEUE_SIZE));
-	//size_t remoteQueueSize = boost::lexical_cast<size_t>(pConfig->get(opencctv::util::PROPERTY_REMOTE_QUEUE_SIZE));
-
-	opencctv::util::log::Loggers::getDefaultLogger()->info("Initializing variables done.");
-
-	std::vector<opencctv::dto::Stream> vStreams;
-
-	try
-	{
-		pStreamGateway->findAll(vStreams);
-		opencctv::util::log::Loggers::getDefaultLogger()->info("Streams loaded.");
-	}
-	catch (opencctv::Exception &e)
-	{
-		std::string sErrMsg = "Failed to find all Streams. ";
-		sErrMsg.append(e.what());
-		opencctv::util::log::Loggers::getDefaultLogger()->error(sErrMsg);
-		return false;
-	}
-
-	opencctv::util::log::Loggers::getDefaultLogger()->debug("Analytic instance number will be run: " + boost::lexical_cast<std::string>(vStreams.size()));
-
-	//test::gateway::TestAnalyticInstanceStreamGateway analyticInstanceGateway;
-	opencctv::db::AnalyticInstanceStreamGateway *pAnalyticInstanceGateway = NULL;
-
-	try
-	{
-		pAnalyticInstanceGateway = new opencctv::db::AnalyticInstanceStreamGateway();
+		pAnalyticInstanceGateway = new opencctv::db::AnalyticInstanceGateway();
 	}
 	catch (opencctv::Exception &e)
 	{
@@ -75,88 +36,78 @@ bool AnalyticServer::startAllAnalyticInstanceAction()
 		return false;
 	}
 
-	for (size_t i = 0; i < vStreams.size(); ++i)
+	std::vector<opencctv::dto::AnalyticInstance> vAnalyticInstances;
+
+
+	try
 	{
-		opencctv::dto::Stream stream = vStreams[i];
+		// Get all analytic instance
+		pAnalyticInstanceGateway->findAll(vAnalyticInstances);
+		opencctv::util::log::Loggers::getDefaultLogger()->info("Analytic Instances Streams loaded.");
+	}
+	catch (opencctv::Exception &e)
+	{
+		std::string sErrMsg = "Failed to find all AnalyticInstanceStream. ";
+		sErrMsg.append(e.what());
+		opencctv::util::log::Loggers::getDefaultLogger()->error(sErrMsg);
+		return false;
+	}
 
-		//ImageMulticaster* pMulticaster = new ImageMulticaster(stream.getId());
-		std::vector<opencctv::dto::AnalyticInstanceStream> vAnalyticInstances;
+	// Starting Analytic Instances
+	for (size_t j = 0; j < vAnalyticInstances.size(); ++j)
+	{
+		opencctv::dto::AnalyticInstance analyticInstance = vAnalyticInstances[j];
 
-		/* Even use analyticInstanceStream, data inside is work like analytic instance
-		 * , because AnalyticInstanceStream is used for multiple relationship Analytic instance and Stream
-		 */
-		try
+		if (!isAnalyticInstance(analyticInstance.getId())) // check dupplicate running, in case one analytic have multiple streams
 		{
-			// Get all analytic instance
-			pAnalyticInstanceGateway->findAllForStream(stream.getId(), vAnalyticInstances);
-			opencctv::util::log::Loggers::getDefaultLogger()->info("Analytic Instances Streams loaded.");
-		}
-		catch (opencctv::Exception &e)
-		{
-			std::string sErrMsg = "Failed to find all AnalyticInstanceStream. ";
-			sErrMsg.append(e.what());
-			opencctv::util::log::Loggers::getDefaultLogger()->error(sErrMsg);
-			return false;
-		}
+			bool bAIStarted = false;
+			std::string sAnalyticQueueInAddress, sAnalyticQueueOutPort;
 
-		// Starting Analytic Instances
-		for (size_t j = 0; j < vAnalyticInstances.size(); ++j)
-		{
-			opencctv::dto::AnalyticInstanceStream analyticInstance = vAnalyticInstances[j];
-
-			if (!isAnalyticInstance(analyticInstance.getAnalyticInstanceId())) // check dupplicate running, in case one analytic have multiple streams
+			try
 			{
-				bool bAIStarted = false;
-				std::string sAnalyticQueueInAddress, sAnalyticQueueOutPort;
+				// start Analytic Instance, store Analytic Input, Output queue addresses into the Application Model.
+				bAIStarted = startAnalyticInstance(analyticInstance.getId(), analyticInstance.getAnalyticDirLocation(), analyticInstance.getAnalyticFilename(), sAnalyticQueueInAddress, sAnalyticQueueOutPort);
 
-				try
+			}
+			catch (opencctv::Exception &e)
+			{
+				std::stringstream ssErrMsg;
+				ssErrMsg << "Failed to start Analytic Instance ";
+				ssErrMsg << analyticInstance.getId() << ". ";
+				ssErrMsg << e.what();
+				opencctv::util::log::Loggers::getDefaultLogger()->error(ssErrMsg.str());
+			}
+
+			if (bAIStarted)
+			{
+				// store analytic input queue address and output queue address in model
+
+				AnalyticData *pAnalyticInstance = new AnalyticData();
+
+				opencctv::ResultRouterThread *pResultRouter = new opencctv::ResultRouterThread(analyticInstance.getId(), _sAnalyticServerIp, sAnalyticQueueOutPort);
+				boost::thread *pResultRouterThread = new boost::thread(*pResultRouter);
+
+				if (pResultRouterThread->joinable())
 				{
-					// start Analytic Instance, store Analytic Input, Output queue addresses into the Application Model.
-					bAIStarted = startAnalyticInstance(analyticInstance.getAnalyticInstanceId(), analyticInstance.getAnalyticDirLocation(), analyticInstance.getAnalyticFilename(), sAnalyticQueueInAddress, sAnalyticQueueOutPort);
-
-				}
-				catch (opencctv::Exception &e)
-				{
-					std::stringstream ssErrMsg;
-					ssErrMsg << "Failed to start Analytic Instance ";
-					ssErrMsg << analyticInstance.getAnalyticInstanceId() << ". ";
-					ssErrMsg << e.what();
-					opencctv::util::log::Loggers::getDefaultLogger()->error(ssErrMsg.str());
+					pAnalyticInstance->setResultRouterThread(pResultRouterThread);
 				}
 
-				if (bAIStarted)
-				{
-					// store analytic input queue address and output queue address in model
+				// Place to set up analytic id
+				setAnalyticData(analyticInstance.getId(), pAnalyticInstance);
 
-					AnalyticData *pAnalyticInstance = new AnalyticData();
-
-					opencctv::ResultRouterThread *pResultRouter = new opencctv::ResultRouterThread(analyticInstance.getAnalyticInstanceId(), _sAnalyticServerIp, sAnalyticQueueOutPort);
-					boost::thread *pResultRouterThread = new boost::thread(*pResultRouter);
-
-					if (pResultRouterThread->joinable())
-					{
-						pAnalyticInstance->setResultRouterThread(pResultRouterThread);
-					}
-
-					// Place to set up analytic id
-					setAnalyticData(analyticInstance.getAnalyticInstanceId(), pAnalyticInstance);
-
-					std::stringstream ssMsg;
-					ssMsg << "Analytic Instance " << analyticInstance.getAnalyticInstanceId();
-					ssMsg << " started.";
-					opencctv::util::log::Loggers::getDefaultLogger()->info(ssMsg.str());
-				}
-				else
-				{
-					std::stringstream ssErrMsg;
-					ssErrMsg << "Starting Analytic Instance " << analyticInstance.getAnalyticInstanceId();
-					ssErrMsg << " failed.";
-					opencctv::util::log::Loggers::getDefaultLogger()->error(ssErrMsg.str());
-				}
+				std::stringstream ssMsg;
+				ssMsg << "Analytic Instance " << analyticInstance.getId();
+				ssMsg << " started.";
+				opencctv::util::log::Loggers::getDefaultLogger()->info(ssMsg.str());
+			}
+			else
+			{
+				std::stringstream ssErrMsg;
+				ssErrMsg << "Starting Analytic Instance " << analyticInstance.getId();
+				ssErrMsg << " failed.";
+				opencctv::util::log::Loggers::getDefaultLogger()->error(ssErrMsg.str());
 			}
 		}
-
-		//opencctv::util::log::Loggers::getDefaultLogger()->info("Starting  All Analytic Instances done.");
 	}
 
 	return true;
@@ -165,51 +116,12 @@ bool AnalyticServer::startAllAnalyticInstanceAction()
 bool AnalyticServer::startAnalyticInstanceAction(unsigned int iAnalyticInstanceId)
 {
 
-//test::gateway::TestStreamGateway streamGateway;
-	opencctv::db::StreamGateway *pStreamGateway = NULL;
-
-	try
-	{
-		pStreamGateway = new opencctv::db::StreamGateway();
-	}
-	catch (opencctv::Exception &e)
-	{
-		std::string sErrMsg = "Failed to create StreamGateway -  ";
-		sErrMsg.append(e.what());
-		opencctv::util::log::Loggers::getDefaultLogger()->error(sErrMsg);
-		return false;
-	}
-
-	//opencctv::util::Config *pConfig = opencctv::util::Config::getInstance();
-
-	//size_t internalQueueSize = boost::lexical_cast<size_t>(pConfig->get(util::PROPERTY_INTERNAL_QUEUE_SIZE));
-	//size_t remoteQueueSize = boost::lexical_cast<size_t>(pConfig->get(util::PROPERTY_REMOTE_QUEUE_SIZE));
-
-	opencctv::util::log::Loggers::getDefaultLogger()->info("Initializing variables done.");
-
-	std::vector<opencctv::dto::Stream> vStreams;
-
-	try
-	{
-		pStreamGateway->findAllByAnalyticInstanceId(vStreams, iAnalyticInstanceId);
-		opencctv::util::log::Loggers::getDefaultLogger()->info("Streams loaded by Analytic instance id: " + boost::lexical_cast<std::string>(iAnalyticInstanceId));
-	}
-	catch (opencctv::Exception &e)
-	{
-		std::string sErrMsg = "Failed to find all Streams. ";
-		sErrMsg.append(e.what());
-		opencctv::util::log::Loggers::getDefaultLogger()->error(sErrMsg);
-		return false;
-	}
-
-	opencctv::util::log::Loggers::getDefaultLogger()->debug("Analytic instance number will be run: " + boost::lexical_cast<std::string>(vStreams.size()));
-
 	//test::gateway::TestAnalyticInstanceStreamGateway analyticInstanceGateway;
-	opencctv::db::AnalyticInstanceStreamGateway *pAnalyticInstanceGateway = NULL;
+	opencctv::db::AnalyticInstanceGateway *pAnalyticInstanceGateway = NULL;
 
 	try
 	{
-		pAnalyticInstanceGateway = new opencctv::db::AnalyticInstanceStreamGateway();
+		pAnalyticInstanceGateway = new opencctv::db::AnalyticInstanceGateway();
 	}
 	catch (opencctv::Exception &e)
 	{
@@ -219,100 +131,82 @@ bool AnalyticServer::startAnalyticInstanceAction(unsigned int iAnalyticInstanceI
 		return false;
 	}
 
-	for (size_t i = 0; i < vStreams.size(); ++i) // Many stream per an anaytic insance
+	std::vector<opencctv::dto::AnalyticInstance> vAnalyticInstances;
+
+	try
 	{
-		opencctv::dto::Stream stream = vStreams[i];
+		// Get all analytic instance
+		pAnalyticInstanceGateway->findAnalyticInstance(vAnalyticInstances, iAnalyticInstanceId);
+		opencctv::util::log::Loggers::getDefaultLogger()->info("Analytic Instances Streams loaded.");
+	}
+	catch (opencctv::Exception &e)
+	{
+		std::string sErrMsg = "Failed to find all AnalyticInstanceStream. ";
+		sErrMsg.append(e.what());
+		opencctv::util::log::Loggers::getDefaultLogger()->error(sErrMsg);
+		return false;
+	}
 
-		//ImageMulticaster* pMulticaster = new ImageMulticaster(stream.getId());
-		std::vector<opencctv::dto::AnalyticInstanceStream> vAnalyticInstances;
+	// Starting Analytic Instances
+	for (size_t j = 0; j < vAnalyticInstances.size(); ++j) 
+	{
+		opencctv::dto::AnalyticInstance analyticInstance = vAnalyticInstances[j];
 
-		/* Even use analyticInstanceStream, data inside is work like analytic instance
-		 * , because AnalyticInstanceStream is used for multiple relationship Analytic instance and Stream
-		 */
+		// if the Analytic Instance has not been started yet
+		AnalyticData *pAD = getAnalyticData(analyticInstance.getId());
 
-		if (isAnalyticInstance(iAnalyticInstanceId))
+		if (!isAnalyticInstance(analyticInstance.getId()))
 		{
-			// break for an analytic instance have multiple stream, we run only one time. This cannot apply in start all, because in statring all alaytic instace, we do not specific analytic instance id, so it may break incase one stream have multiple analytic
-			break;
-		}
+			bool bAIStarted = false;
+			std::string sAnalyticQueueInAddress, sAnalyticQueueOutPort;
 
-		try
-		{
-			// Get all analytic instance
-			pAnalyticInstanceGateway->findAllForStreamByAnalyticInstanceId(stream.getId(), vAnalyticInstances, iAnalyticInstanceId);
-			opencctv::util::log::Loggers::getDefaultLogger()->info("Analytic Instances Streams loaded.");
-		}
-		catch (opencctv::Exception &e)
-		{
-			std::string sErrMsg = "Failed to find all AnalyticInstanceStream. ";
-			sErrMsg.append(e.what());
-			opencctv::util::log::Loggers::getDefaultLogger()->error(sErrMsg);
-			return false;
-		}
+			try
+			{
+				// start Analytic Instance, store Analytic Input, Output queue addresses into the Application Model.
+				bAIStarted = startAnalyticInstance(analyticInstance.getId(), analyticInstance.getAnalyticDirLocation(), analyticInstance.getAnalyticFilename(), sAnalyticQueueInAddress, sAnalyticQueueOutPort);
 
-		// Starting Analytic Instances
-		for (size_t j = 0; j < vAnalyticInstances.size(); ++j) // one stream have many analytic instance, but in this case we use anlaytic id, so it will be only one analytic
-		{
-			opencctv::dto::AnalyticInstanceStream analyticInstance = vAnalyticInstances[j];
+			}
+			catch (opencctv::Exception &e)
+			{
+				std::stringstream ssErrMsg;
+				ssErrMsg << "Failed to start Analytic Instance ";
+				ssErrMsg << analyticInstance.getId() << ". ";
+				ssErrMsg << e.what();
+				opencctv::util::log::Loggers::getDefaultLogger()->error(ssErrMsg.str());
+			}
 
-			// if the Analytic Instance has not been started yet
-			AnalyticData *pAD = getAnalyticData(analyticInstance.getAnalyticInstanceId());
+			if (bAIStarted)
+			{
+				// store analytic input queue address and output queue address in model
 
-			if (!isAnalyticInstance(analyticInstance.getAnalyticInstanceId()))
-            {
-				bool bAIStarted = false;
-				std::string sAnalyticQueueInAddress, sAnalyticQueueOutPort;
+				AnalyticData *pAnalyticInstance = new AnalyticData();
 
-				try
+				opencctv::ResultRouterThread *pResultRouter = new opencctv::ResultRouterThread(analyticInstance.getId(), _sAnalyticServerIp, sAnalyticQueueOutPort);
+				boost::thread *pResultRouterThread = new boost::thread(*pResultRouter);
+
+				if (pResultRouterThread->joinable())
 				{
-					// start Analytic Instance, store Analytic Input, Output queue addresses into the Application Model.
-					bAIStarted = startAnalyticInstance(analyticInstance.getAnalyticInstanceId(), analyticInstance.getAnalyticDirLocation(), analyticInstance.getAnalyticFilename(), sAnalyticQueueInAddress, sAnalyticQueueOutPort);
-
-				}
-				catch (opencctv::Exception &e)
-				{
-					std::stringstream ssErrMsg;
-					ssErrMsg << "Failed to start Analytic Instance ";
-					ssErrMsg << analyticInstance.getAnalyticInstanceId() << ". ";
-					ssErrMsg << e.what();
-					opencctv::util::log::Loggers::getDefaultLogger()->error(ssErrMsg.str());
+					pAnalyticInstance->setResultRouterThread(pResultRouterThread);
 				}
 
-				if (bAIStarted)
-				{
-					// store analytic input queue address and output queue address in model
+				// Place to set up analytic id
+				setAnalyticData(analyticInstance.getId(), pAnalyticInstance);
 
-					AnalyticData *pAnalyticInstance = new AnalyticData();
+				//pAD =  setAnalyticInstance(analyticInstance.getId(), pAnalyticInstance);
 
-					opencctv::ResultRouterThread *pResultRouter = new opencctv::ResultRouterThread(analyticInstance.getAnalyticInstanceId(), _sAnalyticServerIp, sAnalyticQueueOutPort);
-					boost::thread *pResultRouterThread = new boost::thread(*pResultRouter);
-
-					if (pResultRouterThread->joinable())
-					{
-						pAnalyticInstance->setResultRouterThread(pResultRouterThread);
-					}
-
-					// Place to set up analytic id
-					setAnalyticData(analyticInstance.getAnalyticInstanceId(), pAnalyticInstance);
-
-					//pAD =  setAnalyticInstance(analyticInstance.getAnalyticInstanceId(), pAnalyticInstance);
-
-					std::stringstream ssMsg;
-					ssMsg << "Analytic Instance " << analyticInstance.getAnalyticInstanceId();
-					ssMsg << " started.";
-					opencctv::util::log::Loggers::getDefaultLogger()->info(ssMsg.str());
-				}
-				else
-				{
-					std::stringstream ssErrMsg;
-					ssErrMsg << "Starting Analytic Instance " << analyticInstance.getAnalyticInstanceId();
-					ssErrMsg << " failed.";
-					opencctv::util::log::Loggers::getDefaultLogger()->error(ssErrMsg.str());
-				}
+				std::stringstream ssMsg;
+				ssMsg << "Analytic Instance " << analyticInstance.getId();
+				ssMsg << " started.";
+				opencctv::util::log::Loggers::getDefaultLogger()->info(ssMsg.str());
+			}
+			else
+			{
+				std::stringstream ssErrMsg;
+				ssErrMsg << "Starting Analytic Instance " << analyticInstance.getId();
+				ssErrMsg << " failed.";
+				opencctv::util::log::Loggers::getDefaultLogger()->error(ssErrMsg.str());
 			}
 		}
-
-		//opencctv::util::log::Loggers::getDefaultLogger()->info("Starting  All Analytic Instances done.");
 	}
 
 	return true;
@@ -389,7 +283,7 @@ bool AnalyticServer::startAnalyticInstance(unsigned int iAnalyticInstanceId, con
 
 bool AnalyticServer::stopAnalyticInstanceAction(unsigned int iAnalyticInstanceId)
 {
-    bool bRet = false;
+	bool bRet = false;
 
 	if (_pSocket)
 	{
@@ -452,10 +346,10 @@ bool AnalyticServer::stopAnalyticInstanceAction(unsigned int iAnalyticInstanceId
 		}
 	}
 
-    if(bRet)
-        return removeAnalyticData(iAnalyticInstanceId);
-    else
-        return false;
+	if (bRet)
+		return removeAnalyticData(iAnalyticInstanceId);
+	else
+		return false;
 }
 
 bool AnalyticServer::stopAllAnalyticInstanceAction()
@@ -542,25 +436,6 @@ AnalyticData *AnalyticServer::getAnalyticData(unsigned int iAnalyticInstanceId)
 		return NULL;
 }
 
-/*bool AnalyticServer::isMultipleStreamPerAnalytic(const unsigned int& iAnalyticInstanceId) {
-
- std::map<unsigned int, AnalyticInstance*>::iterator it = _mAnalyticInstances.find(iAnalyticInstanceId);
- if (it != _mAnalyticInstances.end()) {
-
- if (!(it->second->vStreamIds.empty()) && it->second->vStreamIds.size() > 1) {
- return true;
- }
- }
- return false;
- }*/
-
-/*bool AnalyticServer::isImageInputQueueAddress(const int& iAnalyticInstanceId) {
-	if (isAnalyticInstance(iAnalyticInstanceId)) {
-		(_mAnalyticInstances[iAnalyticInstanceId]->sImageInputQueueAddress != "") ? true : false;
-	} else
-		return false;
-}*/
-
 bool AnalyticServer::isAnalyticInstance(int iAnalyticInstanceId)
 {
 	if (_mAnalyticDatas.count(iAnalyticInstanceId) > 0 && _mAnalyticDatas[iAnalyticInstanceId])
@@ -587,7 +462,7 @@ bool AnalyticServer::removeAnalyticData(unsigned int iAnalyticInstanceId)
 	{
 		return false;
 	}
-	
+
 	return true;
 }
 

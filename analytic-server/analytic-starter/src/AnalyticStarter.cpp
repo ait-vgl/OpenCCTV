@@ -119,7 +119,7 @@ int main()
 			{
 				bool bAIStarted = false;
 				analytic::AnalyticProcess *pAnalyticProcess = new analytic::AnalyticProcess();
-				std::string sAnalyticInputQueueAddress = boost::lexical_cast<std::string>(++iPort);
+				std::string sAnalyticInputQueueAddress = "9999"; //= boost::lexical_cast<std::string>(++iPort);
 				std::string sAnalyticOutputQueueAddress = boost::lexical_cast<std::string>(++iPort);
 
 				try

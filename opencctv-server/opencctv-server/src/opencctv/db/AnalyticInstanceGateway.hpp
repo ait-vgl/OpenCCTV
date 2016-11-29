@@ -12,6 +12,8 @@
 #include <cppconn/prepared_statement.h>
 #include "DbConnector.hpp"
 
+#include "../dto/AnalyticInstance.hpp"
+
 #include "../Exception.hpp"
 #include "../util/Config.hpp"
 #include "../util/Util.hpp"
@@ -23,17 +25,21 @@ class AnalyticInstanceGateway {
 private:
     sql::Connection* _pDbConnPtr;
 	sql::PreparedStatement* _pStatementPtr;
-	static const std::string _UPDATE_ANALYTICINSTANCE_SQL;
-
 
 public:
 	AnalyticInstanceGateway();
 	virtual ~AnalyticInstanceGateway();
 
-	int updateStatus(unsigned int iAnalyticInstanceId, int iStatus);
+    void findAll(std::vector<opencctv::dto::AnalyticInstance>& vToStoreAIS);
+	void findAnalyticInstance(std::vector<opencctv::dto::AnalyticInstance>& vToStoreAIS, unsigned int iAnalyticInstanceId);
+    int updateStatus(unsigned int iAnalyticInstanceId, int iStatus);
 };
 
 } /* namespace db */
 } /* namespace opencctv */
 
 #endif /* ANALYTICINSTANCEGATEWAY_HPP_ */
+
+    	
+	
+
