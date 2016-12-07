@@ -5,11 +5,13 @@
 #include <sstream>
 #include "../opencctv/mq/Mq.hpp"
 #include "api/Analytic.hpp"
-#include "../opencctv/util/log/Loggers.hpp"
+#include "util/log/Loggers.hpp"
 #include "../opencctv/util/serialization/Serializable.hpp"
 #include "AnalyticResult.hpp"
 #include "../opencctv/util/Util.hpp"
 #include <opencv2/highgui/highgui.hpp>
+
+using namespace analytic;
 
 namespace analytic {
 

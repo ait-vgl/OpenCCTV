@@ -9,17 +9,27 @@
 #include "image.pb.h" // serializable image
 #include "analytic_result.pb.h" // serializable analytic result
 
+
+
 namespace opencctv {
 namespace util {
 namespace serialization {
 
 class ProtoBuf : public Serializable {
 public:
+    
 	ProtoBuf();
+    
 	std::string* serialize(const opencctv::Image* pImage);
 	opencctv::Image* deserializeImage(const std::string* pSSerializedImage);
 	std::string serialize(const analytic::AnalyticResult& analyticResult);
 	analytic::AnalyticResult deserializeAnalyticResult(const std::string& sSerializedAnalyticResult);
+    
+    /*void testF(const std::string& sSerializedAnalyticResult)
+    {
+       opencctv::util::log::Loggers::getDefaultLogger()->debug(" <<<< ProtoBuf >>>>" + sSerializedAnalyticResult);
+    }*/
+	
 	virtual ~ProtoBuf();
 };
 

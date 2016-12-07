@@ -1,0 +1,9 @@
+**/.DS_Store
+**/Debug
+**/Release/src/
+**/Release/output/
+**/.settings/
+**/*.o
+**/*.kdev4
+**/.kev4/
+

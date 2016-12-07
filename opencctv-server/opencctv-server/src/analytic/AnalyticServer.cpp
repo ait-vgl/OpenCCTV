@@ -9,11 +9,19 @@ AnalyticServer::AnalyticServer(const int &analyticServerId, const std::string &s
 	{
 		_iServerId = analyticServerId;
 		_sAnalyticServerIp = sAnalyticServerIp;
+       
 		_pSocket = opencctv::mq::MqUtil::connectToMq(sAnalyticServerIp, sAnalyticServerPort, ZMQ_REQ);
+        
+       // if(_pSocket)
+        //{
+          //  std::string sErrMsg = "Failed to create ZMQ Socket to connect to Analytic Starter with: " + sAnalyticServerIp + ":" + sAnalyticServerPort;
+            //throw opencctv::Exception(sErrMsg);
+            
+        //}
 	}
 	catch (std::runtime_error &e)
 	{
-		std::string sErrMsg = "Failed to create ZMQ Socket to connect to Analytic Starter. ";
+		std::string sErrMsg = "Failed to create ZMQ Socket to connect to Analytic Starter with: " + sAnalyticServerIp + ":" + sAnalyticServerPort;
 		sErrMsg.append(e.what());
 		throw opencctv::Exception(sErrMsg);
 	}
@@ -21,6 +29,8 @@ AnalyticServer::AnalyticServer(const int &analyticServerId, const std::string &s
 
 bool AnalyticServer::startAllAnalyticInstanceAction()
 {
+    _pConfig = opencctv::util::Config::getInstance();
+    _remoteQueueSize = boost::lexical_cast<size_t>(_pConfig->get(opencctv::util::PROPERTY_REMOTE_QUEUE_SIZE));
 
 	opencctv::db::AnalyticInstanceGateway *pAnalyticInstanceGateway = NULL;
 
@@ -43,7 +53,7 @@ bool AnalyticServer::startAllAnalyticInstanceAction()
 	{
 		// Get all analytic instance
 		pAnalyticInstanceGateway->findAll(vAnalyticInstances);
-		opencctv::util::log::Loggers::getDefaultLogger()->info("Analytic Instances Streams loaded.");
+		opencctv::util::log::Loggers::getDefaultLogger()->info("Analytic Instances Streams loaded. Analytic instances: " + boost::lexical_cast<std::string>(vAnalyticInstances.size()));
 	}
 	catch (opencctv::Exception &e)
 	{
@@ -53,6 +63,8 @@ bool AnalyticServer::startAllAnalyticInstanceAction()
 		return false;
 	}
 
+	
+    
 	// Starting Analytic Instances
 	for (size_t j = 0; j < vAnalyticInstances.size(); ++j)
 	{
@@ -65,6 +77,8 @@ bool AnalyticServer::startAllAnalyticInstanceAction()
 
 			try
 			{
+                opencctv::util::log::Loggers::getDefaultLogger()->debug("Starting Analytic Instance: " + boost::lexical_cast<std::string>(analyticInstance.getId())); 
+                
 				// start Analytic Instance, store Analytic Input, Output queue addresses into the Application Model.
 				bAIStarted = startAnalyticInstance(analyticInstance.getId(), analyticInstance.getAnalyticDirLocation(), analyticInstance.getAnalyticFilename(), sAnalyticQueueInAddress, sAnalyticQueueOutPort);
 
@@ -83,8 +97,19 @@ bool AnalyticServer::startAllAnalyticInstanceAction()
 				// store analytic input queue address and output queue address in model
 
 				AnalyticData *pAnalyticInstance = new AnalyticData();
-
+                // if Analytic Instance started, construct Flow Controller for Input Analytic queue and store it on Application Model.
+                					//util::flow::FlowController* pFlowController = new util::flow::BasicFlowController();
+                
+                // opencctv::util::log::Loggers::getDefaultLogger()->debug("Starting FlowController with remoteQueueSize: " + boost::lexical_cast<std::string>(_remoteQueueSize)); 
+                //opencctv::util::flow::FlowController* pFlowController = new opencctv::util::flow::SimpleFlowController(_remoteQueueSize);
+                
+                opencctv::util::log::Loggers::getDefaultLogger()->debug("Starting ResultRouterTheread with: " + _sAnalyticServerIp + ":" + sAnalyticQueueOutPort); 
+                
+                //opencctv::util::serialization::ProtoBuf *pProtoBuf =  new //opencctv::util::serialization::ProtoBuf();
+                //opencctv::util::serialization::Serializable *pSerializer;
+              //  pSerializer = pProtoBuf; 
 				opencctv::ResultRouterThread *pResultRouter = new opencctv::ResultRouterThread(analyticInstance.getId(), _sAnalyticServerIp, sAnalyticQueueOutPort);
+                
 				boost::thread *pResultRouterThread = new boost::thread(*pResultRouter);
 
 				if (pResultRouterThread->joinable())
@@ -108,6 +133,7 @@ bool AnalyticServer::startAllAnalyticInstanceAction()
 				opencctv::util::log::Loggers::getDefaultLogger()->error(ssErrMsg.str());
 			}
 		}
+		opencctv::util::log::Loggers::getDefaultLogger()->info("Finish starting an alytic instance id: " + boost::lexical_cast<std::string>(analyticInstance.getId()));
 	}
 	return true;
 }
@@ -136,7 +162,7 @@ bool AnalyticServer::startAnalyticInstanceAction(unsigned int iAnalyticInstanceI
 	{
 		// Get all analytic instance
 		pAnalyticInstanceGateway->findAnalyticInstance(vAnalyticInstances, iAnalyticInstanceId);
-		opencctv::util::log::Loggers::getDefaultLogger()->info("Analytic Instances Streams loaded.");
+		opencctv::util::log::Loggers::getDefaultLogger()->info("Analytic Instances Streams loaded. Analytic instances: " + boost::lexical_cast<std::string>(vAnalyticInstances.size()));
 	}
 	catch (opencctv::Exception &e)
 	{
@@ -160,6 +186,9 @@ bool AnalyticServer::startAnalyticInstanceAction(unsigned int iAnalyticInstanceI
 			std::string sAnalyticQueueInAddress, sAnalyticQueueOutPort;
 			try
 			{
+                
+                opencctv::util::log::Loggers::getDefaultLogger()->debug("Starting Analytic Instance: " + boost::lexical_cast<std::string>(analyticInstance.getId())); 
+                
 				// start Analytic Instance, store Analytic Input, Output queue addresses into the Application Model.
 				bAIStarted = startAnalyticInstance(analyticInstance.getId(), analyticInstance.getAnalyticDirLocation(), analyticInstance.getAnalyticFilename(), sAnalyticQueueInAddress, sAnalyticQueueOutPort);
 
@@ -179,8 +208,16 @@ bool AnalyticServer::startAnalyticInstanceAction(unsigned int iAnalyticInstanceI
 
 				AnalyticData *pAnalyticInstance = new AnalyticData();
 
+				    // if Analytic Instance started, construct Flow Controller for Input Analytic queue and store it on Application Model.
+                					//util::flow::FlowController* pFlowController = new util::flow::BasicFlowController();
+                
+                // opencctv::util::log::Loggers::getDefaultLogger()->debug("Starting FlowController with remoteQueueSize: " + boost::lexical_cast<std::string>(_remoteQueueSize)); 
+                //opencctv::util::flow::FlowController* pFlowController = new opencctv::util::flow::SimpleFlowController(_remoteQueueSize);
+                
+                opencctv::util::log::Loggers::getDefaultLogger()->debug("Starting RequltRouterTheread with: " + _sAnalyticServerIp + ":" + sAnalyticQueueOutPort); 
 				opencctv::ResultRouterThread *pResultRouter = new opencctv::ResultRouterThread(analyticInstance.getId(), _sAnalyticServerIp, sAnalyticQueueOutPort);
-				boost::thread *pResultRouterThread = new boost::thread(*pResultRouter);
+                
+                boost::thread *pResultRouterThread = new boost::thread(*pResultRouter);
 
 				if (pResultRouterThread->joinable())
 				{
@@ -204,6 +241,8 @@ bool AnalyticServer::startAnalyticInstanceAction(unsigned int iAnalyticInstanceI
 				opencctv::util::log::Loggers::getDefaultLogger()->error(ssErrMsg.str());
 			}
 		}
+		
+			opencctv::util::log::Loggers::getDefaultLogger()->info("Finish starting an alytic instance id: " + boost::lexical_cast<std::string>(analyticInstance.getId()));
 	}
 
 	return true;

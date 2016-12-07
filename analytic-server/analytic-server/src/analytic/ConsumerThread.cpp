@@ -11,19 +11,50 @@ ConsumerThread::ConsumerThread(ConcurrentQueue<api::Image_t>* pResultsOutputQueu
 
 void ConsumerThread::operator()()
 {
-	opencctv::util::log::Loggers::getDefaultLogger()->info("Analytic consumer thread started.");
+	util::log::Loggers::getDefaultLogger()->info("Analytic consumer thread started.");
 	while(_pResultsOutputQueue && _pSender && _pSerializer)
 	{
+       
+        util::log::Loggers::getDefaultLogger()->debug("Start sending result");
 		api::Image_t outputImage = _pResultsOutputQueue->pop();
+        
+        util::log::Loggers::getDefaultLogger()->debug("Result Timestamp: " + outputImage.sInputName + outputImage.sTimestamp + outputImage.sCustomTextResult);
 		AnalyticResult result(outputImage.iStreamId, outputImage.sInputName, outputImage.sTimestamp, outputImage.sCustomTextResult, outputImage.bGenerateAnalyticEvent);
 		std::stringstream ssMsg;
-		ssMsg << "Image " << result.getTimestamp() << " processed. VM used = "
-				<< opencctv::util::Util::getCurrentVmUsageKb() << " Kb";
-		opencctv::util::log::Loggers::getDefaultLogger()->debug(ssMsg.str());
+		
+		
 		//Writing the result to the analytic output queue
 		std::string sSerializedResult = _pSerializer->serialize(result);
-		_pSender->send(&sSerializedResult);
-		outputImage.matImage.release();
+
+         util::log::Loggers::getDefaultLogger()->debug("Serialized data: " + sSerializedResult);
+         
+         
+        // analytic::AnalyticResult resultT = _pSerializer->deserializeAnalyticResult(sSerializedResult);
+         
+        // util::log::Loggers::getDefaultLogger()->debug("After deserializeAnalyticResult");
+			std::stringstream sMsg;
+			
+		//	sMsg << "\t\tReceived Result of ";
+          //  sMsg << resultT.getStreamId();
+		//	sMsg << resultT.getTimestamp();
+		//	util::log::Loggers::getDefaultLogger()->debug(sMsg.str());
+			
+         
+         
+		if(_pSender->send(&sSerializedResult))
+        {
+            ssMsg << "Got violation " << result.getTimestamp() << ". Sent data size = " << opencctv::util::Util::getCurrentVmUsageKb() << " Kb";
+            util::log::Loggers::getDefaultLogger()->debug(ssMsg.str());
+            
+        }else
+        {
+            ssMsg << "Cannot send result data with port: " << _pResultsOutputQueue;
+            util::log::Loggers::getDefaultLogger()->error(ssMsg.str());
+        }
+    
+        
+        //if(outputImage.matImage)
+        //outputImage.matImage.release();
 	}
 }
 

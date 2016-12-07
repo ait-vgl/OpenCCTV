@@ -11,6 +11,7 @@ AnalyticResult::AnalyticResult() {
 AnalyticResult::AnalyticResult(unsigned int iStreamId, const std::string& sInputName, std::string sTimestamp, std::string sCustomText, bool bWriteToDatabase)
 {
 	_iStreamId = iStreamId;
+    _sInputName = sInputName;
 	_sTimestamp = sTimestamp;
 	_sCustomText = sCustomText;
 	_bWriteToDatabase = bWriteToDatabase;

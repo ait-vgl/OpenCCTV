@@ -58,13 +58,18 @@ opencctv::Image* ProtoBuf::deserializeImage(const std::string* pSSerializedImage
 
 std::string ProtoBuf::serialize(const analytic::AnalyticResult& analyticResult)
 {
-	analytic_result serializableAnalyticResult;
-	serializableAnalyticResult.set_stream_id(analyticResult.getStreamId());
-	serializableAnalyticResult.set_input_name(analyticResult.getInputName());
-	serializableAnalyticResult.set_timestamp(analyticResult.getTimestamp());
-	serializableAnalyticResult.set_custom_text(analyticResult.getCustomText());
-	serializableAnalyticResult.set_write_to_db(analyticResult.getWriteToDatabase());
-	return serializableAnalyticResult.SerializeAsString();
+	analytic_result* serializableAnalyticResult = new analytic_result();
+	serializableAnalyticResult->set_stream_id(analyticResult.getStreamId());
+	serializableAnalyticResult->set_input_name(analyticResult.getInputName());
+	serializableAnalyticResult->set_timestamp(analyticResult.getTimestamp());
+	serializableAnalyticResult->set_custom_text(analyticResult.getCustomText());
+	serializableAnalyticResult->set_write_to_db(analyticResult.getWriteToDatabase());
+    
+   // std::string* pSSerialized = new std::string();
+	//serializableAnalyticResult->SerializeToString(pSSerialized);
+	//if(serializableAnalyticResult) delete serializableAnalyticResult;
+	return serializableAnalyticResult->SerializeAsString();;
+    
 }
 
 analytic::AnalyticResult ProtoBuf::deserializeAnalyticResult(const std::string& sSerializedAnalyticResult)

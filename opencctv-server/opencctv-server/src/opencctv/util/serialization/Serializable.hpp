@@ -5,6 +5,7 @@
 #include <string>
 #include "../../Image.hpp"
 #include "../../../analytic/AnalyticResult.hpp"
+#include "../log/Loggers.hpp"
 
 namespace opencctv {
 namespace util {
@@ -13,6 +14,8 @@ namespace serialization {
 class Serializable
 {
 public:
+    
+    Serializable(){}
 	/**
 	 * Alert! Please remember to delete the opencctv::Image
 	 * if it was created on the heap using new operator.
@@ -32,6 +35,11 @@ public:
 	virtual opencctv::Image* deserializeImage(const std::string* pSSerializedImage) = 0;
 	virtual std::string serialize(const analytic::AnalyticResult& analyticResult) = 0;
 	virtual analytic::AnalyticResult deserializeAnalyticResult(const std::string& sSerializedAnalyticResult) = 0;
+   /* virtual void testF(const std::string& sSerializedAnalyticResult)
+    {
+       opencctv::util::log::Loggers::getDefaultLogger()->debug(" <<<< Serializable >>>> " + sSerializedAnalyticResult);
+    }
+    */
 	virtual ~Serializable(){}
 };
 
