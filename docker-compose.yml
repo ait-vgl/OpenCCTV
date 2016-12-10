@@ -32,7 +32,7 @@ services:
     #  - analytic
     #  - mysql:db
     working_dir: /usr/local/opencctv/opencctv-starter
-    mem_limit: 67108864
+    mem_limit: 268435456
     volumes:
       - /usr/local/opencctv/vms_connectors:/usr/local/opencctv/vms_connectors
       - ~/workspace/OpenCCTV/opencctv-server/opencctv-starter/Release:/usr/local/opencctv/opencctv-starter
@@ -54,7 +54,8 @@ services:
       - "5555:5555"
     depends_on:
       - mysql
-    mem_limit: 67108864
+    #mem_limit: 67108864
+    mem_limit: 268435456
     volumes:
       - /usr/local/opencctv/analytics:/usr/local/opencctv/analytics
       - ~/workspace/OpenCCTV/analytic-server/analytic-starter/Release:/usr/local/opencctv/analytic-starter

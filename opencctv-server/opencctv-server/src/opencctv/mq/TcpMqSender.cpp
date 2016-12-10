@@ -43,7 +43,7 @@ bool TcpMqSender::connectToMq(const std::string& serverName, const std::string& 
  * if it was created on the heap using new operator.
  * Use this function when sending very large serialized images to the MQ.
  */
-int TcpMqSender::send(const std::string* pSMessage) {
+bool TcpMqSender::send(const std::string* pSMessage) {
 	bool sent = false;
 	try
 	{

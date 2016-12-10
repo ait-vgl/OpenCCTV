@@ -4,7 +4,7 @@
 
 #include "Logger.hpp"
 
-namespace opencctv {
+namespace analytic {
 namespace util {
 namespace log {
 
@@ -15,7 +15,7 @@ public:
 	static Logger* getDefaultLogger();
 };
 
-} /* namespace opencctv */
+} /* namespace analytic */
 } /* namespace util */
 } /* namespace log */
 

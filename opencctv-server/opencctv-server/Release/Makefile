@@ -34,6 +34,7 @@ CXXFLAGS	:=  -O3 -fPIC #e.g., CXXFLAGS=-g -O0 for debugging
 # If you are targeting only 32 bit for you can remove the entries containing "64"
 LDFLAGS		:= -L/usr/local/opencv-2.4.9/lib \
 				-L/usr/lib \
+				-L/usr/local/lib \
 				-L./
 
 LIBS		:=  -lboost_thread -lboost_system -lboost_program_options -lboost_filesystem -lprotobuf -lzmq -ldl -lmysqlcppconn -pthread
@@ -41,8 +42,8 @@ LIBS		:=  -lboost_thread -lboost_system -lboost_program_options -lboost_filesyst
 all		: $(NAME)
 Other_L		:=${A}AnalyticServerManager.o ${A}AnalyticServer.o ${A}AnalyticServer.o ${A}xml/AnalyticMessage.o ${A}AnalyticData.o ${A}AnalyticResult.o \
 		${O}ResultRouterThread.o ${O}OpenCCTVServerManager.o ${O}OpenCCTVServer.o ${O}Exception.o ${O}Image.o ${O}ServerController.o ${O}Process.o \
-		${O_UTIL}log/Loggers.o ${O_UTIL}xml/OpenCCTVServerMessage.o ${O_UTIL}Config.o ${O_UTIL}serialization/Serializers.o ${O_UTIL}serialization/gpb/ProtoBuf.o ${O_UTIL}serialization/gpb/image.pb.o ${O_UTIL}serialization/gpb/analytic_result.pb.o ${O_UTIL}log/colored/ColorLogger.o ${O_MQ}MqUtil.o ${O_MQ}TcpMqReceiver.o \
-		${O_DB}AnalyticServerGateway.o ${O_DB}AnalyticResultGateway.o ${O_DB}DbConnector.o ${O_DB}AnalyticServerGateway.o $ ${O_DB}AnalyticInstanceGateway.o ${O_DB}AnalyticInstanceGateway.o ${O_DTO}AnalyticServerDTO.o ${O_DTO}AnalyticInstance.o 
+		${O_UTIL}log/Loggers.o ${O_UTIL}xml/OpenCCTVServerMessage.o ${O_UTIL}Config.o  ${O_UTIL}serialization/gpb/ProtoBuf.o ${O_UTIL}serialization/gpb/image.pb.o ${O_UTIL}serialization/gpb/analytic_result.pb.o ${O_UTIL}log/colored/ColorLogger.o $ ${O_MQ}MqUtil.o ${O_MQ}TcpMqReceiver.o \
+		${O_DB}AnalyticServerGateway.o ${O_DB}AnalyticResultGateway.o ${O_DB}DbConnector.o ${O_DB}AnalyticServerGateway.o $ ${O_DB}AnalyticInstanceGateway.o ${O_DB}AnalyticInstanceGateway.o ${O_DB}AnalyticInstanceStreamGateway.o ${O_DB}StreamGateway.o ${O_DTO}AnalyticServerDTO.o ${O_DTO}AnalyticInstance.o ${O_DTO}Stream.o  ${O_DTO}AnalyticInstanceStream.o
 		
 			 
 

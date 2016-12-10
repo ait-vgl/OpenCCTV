@@ -51,9 +51,9 @@ LIBS		:= -lFrameGrabber -lVGL -lopencv_core  -lboost_program_options \
 
 all		: $(NAME)
 Other_L		:=${A}ConsumerThread.o ${A}AnalyticResult.o ${A_DB}AnalyticInstanceConfigGateway.o ${A_DB}AnalyticInstanceStreamGateway.o ${A_DB}DbConnector.o \
-		${A_DTO}AnalyticInstanceConfig.o ${A_DTO}AnalyticInstanceStream.o ${A_UTIL}/Config.o ${A_UTIL}log/colored/ColorLogger.o \
+		${A_DTO}AnalyticInstanceConfig.o ${A_DTO}AnalyticInstanceStream.o ${A_UTIL}/Config.o ${A_UTIL}log/colored/ColorLogger.o ${A_UTIL}log/Loggers.o \
 		${O}Exception.o ${O}Image.o \
-		${O_UTIL}log/Loggers.o ${O_UTIL}Util.o ${O_UTIL}SharedLibLoader.o ${O_UTIL}serialization/gpb/ProtoBuf.o ${O_UTIL}serialization/gpb/analytic_result.pb.o ${O_UTIL}serialization/gpb/image.pb.o \
+		 ${O_UTIL}Util.o ${O_UTIL}SharedLibLoader.o ${O_UTIL}serialization/gpb/ProtoBuf.o ${O_UTIL}serialization/gpb/analytic_result.pb.o ${O_UTIL}serialization/gpb/image.pb.o \
 		${O_MQ}/TcpMqSender.o ${O_MQ}/TcpMqReceiver.o ${O_MQ}MqUtil.o \
 			 
 
