@@ -30,15 +30,14 @@ LDFLAGS		:= -L/usr/local/opencv-2.4.9/lib \
 LIBS		:= -lboost_system -lboost_filesystem -lboost_program_options -lzmq
 all		: $(NAME)
 Other_L		:= ${O}Process.o ${O}Exception.o ${O}ServerController.o \
-		${O_UTIL}log/Loggers.o ${O_UTIL}log/colored/ColorLogger.o ${O_UTIL}Util.o  ${O_UTIL}xml/OpenCCTVServerMessage.o ${O_UTIL}Config.o ${O_MQ}MqUtil.o\
-			 
+		${O_UTIL}log/Loggers.o ${O_UTIL}log/colored/ColorLogger.o ${O_UTIL}Util.o  ${O_UTIL}xml/OpenCCTVServerMessage.o ${O_UTIL}Config.o ${O_MQ}MqUtil.o		 
 
-$(NAME)		: ${BASE}${NAME}.o ${Other_L} 
-	$(LD) $(LDFLAGS) -o $@ $^ $(LIBS)
+$(NAME)		:${BASE}${NAME}.o ${Other_L}
+	$(LD) $(LDFLAGS) -o $@ $^ $(LIBS) 
 	
 ProjectIncludes := /*.h	
-%.o 		: %.cpp ${ProjectIncludes}
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c -o $@ $<
+%.o 		:   %.cpp ${ProjectIncludes}
+		$(CXX) $(CPPFLAGS) $(CXXFLAGS)  -c -o $@ $< 
 
 #Clean
 DIRS := . $(shell find $(BASE) -type d)

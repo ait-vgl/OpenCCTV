@@ -2,9 +2,9 @@
 
 #for web 
 
-app/uploads/vms_connectors/
-app/assets/images/
-app/uploads/analytics/
+app/uploads/vms_connectors/*
+app/assets/images/*
+app/uploads/analytics/*
 .idea
 tmp/
 log/
