@@ -26,6 +26,24 @@ services:
     tty: true
     stdin_open: true
   
+  web-result:
+    image: ruby
+    links:
+      - mysql:db
+    working_dir: /myapp
+    mem_limit: 268435456
+    volumes:
+      - ~/workspace/OpenCCTV/opencctv-web-result:/myapp
+    ports:
+      - "3001:3000"
+    depends_on:
+      - mysql
+    container_name: web-result
+    command: /bin/bash
+    tty: true
+    stdin_open: true
+  
+  
   opencctv:
     image: opencctv
     #links:
