@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :results
+
   resources :analytic_servers
 
   resources :analytic_instance_streams do

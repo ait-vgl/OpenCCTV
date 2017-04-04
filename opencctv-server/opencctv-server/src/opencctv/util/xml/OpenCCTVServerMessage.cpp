@@ -72,8 +72,6 @@ int OpenCCTVServerMessage::extractMessageDetailWithData(const string &sRequest, 
 
 		iAIId = pt.get<unsigned int> ("opencctvmsg.AIId");
 		iASId = pt.get<unsigned int> ("opencctvmsg.ASId");
-		//}catch(const std::exception &e){ // (...)}
-
 	}
 	catch (boost::property_tree::xml_parser::xml_parser_error &e)
 	{

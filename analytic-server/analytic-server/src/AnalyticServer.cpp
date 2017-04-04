@@ -281,7 +281,7 @@ int main(int argc, char *argv[])
 			mFrameGrabbers[AIS.getInputName()] = pIFGW->getFrameGrabberObj();
 		}
 
-		analytic::util::log::Loggers::getDefaultLogger()->info("FrameGrabber config setted.");
+		analytic::util::log::Loggers::getDefaultLogger()->info("FrameGrabber config setted  " + boost::lexical_cast<std::string>(mFrameGrabbers.size()) + " items.");
 	}
 
 
@@ -300,7 +300,7 @@ int main(int argc, char *argv[])
 			mConfigFiles[AIC.getFileName()] = fs;
 		}
 
-		analytic::util::log::Loggers::getDefaultLogger()->info("Analytic config setted.");
+		analytic::util::log::Loggers::getDefaultLogger()->info("Analytic config setted " + boost::lexical_cast<std::string>(mConfigFiles.size()) + " items.");
 	}
 
 // End creating analytic config object

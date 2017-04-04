@@ -81,15 +81,15 @@ void ResultRouterThread::operator()()
 			
 
 			//Saving to DB
-			//if (result.getWriteToDatabase())
+			if (result.getWriteToDatabase())
 			{
 				try
 				{
 					opencctv::db::AnalyticResultGateway analyticResultGateway;
-					//analyticResultGateway.insertResults(_iAnalyticInstanceId, result);
+					analyticResultGateway.insertResults(_iAnalyticInstanceId, result);
 					sMsg = "\t\tResult written to the database: ";
-					//sMsg.append(result.getTimestamp());
-					//util::log::Loggers::getDefaultLogger()->info(sMsg);
+					sMsg.append(result.getTimestamp());
+					util::log::Loggers::getDefaultLogger()->info(sMsg);
 
 				}
 				catch (opencctv::Exception &e)

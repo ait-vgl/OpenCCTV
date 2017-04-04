@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Result text:</strong>
+  <%= @result.result_text %>
+</p>
+
+<p>
+  <strong>Location:</strong>
+  <%= @result.location %>
+</p>
+
+<p>
+  <strong>Timestamp:</strong>
+  <%= @result.timestamp %>
+</p>
+
+<p>
+  <strong>Analytic instance:</strong>
+  <%= @result.analytic_instance %>
+</p>
+
+<p>
+  <strong>Analytic:</strong>
+  <%= @result.analytic %>
+</p>
+
+<p>
+  <strong>Vms:</strong>
+  <%= @result.vms %>
+</p>
+
+<p>
+  <strong>Camera:</strong>
+  <%= @result.camera %>
+</p>
+
+<%= link_to 'Edit', edit_result_path(@result) %> |
+<%= link_to 'Back', results_path %>
