@@ -2,6 +2,8 @@ class Analytic < ActiveRecord::Base
   has_many :analytic_input_streams, dependent: :destroy
   has_many :analytic_instances, dependent: :destroy
 
+  has_many :results, dependent: :nullify
+
   has_many :analytic_configs, dependent: :destroy
 
   validates :name, presence: true

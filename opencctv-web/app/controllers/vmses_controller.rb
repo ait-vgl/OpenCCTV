@@ -38,6 +38,7 @@ class VmsesController < ApplicationController
                      :server_ip => params[:vms][:server_ip], :server_port => params[:vms][:server_port],
                      :username => params[:vms][:username], :password => params[:vms][:password],
                      :vms_connector_id => params[:vms][:vms_connector_id], :vms_type => params[:vms][:vms_type],
+                     :isFrameGrabber => params[:vms][:isFrameGrabber], :connection_type => params[:vms][:connection_type],
                      #:user_id => current_user.id,
                      :group_user_id => params[:vms][:group_user_id])
     else
@@ -45,6 +46,7 @@ class VmsesController < ApplicationController
                      :server_ip => params[:vms][:server_ip], :server_port => params[:vms][:server_port],
                      :username => params[:vms][:username], :password => params[:vms][:password],
                      :vms_connector_id => params[:vms][:vms_connector_id], :vms_type => params[:vms][:vms_type],
+                     :isFrameGrabber => params[:vms][:isFrameGrabber], :connection_type => params[:vms][:connection_type],
                      :user_id => current_user.id)
     end
 
@@ -170,7 +172,7 @@ class VmsesController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def vms_params
-    params.require(:vms).permit(:name, :description, :server_ip, :server_port, :username, :password, :vms_connector_id, :vms_type, :group_user_id)
+    params.require(:vms).permit(:name, :description, :server_ip, :server_port, :username, :password, :vms_connector_id, :vms_type, :group_user_id, :isFrameGrabber, :connection_type)
   end
 
   def get_cameras(xml_string)

@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  result_text: MyString
+  location: MyString
+  timestamp: 2017-02-15 07:32:27
+  analytic_instance_id: 
+  analytic_id: 
+  vms_id: 
+  camera_id: 
+
+two:
+  result_text: MyString
+  location: MyString
+  timestamp: 2017-02-15 07:32:27
+  analytic_instance_id: 
+  analytic_id: 
+  vms_id: 
+  camera_id: 

@@ -4,6 +4,8 @@ class AnalyticInstance < ActiveRecord::Base
   has_many :streams, through: :analytic_instance_streams
   has_many :analytic_instance_configs, dependent: :destroy
 
+  has_many :results, dependent: :nullify
+
   belongs_to :user
   belongs_to :group_user
 
