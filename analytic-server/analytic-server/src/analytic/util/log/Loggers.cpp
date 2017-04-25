@@ -2,7 +2,7 @@
 #include "Loggers.hpp"
 #include "../../../analytic/util/log/colored/ColorLogger.hpp"
 
-namespace opencctv {
+namespace analytic {
 namespace util {
 namespace log {
 
@@ -18,6 +18,6 @@ Logger* Loggers::getDefaultLogger()
 	return _pDefaultLogger;
 }
 
-} /* namespace opencctv */
+} /* namespace analytic */
 } /* namespace util */
 } /* namespace log */

@@ -1,11 +1,16 @@
 #ifndef ANALYTIC_ANALYTIC_HPP_
 #define ANALYTIC_ANALYTIC_HPP_
 
-#include "../ConcurrentQueue.hpp"
+
 #include <string>
-#include <opencv2/core/core.hpp>
-#include "FrameGrabber.h"
 #include <map>
+#include <opencv2/core/core.hpp>
+#include "../ConcurrentQueue.hpp"
+#include "IFrameGrabber.hpp"
+#include "../util/log/Loggers.hpp"
+
+using namespace cv;
+using namespace analytic;
 
 namespace analytic {
 namespace api {
@@ -25,7 +30,7 @@ class Analytic
 public:
 	Analytic(){}
 	//Load config, module. Check before starting
-	virtual bool init(const std::string& sAnalyticPluginDirLocation, const std::map<string,FileStorage>& mConfigFiles, const std::map<string,FrameGrabber*>& mFrameGrabbers) = 0;
+	virtual bool init(const std::string& sAnalyticPluginDirLocation, const std::map<std::string,FileStorage>& mConfigFiles, const std::map<std::string,IFrameGrabber*>& mFrameGrabbers, util::log::Logger *pAnalyticLog) = 0;
 	
 	//Start process
 	virtual void process(analytic::ConcurrentQueue<analytic::api::Image_t>* pOutputQueue) = 0;

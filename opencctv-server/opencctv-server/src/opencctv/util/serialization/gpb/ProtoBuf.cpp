@@ -15,6 +15,7 @@ ProtoBuf::ProtoBuf() : Serializable() {
  * because it was constructed on heap using new operator.
  * This function is used to serialized large Image objects.
  */
+
 std::string* ProtoBuf::serialize(const opencctv::Image* pImage)
 {
 	image* pSerializableImage = new image();
@@ -69,10 +70,12 @@ std::string ProtoBuf::serialize(const analytic::AnalyticResult& analyticResult)
 
 analytic::AnalyticResult ProtoBuf::deserializeAnalyticResult(const std::string& sSerializedAnalyticResult)
 {
+    
+    //opencctv::util::log::Loggers::getDefaultLogger()->debug("xxxxxxxxxxxx      xxxxxx     xxxxxxxxxxxxxxxxxxxxxx");
 	analytic_result parsedAnalyticResult;
 	parsedAnalyticResult.ParseFromString(sSerializedAnalyticResult);
-	analytic::AnalyticResult analyticResult(parsedAnalyticResult.stream_id(), parsedAnalyticResult.input_name(),
-			parsedAnalyticResult.timestamp(), parsedAnalyticResult.custom_text(), parsedAnalyticResult.write_to_db());
+	analytic::AnalyticResult analyticResult(parsedAnalyticResult.stream_id(), parsedAnalyticResult.input_name(), parsedAnalyticResult.timestamp(), parsedAnalyticResult.custom_text(), parsedAnalyticResult.write_to_db());
+    //analytic::AnalyticResult analyticResult(999,"inputName","timestamp","custom_text", false);
 	return analyticResult;
 
 }

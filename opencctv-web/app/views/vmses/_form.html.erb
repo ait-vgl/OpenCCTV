@@ -27,6 +27,31 @@
       <br>
       <%= f.number_field :server_port, {:disabled => params[:action]=="edit"} %>
     </div>
+
+    <div class="field">
+      <br>
+      <%= f.radio_button(:connection_type, "vms") %>
+      <%= f.label(:connection_type_vms, "Aanalytic streams via this device ") %>
+      <%= f.radio_button(:connection_type, "camera", :checked => true)%>
+      <%= f.label(:connection_type_camera, "Analytic streams direclty from cameras connected with this device ") %>
+     
+    </div>
+
+    <div class="field">
+      <%= f.label(:isFrameGrabber, "Use FrameGrabber connector: ") %>
+      <%= f.check_box("isFrameGrabber",{:checked => true},true,false) %>
+      <br>
+      <br>
+    </div>
+
+    <% if (params[:action]!='edit') %>
+        <div class="field">
+          <%= f.label :vms_type, 'VMS type' %>
+          <br>
+          <%= f.select :vms_type, options_for_select([['Other', 'other'], ['Milestone XProtect', 'milestone'], ['ZoneMinder', 'zoneminder'], ['HikVision', 'hikvision'] , ['Lilin', 'lilin']]) %>
+        </div>
+    <% end %>
+
     <div class="field">
       <%= f.label :vms_connector_id, 'VMS connector' %>
       <br>
@@ -35,13 +60,8 @@
           <%= "(#{@vms.vms_type})" %>
       <% end %>
     </div>
-    <% if (params[:action]!='edit') %>
-        <div class="field">
-          <%= f.label :vms_type, 'VMS type' %>
-          <br>
-          <%= f.select :vms_type, options_for_select([['Other', 'other'], ['Milestone XProtect', 'milestone'], ['ZoneMinder', 'zoneminder'], ['HikVision', 'hikvision'] , ['Lilin', 'lilin']]) %>
-        </div>
-    <% end %>
+
+    
     <div class="field">
       <%= f.label :description %>
       <br>

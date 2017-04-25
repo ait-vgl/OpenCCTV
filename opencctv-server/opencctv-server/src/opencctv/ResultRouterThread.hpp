@@ -9,9 +9,11 @@
 #include "Exception.hpp"
 
 #include "util/Config.hpp"
-#include "util/serialization/Serializers.hpp"
+//#include "util/serialization/Serializable.hpp"
+#include "util/serialization/gpb/ProtoBuf.hpp"
+
 #include "util/log/Loggers.hpp"
-#include "util/flow/FlowController.hpp"
+//#include "util/flow/FlowController.hpp"
 
 //#include "../analytic/AnalyticServer.hpp"
 #include "../analytic/AnalyticData.hpp"
@@ -26,7 +28,7 @@ private:
 	//util::flow::FlowController* _pFlowController;
     std::string _sAnalyticServerIp;
     std::string _sAnalyticQueueOutPort;
-	util::serialization::Serializable* _pSerializer;
+	//util::serialization::Serializable* _pSerializer;
 
 public:
 	ResultRouterThread(unsigned int iAnalyticInstanceId, std::string sAnalyticServerIp, std::string sAnalyticQueueOutPort);

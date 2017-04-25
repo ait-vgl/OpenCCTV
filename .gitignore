@@ -6,3 +6,5 @@
 **/*.d
 **/.idea
 **/*.mk
+**/licenseVGL.txt
+**/.vscode

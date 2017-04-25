@@ -15,11 +15,12 @@
 #include "opencctv/mq/TcpMqSender.hpp"
 #include "opencctv/PluginLoader.hpp"
 #include "opencctv/util/serialization/gpb/ProtoBuf.hpp"
-#include "opencctv/util/log/Loggers.hpp"
+#include "analytic/util/log/Loggers.hpp"
 
 #include "analytic/ConcurrentQueue.hpp"
 #include "analytic/api/Analytic.hpp"
 #include "analytic/api/IFrameGrabberWrapper.hpp"
+
 #include "FrameGrabberWrapper.h"
 
 #include "analytic/xml/AnalyticMessage.hpp"
@@ -31,8 +32,6 @@
 #include "analytic/db/AnalyticInstanceConfigGateway.hpp"
 //#include "analytic/ImageQueue.hpp"
 
-#include "FrameGrabberWrapper.h"
-
 #include <opencv2/core/core.hpp>
 
 using namespace cv;
@@ -42,78 +41,85 @@ using namespace opencctv;
 using namespace analytic;
 
 void exitHandler(int iSignum);
-std::map<string, FrameGrabber *> mFrameGrabbers;
+std::map<string, api::IFrameGrabber *> mFrameGrabbers;
 
 int main(int argc, char *argv[])
 {
-    // Registering signal SIGINT and signal handler
+	// Registering signal SIGINT and signal handler
 	signal(SIGINT, exitHandler); // for Ctrl + C keyboard interrupt
 	signal(SIGTERM, exitHandler); // for Terminate signal
-    signal(SIGKILL, exitHandler); // for SIGKILL
-    
+	signal(SIGKILL, exitHandler); // for SIGKILL
+
 	if (argc < 6)
 	{
-		opencctv::util::log::Loggers::getDefaultLogger()->error("Invalid number of arguments.");
+		analytic::util::log::Loggers::getDefaultLogger()->error("Invalid number of arguments.");
 		return -1;
 	}
 
 	// Sending PID of Analytic process to Analytic Starter process through stdout
 	fprintf(stdout, "%s", opencctv::util::Util::getPidMessage(getpid()).c_str());
-    fflush(stdout);
-   
+	fflush(stdout);
+
 	// Saving input arguments
 	std::string sAnalyticInstanceId = argv[1];
 	std::string sAnalyticPluginDirLocation = argv[2];
 	std::string sAnalyticPluginFilename = argv[3];
 	std::string sInputAnalyticQueueAddress = argv[4];
 	std::string sOutputAnalyticQueueAddress = argv[5];
-    
-    std::cout << "From Analytic Server Instance id: " + sAnalyticInstanceId + " plugin location: " + sAnalyticPluginDirLocation + " plugin file anem: " + sAnalyticPluginFilename + " Input Queue port: " + sInputAnalyticQueueAddress + " Output queue port: " + sOutputAnalyticQueueAddress << std::endl;
-    
-/*
-	// Creating Image input queue
-	opencctv::mq::TcpMqReceiver *pReceiver = NULL;
 
-	try
-	{
-		pReceiver = new opencctv::mq::TcpMqReceiver();
-		pReceiver->createMq(sInputAnalyticQueueAddress);
-	}
-	catch (opencctv::Exception &e)
-	{
-		std::string sErrMsg = "Failed to create Analytic input image queue. ";
-		sErrMsg.append(e.what());
-		opencctv::util::log::Loggers::getDefaultLogger()->error(sErrMsg);
-		return -1;
-	}
+	analytic::util::log::Loggers::getDefaultLogger()->debug("From Analytic Server Instance id: " + sAnalyticInstanceId + " plugin location: " + sAnalyticPluginDirLocation + " plugin file anem: " + sAnalyticPluginFilename + " Input Queue port: " + sInputAnalyticQueueAddress + " Output queue port: " + sOutputAnalyticQueueAddress);
 
-	opencctv::util::log::Loggers::getDefaultLogger()->info("Creating Image input queue done.");
-*/
+	//std::cout << "Test log console with cout xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" << std::endl;
+
+	/*
+		// Creating Image input queue
+		opencctv::mq::TcpMqReceiver *pReceiver = NULL;
+
+		try
+		{
+			pReceiver = new opencctv::mq::TcpMqReceiver();
+			pReceiver->createMq(sInputAnalyticQueueAddress);
+		}
+		catch (opencctv::Exception &e)
+		{
+			std::string sErrMsg = "Failed to create Analytic input image queue. ";
+			sErrMsg.append(e.what());
+			analytic::util::log::Loggers::getDefaultLogger()->error(sErrMsg);
+			return -1;
+		}
+
+		analytic::util::log::Loggers::getDefaultLogger()->info("Creating Image input queue done.");
+	*/
 	// Creating Results output queue
 	opencctv::mq::TcpMqSender *pSender = NULL;
 
 	try
 	{
 		pSender = new opencctv::mq::TcpMqSender();
-		pSender->createMq(sOutputAnalyticQueueAddress);
+		if(pSender->createMq(sOutputAnalyticQueueAddress))
+        {
+            analytic::util::log::Loggers::getDefaultLogger()->info("Analytic instance ResultOutput started with port: " + sOutputAnalyticQueueAddress);
+        }else
+        {
+            analytic::util::log::Loggers::getDefaultLogger()->error("Cannot start ResultOutput  port: " + sOutputAnalyticQueueAddress);
+            return -1;
+        }
 	}
 	catch (opencctv::Exception &e)
 	{
 		std::string sErrMsg = "Failed to create Analytic Results output queue. ";
 		sErrMsg.append(e.what());
-		opencctv::util::log::Loggers::getDefaultLogger()->error(sErrMsg);
+		analytic::util::log::Loggers::getDefaultLogger()->error(sErrMsg);
 		return -1;
 	}
 
-	opencctv::util::log::Loggers::getDefaultLogger()->info("Creating Results output queue done.");
+	
 
 	// Creating internal input, output queue
-	//analytic::ConcurrentQueue<analytic::api::Image_t>* pInputImageQueue = new analytic::ConcurrentQueue<analytic::api::Image_t>(5);
-	analytic::ConcurrentQueue<analytic::api::Image_t> *pOutputResultQueue = new analytic::ConcurrentQueue<analytic::api::Image_t> (5);
-	/*analytic::ImageQueue<analytic::api::Image_t>* pInputImageQueue = new analytic::ImageQueue<analytic::api::Image_t>(5);
-	analytic::ImageQueue<analytic::api::Image_t>* pOutputResultQueue = new analytic::ImageQueue<analytic::api::Image_t>(5);*/
 
-	opencctv::util::log::Loggers::getDefaultLogger()->info("Creating output queue done.");
+	analytic::ConcurrentQueue<analytic::api::Image_t> *pOutputResultQueue = new analytic::ConcurrentQueue<analytic::api::Image_t> (5);
+
+	analytic::util::log::Loggers::getDefaultLogger()->info("Creating output queue done.");
 
 	// Loading Analytic plugin
 	opencctv::PluginLoader<analytic::api::Analytic> analyticLoader;
@@ -141,17 +147,17 @@ int main(int argc, char *argv[])
 	{
 		std::string sErrMsg = "Failed to load Analytic plugin. ";
 		sErrMsg.append(e.what());
-		opencctv::util::log::Loggers::getDefaultLogger()->error(sErrMsg);
+		analytic::util::log::Loggers::getDefaultLogger()->error(sErrMsg);
 		return -1;
 	}
 
 	if (!pAnalytic)
 	{
-		opencctv::util::log::Loggers::getDefaultLogger()->error("Loaded Analytic is NULL.");
+		analytic::util::log::Loggers::getDefaultLogger()->error("Loaded Analytic is NULL.");
 		return -1;
 	}
 
-	opencctv::util::log::Loggers::getDefaultLogger()->info("Loading Analytic plugin done.");
+	analytic::util::log::Loggers::getDefaultLogger()->info("Loading Analytic plugin done.");
 
 // Preparing analytic instance input stream
 	analytic::db::AnalyticInstanceStreamGateway *pAnalyticInstanceStreamGateway = NULL;
@@ -159,13 +165,13 @@ int main(int argc, char *argv[])
 	try
 	{
 		pAnalyticInstanceStreamGateway = new analytic::db::AnalyticInstanceStreamGateway();
-        opencctv::util::log::Loggers::getDefaultLogger()->info("Analytic instance stream variable created.");
+		analytic::util::log::Loggers::getDefaultLogger()->info("Analytic instance stream variable created.");
 	}
 	catch (opencctv::Exception &e)
 	{
 		std::string sErrMsg = "Failed to create AnalyticInstanceStreamGateway -  ";
 		sErrMsg.append(e.what());
-		opencctv::util::log::Loggers::getDefaultLogger()->error(sErrMsg);
+		analytic::util::log::Loggers::getDefaultLogger()->error(sErrMsg);
 		return -1;
 	}
 
@@ -174,13 +180,13 @@ int main(int argc, char *argv[])
 	try
 	{
 		pAnalyticInstanceStreamGateway->getAnalyticInstanceStreams(boost::lexical_cast<unsigned int> (sAnalyticInstanceId), vAnalyticInstanceStream);
-		opencctv::util::log::Loggers::getDefaultLogger()->info("Analytic instance stream loaded.");
+		analytic::util::log::Loggers::getDefaultLogger()->info("Analytic instance stream loaded.");
 	}
 	catch (opencctv::Exception &e)
 	{
 		std::string sErrMsg = "Failed to get all stream by analytic instance id. ";
 		sErrMsg.append(e.what());
-		opencctv::util::log::Loggers::getDefaultLogger()->error(sErrMsg);
+		analytic::util::log::Loggers::getDefaultLogger()->error(sErrMsg);
 		return -1;
 	}
 
@@ -192,13 +198,13 @@ int main(int argc, char *argv[])
 	try
 	{
 		pAnalyticInstanceConfigGateway = new analytic::db::AnalyticInstanceConfigGateway();
-         opencctv::util::log::Loggers::getDefaultLogger()->info("Analytic instance config variable created.");
+		analytic::util::log::Loggers::getDefaultLogger()->info("Analytic instance config variable created.");
 	}
 	catch (opencctv::Exception &e)
 	{
 		std::string sErrMsg = "Failed to create AnalyticInstanceConfigGateway -  ";
 		sErrMsg.append(e.what());
-		opencctv::util::log::Loggers::getDefaultLogger()->error(sErrMsg);
+		analytic::util::log::Loggers::getDefaultLogger()->error(sErrMsg);
 		return -1;
 	}
 
@@ -206,23 +212,23 @@ int main(int argc, char *argv[])
 
 	try
 	{
-       
+
 		pAnalyticInstanceConfigGateway->getAnalyticInstanceConfig(boost::lexical_cast<unsigned int> (sAnalyticInstanceId), vAnalyticInstaceConfig);
-		opencctv::util::log::Loggers::getDefaultLogger()->info("Analytic instance config loaded, with " + boost::lexical_cast<std::string>(vAnalyticInstaceConfig.size()) + "config files." );
+		analytic::util::log::Loggers::getDefaultLogger()->info("Analytic instance config loaded, with " + boost::lexical_cast<std::string>(vAnalyticInstaceConfig.size()) + " config files.");
 	}
 	catch (opencctv::Exception &e)
 	{
 		std::string sErrMsg = "Failed to get all analytic config by analytic instance id. ";
 		sErrMsg.append(e.what());
-		opencctv::util::log::Loggers::getDefaultLogger()->error(sErrMsg);
+		analytic::util::log::Loggers::getDefaultLogger()->error(sErrMsg);
 		return -1;
 	}
 
 // End preparing analytic instance config
-std::cout << "Starting config FrameGrabber, with " << vAnalyticInstanceStream.size() << " channels" <<std::endl;
+	analytic::util::log::Loggers::getDefaultLogger()->info("Starting config FrameGrabber, with " + boost::lexical_cast<string>(vAnalyticInstanceStream.size()) + " channels");
 
 // Creating framgraber object
-	
+
 
 	if (!vAnalyticInstanceStream.empty())
 	{
@@ -233,40 +239,49 @@ std::cout << "Starting config FrameGrabber, with " << vAnalyticInstanceStream.si
 
 			FrameGrabberWrapper *pFGW =  new FrameGrabberWrapper();
 			analytic::api::IFrameGrabberWrapper *pIFGW = pFGW;
-			pIFGW->init();
+			pIFGW->init(analytic::util::log::Loggers::getDefaultLogger());
 
 			FileStorage config(AIS.getConfig(), FileStorage::READ + FileStorage::MEMORY);
 			pIFGW->setDefaultConfig(config);
 
 			vector<string> strs;
 			boost::split(strs, AIS.getURL(), boost::is_any_of("/"), boost::token_compress_on);
-             //std::cout << "getURL() " << AIS.getURL() << std::endl;
-             //std::cout << "size: "<< strs.size() << std::endl;
-            string sUrl;
-             for (int i =0 ; i < strs.size() ; i++){
-                std::cout << i << " " <<  strs[i] <<std::endl;
-                if (i==0) 
-                    sUrl = strs[i] + "//" + AIS.getUsername() + ":" + AIS.getPassword() + "@";
-                else if (i==1)
-                    sUrl +=  strs[i];
-                else 
-                    sUrl += "/" + strs[i];
-                //std::cout << "sURL: " << sUrl << std::endl;
-             }
-              
+			//std::cout << "getURL() " << AIS.getURL() << std::endl;
+			//std::cout << "size: "<< strs.size() << std::endl;
+			string sUrl;
+
+			for (int i = 0 ; i < strs.size() ; i++)
+			{
+				std::cout << i << " " <<  strs[i] << std::endl;
+
+				if (i == 0)
+					sUrl = strs[i] + "//" + AIS.getUsername() + ":" + AIS.getPassword() + "@";
+				else if (i == 1)
+					sUrl +=  strs[i];
+				else
+					sUrl += "/" + strs[i];
+
+				//std::cout << "sURL: " << sUrl << std::endl;
+			}
+
 			//string sUrl = strs[0] + "://" + AIS.getUsername() + ":" + AIS.getPassword() + "@" + strs[1];
 
 			int iWidth = AIS.getWidth();
 			int iHeight = AIS.getHeight();
 			int iFps = 30; //AIS.getFps();
-			
-			opencctv::util::log::Loggers::getDefaultLogger()->info("Set streamConfig " + sUrl + " " + boost::lexical_cast<std::string>(iWidth) + " " + boost::lexical_cast<std::string>(iHeight) + " " + boost::lexical_cast<std::string>(iFps));
+
+			analytic::util::log::Loggers::getDefaultLogger()->info("Set streamConfig " + sUrl + " " + boost::lexical_cast<std::string>(iWidth) + " " + boost::lexical_cast<std::string>(iHeight) + " " + boost::lexical_cast<std::string>(iFps));
+
+			sUrl = "rtsp://wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mov";
+
+			//sUrl = "rtsp://192.41.170.200:554/now.mp4";
+
 			pIFGW->setStreamConfig(sUrl, iWidth, iHeight, iFps);
 
 			mFrameGrabbers[AIS.getInputName()] = pIFGW->getFrameGrabberObj();
 		}
 
-		opencctv::util::log::Loggers::getDefaultLogger()->info("FrameGrabber config setted.");
+		analytic::util::log::Loggers::getDefaultLogger()->info("FrameGrabber config setted  " + boost::lexical_cast<std::string>(mFrameGrabbers.size()) + " items.");
 	}
 
 
@@ -285,19 +300,19 @@ std::cout << "Starting config FrameGrabber, with " << vAnalyticInstanceStream.si
 			mConfigFiles[AIC.getFileName()] = fs;
 		}
 
-		opencctv::util::log::Loggers::getDefaultLogger()->info("Analytic config setted.");
+		analytic::util::log::Loggers::getDefaultLogger()->info("Analytic config setted " + boost::lexical_cast<std::string>(mConfigFiles.size()) + " items.");
 	}
 
 // End creating analytic config object
 
 	// Init Analytic plugin
-	if (!pAnalytic->init(sAnalyticPluginDirLocation, mConfigFiles, mFrameGrabbers))
+	if (!pAnalytic->init(sAnalyticPluginDirLocation, mConfigFiles, mFrameGrabbers, analytic::util::log::Loggers::getDefaultLogger()))
 	{
-		opencctv::util::log::Loggers::getDefaultLogger()->error("Analytic plugin init failed.");
+		analytic::util::log::Loggers::getDefaultLogger()->error("Analytic plugin init failed.");
 		return -1;
 	}
 
-	opencctv::util::log::Loggers::getDefaultLogger()->info("Init Analytic plugin done.");
+	analytic::util::log::Loggers::getDefaultLogger()->info("Init Analytic plugin done.");
 
 	// Creating threads
 	boost::thread_group threadGroup;
@@ -311,10 +326,10 @@ std::cout << "Starting config FrameGrabber, with " << vAnalyticInstanceStream.si
 	}
 
 	//}
-	opencctv::util::log::Loggers::getDefaultLogger()->info("Creating threads done.");
+	analytic::util::log::Loggers::getDefaultLogger()->info("Creating threads done.");
 
 	// Starting Analytic plugin
-	opencctv::util::log::Loggers::getDefaultLogger()->info("Starting Analytic plugin...");
+	analytic::util::log::Loggers::getDefaultLogger()->info("Starting Analytic plugin...");
 
 	pAnalytic->process(pOutputResultQueue);
 
@@ -323,20 +338,23 @@ std::cout << "Starting config FrameGrabber, with " << vAnalyticInstanceStream.si
 
 void exitHandler(int iSignum)
 {
-
-	
-
-	std::map<std::string , FrameGrabber *>::iterator it;
+    // clear
+        //  pSender
+        // _pSerializer
+        // ConsumerThread
+    
+	std::map<std::string , api::IFrameGrabber *>::iterator it;
 
 	for (it = mFrameGrabbers.begin(); it != mFrameGrabbers.end(); ++it)
 	{
-        if(it->second){
-            delete it->second;
-            mFrameGrabbers.erase(it);
-        }
+		if (it->second)
+		{
+			delete it->second;
+			mFrameGrabbers.erase(it);
+		}
 
-    }
+	}
 
-    opencctv::util::log::Loggers::getDefaultLogger()->info("This analytic instance resources were release from exitHandler befor the analytic instance was terminated.");
+	analytic::util::log::Loggers::getDefaultLogger()->info("This analytic instance resources were release from exitHandler before the analytic instance was terminated.");
 	exit(iSignum);
 }

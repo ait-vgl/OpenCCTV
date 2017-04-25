@@ -6,7 +6,7 @@
 #include <boost/thread/mutex.hpp>
 #include <boost/thread/thread.hpp>
 
-namespace opencctv {
+namespace analytic {
 namespace util {
 namespace log {
 
@@ -24,7 +24,7 @@ public:
 	virtual ~Logger(){}
 };
 
-} /* namespace opencctv */
+} /* namespace analytic */
 } /* namespace util */
 } /* namespace log */
 

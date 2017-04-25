@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161031081358) do
+ActiveRecord::Schema.define(version: 20170316072105) do
 
   create_table "analytic_configs", force: true do |t|
     t.string   "name"
@@ -234,6 +234,23 @@ ActiveRecord::Schema.define(version: 20161031081358) do
   add_index "requests", ["status_id"], name: "index_requests_on_status_id", using: :btree
   add_index "requests", ["user_id"], name: "index_requests_on_user_id", using: :btree
 
+  create_table "results", force: true do |t|
+    t.string   "result_text"
+    t.string   "location"
+    t.time     "timestamp"
+    t.integer  "analytic_instance_id"
+    t.integer  "analytic_id"
+    t.integer  "vms_id"
+    t.integer  "camera_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "results", ["analytic_id"], name: "index_results_on_analytic_id", using: :btree
+  add_index "results", ["analytic_instance_id"], name: "index_results_on_analytic_instance_id", using: :btree
+  add_index "results", ["camera_id"], name: "index_results_on_camera_id", using: :btree
+  add_index "results", ["vms_id"], name: "index_results_on_vms_id", using: :btree
+
   create_table "roles", force: true do |t|
     t.string   "title"
     t.datetime "created_at"
@@ -320,6 +337,8 @@ ActiveRecord::Schema.define(version: 20161031081358) do
     t.datetime "updated_at"
     t.string   "vms_type"
     t.integer  "open_cctv_server_id"
+    t.string   "connection_type"
+    t.boolean  "isFrameGrabber"
   end
 
   add_index "vmses", ["group_user_id"], name: "index_vmses_on_group_user_id", using: :btree

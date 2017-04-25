@@ -2,6 +2,8 @@ class Vms < ActiveRecord::Base
   belongs_to :vms_connector
   has_many :cameras, dependent: :destroy
 
+  has_many :results, dependent: :nullify
+
   belongs_to :user
   belongs_to :group_user
 
@@ -381,7 +383,7 @@ class Vms < ActiveRecord::Base
 
   def lilin_add_monitors(response)
 
-    puts("kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk")
+    #puts("kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk")
 
     result = response.body
 

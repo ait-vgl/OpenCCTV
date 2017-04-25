@@ -59,7 +59,7 @@ int main()
 		return -1;
 	}
 
-	opencctv::util::log::Loggers::getDefaultLogger()->info("Creating Analytic Server's request-reply MQ done.");
+	opencctv::util::log::Loggers::getDefaultLogger()->info("Creating Analytic Server starter's request-reply MQ done, with port: " + sStartingPort);
 
 	// Starting listening for requests
 	opencctv::util::log::Loggers::getDefaultLogger()->info("Listening for requests started.");

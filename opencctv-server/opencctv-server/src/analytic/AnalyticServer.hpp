@@ -10,22 +10,21 @@
 
 #include "../opencctv/OpenCCTVServer.hpp"
 
-
 #include "../opencctv/util/Config.hpp"
 #include "../opencctv/util/log/Loggers.hpp"
 #include "../opencctv/util/TypeDefinitions.hpp"
 
 #include "../opencctv/mq/MqUtil.hpp"
 
-//#include "opencctv/util/flow/SimpleFlowController.hpp"
+//#include "../opencctv/util/flow/SimpleFlowController.hpp"
 #include "../opencctv/Exception.hpp"
 
 #include "../opencctv/db/StreamGateway.hpp"
 //#include "../opencctv/db/AnalyticServerGateway.hpp"
 #include "../opencctv/db/AnalyticInstanceGateway.hpp"
 
-
 #include "../opencctv/ResultRouterThread.hpp"
+#include "../opencctv/util/serialization/gpb/ProtoBuf.hpp"
 
 namespace analytic {
 
@@ -34,10 +33,12 @@ private:
 	int _iServerId;
     std::string _sAnalyticServerIp;
 	zmq::socket_t* _pSocket;
+    size_t _remoteQueueSize;
 	std::map<unsigned int, AnalyticData*> _mAnalyticDatas; // Key is analytic instance id, Value is analytic data
     bool startAnalyticInstance(unsigned int iAnalyticInstanceId, const std::string& sAnalyticPluginDirLocation, const std::string& sAnalyticPluginFilename, std::string& sAnalyticQueueInAddress, std::string& sAnalyticQueueOutAddress);
     bool startAnalyticInstanceWrapper(std::vector<opencctv::dto::Stream>& vStreams);
     bool removeAnalyticData(unsigned int iAnalyticInstanceId);
+    opencctv::util::Config *_pConfig;
 
 public:
 	AnalyticServer(const int& analyticServerId, const std::string& sAnalyticServerIp, const std::string& sAnalyticServerPort);
