@@ -3,7 +3,8 @@
 
 namespace opencctv {
 
-Process::Process() {
+Process::Process()
+{
 	_pReadStream = NULL;
 	_pid = 0;
 }
