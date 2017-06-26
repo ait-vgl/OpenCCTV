@@ -1,0 +1,2 @@
+module ResultsAppConnectorsHelper
+end

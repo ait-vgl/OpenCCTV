@@ -1,0 +1,1 @@
+json.array! @results_app_connector_files, partial: 'results_app_connector_files/results_app_connector_file', as: :results_app_connector_file

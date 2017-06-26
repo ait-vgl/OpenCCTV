@@ -1,0 +1,1 @@
+json.partial! "results_app_input_files/results_app_input_file", results_app_input_file: @results_app_input_file

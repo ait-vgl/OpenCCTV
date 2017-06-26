@@ -1,0 +1,12 @@
+<div class="container">
+  <ol class="breadcrumb">
+    <li><%= link_to 'Home', root_path %></li>
+    <li><%= link_to 'Results application connectors', results_app_connectors_path %></li>
+    <li><%= link_to 'Results application connector', results_app_connector_path(@results_app_connector) %></li>
+    <li class="active">Results application connector input file</li>
+  </ol>
+</div>
+
+<%= render 'results_app_connectors/info' %>
+
+<%= render 'info' %>

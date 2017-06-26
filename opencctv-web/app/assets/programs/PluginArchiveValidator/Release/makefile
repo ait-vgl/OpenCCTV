@@ -6,7 +6,8 @@ BASE 		:= ../src/
 O		:= ${BASE}opencctv/
 O_UTIL		:= ${O}util/
 
-LibVGL		:= ~/workspace/vgl/libVGL/
+#LibVGL		:= ~/workspace/vgl/libVGL/
+LibVGL		:= /usr/local/opencctv/libVGL_bin/
 
 
 # Build tools and flags
@@ -38,10 +39,14 @@ Other_L		:= ${O}Exception.o ${O_UTIL}Unzipper.o ${O_UTIL}Util.o ${O_UTIL}SharedL
 
 $(NAME)		: ${BASE}${NAME}.o ${Other_L}
 	$(LD) $(LDFLAGS) -o $@ $^ $(LIBS)
+	@echo ' '
+	@echo 'Finished building target: $(NAME)'
+	@echo ' '
 	
-ProjectIncludes := /*.h	
-%.o 		: %.cpp ${ProjectIncludes}
+ProjectIncludes := /*.hpp
+%.o 		: %.cpp ${ProjectIncludes }
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c -o $@ $<
+	@echo ' '
 
 #Clean
 DIRS := . $(shell find $(BASE) -type d)
@@ -50,3 +55,10 @@ GARBAGE_PATTERNS := *.o
 GARBAGE := $(foreach DIR,$(DIRS),$(addprefix $(DIR)/,$(GARBAGE_PATTERNS)))	
 clean	:
 	rm -rf $(GARBAGE) $(NAME)
+	
+#Clean only the object files	
+clean_obj : 
+	@echo ' '
+	@echo 'Cleaning object files ..... '
+	rm -rf $(GARBAGE)
+	@echo ' '

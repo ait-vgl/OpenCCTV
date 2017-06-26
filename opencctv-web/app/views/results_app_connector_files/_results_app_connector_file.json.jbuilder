@@ -1,0 +1,2 @@
+json.extract! results_app_connector_file, :id, :name, :required, :description, :results_app_connector_id, :created_at, :updated_at
+json.url results_app_connector_file_url(results_app_connector_file, format: :json)

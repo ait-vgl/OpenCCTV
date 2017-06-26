@@ -1,0 +1,29 @@
+<%= form_for(@results_app_input_file) do |f| %>
+  <% if @results_app_input_file.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@results_app_input_file.errors.count, "error") %> prohibited this results_app_input_file from being saved:</h2>
+
+      <ul>
+      <% @results_app_input_file.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :results_app_id %><br>
+    <%= f.text_field :results_app_id %>
+  </div>
+  <div class="field">
+    <%= f.label :results_app_connector_file_id %><br>
+    <%= f.text_field :results_app_connector_file_id %>
+  </div>
+  <div class="field">
+    <%= f.label :filename %><br>
+    <%= f.text_field :filename %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

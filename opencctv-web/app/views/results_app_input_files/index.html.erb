@@ -1,0 +1,29 @@
+<h1>Listing results_app_input_files</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Results app</th>
+      <th>Results app connector file</th>
+      <th>Filename</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @results_app_input_files.each do |results_app_input_file| %>
+      <tr>
+        <td><%= results_app_input_file.results_app %></td>
+        <td><%= results_app_input_file.results_app_connector_file %></td>
+        <td><%= results_app_input_file.filename %></td>
+        <td><%= link_to 'Show', results_app_input_file %></td>
+        <td><%= link_to 'Edit', edit_results_app_input_file_path(results_app_input_file) %></td>
+        <td><%= link_to 'Destroy', results_app_input_file, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Results app input file', new_results_app_input_file_path %>

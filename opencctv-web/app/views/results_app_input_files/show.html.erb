@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Results app:</strong>
+  <%= @results_app_input_file.results_app %>
+</p>
+
+<p>
+  <strong>Results app connector file:</strong>
+  <%= @results_app_input_file.results_app_connector_file %>
+</p>
+
+<p>
+  <strong>Filename:</strong>
+  <%= @results_app_input_file.filename %>
+</p>
+
+<%= link_to 'Edit', edit_results_app_input_file_path(@results_app_input_file) %> |
+<%= link_to 'Back', results_app_input_files_path %>

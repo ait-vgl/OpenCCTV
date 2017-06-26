@@ -1,0 +1,18 @@
+<%#= render 'form' %>
+
+<%#= link_to 'Show', @results_app %> |
+<%#= link_to 'Back', results_apps_path %>
+
+
+<div class="container">
+  <ol class="breadcrumb">
+    <li><%= link_to 'Home', root_path %></li>
+    <li><%= link_to 'Results applications', results_apps_path %></li>
+    <li class="active">Edit results applications</li>
+  </ol>
+</div>
+
+<div class="container">
+  <h1>Edit results applications information</h1>
+  <%= render 'form' %>
+</div>

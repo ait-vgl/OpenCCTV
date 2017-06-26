@@ -1,7 +1,7 @@
 <h1>
   VMS information
   <% if isOrganization? %>
-      <a href="<%= edit_group_user_vms_path(params[:group_user_id], @vms) %>" class="btn btn-warning"><span class="glyphicon glyphicon-pencil"></span>
+      <a href="<%= edit_group_user_vms_path(params[:group_user_id], @results_app) %>" class="btn btn-warning"><span class="glyphicon glyphicon-pencil"></span>
         Edit</a>
   <% else %>
       <a href="<%= edit_vms_path(@vms) %>" class="btn btn-warning"><span class="glyphicon glyphicon-pencil"></span> Edit</a>

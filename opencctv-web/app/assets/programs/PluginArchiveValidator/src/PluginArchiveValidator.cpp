@@ -5,25 +5,30 @@
 #include "opencctv/PluginLoader.hpp"
 #include "opencctv/api/VmsConnector.hpp"
 #include "analytic/api/Analytic.hpp"
+#include "result/api/ResultsAppConnector.hpp"
 #include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
 
 const std::string S_PLUGIN_TYPE_VMS = "vms";
 const std::string S_PLUGIN_TYPE_ANALYTIC = "analytic";
+const std::string S_PLUGIN_TYPE_RESULT_APP = "results_app";
 
 void appendHtmlTitle(const std::string& sTitle, std::stringstream& ss)
 {
 	ss << "<strong>" << sTitle << "</strong>";
 }
 
-std::string generatePluginValidatorOutput(bool bVerified, const std::string& sHtmlOutput, const std::string& sAnalyticInputs, const std::string& sAnalyticConfigs)
+std::string generatePluginValidatorOutput(bool bVerified, const std::string& sHtmlOutput,
+		const std::string& sAnalyticInputs, const std::string& sAnalyticConfigs,
+		const std::string& sResultsAppFiles)
 {
 	std::stringstream ss;
 	ss << "<pluginvalidatorreply>";
 		ss << "<verified>" << bVerified << "</verified>";
 		ss << "<html>" << sHtmlOutput << "</html>";
 		ss << "<analytic>" << sAnalyticConfigs << sAnalyticInputs << "</analytic>";
+		ss << "<result>" << sResultsAppFiles << "</result>";
 	ss << "</pluginvalidatorreply>";
 	return ss.str();
 }
@@ -57,6 +62,7 @@ int main(int argc, char* argv[])
 	std::stringstream ssHtmlOutput;
 	bool bVerified = false;
 	std::string sAnalyticInputs;
+	std::string sResultsAppFiles;
 
 	opencctv::util::Unzipper unzipper(sLocation, sZipFilename, sUnzipDirName);
 	bool bUnzipped = false;
@@ -76,6 +82,11 @@ int main(int argc, char* argv[])
 		else if(spluginType.compare(S_PLUGIN_TYPE_VMS) == 0)
 		{
 			ssCommand << "/usr/local/opencctv/vms_connectors/" << sUnzipDirName;
+			int systemRet = system(ssCommand.str().c_str());
+		}
+		else if(spluginType.compare(S_PLUGIN_TYPE_RESULT_APP) == 0)
+		{
+			ssCommand << "/usr/local/opencctv/results_app_connectors/" << sUnzipDirName;
 			int systemRet = system(ssCommand.str().c_str());
 		}
 	}
@@ -150,6 +161,27 @@ int main(int argc, char* argv[])
 				ssHtmlOutput << "<p>" << e.what() << "</p>";
 			}
 		}
+		else if(spluginType.compare(S_PLUGIN_TYPE_RESULT_APP) == 0)
+		{
+			opencctv::PluginLoader<result::api::ResultsAppConnector> loader;
+			try
+			{
+				loader.loadPlugin(sSharedLibPath);
+				result::api::ResultsAppConnector* resultsAppConn = loader.createPluginInstance();
+				sResultsAppFiles = resultsAppConn->getInputFileList();
+				loader.deletePluginInstance(resultsAppConn);
+				appendHtmlTitle("Results application connector plugin verified!", ssHtmlOutput);
+				bVerified = true;
+
+				/*std::cout << generatePluginValidatorOutput(bVerified, ssHtmlOutput.str(), sAnalyticInputs,
+							sAnalyticConfigs, sResultsAppFiles) << std::endl;*/
+			}
+			catch(std::exception &e)
+			{
+				appendHtmlTitle("Results application connector plugin error:", ssHtmlOutput);
+				ssHtmlOutput << "<p>" << e.what() << "</p>";
+			}
+		}
 		else
 		{
 			return -1;
@@ -160,5 +192,6 @@ int main(int argc, char* argv[])
 		appendHtmlTitle("Shared Library not found. Invalid plugin archive!", ssHtmlOutput);
 	}
 	unzipper.removeUnzippedFiles();
-	std::cout << generatePluginValidatorOutput(bVerified, ssHtmlOutput.str(), sAnalyticInputs, sAnalyticConfigs) << std::endl;
+	std::cout << generatePluginValidatorOutput(bVerified, ssHtmlOutput.str(), sAnalyticInputs,
+			sAnalyticConfigs, sResultsAppFiles) << std::endl;
 }

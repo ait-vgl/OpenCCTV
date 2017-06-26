@@ -1,0 +1,1 @@
+json.partial! "results_apps/results_app", results_app: @results_app

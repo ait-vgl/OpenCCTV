@@ -1,0 +1,1 @@
+json.partial! "results_app_connector_files/results_app_connector_file", results_app_connector_file: @results_app_connector_file

@@ -1,0 +1,31 @@
+<h1>Listing results_app_connector_files</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Required</th>
+      <th>Description</th>
+      <th>Results app connector</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @results_app_connector_files.each do |results_app_connector_file| %>
+      <tr>
+        <td><%= results_app_connector_file.name %></td>
+        <td><%= results_app_connector_file.required %></td>
+        <td><%= results_app_connector_file.description %></td>
+        <td><%= results_app_connector_file.results_app_connector %></td>
+        <td><%= link_to 'Show', results_app_connector_file %></td>
+        <td><%= link_to 'Edit', edit_results_app_connector_file_path(results_app_connector_file) %></td>
+        <td><%= link_to 'Destroy', results_app_connector_file, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Results app connector file', new_results_app_connector_file_path %>

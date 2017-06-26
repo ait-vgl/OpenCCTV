@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170316072105) do
+ActiveRecord::Schema.define(version: 20170625235902) do
 
   create_table "analytic_configs", force: true do |t|
     t.string   "name"
@@ -250,6 +250,63 @@ ActiveRecord::Schema.define(version: 20170316072105) do
   add_index "results", ["analytic_instance_id"], name: "index_results_on_analytic_instance_id", using: :btree
   add_index "results", ["camera_id"], name: "index_results_on_camera_id", using: :btree
   add_index "results", ["vms_id"], name: "index_results_on_vms_id", using: :btree
+
+  create_table "results_app_connector_files", force: true do |t|
+    t.string   "name"
+    t.boolean  "required"
+    t.text     "description"
+    t.integer  "results_app_connector_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "editable"
+  end
+
+  add_index "results_app_connector_files", ["results_app_connector_id"], name: "index_results_app_connector_files_on_results_app_connector_id", using: :btree
+
+  create_table "results_app_connectors", force: true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.string   "filename"
+    t.boolean  "verified"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.text     "log"
+  end
+
+  create_table "results_app_input_files", force: true do |t|
+    t.integer  "results_app_id"
+    t.integer  "results_app_connector_file_id"
+    t.string   "filename"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "results_app_input_files", ["results_app_connector_file_id"], name: "index_results_app_input_files_on_results_app_connector_file_id", using: :btree
+  add_index "results_app_input_files", ["results_app_id"], name: "index_results_app_input_files_on_results_app_id", using: :btree
+
+  create_table "results_app_parameters", force: true do |t|
+    t.string   "name"
+    t.string   "value"
+    t.integer  "results_app_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "results_app_parameters", ["results_app_id"], name: "index_results_app_parameters_on_results_app_id", using: :btree
+
+  create_table "results_apps", force: true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.integer  "results_app_connector_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "user_id"
+    t.integer  "group_user_id"
+  end
+
+  add_index "results_apps", ["group_user_id"], name: "index_results_apps_on_group_user_id", using: :btree
+  add_index "results_apps", ["results_app_connector_id"], name: "index_results_apps_on_results_app_connector_id", using: :btree
+  add_index "results_apps", ["user_id"], name: "index_results_apps_on_user_id", using: :btree
 
   create_table "roles", force: true do |t|
     t.string   "title"

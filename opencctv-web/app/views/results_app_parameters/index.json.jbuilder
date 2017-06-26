@@ -1,0 +1,1 @@
+json.array! @results_app_parameters, partial: 'results_app_parameters/results_app_parameter', as: :results_app_parameter

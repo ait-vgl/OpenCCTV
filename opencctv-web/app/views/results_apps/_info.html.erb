@@ -1,0 +1,21 @@
+<div class="container">
+  <h1>
+    Results application information
+  </h1>
+  <p>
+    <strong>Results application ID:</strong>
+    <%= @results_app.id %>
+  </p>
+  <p>
+    <strong>Name:</strong>
+    <%=@results_app.name%>
+  </p>
+  <p>
+    <strong>Connector Type:</strong>
+    <%= @results_app.results_app_connector.name %>
+  </p>
+  <p>
+    <strong>Description:</strong>
+    <%= @results_app.description %>
+  </p>
+</div>

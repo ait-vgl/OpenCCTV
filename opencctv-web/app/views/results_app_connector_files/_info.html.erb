@@ -1,0 +1,40 @@
+<div class="container">
+
+  <h3>Results application connector input file information:</h3>
+
+  <div class="panel-body">
+    <div class="media">
+      <div class="media-body col-sm-12">
+        <p>
+          <strong>Name:</strong>
+          <%= @results_app_connector_file.name %>
+        </p>
+        <p>
+          <strong>Required:</strong>
+          <%= @results_app_connector_file.required %>
+        </p>
+        <p>
+          <strong>Editable:</strong>
+          <%= @results_app_connector_file.editable %>
+        </p>
+        <!--<p>
+          <strong>Results app connector:</strong>
+          <%# @results_app_connector_file.results_app_connector.name %>
+        </p>-->
+        <p>
+          <strong>Description:</strong>
+          <%= @results_app_connector_file.description %>
+        </p>
+        <p>
+          <%= link_to 'Input File List', results_app_connector_path(@results_app_connector), class: 'btn btn-xs btn-default'%> |
+          <%# link_to 'Edit', edit_results_app_connector_file_path(@results_app_connector_file), class: 'btn btn-xs btn-warning' %>
+          <% if @results_app_connector_file.editable %>
+            <%= link_to 'Edit', edit_results_app_connector_results_app_connector_file_path(@results_app_connector, @results_app_connector_file), :class => "btn btn-xs btn-warning" %>
+          <%else%>
+              <%= link_to 'Edit', '#', :class => "btn btn-xs btn-warning", :onclick => 'alert("This input file is not editable!")'%>
+          <% end %>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

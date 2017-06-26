@@ -1,0 +1,13 @@
+<div class="container">
+  <ol class="breadcrumb">
+    <li><%= link_to 'Home', root_path %></li>
+    <li><%= link_to 'Results application connectors', results_app_connectors_path%></li>
+    <li><%= link_to 'Results application connector', results_app_connector_path(@results_app_connector)%></li>
+    <li class="active">Edit results application connector input file</li>
+  </ol>
+</div>
+
+<div class="container">
+  <h1>Edit input file details</h1>
+  <%= render 'form' %>
+</div>

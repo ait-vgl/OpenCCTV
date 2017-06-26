@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  results_app_id: 
+  results_app_connector_file_id: 
+  filename: MyString
+
+two:
+  results_app_id: 
+  results_app_connector_file_id: 
+  filename: MyString

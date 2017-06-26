@@ -1,0 +1,33 @@
+<div class="container">
+  <ol class="breadcrumb">
+    <li><%= link_to 'Home', root_path %></li>
+    <li><%= link_to 'Results Applications', results_apps_path %></li>
+    <li><%= link_to 'Results Application', results_app_path(@results_app_parameter) %></li>
+    <li class="active">Results application input parameter</li>
+  </ol>
+</div>
+
+<%= render 'analytic_instances/info' %>
+
+<%= render 'info' %>
+============
+
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @results_app_parameter.name %>
+</p>
+
+<p>
+  <strong>Value:</strong>
+  <%= @results_app_parameter.value %>
+</p>
+
+<p>
+  <strong>Results app:</strong>
+  <%= @results_app_parameter.results_app %>
+</p>
+
+<%= link_to 'Edit', edit_results_app_parameter_path(@results_app_parameter) %> |
+<%= link_to 'Back', results_app_parameters_path %>

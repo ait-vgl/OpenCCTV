@@ -1,0 +1,1 @@
+json.array! @results_app_input_files, partial: 'results_app_input_files/results_app_input_file', as: :results_app_input_file

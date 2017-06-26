@@ -1,0 +1,69 @@
+<div class="container">
+  <ol class="breadcrumb">
+    <li><%= link_to 'Home', root_path %></li>
+    <li><%= link_to 'Results application connectors', results_app_connectors_path %></li>
+    <li class="active">Results application connector</li>
+  </ol>
+</div>
+
+<div class="container">
+  <%= render 'info' %>
+
+  <p>
+    <a href="<%=results_app_connector_download_path(@results_app_connector.filename)%>" class="btn btn-xs btn-primary"><span class="glyphicon glyphicon-download-alt"></span> Download the Archive</a>
+  </p>
+</div>
+
+<div class="container">
+  <p>
+    <a href="<%= new_results_app_connector_results_app_connector_file_path(@results_app_connector)%>"
+       class="btn btn-success"> <span class="glyphicon glyphicon-plus"></span> Add New Input File Manually </a>
+  </p>
+
+  <%if @results_app_connector.results_app_connector_files.empty?%>
+      <div class="alert alert-warning">
+        Currently no input files are registered with the results application connector.
+      </div>
+  <%else%>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4>Input Files</h4>
+        </div>
+        <div class="media">
+          <table class="table table-hover">
+            <thead>
+            <tr>
+              <th>#</th>
+              <th>Name</th>
+              <th>Required</th>
+              <th>Description</th>
+              <th> </th>
+              <th colspan="3"></th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <% i = 1 %>
+            <% @results_app_connector.results_app_connector_files.each do |input_file|%>
+                <tr>
+                  <td><%= i %></td>
+                  <td><%= input_file.name %></td>
+                  <td><%= input_file.required %></td>
+                  <td><%= input_file.description %></td>
+                  <td><%= link_to 'Show', results_app_connector_results_app_connector_file_path(@results_app_connector,input_file), :class => "btn btn-xs btn-default"%></td>
+                  <% if input_file.editable %>
+                      <td><%= link_to 'Edit', edit_results_app_connector_results_app_connector_file_path(@results_app_connector, input_file), :class => "btn btn-xs btn-warning" %></td>
+                      <td><%= link_to 'Destroy', results_app_connector_results_app_connector_file_path(@results_app_connector, input_file), method: :delete, :class => "btn btn-xs btn-danger", data: { confirm: 'Are you sure?' } %></td>
+                  <%else%>
+                      <td><%= link_to 'Edit', '#', :class => "btn btn-xs btn-warning", :onclick => 'alert("This input file is not editable!")'%></td>
+                      <td><%= link_to 'Destroy', '#', :class => "btn btn-xs btn-danger", :onclick => 'alert("This input file is not deletable!")'%></td>
+                  <% end %>
+                </tr>
+                <% i = i + 1 %>
+            <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+  <%end%>
+</div>

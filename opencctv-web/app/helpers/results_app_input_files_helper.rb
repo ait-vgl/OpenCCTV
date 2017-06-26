@@ -1,0 +1,2 @@
+module ResultsAppInputFilesHelper
+end

@@ -1,0 +1,1 @@
+json.array! @results_app_connectors, partial: 'results_app_connectors/results_app_connector', as: :results_app_connector

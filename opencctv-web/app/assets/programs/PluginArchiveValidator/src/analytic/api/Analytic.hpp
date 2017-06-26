@@ -4,7 +4,7 @@
 #include "../ConcurrentQueue.hpp"
 #include <string>
 #include <opencv2/core/core.hpp>
-#include "FrameGrabber.h"
+//#include "FrameGrabber.h"
 #include <map>
 
 namespace analytic {
@@ -25,7 +25,7 @@ class Analytic
 public:
 	Analytic(){}
 	//Load config, module. Check before starting
-	virtual bool init(const std::string& sAnalyticPluginDirLocation, const std::map<std::string,FileStorage>& mConfigFiles, const std::map<std::string,FrameGrabber*>& mFrameGrabbers) = 0;
+	//virtual bool init(const std::string& sAnalyticPluginDirLocation, const std::map<std::string,FileStorage>& mConfigFiles, const std::map<std::string,FrameGrabber*>& mFrameGrabbers) = 0;
 	
 	//Start process
 	virtual void process(analytic::ConcurrentQueue<analytic::api::Image_t>* pOutputQueue) = 0;

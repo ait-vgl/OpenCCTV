@@ -1,0 +1,29 @@
+<h1>Listing results_app_parameters</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Value</th>
+      <th>Results app</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @results_app_parameters.each do |results_app_parameter| %>
+      <tr>
+        <td><%= results_app_parameter.name %></td>
+        <td><%= results_app_parameter.value %></td>
+        <td><%= results_app_parameter.results_app %></td>
+        <td><%= link_to 'Show', results_app_parameter %></td>
+        <td><%= link_to 'Edit', edit_results_app_parameter_path(results_app_parameter) %></td>
+        <td><%= link_to 'Destroy', results_app_parameter, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Results app parameter', new_results_app_parameter_path %>

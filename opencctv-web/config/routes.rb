@@ -1,5 +1,15 @@
 Rails.application.routes.draw do
 
+  resources :results_app_input_files
+
+  resources :results_app_connector_files
+
+  resources :results_app_parameters
+
+  resources :results_apps
+
+  resources :results_app_connectors
+
   resources :results
 
   resources :analytic_servers
@@ -73,6 +83,16 @@ end
     end
   end
 
+  resources :results_apps do
+    resources :results_app_parameters do
+    end
+  end
+
+  resources :results_app_connectors do
+    resources :results_app_connector_files do
+    end
+  end
+
   # Overide rote of Vms
   #get '/vmses/:id/:group_user_id', to: "vmses#show", as: 'vms_org_show'
 
@@ -138,6 +158,8 @@ end
   get '/download/vms_connector/:filename' => 'download#vms_connector', as: :vms_connector_download
 
   get '/download/analytic/:filename' => 'download#analytic', as: :analytic_download
+
+  get '/download/results_app_connector/:filename' => 'download#results_app_connector', as: :results_app_connector_download
 
   get '/open_cctv_servers/:id/start' => 'open_cctv_servers#start_server', as: :open_cctv_servers_start
 
