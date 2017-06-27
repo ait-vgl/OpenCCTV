@@ -8,10 +8,25 @@
 
 <%= render 'info' %>
 
+<%
+  input_file_ids = @results_app.results_app_input_files.select(:results_app_connector_file_id)
+  remainig_files = @results_app.results_app_connector.results_app_connector_files.where.not(id: input_file_ids)
+
+=begin
+  file_ids.each do |file|
+    puts file.id
+  end
+=end
+%>
+
+
+
 <div class="container">
   <%= link_to 'Edit', edit_results_app_path(@results_app), :class => "btn btn-warning" %>
-  <%= link_to 'Add Input File',new_results_app_input_file_path(@results_app), :class => "btn btn-success"%>
-  <%= link_to 'Add Input Parameter',new_results_app_input_file_path(@results_app), :class => "btn btn-success"%>
+  <% if !remainig_files.empty? %>
+    <%= link_to 'Add Input File',new_results_app_results_app_input_file_path(@results_app), :class => "btn btn-success"%>
+  <%end%>
+  <%# link_to 'Add Input Parameter',new_results_app_input_file_path(@results_app), :class => "btn btn-success"%>
 </div>
 
 <div class="container">
@@ -23,6 +38,7 @@
           Currently no input parametaers are registered with this results application.
         </div>
     <%else%>
+    <!--TODO List the added parameter values-->
     <%end%>
   </p>
 </div>
@@ -60,9 +76,9 @@
                     <td><%= i %></td>
                     <td><%= input_file.results_app_connector_file.name%></td>
                     <td><%= input_file.filename%></td>
-                    <td><%= link_to 'Show', '#', class: "btn btn-xs btn-default"%></td>
-                    <td><%= link_to 'Edit', '#', class: "btn btn-xs btn-warning" %>
-                    <td><%= link_to 'Destroy', '#', method: :delete, class: "btn btn-xs btn-danger", data: { confirm: 'Are you sure?' } %></td>
+                    <td><%= link_to 'Show', results_app_results_app_input_file_path(@results_app,input_file), class: "btn btn-xs btn-default"%></td>
+                    <td><%= link_to 'Edit', edit_results_app_results_app_input_file_path(@results_app,input_file), class: "btn btn-xs btn-warning" %>
+                    <td><%= link_to 'Destroy', results_app_results_app_input_file_path(@results_app,input_file), method: :delete, class: "btn btn-xs btn-danger", data: { confirm: 'Are you sure?' } %></td>
                   </tr>
                   <% i = i + 1 %>
               <% end %>

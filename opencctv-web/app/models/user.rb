@@ -12,6 +12,8 @@ class User < ActiveRecord::Base
   has_many :analytic_instances, dependent: :destroy
   has_many :notifications, dependent: :destroy
 
+  has_many :results_apps
+
   belongs_to :role
 
   # Include default devise modules. Others available are:

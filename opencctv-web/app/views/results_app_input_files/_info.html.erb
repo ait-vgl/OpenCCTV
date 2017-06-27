@@ -1,0 +1,24 @@
+<div class="container">
+  <h2>
+    Input file information
+  </h2>
+  <p>
+    <strong>File type:</strong>
+    <%= @results_app_input_file.results_app_connector_file.name %>
+  </p>
+
+  <p>
+    <strong>Description:</strong>
+    <%= @results_app_input_file.results_app_connector_file.description %>
+  </p>
+
+  <p>
+    <strong>Uploaded filename:</strong>
+    <%= @results_app_input_file.filename %>
+  </p>
+
+  <p>
+    <%= link_to 'Input file List', results_app_path(@results_app), class: 'btn btn-xs btn-default'%> |
+    <%= link_to 'Edit', edit_results_app_results_app_input_file_path(@results_app,@results_app_input_file), class: 'btn btn-xs btn-warning' %>
+  </p>
+</div>

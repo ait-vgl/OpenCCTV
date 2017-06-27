@@ -63,15 +63,15 @@ class ResultsAppConnectorFilesController < ApplicationController
   end
 
   private
-  def set_results_app_connector_file
+    def set_results_app_connector_file
       @results_app_connector_file = ResultsAppConnectorFile.find(params[:id])
-  end
+    end
 
-  def set_results_app_connector
-    @results_app_connector = ResultsAppConnector.find(params[:results_app_connector_id])
-  end
+    def set_results_app_connector
+      @results_app_connector = ResultsAppConnector.find(params[:results_app_connector_id])
+    end
 
-  def results_app_connector_file_params
+    def results_app_connector_file_params
       params.require(:results_app_connector_file).permit(:name, :required, :description, :editable, :results_app_connector_id)
-  end
+    end
 end

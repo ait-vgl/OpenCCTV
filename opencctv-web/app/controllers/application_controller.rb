@@ -75,6 +75,10 @@ class ApplicationController < ActionController::Base
     session[:org_id] = org_id
   end
 
+  def results_app_input_file_dir
+    return '/usr/local/opencctv/results_app_input_files'
+  end
+
   ROLE_OPENCCTV_ADMIN = '1'
   ROLE_ORGANIZATION_ADMIN = '2'
   ROLE_RESOURCE_ADMIN = '3'

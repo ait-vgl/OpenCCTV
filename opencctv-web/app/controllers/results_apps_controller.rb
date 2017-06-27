@@ -3,15 +3,9 @@ class ResultsAppsController < ApplicationController
   before_action :setGroupList, only: [:index]
   before_action :set_results_app, only: [:show, :edit, :update, :destroy]
   before_action :set_results_app_connector, only: [:show, :edit, :update]
+  after_action  :set_usable, only: [:create, :update]
 
   respond_to :html
-
-=begin
-  def index
-    @results_apps = ResultsApp.all
-    respond_with(@results_apps)
-  end
-=end
 
   def index
     if isOrganization?
@@ -70,6 +64,10 @@ class ResultsAppsController < ApplicationController
 
     def set_results_app_connector
       @results_app_connector = ResultsApp.find(params[:id]).results_app_connector
+    end
+
+    def set_usable
+      @results_app.set_usable
     end
 
     def setGroupList

@@ -30,6 +30,7 @@
             <th>Name</th>
             <th>Description</th>
             <th>Results App Connector</th>
+            <th>Usable</th>
             <th colspan="3"></th>
           </tr>
           </thead>
@@ -43,6 +44,7 @@
                 <td><%= results_app.name %></td>
                 <td><%= results_app.description %></td>
                 <td><%= results_app.results_app_connector.name%></td>
+                <td><%= results_app.usable ? 'True' : 'False'%></td>
                 <td><%= link_to 'Show', results_app, :class => "btn btn-xs btn-default"  %></td>
                 <td><%= link_to 'Edit', edit_results_app_path(results_app), :class => "btn btn-xs btn-warning"  %></td>
                 <td><%= link_to 'Destroy', results_app, method: :delete, :class => "btn btn-xs btn-danger", data: { confirm: 'Are you sure?' } %></td>

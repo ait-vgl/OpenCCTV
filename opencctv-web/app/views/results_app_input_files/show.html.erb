@@ -1,19 +1,18 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Results app:</strong>
-  <%= @results_app_input_file.results_app %>
-</p>
+<div class="container">
+  <ol class="breadcrumb">
+    <li><%= link_to 'Home', root_path %></li>
+    <li><%= link_to 'Results applications', results_apps_path %></li>
+    <li><%= link_to 'Results application', results_app_path(@results_app) %></li>
+    <li class="active">Results application input file</li>
+  </ol>
+</div>
 
-<p>
-  <strong>Results app connector file:</strong>
-  <%= @results_app_input_file.results_app_connector_file %>
-</p>
+<div class="container">
+  <%= render 'results_apps/info' %>
+  <%= render 'info' %>
+</div>
 
-<p>
-  <strong>Filename:</strong>
-  <%= @results_app_input_file.filename %>
-</p>
-
-<%= link_to 'Edit', edit_results_app_input_file_path(@results_app_input_file) %> |
-<%= link_to 'Back', results_app_input_files_path %>
+<%# link_to 'Edit', edit_results_app_input_file_path(@results_app_input_file) %> |
+<%# link_to 'Back', results_app_input_files_path %>

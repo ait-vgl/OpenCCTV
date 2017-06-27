@@ -1,5 +1,15 @@
-<h1>New results_app_input_file</h1>
+<div class="container">
+  <ol class="breadcrumb">
+    <li><%= link_to 'Home', root_path %></li>
+    <li><%= link_to 'Results applications', results_apps_path %></li>
+    <li><%= link_to 'Results application', results_app_path(@results_app)%></li>
+    <li class="active">Results application input file</li>
+  </ol>
+</div>
 
-<%= render 'form' %>
+<%= render 'results_apps/info' %>
 
-<%= link_to 'Back', results_app_input_files_path %>
+<div class="container">
+  <h2>New results application input file</h2>
+  <%= render 'form' %>
+</div>

@@ -13,7 +13,7 @@ class GroupUser < ActiveRecord::Base
   has_many :analytic_instances, dependent: :destroy
   has_many :notifications, dependent: :destroy
 
-
+  has_many :results_apps
 
   def self.getGroupUserList(org_id, user_id)
     return self.joins(:org_users).where(:org_id => org_id, :org_users => {:user_id => user_id}).pluck(:group_user_id)
@@ -23,7 +23,6 @@ class GroupUser < ActiveRecord::Base
     return self.joins(:org_users).where(:org_id => org_id, :org_users => {:user_id => user_id})
         .select('group_users.id', 'group_users.title')
   end
-
 
   def self.getGroupListPerOrg(org_id)
     return self.where(:org_id => org_id)

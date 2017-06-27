@@ -5,7 +5,6 @@
 app/uploads/vms_connectors/*
 app/assets/images/*
 app/uploads/analytics/*
-app/uploads/results_app_connectors/*
 .idea
 tmp/
 log/

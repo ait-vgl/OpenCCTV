@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170625235902) do
+ActiveRecord::Schema.define(version: 20170627174932) do
 
   create_table "analytic_configs", force: true do |t|
     t.string   "name"
@@ -302,6 +302,7 @@ ActiveRecord::Schema.define(version: 20170625235902) do
     t.datetime "updated_at"
     t.integer  "user_id"
     t.integer  "group_user_id"
+    t.boolean  "usable"
   end
 
   add_index "results_apps", ["group_user_id"], name: "index_results_apps_on_group_user_id", using: :btree

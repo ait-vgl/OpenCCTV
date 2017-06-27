@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  resources :results_app_input_files
+  #resources :results_app_input_files
 
   resources :results_app_connector_files
 
@@ -83,13 +83,18 @@ end
     end
   end
 
-  resources :results_apps do
-    resources :results_app_parameters do
+  resources :results_app_connectors do
+    resources :results_app_connector_files do
     end
   end
 
-  resources :results_app_connectors do
-    resources :results_app_connector_files do
+  resources :results_apps do
+    resources :results_app_input_files do
+    end
+  end
+
+  resources :results_apps do
+    resources :results_app_parameters do
     end
   end
 
