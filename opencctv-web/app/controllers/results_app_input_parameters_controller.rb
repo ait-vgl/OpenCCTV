@@ -15,10 +15,6 @@ class ResultsAppInputParametersController < ApplicationController
   end
 
   def new
-=begin
-    @results_app_input_parameter = ResultsAppInputParameter.new
-    respond_with(@results_app_input_parameter)
-=end
     flash[:alert] = "Results routing may not work properly if the input parameters are not properly configured !"
     @results_app_input_parameter = ResultsAppInputParameter.new
     @results_app_input_parameter.results_app = @results_app
@@ -30,11 +26,6 @@ class ResultsAppInputParametersController < ApplicationController
   end
 
   def create
-=begin
-    @results_app_input_parameter = ResultsAppInputParameter.new(results_app_input_parameter_params)
-    @results_app_input_parameter.save
-    respond_with(@results_app_input_parameter)
-=end
     @results_app_input_parameter = ResultsAppInputParameter.new
     @results_app_input_parameter.results_app = @results_app
 
@@ -57,19 +48,9 @@ class ResultsAppInputParametersController < ApplicationController
   end
 
   def update
-=begin
-    @results_app_input_parameter.update(results_app_input_parameter_params)
-    respond_with(@results_app_input_parameter)
-=end
-    @results_app_input_file.results_app = @results_app
-
-    if params[:results_app_input_parameter][:results_app_connector_parameter_id].present?
-      @results_app_input_parameter.results_app_connector_parameter = ResultsAppConnectorParameter.find(params[:results_app_input_parameter][:results_app_connector_parameter_id])
-    end
-
-    if params[:results_app_input_parameter][:value].present?
-      @results_app_input_parameter.value = params[:results_app_input_parameter][:value]
-    end
+    @results_app_input_parameter.results_app = @results_app
+    @results_app_input_parameter.results_app_connector_parameter = ResultsAppConnectorParameter.find(params[:results_app_input_parameter][:results_app_connector_parameter_id])
+    @results_app_input_parameter.value = params[:results_app_input_parameter][:value]
 
     @results_app_input_parameter.save
     @results_app.set_usable
