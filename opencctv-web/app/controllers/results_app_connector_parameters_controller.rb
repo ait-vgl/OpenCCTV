@@ -23,11 +23,6 @@ class ResultsAppConnectorParametersController < ApplicationController
   end
 
   def create
-=begin
-    @results_app_connector_parameter = ResultsAppConnectorParameter.new(results_app_connector_parameter_params)
-    @results_app_connector_parameter.save
-    respond_with(@results_app_connector_parameter)
-=end
     @results_app_connector_parameter = @results_app_connector.results_app_connector_parameters.create(
         name: params[:results_app_connector_parameter][:name],
         required: params[:results_app_connector_parameter][:required],
@@ -42,10 +37,6 @@ class ResultsAppConnectorParametersController < ApplicationController
   end
 
   def update
-=begin
-    @results_app_connector_parameter.update(results_app_connector_parameter_params)
-    respond_with(@results_app_connector_parameter)
-=end
     if(!@results_app_connector_parameter.results_app_input_parameters.empty?)
       flash[:error] = "There are results applications that are using this input parameter type. Therefore unable to edit details of input parameter #{@results_app_connector_parameter.name}; "
     else
@@ -63,10 +54,6 @@ class ResultsAppConnectorParametersController < ApplicationController
   end
 
   def destroy
-=begin
-    @results_app_connector_parameter.destroy
-    respond_with(@results_app_connector_parameter)
-=end
     if(!@results_app_connector_parameter.results_app_input_parameters.empty?)
       flash[:error] = "There are results applications that are using this input parameter type. Therefore unable to delete the input parameter #{@results_app_connector_parameter.name}; "
     else
