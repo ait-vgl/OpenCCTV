@@ -1,0 +1,44 @@
+<%= form_for(@results_app_input_parameter) do |f| %>
+  <% if @results_app_input_parameter.errors.any? %>
+    <div id="error_explanation", class="alert alert-danger" role="alert">
+      <h2><%= pluralize(@results_app_input_parameter.errors.count, "error") %> prohibited this results_app_input_parameter from being saved:</h2>
+
+      <ul>
+      <% @results_app_input_parameter.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+    <%
+      input_param_ids = @results_app.results_app_input_parameters.select(:results_app_connector_parameter_id)
+      remaining_params = @results_app.results_app_connector.results_app_connector_parameters.where.not(id: input_param_ids)
+      if !@results_app_input_parameter.new_record?
+        remaining_params.push(@results_app_input_parameter.results_app_connector_parameter)
+      end
+    %>
+
+    <!--Form fields-->
+  <!--<div class="field">
+    <%# f.label :results_app_id %><br>
+    <%# f.text_field :results_app_id %>
+  </div>-->
+  <div class="field">
+    <%= f.label :results_app_connector_parameter_id, "Results application input parameter type*"%><br>
+    <%# f.text_field :results_app_connector_parameter_id %>
+    <%= f.collection_select( :results_app_connector_parameter_id, remaining_params, :id, :name, {prompt: 'Select Input Parameter Type'})%>
+  </div>
+  <div class="field">
+    <%= f.label :value %><br>
+    <%= f.text_field :value %>
+  </div>
+
+  <!--Submit button-->
+  <p>
+  <div class="actions">
+    <%= f.submit class: "btn btn-success btn-mini"%>
+    <%= link_to 'Cancel', @results_app, :class => "btn btn-danger" %>
+    </div>
+  </p>
+<% end %> <!--Form ends-->

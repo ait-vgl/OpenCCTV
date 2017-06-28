@@ -4,8 +4,7 @@ class ResultsApp < ActiveRecord::Base
   belongs_to :group_user
 
   has_many :results_app_input_files, dependent: :destroy
-
-  has_many :results_app_parameters, dependent: :destroy
+  has_many :results_app_input_parameters, dependent: :destroy
 
   validates :name, presence: true
   validates :results_app_connector_id, presence: true
@@ -22,9 +21,11 @@ class ResultsApp < ActiveRecord::Base
     end
 =end
 
-    # TODO Similarly check all the required parameters are set
+    input_param_ids = self.results_app_input_parameters.select(:results_app_connector_parameter_id)
+    required_params = self.results_app_connector.results_app_connector_parameters.where(required: true)
+    remaining_params = required_params.where.not(id: input_param_ids)
 
-    self.usable =  remaining_files.empty?
+    self.usable =  remaining_files.empty? && remaining_params.empty?
     self.save
   end
 

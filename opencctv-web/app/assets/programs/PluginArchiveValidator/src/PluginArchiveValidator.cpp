@@ -21,14 +21,14 @@ void appendHtmlTitle(const std::string& sTitle, std::stringstream& ss)
 
 std::string generatePluginValidatorOutput(bool bVerified, const std::string& sHtmlOutput,
 		const std::string& sAnalyticInputs, const std::string& sAnalyticConfigs,
-		const std::string& sResultsAppFiles)
+		const std::string& sResultsAppFiles, const std::string& sResultsAppParms)
 {
 	std::stringstream ss;
 	ss << "<pluginvalidatorreply>";
 		ss << "<verified>" << bVerified << "</verified>";
 		ss << "<html>" << sHtmlOutput << "</html>";
 		ss << "<analytic>" << sAnalyticConfigs << sAnalyticInputs << "</analytic>";
-		ss << "<result>" << sResultsAppFiles << "</result>";
+		ss << "<result>" << sResultsAppFiles << sResultsAppParms << "</result>";
 	ss << "</pluginvalidatorreply>";
 	return ss.str();
 }
@@ -63,6 +63,7 @@ int main(int argc, char* argv[])
 	bool bVerified = false;
 	std::string sAnalyticInputs;
 	std::string sResultsAppFiles;
+	std::string sResultsAppParms;
 
 	opencctv::util::Unzipper unzipper(sLocation, sZipFilename, sUnzipDirName);
 	bool bUnzipped = false;
@@ -169,6 +170,7 @@ int main(int argc, char* argv[])
 				loader.loadPlugin(sSharedLibPath);
 				result::api::ResultsAppConnector* resultsAppConn = loader.createPluginInstance();
 				sResultsAppFiles = resultsAppConn->getInputFileList();
+				sResultsAppParms = resultsAppConn->getInputParameterList();
 				loader.deletePluginInstance(resultsAppConn);
 				appendHtmlTitle("Results application connector plugin verified!", ssHtmlOutput);
 				bVerified = true;
@@ -193,5 +195,5 @@ int main(int argc, char* argv[])
 	}
 	unzipper.removeUnzippedFiles();
 	std::cout << generatePluginValidatorOutput(bVerified, ssHtmlOutput.str(), sAnalyticInputs,
-			sAnalyticConfigs, sResultsAppFiles) << std::endl;
+			sAnalyticConfigs, sResultsAppFiles, sResultsAppParms) << std::endl;
 }

@@ -1,0 +1,35 @@
+<div class="container">
+
+  <h3>Results application connector input parameter information:</h3>
+
+  <div class="panel-body">
+    <div class="media">
+      <div class="media-body col-sm-12">
+        <p>
+          <strong>Name:</strong>
+          <%= @results_app_connector_parameter.name %>
+        </p>
+        <p>
+          <strong>Required:</strong>
+          <%= @results_app_connector_parameter.required %>
+        </p>
+        <p>
+          <strong>Editable:</strong>
+          <%= @results_app_connector_parameter.editable %>
+        </p>
+        <p>
+          <strong>Description:</strong>
+          <%= @results_app_connector_parameter.description %>
+        </p>
+        <p>
+          <%= link_to 'Input Parameter List', results_app_connector_path(@results_app_connector), class: 'btn btn-xs btn-default'%> |
+          <% if @results_app_connector_parameter.editable %>
+            <%= link_to 'Edit', edit_results_app_connector_results_app_connector_parameter_path(@results_app_connector, @results_app_connector_parameter), :class => "btn btn-xs btn-warning" %>
+          <%else%>
+            <%= link_to 'Edit', '#', :class => "btn btn-xs btn-warning", :onclick => 'alert("This input parameter is not editable!")'%>
+          <% end %>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

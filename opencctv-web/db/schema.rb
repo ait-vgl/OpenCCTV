@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170627174932) do
+ActiveRecord::Schema.define(version: 20170628054529) do
 
   create_table "analytic_configs", force: true do |t|
     t.string   "name"
@@ -263,6 +263,18 @@ ActiveRecord::Schema.define(version: 20170627174932) do
 
   add_index "results_app_connector_files", ["results_app_connector_id"], name: "index_results_app_connector_files_on_results_app_connector_id", using: :btree
 
+  create_table "results_app_connector_parameters", force: true do |t|
+    t.string   "name"
+    t.boolean  "required"
+    t.boolean  "editable"
+    t.text     "description"
+    t.integer  "results_app_connector_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "results_app_connector_parameters", ["results_app_connector_id"], name: "index_r_app_connector_params_on_r_app_connector_id", using: :btree
+
   create_table "results_app_connectors", force: true do |t|
     t.string   "name"
     t.text     "description"
@@ -284,15 +296,16 @@ ActiveRecord::Schema.define(version: 20170627174932) do
   add_index "results_app_input_files", ["results_app_connector_file_id"], name: "index_results_app_input_files_on_results_app_connector_file_id", using: :btree
   add_index "results_app_input_files", ["results_app_id"], name: "index_results_app_input_files_on_results_app_id", using: :btree
 
-  create_table "results_app_parameters", force: true do |t|
-    t.string   "name"
-    t.string   "value"
+  create_table "results_app_input_parameters", force: true do |t|
     t.integer  "results_app_id"
+    t.integer  "results_app_connector_parameter_id"
+    t.string   "value"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "results_app_parameters", ["results_app_id"], name: "index_results_app_parameters_on_results_app_id", using: :btree
+  add_index "results_app_input_parameters", ["results_app_connector_parameter_id"], name: "index_r_app_input_params_on_r_app_connector_param_id", using: :btree
+  add_index "results_app_input_parameters", ["results_app_id"], name: "index_results_app_input_parameters_on_results_app_id", using: :btree
 
   create_table "results_apps", force: true do |t|
     t.string   "name"

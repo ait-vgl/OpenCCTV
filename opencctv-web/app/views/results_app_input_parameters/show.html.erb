@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<div class="container">
+  <ol class="breadcrumb">
+    <li><%= link_to 'Home', root_path %></li>
+    <li><%= link_to 'Results applications', results_apps_path %></li>
+    <li><%= link_to 'Results application', results_app_path(@results_app) %></li>
+    <li class="active">Results application input parameter</li>
+  </ol>
+</div>
+
+<div class="container">
+  <%= render 'results_apps/info' %>
+  <%= render 'info' %>
+</div>
+
+<!--<p id="notice"><%# notice %></p>
+
+<p>
+  <strong>Results app:</strong>
+  <%# @results_app_input_parameter.results_app %>
+</p>
+
+<p>
+  <strong>Results app connector parameter:</strong>
+  <%# @results_app_input_parameter.results_app_connector_parameter %>
+</p>
+
+<p>
+  <strong>Value:</strong>
+  <%# @results_app_input_parameter.value %>
+</p>
+
+<%# link_to 'Edit', edit_results_app_input_parameter_path(@results_app_input_parameter) %> |
+<%# link_to 'Back', results_app_input_parameters_path %>-->

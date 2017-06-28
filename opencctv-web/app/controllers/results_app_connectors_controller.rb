@@ -48,6 +48,11 @@ class ResultsAppConnectorsController < ApplicationController
         input_files.each do |in_file|
           @results_app_connector.results_app_connector_files.push(in_file)
         end
+
+        input_params = validation_result[:input_params]
+        input_params.each do |in_param|
+          @results_app_connector.results_app_connector_parameters.push(in_param)
+        end
       end
     else
       flash[:error] = 'Failed to upload the new results application connector. No results application connector plugin archive (.zip) was selected or invalid file type.'

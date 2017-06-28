@@ -1,0 +1,1 @@
+json.partial! "results_app_connector_parameters/results_app_connector_parameter", results_app_connector_parameter: @results_app_connector_parameter

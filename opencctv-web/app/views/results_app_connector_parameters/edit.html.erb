@@ -1,0 +1,21 @@
+<div class="container">
+  <ol class="breadcrumb">
+    <li><%= link_to 'Home', root_path %></li>
+    <li><%= link_to 'Results application connectors', results_app_connectors_path%></li>
+    <li><%= link_to 'Results application connector', results_app_connector_path(@results_app_connector)%></li>
+    <li class="active">Edit results application connector input parameter</li>
+  </ol>
+</div>
+
+<div class="container">
+  <h1>Edit input parameter details</h1>
+  <%= render 'form' %>
+</div>
+
+
+<!--<h1>Editing results_app_connector_parameter</h1>
+
+<%# render 'form' %>
+
+<%# link_to 'Show', @results_app_connector_parameter %> |
+<%# link_to 'Back', results_app_connector_parameters_path %>-->

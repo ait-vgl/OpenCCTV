@@ -1,6 +1,7 @@
 class ResultsAppConnector < ActiveRecord::Base
 
   has_many :results_app_connector_files,  dependent: :destroy
+  has_many :results_app_connector_parameters, dependent: :destroy
   has_many :results_apps, dependent: :destroy
 
   validates :name, presence: true
@@ -11,6 +12,7 @@ class ResultsAppConnector < ActiveRecord::Base
     verified = false
     html_content = nil
     input_files = Array.new
+    input_params = Array.new
 
     if(!self.filename.empty?)
       cmd = "#{Rails.root}/app/assets/programs/PluginArchiveValidator/Release/PluginArchiveValidator " +
@@ -38,12 +40,23 @@ class ResultsAppConnector < ActiveRecord::Base
           input_file.description = in_file.xpath("description")[0].content
           input_files.push(input_file)
         end
+
+        #Input file details
+        xml.xpath('//pluginvalidatorreply/result/inputparams/inputparam').each do |in_param|
+          input_param = ResultsAppConnectorParameter.new
+          input_param.name = in_param.xpath("name")[0].content
+          input_param.required = in_param.xpath("required")[0].content
+          input_param.editable = false
+          input_param.description = in_param.xpath("description")[0].content
+          input_params.push(input_param)
+        end
       end
     end
 
     validation_result[:verified] = verified
     validation_result[:html_content] = html_content
     validation_result[:input_files] = input_files
+    validation_result[:input_params] = input_params
 
     return validation_result
   end

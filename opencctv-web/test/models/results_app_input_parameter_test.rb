@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class ResultsAppParameterTest < ActiveSupport::TestCase
+class ResultsAppInputParameterTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

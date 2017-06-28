@@ -1,1 +1,0 @@
-json.partial! "results_app_parameters/results_app_parameter", results_app_parameter: @results_app_parameter
