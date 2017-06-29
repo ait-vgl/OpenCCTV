@@ -8,7 +8,8 @@
 #include "ResultAppInstController.hpp"
 #include "../analytic/ApplicationModel.hpp"
 
-namespace result {
+namespace result
+{
 
 ResultAppInstController::ResultAppInstController(unsigned int iResultAppInstId)
 {
@@ -21,9 +22,10 @@ bool ResultAppInstController::init()
 	//Step 1 - Find the results app instance details from DB
 	result::db::ResultsAppInstanceGateway resultsAppInstGateway;
 	result::db::dto::ResultsAppInstance rAppInst;
-	rAppInst.setResultsAppInstanceId(0);
-	std::stringstream ssMsg;
 
+	rAppInst.setResultsAppInstanceId(0);
+
+	std::stringstream ssMsg;
 	try
 	{
 		resultsAppInstGateway.findRAppInstance(_iResultsAppInstId,rAppInst);

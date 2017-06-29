@@ -44,7 +44,7 @@ Other_L		:= ${A}AnalyticProcess.o ${A}ApplicationModel.o ${A}AnalyticServerContr
 		${O}Process.o ${O}Exception.o \
 		${O_MQ}MqUtil.o ${O_UTIL}Util.o \
 		${O_UTIL_LOG}Loggers.o ${O_UTIL_LOG}TempLogger.o ${O_UTIL_LOG}colored/ColorLogger.o \
-        ${R}ResultAppInstController.o ${R}ResultsTxThread.o \
+        ${R}ResultAppInstController.o ${R}AnalyticInstController.o ${R}ResultsTxThread.o \
         ${R_DB}DbConnector.o ${R_DB}ResultsAppInstanceGateway.o \
         ${R_DB}AnalyticResultGateway.o ${R_DB}AnalyticInstanceGateway.o \
         ${R_DB_DTO}ResultsAppInstance.o ${R_DB_DTO}AnalyticInstance.o ${R_DB_DTO}AnalyticResult.o

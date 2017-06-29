@@ -51,7 +51,6 @@ ResultsAppInstanceGateway::ResultsAppInstanceGateway()
 	{
 		throw opencctv::Exception(e);
 	}
-
 }
 
 void ResultsAppInstanceGateway::findAllRAppInstances(

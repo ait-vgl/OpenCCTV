@@ -25,7 +25,8 @@
 
 //class analytic::ApplicationModel;
 
-namespace result {
+namespace result
+{
 
 class ResultAppInstController
 {

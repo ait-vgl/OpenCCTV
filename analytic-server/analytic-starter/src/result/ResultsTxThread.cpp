@@ -7,7 +7,8 @@
 
 #include "ResultsTxThread.hpp"
 
-namespace result {
+namespace result
+{
 
 ResultsTxThread::ResultsTxThread(unsigned int iResultsAppInstId)
 {
