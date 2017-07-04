@@ -16,11 +16,13 @@ namespace xml {
 const std::string OPERATION_START_ANALYTIC = "startanalytic";
 const std::string OPERATION_KILL_ALL_ANALYTICS = "killallanalytics";
 const std::string OPERATION_STOP_ANALYTIC = "stopanalytic";
+const std::string OPERATION_ANALYTIC_SERVER_STATUS = "analyticserverstatus";
 const std::string OPERATION_UNKNOWN = "unknown";
 
 class AnalyticMessage {
 public:
 	static std::string extractAnalyticRequestOperation(const std::string& sAnalyticRequest);
+	static std::string getServerStatusReply(const std::string& sStatus, const int iPid);
 	//static std::string getAnalyticStartRequest(unsigned int iAnalyticInstanceId, const std::string& sAnalyticPluginDirLocation, const std::string& sAnalyticPluginFilename);
 	//static std::string getAnalyticStartReply(const std::string& sAnalyticQueueInAddress,const std::string& sAnalyticQueueOutAddress);
 	static std::string getAnalyticStartReply(const bool bDone, const std::string& sMessage, const std::string& sAnalyticQueueInAddress,const std::string& sAnalyticQueueOutAddress);

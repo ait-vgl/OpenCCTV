@@ -14,12 +14,32 @@ std::string AnalyticMessage::extractAnalyticRequestOperation(const std::string& 
 		sRet = pt.get<std::string>("analyticrequest.operation");
 	} catch (boost::property_tree::xml_parser::xml_parser_error &e)
 	{
-		std::string sErrMsg = "Failed to parse Analytic Start Reply. ";
+		std::string sErrMsg = "Failed to parse operation details form the request. ";
 		sErrMsg.append(e.what());
 		throw opencctv::Exception(sErrMsg);
 	}
 	boost::algorithm::trim (sRet);
 	return sRet;
+}
+
+std::string AnalyticMessage::getServerStatusReply(const std::string& sStatus, const int iPid)
+{
+	boost::property_tree::ptree pt;
+	pt.put("analyticreply.operation", OPERATION_ANALYTIC_SERVER_STATUS);
+	pt.put("analyticreply.status", sStatus);
+	pt.put("analyticreply.pid", iPid);
+	std::ostringstream oss;
+	try
+	{
+		write_xml(oss, pt);
+	} catch (boost::property_tree::xml_parser::xml_parser_error &e)
+	{
+		std::string sErrMsg = "Failed to generate Analytic Server Status Reply. ";
+		sErrMsg.append(e.what());
+		throw opencctv::Exception(sErrMsg);
+	}
+	std::string message = oss.str();
+	return message;
 }
 /*
 std::string AnalyticMessage::getKillAllAnalyticProcessesRequest()

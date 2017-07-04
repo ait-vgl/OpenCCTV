@@ -51,7 +51,7 @@ int main()
 
 	/*
 	 * Start responding to requests. At present supported requests are start analytic
-	 * instance, stop analytic instance and kill all analytic instances
+	 * instance, stop analytic instance kill all analytic instances and get analytic server status
 	 */
 	while(bEnabled)
 	{

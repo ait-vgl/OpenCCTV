@@ -11,6 +11,7 @@
 #include <string>
 #include <sstream>
 #include <map>
+#include <unistd.h>
 #include "../opencctv/mq/MqUtil.hpp"
 #include "../opencctv/Exception.hpp"
 #include "../opencctv/util/log/Loggers.hpp"
@@ -40,6 +41,7 @@ private:
 	std::string startAnalytic(const std::string& sRequest);
 	std::string stopAnalytic(const std::string& sRequest);
 	std::string killAllAnalytics(const std::string& sRequest);
+	std::string getServerStatus();
 	std::string reportError(const std::string& sOperation,const bool bDone,
 			const std::string& sErrorMsg, const std::string& sExceptionMsg);
 	void sendReply(const std::string& sMessage);

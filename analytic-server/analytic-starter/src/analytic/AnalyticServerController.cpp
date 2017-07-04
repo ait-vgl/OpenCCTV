@@ -113,6 +113,11 @@ void AnalyticServerController::executeOperation()
 		sReply = killAllAnalytics(sRequest);
 		sendReply(sReply);
 	}
+	else if(sOperation.compare(analytic::xml::OPERATION_ANALYTIC_SERVER_STATUS) == 0)
+	{
+		sReply = getServerStatus();
+		sendReply(sReply);
+	}
 	else
 	{
 		sendReply(reportError(analytic::xml::OPERATION_UNKNOWN, false,
@@ -436,6 +441,40 @@ std::string AnalyticServerController::killAllAnalytics(const std::string& sReque
 	return sReply;
 }
 
+std::string AnalyticServerController::AnalyticServerController::getServerStatus()
+{
+	std::string sReply;
+
+	//Return the reply XML message
+	int iPid = getpid();
+	//TODO Modify server status accordingly, at the moment hard-coded to "Running"
+	std::string sStatus = "Running";
+	try
+	{
+		sReply = analytic::xml::AnalyticMessage::getServerStatusReply(sStatus,iPid);
+	}
+	catch (opencctv::Exception &e)
+	{
+		std::stringstream ossReply;
+		ossReply << "<?xml version=\"1.0\" encoding=\"utf-8\"?>";
+		ossReply << "<analyticreply>";
+		ossReply << "<operation>";
+		ossReply <<	analytic::xml::OPERATION_ANALYTIC_SERVER_STATUS;
+		ossReply << "</operation>";
+		ossReply << "<status>";
+		ossReply <<	sStatus;
+		ossReply << "</status>";
+		ossReply << "<pid>";
+		ossReply <<	iPid;
+		ossReply << "</pid>";
+		ossReply << "</analyticreply>";
+
+		sReply = ossReply.str();
+	}
+
+	return sReply;
+}
+
 void AnalyticServerController::sendReply(const std::string& sMessage)
 {
 	if(_pSocket)
@@ -462,7 +501,6 @@ std::string AnalyticServerController::reportError(const std::string& sOperation,
 	opencctv::util::log::Loggers::getDefaultLogger()->error(sMsg);
 	return analytic::xml::AnalyticMessage::getErrorReply(sOperation, bDone, sMsg);
 }
-
 
 AnalyticServerController::~AnalyticServerController()
 {
