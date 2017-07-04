@@ -1,7 +1,7 @@
 <%= form_for(@analytic_server) do |f| %>
   <% if @analytic_server.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@analytic_server.errors.count, "error") %> prohibited this analytic_server from being saved:</h2>
+        <div id="error_explanation" class="alert alert-danger" role="alert">
+      <h2><%= pluralize(@analytic_server.errors.count, "error") %> prohibited this analytic server from being saved:</h2>
 
       <ul>
       <% @analytic_server.errors.full_messages.each do |message| %>
@@ -17,7 +17,7 @@
   </div>
     <br>
   <div class="field">
-    <%= f.label :ip %><br>
+    <%= f.label :ip, 'IP'%><br>
     <%= f.text_field :ip %>
   </div>
     <br>
@@ -25,16 +25,16 @@
     <%= f.label :port %><br>
     <%= f.text_field :port %>
   </div>
-    <br>
+    <!--<br>
   <div class="field">
-    <%= f.label :status %><br>
-    <%= f.text_field :status %>
-  </div>
-    <br>
+    <%# f.label :status %><br>
+    <%# f.text_field :status %>
+  </div>-->
+    <!--<br>
   <div class="field">
-    <%= f.label :pid %><br>
-    <%= f.text_field :pid %>
-  </div>
+    <%# f.label :pid %><br>
+    <%# f.text_field :pid %>
+  </div>-->
     <br>
   <div class="actions">
     <%= f.submit "Save analytic server"  , :class => "btn btn-success btn-mini" %>

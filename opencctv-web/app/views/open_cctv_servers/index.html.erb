@@ -1,20 +1,63 @@
 <div class="container">
   <ol class="breadcrumb">
     <li><%= link_to 'Home', root_path %></li>
-    <li class="active">OpenCCTV Server</li>
+    <li class="active">OpenCCTV Servers</li>
   </ol>
 </div>
 
-<%if @open_cctv_server.nil?%>
-  <div class="container">
-    <a href="<%=new_open_cctv_server_path%>" class="btn btn-success"> <span class="glyphicon glyphicon-plus"></span>Register a Connection to OpenCCTV Server</a>
-    <br/>
-    <br/>
+<div class="container">
+  <h1>
+    All registered OpenCCTV servers
+    <a href="<%=new_open_cctv_server_path %>" class="btn btn-success">
+      <span class="glyphicon glyphicon-upload"></span>
+      Register a New OpenCCTV Server
+    </a>
+  </h1>
 
-    <div class="alert alert-warning">
-      Currently no OpenCCTV Server is registered with the system.
+  <% if @open_cctv_servers.empty? %>
+    <p>
+      <div class="alert alert-warning">
+        Currently no OpenCCTV servers are registered with the system.
+      </div>
+    </p>
+  <% else %>
+    <div class="media">
+      <table class="table table-hover">
+        <thead>
+        <tr>
+          <th>Name</th>
+          <th>IP</th>
+          <th>Port</th>
+          <th>Status</th>
+          <th>Process ID</th>
+          <th colspan="3"></th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <% @open_cctv_servers.each do |opencctv_server| %>
+            <tr>
+              <td><%= opencctv_server.name %></td>
+              <td><%= opencctv_server.host %></td>
+              <td><%= opencctv_server.port %></td>
+              <% if opencctv_server.status.blank? %>
+                  <td><%= 'Unknown' %></td>
+              <% else %>
+                  <td><%= opencctv_server.status %></td>
+              <% end %>
+              <% if opencctv_server.pid.blank? %>
+                  <td><%= 'Unknown' %></td>
+              <% else %>
+                  <td><%= opencctv_server.pid %></td>
+              <% end %>
+              <td><%= link_to 'Show', opencctv_server , :class => "btn btn-xs btn-default" %></td>
+              <!-- TODO Allow editing and destroying only if the OpenCCTV server is not running -->
+              <td><%= link_to 'Edit', edit_open_cctv_server_path(opencctv_server), :class => "btn btn-xs btn-warning" %></td>
+              <td><%= link_to 'Destroy', opencctv_server, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-xs btn-danger", data: {confirm: 'Are you sure?'} %></td>
+            </tr>
+        <% end %>
+        </tbody>
+      </table>
     </div>
-  </div>
-<%else%>
-  <%= render 'info' %>
-<%end%>
+  <% end %>
+</div>

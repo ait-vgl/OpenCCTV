@@ -1,7 +1,8 @@
 <div class="container">
   <ol class="breadcrumb">
     <li><%= link_to 'Home', root_path %></li>
-    <li class="active">OpenCCTV Server</li>
+    <li><%= link_to 'OpenCCTV servers', open_cctv_servers_path %></li>
+    <li class="active">OpenCCTV server</li>
   </ol>
 </div>
 
@@ -12,7 +13,7 @@
       <br/>
 
       <div class="alert alert-warning">
-        Currently no OpenCCTV Server is registered with the system.
+        Currently no OpenCCTV servers are registered with the system.
       </div>
     </div>
 <%else%>

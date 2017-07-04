@@ -1,37 +1,45 @@
 <div class="container">
   <ol class="breadcrumb">
     <li><%= link_to 'Home', root_path %></li>
-    <li><%= link_to 'VMSes', vmses_path %></li>
-    <li class="active">VMS</li>
+    <li><%= link_to 'Analytic servers', analytic_servers_path %></li>
+    <li class="active">Analytic server</li>
   </ol>
 </div>
 
+<%= render 'info' %>
+
 <div class="container">
+  <%= link_to 'Analytic Server List', analytic_servers_path, class: 'btn btn-xs btn-default'%> |
+  <!-- TODO Allow editing and destroying only if the analytic server is not running -->
+  <%= link_to 'Edit', edit_analytic_server_path(@analytic_server), :class => "btn btn-xs btn-warning" %>
+</div>
+
+<!--<div class="container">
   <p>
     <strong>Name:</strong>
-    <%= @analytic_server.name %>
+    <%# @analytic_server.name %>
   </p>
 
   <p>
     <strong>Ip:</strong>
-    <%= @analytic_server.ip %>
+    <%# @analytic_server.ip %>
   </p>
 
   <p>
     <strong>Port:</strong>
-    <%= @analytic_server.port %>
+    <%# @analytic_server.port %>
   </p>
 
   <p>
     <strong>Status:</strong>
-    <%= @analytic_server.status %>
+    <%# @analytic_server.status %>
   </p>
 
   <p>
     <strong>Pid:</strong>
-    <%= @analytic_server.pid %>
+    <%# @analytic_server.pid %>
   </p>
 
-  <%= link_to 'Edit', edit_analytic_server_path(@analytic_server) %> |
-  <%= link_to 'Back', analytic_servers_path %>
-</div>
+  <%# link_to 'Edit', edit_analytic_server_path(@analytic_server) %> |
+  <%# link_to 'Back', analytic_servers_path %>
+</div>-->

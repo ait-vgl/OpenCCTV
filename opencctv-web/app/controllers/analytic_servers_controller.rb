@@ -18,20 +18,24 @@ class AnalyticServersController < ApplicationController
   end
 
   def edit
+    # TODO Allow editing only if the analytic server is not running
   end
 
   def create
+    # TODO Check the status of the analytic server and update the database
     @analytic_server = AnalyticServer.new(analytic_server_params)
     @analytic_server.save
     respond_with(@analytic_server)
   end
 
   def update
+    # TODO Check the status of the analytic server and update the database
     @analytic_server.update(analytic_server_params)
     respond_with(@analytic_server)
   end
 
   def destroy
+    # TODO Allow destroying only if the analytic server is not running
     @analytic_server.destroy
     respond_with(@analytic_server)
   end

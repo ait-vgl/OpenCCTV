@@ -6,17 +6,21 @@ class OpenCctvServersController < ApplicationController
 
   # GET /open_cctv_servers
   def index
+=begin
     @open_cctv_server = OpenCctvServer.last
     if (!@open_cctv_server.nil?)
       request_server_status
     end
     respond_with(@open_cctv_server)
+=end
+    @open_cctv_servers = OpenCctvServer.all
+    respond_with(@open_cctv_servers)
   end
 
   # GET /open_cctv_servers/1
   def show
     #@open_cctv_server = OpenCctvServer.find(params[:id])
-    @open_cctv_server = OpenCctvServer.last
+    #@open_cctv_server = OpenCctvServer.last
     if (!@open_cctv_server.nil?)
       request_server_status
     end
