@@ -12,7 +12,6 @@
 #include "opencctv/Exception.hpp"
 #include "opencctv/mq/TcpMqSender.hpp"
 #include "opencctv/PluginLoader.hpp"
-//#include "opencctv/util/serialization/gpb/ProtoBuf.hpp"
 #include "opencctv/util/log/Loggers.hpp"
 #include "analytic/ConcurrentQueue.hpp"
 #include "analytic/api/Analytic.hpp"
@@ -20,16 +19,11 @@
 #include "FrameGrabberWrapper.h"
 
 #include "analytic/xml/AnalyticMessage.hpp"
-//#include "analytic/ProducerThread.hpp"
 #include "analytic/ConsumerThread.hpp"
 #include "analytic/util/Config.hpp"
 
 #include "analytic/db/AnalyticInstanceStreamGateway.hpp"
 #include "analytic/db/AnalyticInstanceConfigGateway.hpp"
-//#include "analytic/ImageQueue.hpp"
-
-//#include "FrameGrabberWrapper.h"
-
 #include <opencv2/core/core.hpp>
 
 using namespace cv;
@@ -55,7 +49,6 @@ int main(int argc, char *argv[])
 	}
 
 	// Sending PID of Analytic process to Analytic Starter process through stdout
-	//fprintf(stdout, "%s", opencctv::util::Util::getPidMessage(getpid()).c_str());
 	fprintf(stdout, "%s", opencctv::util::Util::getPidMessage(getpid()).c_str());
     fflush(stdout);
    
@@ -145,7 +138,6 @@ int main(int argc, char *argv[])
 	try
 	{
 		pAnalyticInstanceConfigGateway = new analytic::db::AnalyticInstanceConfigGateway();
-        //opencctv::util::log::Loggers::getDefaultLogger()->info("Analytic instance configuration details retrieved.");
 	}
 	catch (opencctv::Exception &e)
 	{
@@ -252,7 +244,6 @@ int main(int argc, char *argv[])
 	//opencctv::util::log::Loggers::getDefaultLogger()->info("Creating output queue done.");
 
 	boost::thread_group threadGroup;
-	//analytic::ConsumerThread resultsConsumer(pOutputResultQueue, pSender, new opencctv::util::serialization::ProtoBuf());
 	analytic::ConsumerThread resultsConsumer(pOutputResultQueue);
 	//boost::thread *pConsumerThread = new boost::thread(resultsConsumer);
 
