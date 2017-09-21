@@ -23,21 +23,22 @@
       <%= f.collection_select(:stream_id, @streams, :id, :name, {prompt: 'Select the Stream'}, :disabled => params[:action]=="show")  %>
     </div>
     <br/>
-    <% if params[:action]!= "new" %>
-        <div class="field">
-          <%= f.label :config, "Config" %><br>
-          <%= f.text_area :config, cols: "60", rows: "20", :disabled => params[:action]=="show" %>
-        </div>
-        <br/>
-    <% end %>
+    <%# if params[:action] != "new" %>
+    <%# end %>
+    <div class="field">
+      <%= f.label :config, "Config" %><br>
+      <%= f.text_area :config, cols: "60", rows: "20", :disabled => params[:action]=="show" %>
+    </div>
+    <br/>
     <!--Submit button-->
     <p>
-      <% if params[:action]!= "show" %>
-        <div class="actions">
-          <%= f.submit class: "btn btn-success btn-mini" %>
-              <%= link_to 'Cancel', @analytic_instance, :class => "btn btn-danger" %>
-              </div>
+      <%# if params[:action]!= "show" %>
+      <%# end %>
+    <div class="actions">
+      <%= f.submit class: "btn btn-success btn-mini" %>
+      <%#= link_to 'Cancel', @analytic_instance, :class => "btn btn-danger" %>
+      <%= link_to 'Cancel', :back, :class => "btn btn-danger" %>
 
-      <% end %>
+    </div>
     </p>
-    <% end %> <!--Form ends-->
+<% end %> <!--Form ends-->

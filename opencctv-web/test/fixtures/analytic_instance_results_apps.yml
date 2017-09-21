@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  analytic_instance_id: 
+  results_app_id: 
+
+two:
+  analytic_instance_id: 
+  results_app_id: 

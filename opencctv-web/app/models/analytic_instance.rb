@@ -1,10 +1,12 @@
 class AnalyticInstance < ActiveRecord::Base
   belongs_to :analytic
+  belongs_to :analytic_server
   has_many :analytic_instance_streams, dependent: :destroy
   has_many :streams, through: :analytic_instance_streams
   has_many :analytic_instance_configs, dependent: :destroy
 
   has_many :results, dependent: :nullify
+  has_many :analytic_instance_results_apps, dependent: :destroy
 
   belongs_to :user
   belongs_to :group_user
@@ -14,4 +16,5 @@ class AnalyticInstance < ActiveRecord::Base
 
   validates :analytic_id, presence: true
   validates :name, presence: true
+  validates :analytic_server_id, presence: true
 end

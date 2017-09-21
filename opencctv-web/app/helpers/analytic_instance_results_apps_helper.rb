@@ -1,0 +1,2 @@
+module AnalyticInstanceResultsAppsHelper
+end

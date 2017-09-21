@@ -7,7 +7,7 @@ O		:= ${BASE}opencctv/
 O_UTIL		:= ${O}util/
 
 #LibVGL		:= ~/workspace/vgl/libVGL/
-LibVGL		:= /usr/local/opencctv/libVGL_bin/
+LibVGL		:= /usr/local/vgl/libVGL_bin/
 
 
 # Build tools and flags
@@ -16,8 +16,8 @@ LD		:= /usr/bin/g++
 
 PKG_CONFIG_LIBS =
 
-CPPFLAGS	:= -I /usr/local/opencv-2.4.9/include \
-				-I /usr/local/opencv-2.4.9/include/opencv \
+CPPFLAGS	:= -I /usr/local/include/opencv \
+				-I /usr/local/include/opencv2 \
 				-I /usr/include \
 				-I /usr/include/ImageMagick \
 				-I ${LibVGL}include/ \
@@ -27,7 +27,7 @@ CXXFLAGS	:=  -O3 -fPIC #e.g., CXXFLAGS=-g -O0 for debugging
 
 # To keep the makefile for 32 and 64 in sync we add 64 and 32-bit library path
 # If you are targeting only 32 bit for you can remove the entries containing "64"
-LDFLAGS		:= -L/usr/local/opencv-2.4.9/lib \
+LDFLAGS		:= -L/usr/local/lib \
 				-L/usr/lib \
 				-L ${LibVGL}libVGL/lib \
 				-L./

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170628054529) do
+ActiveRecord::Schema.define(version: 20170821083112) do
 
   create_table "analytic_configs", force: true do |t|
     t.string   "name"
@@ -44,6 +44,16 @@ ActiveRecord::Schema.define(version: 20170628054529) do
   end
 
   add_index "analytic_instance_configs", ["analytic_instance_id"], name: "index_analytic_instance_configs_on_analytic_instance_id", using: :btree
+
+  create_table "analytic_instance_results_apps", force: true do |t|
+    t.integer  "analytic_instance_id"
+    t.integer  "results_app_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "analytic_instance_results_apps", ["analytic_instance_id"], name: "index_analytic_instance_results_apps_on_analytic_instance_id", using: :btree
+  add_index "analytic_instance_results_apps", ["results_app_id"], name: "index_analytic_instance_results_apps_on_results_app_id", using: :btree
 
   create_table "analytic_instance_streams", force: true do |t|
     t.integer  "analytic_instance_id"
@@ -87,6 +97,9 @@ ActiveRecord::Schema.define(version: 20170628054529) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "analytic_servers", ["ip", "port"], name: "index_analytic_servers_on_ip_and_port", unique: true, using: :btree
+  add_index "analytic_servers", ["name"], name: "index_analytic_servers_on_name", unique: true, using: :btree
 
   create_table "analytics", force: true do |t|
     t.string   "name"

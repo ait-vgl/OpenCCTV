@@ -1,0 +1,1 @@
+json.partial! "analytic_instance_results_apps/analytic_instance_results_app", analytic_instance_results_app: @analytic_instance_results_app

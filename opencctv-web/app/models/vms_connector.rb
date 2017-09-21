@@ -5,21 +5,40 @@ class VmsConnector < ActiveRecord::Base
   validates_presence_of :filename, message: 'No VMS connector plugin archive selected to upload.'
 
   def validate_plugin_archive
+
+    verified = false
+    html_content = 'Error occured during VMS connector plugin validation'
+
     if(!self.filename.empty?)
       cmd = "#{Rails.root}/app/assets/programs/PluginArchiveValidator/Release/PluginArchiveValidator " +
           "#{Rails.root}/app/uploads/vms_connectors " + "#{self.filename}.zip " + "#{self.filename} " + 'vms'
-          
       puts cmd
-      stdin, stdout, stderr = Open3.popen3(cmd)
-      output = stdout.readline
+
+      begin
+        stdin, stdout, stderr = Open3.popen3(cmd)
+        output = stdout.readline
+      rescue
+        output = nil
+      end
+
+      #puts "PluginArchiveValidator output fot VMS - #{output}"
+
       if(!output.nil? && (output.start_with?("<")))
         xml = Nokogiri::XML(output)
-        if(xml.xpath('//pluginvalidatorreply/verified')[0].content == '1')
-          self.verified = true
+        begin
+          if(xml.xpath('//pluginvalidatorreply/verified')[0].content == '1')
+            verified = true
+          end
+          html_content = xml.xpath('//pluginvalidatorreply/html')[0].inner_html
+        rescue
+          html_content = 'Invalid message format received from the Plugin Validator' if html_content.nil?
         end
-        self.log = xml.xpath('//pluginvalidatorreply/html')[0].inner_html
       end
     end
-    return self.verified?
+
+    self.verified = verified
+    self.log = html_content
+
+    return verified
   end
 end

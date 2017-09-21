@@ -2,7 +2,7 @@ class Vms < ActiveRecord::Base
   belongs_to :vms_connector
   has_many :cameras, dependent: :destroy
 
-  has_many :results, dependent: :nullify
+  #has_many :results, dependent: :nullify
 
   belongs_to :user
   belongs_to :group_user
@@ -17,7 +17,8 @@ class Vms < ActiveRecord::Base
 
   ## Public methods start
 
-  # validates all VMS types and update verified column of table if VMS is valid
+  # validates all VMS types and update verified column
+=begin
   def validate_connection
     valid = false
     if (self.vms_type == 'milestone')
@@ -33,6 +34,29 @@ class Vms < ActiveRecord::Base
     end
     if (valid)
       self.update(:verified => true)
+    end
+    return valid
+  end
+=end
+
+  def validate_connection
+    valid = false
+    begin
+      if (self.vms_type == 'milestone')
+        valid, xml_response = milestone_validate_vms
+      elsif (self.vms_type == 'zoneminder')
+        valid = zoneminder_validate_vms
+      elsif (self.vms_type == 'hikvision')
+        valid = hikvision_validate_device
+      elsif (self.vms_type =='lilin')
+        valid = lilin_validate_vms
+      else # anything else
+        valid = true
+      end
+    rescue Exception => e
+      raise
+    ensure
+      self.update(:verified => valid)
     end
     return valid
   end
@@ -54,9 +78,7 @@ class Vms < ActiveRecord::Base
     elsif (self.vms_type == 'hikvision')
       hikvision_add_monitors
     elsif (self.vms_type == 'lilin')
-
       response = connect_to_lilin_vms(self.server_ip, self.server_port, self.username, self.password)
-
       if (validate_http_response(response))
         lilin_add_monitors(response)
       else
@@ -64,6 +86,7 @@ class Vms < ActiveRecord::Base
       end
 
     else
+      # Do nothing.....
     end
   end
 
@@ -145,7 +168,6 @@ class Vms < ActiveRecord::Base
     else
       raise 'Failed to connect to Lilin server.'
     end
-
   end
 
 
@@ -381,15 +403,10 @@ class Vms < ActiveRecord::Base
     return "http://#{ip}:#{port}/index.php"
   end
 
-  def lilin_add_monitors(response)
-
-    #puts("kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk")
-
+  def lilin_add_monitors_ver1(response) # Original version - NOT USED AT PRESENT
     result = response.body
 
     if !result.to_s.empty?
-
-      #puts "Startttttttttttt"
       groupAllowMax = findValueResult(result, "groupallowmax").to_s.to_i
       puts groupAllowMax
 
@@ -522,8 +539,122 @@ class Vms < ActiveRecord::Base
     end
   end
 
-  def findValueResult(result, search)
+  def lilin_add_monitors(response) # Current version
+    result = response.body
+    if !result.to_s.empty?
+      groupAllowMax = findValueResult(result, "groupallowmax").to_s.to_i
 
+      groupMax = findValueResult(result, "groupmax").to_s.to_i
+      groupMax -= 1
+
+      chkMaxGroup = 0
+      startingChannelNo = 0
+      endingChannelNo = 0
+      maxChannels = 0
+
+      for i in 0..groupMax
+
+        if chkMaxGroup == groupAllowMax
+          break
+        end
+
+        if findValueResult(result, "group#{i}allow").to_s.to_i == 1 ## The monitor group is allowed
+          startingChannelNo += maxChannels
+          maxChannels = findValueResult(result, "group#{i}childmax").to_s.to_i ## Maximum no of channels in the monitor gorup
+          endingChannelNo += maxChannels
+
+          for channelNo in startingChannelNo..(endingChannelNo-1)
+            url = "http://#{self.server_ip}/cmd=getchannelinfo&ch=#{channelNo}"
+            begin
+              # TODO LiLin VMS API Limitation
+              # As a result of a anomality in the LiLin VMS API to get the channel info the request has to be sent to
+              # port 8080 not to the VMS port given by self.server_port
+              response = connect_with_basic_auth(url, 8080, self.username, self.password)
+              if (validate_http_response(response))
+                cameraResult = response.body
+                if !cameraResult.include? "chdisable" ## The channel is not disabled, thus the camera can be aadded
+                  camera = Camera.new
+                  camera.camera_id = findValueResult(cameraResult, "uid64").to_s
+                  camera.description =  "The camera channel #{channelNo} of VMS no. #{self.id}, Group #{i}"
+                  camera.name = findValueResult(cameraResult, "nameutf8").to_s
+                  camera.ip = findValueResult(cameraResult, "ip").to_s
+                  camera.username = findValueResult(cameraResult, "user").to_s.strip
+                  # TODO API of LiLin VMS ver 2.0 upwards only return the encrypted password
+                  camera.password = findValueResult(cameraResult, "passen").to_s.strip
+                  # TODO API of LiLin VMS ver 2.0 upwards httpport, videoport values are not returned
+                  camera.http_port = findValueResult(cameraResult, "httpport")
+                  camera.video_port = findValueResult(cameraResult, "videoport")
+                  camera.verified = true
+                  self.cameras.push(camera)
+                  camera.lilin_grab_default_frame
+                  lilin_add_camera_streams(camera)
+                end
+              end
+            rescue Exception => e
+              self.errors.add(:base, "Error while adding camera/channel #{channelNo} -  #{e.message}")
+            end
+          end
+        end
+      end
+    end
+  end
+
+  def lilin_add_camera_streams(camera)
+    urlProfile = "http://#{camera.ip}/getprofile"
+    begin
+      # TODO LiLin VMS API Limitation
+      # Since API of LiLin VMS 2.0 upwards only give the encrypted password, it is assumed that all cameras use the default password
+      responseProfile = connect_camera_with_basic_auth(urlProfile, camera.http_port, camera.username, "pass")
+
+      if (responseProfile && validate_camera_http(responseProfile))
+        profileResult = responseProfile.body
+        #puts profileResult
+        range = findValueResult(profileResult, "profileno_range").to_s.split(",")
+        #TODO please fix when VMS have empty camera, what to do then
+
+        for j in 0..(range.count-1)
+
+          #out of profile range
+          if(findValueResult(profileResult, "profile_0#{j}_name").to_s == "")
+            break
+          end
+
+          stream = Stream.new
+          stream.name = findValueResult(profileResult, "profile_0#{j}_name").to_s
+          stream.width = findValueResult(profileResult, "profile_0#{j}_res").to_s.split("x")[0]
+          stream.height = findValueResult(profileResult, "profile_0#{j}_res").to_s.split("x")[1]
+          stream.fps = findValueResult(profileResult, "profile_0#{j}_fps")
+
+
+          # profile_xx_type = 0 => H.264, profile_xx_type = 1 => = JPEG
+          #TODO profile type mismatch
+          stream.codec = (findValueResult(profileResult, "profile_0#{j}_type") == "0") ? "H.264" : "JPEG"
+          stream.protocol = "rtsp"
+
+          if camera.video_port.blank?
+            stream.url = "rtsp://#{camera.ip}/rtsp#{(stream.name).downcase}"
+          else
+            stream.url = "rtsp://#{camera.ip}:#{camera.video_port}/rtsp#{(stream.name).downcase}"
+          end
+
+          stream.compression_rate = 100
+          stream.keep_aspect_ratio = false
+          stream.allow_upsizing = false
+          stream.description = "#{stream.codec} video stream with resolution #{findValueResult(profileResult, "profile_0#{j}_res")}"
+          #TODO Check the stream before setting verified to true.
+          stream.verified = true
+          stream.camera = camera
+          stream.save
+        end
+      else
+        raise "Failed to connect to camera ip #{camera.ip}, named #{camera.name} to obtain stream details"
+      end
+    rescue Exception => e
+      raise
+    end
+  end
+
+  def findValueResult(result, search)
     result.each_line do |line|
       # puts line.split('=')[0]
       #puts line.split('=')[1]
@@ -531,12 +662,8 @@ class Vms < ActiveRecord::Base
         return (line.split('=')[1]).split("\n")[0]
       end
     end
-
     return ""
-
   end
-
-
 
   # Private methods end
 

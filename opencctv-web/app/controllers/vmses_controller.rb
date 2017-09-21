@@ -74,6 +74,7 @@ class VmsesController < ApplicationController
   def update
     @vms.update(vms_params)
     if !@vms.errors.any?
+
       begin
         if (@vms.validate_connection)
           flash[:notice] = 'Successfully connected to the VMS.'

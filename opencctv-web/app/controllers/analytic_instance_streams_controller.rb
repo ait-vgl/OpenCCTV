@@ -1,7 +1,7 @@
 class AnalyticInstanceStreamsController < ApplicationController
   before_action :set_analytic_instance_stream, only: [:show, :edit, :update, :destroy]
   before_action :set_analytic_instance, only: [:index, :new, :create, :edit, :show, :update, :destroy]
-  before_action :set_stream, only: [:edit, :new, :show]
+  before_action :set_stream, only: [:edit, :new, :show, :create]
   before_action :authenticate_user!
   #before_action :isOpenCCTVPageAdmin?
   respond_to :html
@@ -23,58 +23,75 @@ class AnalyticInstanceStreamsController < ApplicationController
     @analytic_instance_stream.analytic_instance = @analytic_instance
 
     #@vmses = Vms.where(user_id: current_user.id)
-
-
     #TODO: add filter by group
-
     respond_with(@analytic_instance_stream)
   end
 
   # GET /analytic_instance_streams/1/edit
   def edit
+    #Edit is allowed only if the analytic instance is stopped
+    session[:return_to] ||= request.referer
+    if @analytic_instance.status != 0
+      flash[:error] = "Unable to edit video stream details of analytic instance #{@analytic_instance.id}. Stop the analytic instance to enable editing!"
+      if session[:return_to]
+        redirect_to session.delete(:return_to)
+      else
+        redirect_to @analytic_instance
+      end
+    end
+
     flash[:alert] = "Analytic instance may not work properly if the input streams are not properly configured"
   end
 
   # POST /analytic_instance_streams
   def create
-    @analytic_instance_stream = AnalyticInstanceStream.new
+    @analytic_instance_stream = AnalyticInstanceStream.new(analytic_instance_stream_params)
     @analytic_instance_stream.analytic_instance = @analytic_instance
-
-    if params[:analytic_instance_stream][:analytic_input_stream_id].present?
-      @analytic_instance_stream.analytic_input_stream = AnalyticInputStream.find(params[:analytic_instance_stream][:analytic_input_stream_id])
-    end
-
-    if params[:analytic_instance_stream][:stream_id].present?
-      @analytic_instance_stream.stream = Stream.find(params[:analytic_instance_stream][:stream_id])
-    end
-
-    @analytic_instance_stream.config = File.read(Rails.root.join('app/uploads/configs', 'framegraber.yml'))
     @analytic_instance_stream.save
-
-    if @analytic_instance_stream.errors.any?
-      flash[:alert] = "Error: Cannot save analytic instance stream input. For more details: #{@analytic_instance_stream.errors.messages}"
-      #puts @analytic_instance_stream.errors.messages
-      respond_with(@analytic_instance)
-    else
-      flash[:info] = "Analytic instance input stream added successfully"
+    if (!@analytic_instance_stream.errors.any?)
+      flash[:info] = 'Analytic instance input stream added successfully'
       redirect_to analytic_instance_path(@analytic_instance)
+    else
+      flash[:error] = 'Failed to save analytic instance input stream details.'
+      respond_with(@analytic_instance_stream)
     end
   end
 
   # PATCH/PUT /analytic_instance_streams/1
   def update
+    # Update is allowed only if analytic has stopped
+    if @analytic_instance.status != 0
+      flash[:error] = "Unable to edit video streams details of analytic instance #{@analytic_instance.id}. Stop the analytic instance to enable editing!"
+      if session[:return_to]
+        redirect_to session.delete(:return_to) and return
+      else
+        respond_with(@analytic_instance_stream) and return
+      end
+    end
+
     @analytic_instance_stream.update(analytic_input_stream_id: params[:analytic_instance_stream][:analytic_input_stream_id], stream_id: params[:analytic_instance_stream][:stream_id], config: params[:analytic_instance_stream][:config] )
 
     if @analytic_instance_stream.errors.any?
       respond_with(@analytic_instance_stream)
     else
-      redirect_to analytic_instance_path(@analytic_instance)
-      #redirect_to analytic_instance_analytic_instance_stream_path(@analytic_instance, @analytic_instance_stream)
+      if session[:return_to]
+        redirect_to session.delete(:return_to)
+      else
+        redirect_to analytic_instance_path(@analytic_instance)
+        #redirect_to analytic_instance_analytic_instance_stream_path(@analytic_instance, @analytic_instance_stream)
+      end
     end
   end
 
   # DELETE /analytic_instance_streams/1
   def destroy
+    # Delete is allowed only if analytic has stopped
+    if @analytic_instance.status != 0
+      flash[:error] = "Unable to delete video streams of analytic instance #{@analytic_instance.id}. Stop the analytic instance to enable deleting!"
+      redirect_to analytic_instance_path(@analytic_instance) and return
+      #respond_with(@analytic_instance) and return
+    end
+
     @analytic_instance_stream.destroy
     redirect_to analytic_instance_path(@analytic_instance)
   end
@@ -101,6 +118,6 @@ class AnalyticInstanceStreamsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def analytic_instance_stream_params
-      params.require(:analytic_instance_stream).permit(:analytic_instance_id, :analytic_input_stream_id, :stream_id)
+      params.require(:analytic_instance_stream).permit(:analytic_instance_id, :analytic_input_stream_id, :stream_id, :config)
     end
 end

@@ -2,7 +2,7 @@ class Camera < ActiveRecord::Base
   belongs_to :vms
   has_many :streams, dependent: :destroy
 
-  has_many :results, dependent: :nullify
+  #has_many :results, dependent: :nullify
 
   before_destroy :delete_frame
 
@@ -29,16 +29,23 @@ class Camera < ActiveRecord::Base
     if(!self.errors.any?)
       img_path = "#{Rails.root}/app/assets/images/#{self.vms.id}_#{self.id}.jpeg"
       cmd = "java -jar #{Rails.root}/app/assets/programs/MilestoneFrameGrabber/mx_grab_stream_frame.jar #{self.vms.server_ip} #{self.vms.server_port} #{self.vms.username} #{self.vms.password} #{self.camera_id} #{img_path}"
-      stdin, stdout, stderr = Open3.popen3(cmd)
-      output = stdout.gets
-      if(!output.nil? && output.start_with?("<"))
-        doc = Nokogiri::XML(output)
-        error = doc.xpath('//output//error')[0].content
-        if(!error.nil? && error == "no")
-          width = doc.xpath('//output//width')[0].content.to_i
-          height = doc.xpath('//output//height')[0].content.to_i
-          complete = true
+
+      begin
+        stdin, stdout, stderr = Open3.popen3(cmd)
+        output = stdout.gets
+        if(!output.nil? && output.start_with?("<"))
+          doc = Nokogiri::XML(output)
+          error = doc.xpath('//output//error')[0].content
+          if(!error.nil? && error == "no")
+            width = doc.xpath('//output//width')[0].content.to_i
+            height = doc.xpath('//output//height')[0].content.to_i
+            complete = true
+          end
         end
+      rescue
+        complete = false
+        width = -1
+        height = -1
       end
     end
     return complete, width, height
@@ -50,15 +57,22 @@ class Camera < ActiveRecord::Base
     height = -1
     img_path = "#{Rails.root}/app/assets/images/#{self.vms.id}_#{self.id}.jpeg"
     cmd = "java -jar #{Rails.root}/app/assets/programs/ZoneminderFrameGrabber/zm_grab_stream_frame.jar #{streamUrl} #{img_path}"
-    stdin, stdout, stderr = Open3.popen3(cmd)
-    output = stdout.readline
-    if(!output.nil? && output.start_with?("<"))
-      error = doc.xpath('//output//error')[0].content
-      if(!error.nil? && error == "no")
-        width = doc.xpath('//output//width')[0].content.to_i
-        height = doc.xpath('//output//height')[0].content.to_i
-        complete = true
+
+    begin
+      stdin, stdout, stderr = Open3.popen3(cmd)
+      output = stdout.readline
+      if(!output.nil? && output.start_with?("<"))
+        error = doc.xpath('//output//error')[0].content
+        if(!error.nil? && error == "no")
+          width = doc.xpath('//output//width')[0].content.to_i
+          height = doc.xpath('//output//height')[0].content.to_i
+          complete = true
+        end
       end
+    rescue
+      complete = false
+      width = -1
+      height = -1
     end
     return complete, width, height
   end
@@ -87,7 +101,7 @@ class Camera < ActiveRecord::Base
     end
   end
 
-  def lilin_grab_default_frame
+  def lilin_grab_default_frame_ver1 # Original version - - NOT USED AT PRESENT
     url = "http://#{self.vms.server_ip}/snap#{self.camera_id.to_s.split("getstream")[1]}"
     #puts "URLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL"
     #puts self.camera_id.to_s
@@ -116,6 +130,33 @@ class Camera < ActiveRecord::Base
     end
   end
 
+  def lilin_grab_default_frame # Current version
+    url = "http://#{self.vms.server_ip}/snap#{self.camera_id}"
+    #puts "JPEG Image URL #{url}"
+    uri = URI.parse(url)
+    http = Net::HTTP.new(uri.host, self.vms.server_port)
+    http.open_timeout = 5
+    http.read_timeout = 5
+    request = Net::HTTP::Get.new(uri.request_uri)
+    request.basic_auth(self.vms.username, self.vms.password)
+    # Open the file for writing
+    img_path = "#{Rails.root}/app/assets/images/#{self.vms.id}_#{self.id}.jpeg"
+    destFile = open(img_path, "wb")
+    begin
+      http.request(request) do |response|
+        # Read the data as it comes in
+        response.read_body do |part|
+          # Write the data direct to file
+          destFile.write(part)
+        end
+      end
+    rescue
+        #Error handling ....
+    ensure
+      destFile.close
+    end
+  end
+
   def set_verification(is_verified)
     if(!is_verified)
       self.streams.each do |stream|
@@ -135,17 +176,22 @@ class Camera < ActiveRecord::Base
     if(vms.errors.any?)
       return false
     end
-    msg = connect_xml_builder.to_xml.to_s + "\r\n\r\n"
-    sock = TCPSocket.new( vms.server_ip, vms.server_port )
-    sock.write( msg )
-    reply = sock.recv( 2048 )
-    if(reply.start_with?("<"))
-      doc = Nokogiri::XML(reply)
-      connected = doc.xpath('//methodresponse//connected')[0].content
-      if(connected == "yes")
-        return true
+
+    begin
+      msg = connect_xml_builder.to_xml.to_s + "\r\n\r\n"
+      sock = TCPSocket.new( vms.server_ip, vms.server_port )
+      sock.write( msg )
+      reply = sock.recv( 2048 )
+      if(reply.start_with?("<"))
+        doc = Nokogiri::XML(reply)
+        connected = doc.xpath('//methodresponse//connected')[0].content
+        if(connected == "yes")
+          return true
+        end
       end
+      return false
+    rescue
+      return false
     end
-    return false
   end
 end

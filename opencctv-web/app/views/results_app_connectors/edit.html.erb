@@ -35,7 +35,7 @@
     <%= link_to 'Delete', @results_app_connector, method: :delete, :class => "btn btn-xs btn-danger", data: { confirm: 'Are you sure?' } %>
     the current results application connector and upload a new archive.
     <p>
-      <strong>Archive info:</strong>
+      <strong>Archive validation info:</strong>
       <% if(@results_app_connector.verified?) %>
         <span class="label label-success">
           <span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>

@@ -66,10 +66,15 @@ class ResultsAppConnectorsController < ApplicationController
   end
 
   def destroy
-    path_to_file = Rails.root.join('app/uploads', 'results_app_connectors', (@results_app_connector.filename + '.zip'))
-    File.delete(path_to_file) if File.exist?(path_to_file)
-    @results_app_connector.destroy
-    respond_with @results_app_connector
+    begin
+      @results_app_connector.destroy
+      path_to_file = Rails.root.join('app/uploads', 'results_app_connectors', (@results_app_connector.filename + '.zip'))
+      File.delete(path_to_file) if File.exist?(path_to_file)
+      respond_with @results_app_connector
+    rescue ActiveRecord::DeleteRestrictionError => e
+      flash[:error] = e.message
+      redirect_to results_app_connectors_path
+    end
   end
 
   private

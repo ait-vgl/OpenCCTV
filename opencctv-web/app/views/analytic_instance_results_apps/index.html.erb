@@ -1,0 +1,27 @@
+<h1>Listing analytic_instance_results_apps</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Analytic instance</th>
+      <th>Results app</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @analytic_instance_results_apps.each do |analytic_instance_results_app| %>
+      <tr>
+        <td><%= analytic_instance_results_app.analytic_instance %></td>
+        <td><%= analytic_instance_results_app.results_app %></td>
+        <td><%= link_to 'Show', analytic_instance_results_app %></td>
+        <td><%= link_to 'Edit', edit_analytic_instance_results_app_path(analytic_instance_results_app) %></td>
+        <td><%= link_to 'Destroy', analytic_instance_results_app, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Analytic instance results app', new_analytic_instance_results_app_path %>

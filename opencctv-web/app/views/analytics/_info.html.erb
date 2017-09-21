@@ -12,7 +12,7 @@
     <%= @analytic.description %>
   </p>
   <p>
-    <strong>Verification report:</strong>
+    <strong>Verification result:</strong>
     <% if(@analytic.verified?) %>
         <span class="label label-success">
           <span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>
@@ -25,21 +25,31 @@
         </span>
     <% end %>
   </p>
-  <p>
-    <% if(@analytic.verified?) %>
-      <div class="alert alert-success">
-        <samp>
-          <%= @analytic.log.html_safe %>
-        </samp>
-      </div>
-  <% else %>
-      <div class="alert alert-danger">
-        <samp>
-          <%= @analytic.log.html_safe %>
-        </samp>
-      </div>
+
+  <% if !@analytic.log.blank? %>
+      <p>
+      <% if(@analytic.verified?) %>
+        <div class="alert alert-success">
+          <samp>
+            <%= @analytic.log.html_safe %>
+          </samp>
+        </div>
+      <% else %>
+        <div class="alert alert-danger">
+          <samp>
+            <%= @analytic.log.html_safe %>
+          </samp>
+        </div>
+      <% end %>
+      </p>
+  <%else%>
+    <p>
+    <div class="alert alert-warning">
+      No details are available for this analytic plugin.
+    </div>
+    </p>
   <% end %>
-  </p>
+
   <p>
     <a href="<%=analytic_download_path(@analytic.filename)%>" class="btn btn-xs btn-primary"><span class="glyphicon glyphicon-download-alt"></span> Download the Archive</a>
   </p>

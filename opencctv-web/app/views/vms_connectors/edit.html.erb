@@ -30,12 +30,14 @@
 
   <br>
   <div>
+    <p>
     <strong>Changing VMS connector plugin archive zip file:</strong> <br>
     If you need to change the VMS connector archive, please
     <%= link_to 'Delete', @vms_connector, method: :delete, :class => "btn btn-xs btn-danger", data: { confirm: 'Are you sure?' } %>
     the current VMS connector and upload a new.
+    </p>
     <p>
-      <strong>Archive info:</strong>
+      <strong>Archive validation info:</strong>
       <% if(@vms_connector.verified?) %>
         <span class="label label-success">
           <span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>
@@ -48,21 +50,28 @@
         </span>
       <% end %>
     </p>
-    <p>
-      <% if(@vms_connector.verified?) %>
-        <div class="alert alert-success">
-          <samp>
-            <%= @vms_connector.log.html_safe %>
-          </samp>
+    <% if !@vms_connector.log.blank? %>
+      <p>
+        <% if(@vms_connector.verified?) %>
+          <div class="alert alert-success">
+            <samp>
+              <%= @vms_connector.log.html_safe %>
+            </samp>
+          </div>
+        <% else %>
+          <div class="alert alert-danger">
+            <samp>
+              <%= @vms_connector.log.html_safe %>
+            </samp>
+          </div>
+        <% end %>
+      </p>
+    <%else%>
+      <p>
+        <div class="alert alert-warning">
+          No details are available for this VMS connector plugin.
         </div>
-    <% else %>
-        <div class="alert alert-danger">
-          <samp>
-            <%= @vms_connector.log.html_safe %>
-          </samp>
-        </div>
+      </p>
     <% end %>
-    </p>
   </div>
-
 </div>

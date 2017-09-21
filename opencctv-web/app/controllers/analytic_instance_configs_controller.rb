@@ -28,6 +28,16 @@ class AnalyticInstanceConfigsController < ApplicationController
 
   # GET /analytic_instance_configs/1/edit
   def edit
+    #Edit is allowed only if the analytic instance is stopped
+    session[:return_to] ||= request.referer
+    if @analytic_instance.status != 0
+      flash[:error] = "Unable to edit configuration details of analytic instance #{@analytic_instance.id}. Stop the analytic instance to enable editing!"
+      if session[:return_to]
+        redirect_to session.delete(:return_to)
+      else
+        redirect_to @analytic_instance
+      end
+    end
   end
 
   # POST /analytic_instance_configs
@@ -49,28 +59,42 @@ class AnalyticInstanceConfigsController < ApplicationController
   # PATCH/PUT /analytic_instance_configs/1
   # PATCH/PUT /analytic_instance_configs/1.json
   def update
-      if @analytic_instance_config.update_attributes(:data => params[:analytic_instance_config][:data])
-        #format.html { redirect_to @analytic_instance_config, notice: 'Analytic instance config was successfully updated.' }
-        #format.json { render :show, status: :ok, location: @analytic_instance_config }
-        flash[:notice] = 'Successfully update the configuration.'
-        redirect_to analytic_instance_analytic_instance_config_path(@analytic_instance,@analytic_instance_config)
-
+    # Update is allowed only if analytic has stopped
+    if @analytic_instance.status != 0
+      flash[:error] = "Unable to edit configuration details of analytic instance #{@analytic_instance.id}. Stop the analytic instance to enable editing!"
+      if session[:return_to]
+        redirect_to session.delete(:return_to) and return
       else
-        flash[:error] = 'Cannot update the configuration.'
-        redirect_to analytic_instance_analytic_instance_config_path(@analytic_instance,@analytic_instance_config)
-        #format.html { render :edit }
-        #format.json { render json: @analytic_instance_config.errors, status: :unprocessable_entity }
+        respond_with(@analytic_instance_stream) and return
       end
+    end
+
+    if @analytic_instance_config.update_attributes(:data => params[:analytic_instance_config][:data])
+      flash[:notice] = 'Successfully update the configuration.'
+      if session[:return_to]
+        redirect_to session.delete(:return_to)
+      else
+        redirect_to analytic_instance_analytic_instance_config_path(@analytic_instance,@analytic_instance_config)
+        #redirect_to analytic_instance_path(@analytic_instance)
+        #redirect_to analytic_instance_analytic_instance_stream_path(@analytic_instance, @analytic_instance_stream)
+      end
+    else
+      flash[:error] = 'Cannot update the configuration.'
+      redirect_to analytic_instance_analytic_instance_config_path(@analytic_instance,@analytic_instance_config)
+    end
   end
 
   # DELETE /analytic_instance_configs/1
   # DELETE /analytic_instance_configs/1.json
   def destroy
-    @analytic_instance_config.destroy
-    respond_to do |format|
-      format.html { redirect_to analytic_instance_configs_url, notice: 'Analytic instance config was successfully destroyed.' }
-      format.json { head :no_content }
+    # Delete is allowed only if analytic has stopped
+    if @analytic_instance.status != 0
+      flash[:error] = "Unable to delete configuration details of analytic instance #{@analytic_instance.id}. Stop the analytic instance to enable deleting!"
+      redirect_to analytic_instance_path(@analytic_instance) and return
     end
+
+    @analytic_instance_config.destroy
+    redirect_to analytic_instance_path(@analytic_instance)
   end
 
   private

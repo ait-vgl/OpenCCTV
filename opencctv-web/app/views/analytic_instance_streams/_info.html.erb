@@ -1,15 +1,11 @@
-
-
-  <h3>Analytic Input Stream Information:</h3>
+<h3>
+  Analytic Input Stream Information:
+  <%= link_to 'Edit', edit_analytic_instance_analytic_instance_stream_path(@analytic_instance,@analytic_instance_stream), class: 'btn btn-xs btn-warning' %>
+</h3>
 
   <div class="panel-body">
     <div class="media">
       <div class="media-body col-sm-12">
-        <p>
-          <strong>Analytic instance:</strong>
-          <%= @analytic_instance_stream.analytic_instance.name %>
-        </p>
-
         <p>
           <strong>Analytic input stream:</strong>
           <%= @analytic_instance_stream.analytic_input_stream.name %>
@@ -17,11 +13,16 @@
 
         <p>
           <strong>Stream:</strong>
+          <!-- TODO Displat the full name of the stream -->
           <%= @analytic_instance_stream.stream.name %>
         </p>
 
-        <%= link_to 'Edit', edit_analytic_instance_analytic_instance_stream_path(@analytic_instance,@analytic_instance_stream), class: 'btn btn-xs btn-warning' %> |
-        <%= link_to 'Input Stream List', analytic_instance_path(@analytic_instance), class: 'btn btn-xs btn-default'%>
+        <p>
+          <strong>Configuration details:</strong>
+          <%= simple_format(@analytic_instance_stream.config, class: 'description') %>
+        </p>
+
+        <%= link_to 'Analytic Instance Input Stream List', analytic_instance_path(@analytic_instance), class: 'btn btn-xs btn-default'%>
       </div>
     </div>
   </div>

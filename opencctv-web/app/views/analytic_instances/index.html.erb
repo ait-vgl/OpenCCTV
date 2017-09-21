@@ -45,33 +45,23 @@
                 <td><%= analytic_instance.analytic.name %></td>
                 <td><%= analytic_instance.description %></td>
 
-
                 <% if isOrganization? %>
-
                     <td><%= link_to 'Show', group_user_analytic_instance_path(analytic_instance.group_user_id, analytic_instance), :class => "btn btn-xs btn-default" %></td>
                     <td><%= link_to 'Edit', edit_group_user_analytic_instance_path(analytic_instance.group_user_id, analytic_instance), :class => "btn btn-xs btn-warning" %></td>
                     <td><%= link_to 'Destroy', group_user_analytic_instance_path(analytic_instance.group_user_id, analytic_instance), method: :delete, :class => "btn btn-xs btn-danger", data: {confirm: 'Are you sure?'} %></td>
-
                 <% else %>
-                    <% if analytic_instance.status == 0 %>
-
-                        <td><%= link_to 'Start', start_analytic_instance_path(analytic_instance), :class => "btn btn-xs btn-warning" %></td>
-
-                    <%elsif analytic_instance.status == 2 %>
-
+                    <% if analytic_instance.status == 0 %> <!--Analytic instance stopped -->
+                        <td><%= link_to 'Start', start_analytic_instance_path(analytic_instance), :class => "btn btn-xs btn-success" %></td>
+                    <%elsif analytic_instance.status == 2 %><!--Analytic instance running -->
+                    <%#elsif analytic_instance.status == 1 %>
                         <td><%= link_to 'Stop', stop_analytic_instance_path(analytic_instance), :class => "btn btn-xs btn-danger", data: {confirm: 'Are you sure?'} %></td>
-
-                    <%else%>
+                    <%else%> <!--Analytic instance status = 1 or unknown -->
                         <td><%= link_to 'Pending',"#" ,:class => "btn btn-xs btn-info" %></td>
                     <% end %>
-
                     <td><%= link_to 'Show', analytic_instance, :class => "btn btn-xs btn-default" %></td>
                     <td><%= link_to 'Edit', edit_analytic_instance_path(analytic_instance), :class => "btn btn-xs btn-warning" %></td>
                     <td><%= link_to 'Destroy', analytic_instance, method: :delete, :class => "btn btn-xs btn-danger", data: {confirm: 'Are you sure?'} %></td>
-
-
                 <% end %>
-
               </tr>
               <% i = i + 1 %>
           <% end %>

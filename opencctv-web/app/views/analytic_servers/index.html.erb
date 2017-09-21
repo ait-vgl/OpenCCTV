@@ -25,6 +25,8 @@
       <table class="table table-hover">
         <thead>
         <tr>
+          <th>#</th>
+          <th>ID</th>
           <th>Name</th>
           <th>IP</th>
           <th>Port</th>
@@ -35,26 +37,40 @@
         </thead>
 
         <tbody>
+        <% i = 1 %>
         <% @analytic_servers.each do |analytic_server| %>
-            <tr>
-              <td><%= analytic_server.name %></td>
-              <td><%= analytic_server.ip %></td>
-              <td><%= analytic_server.port %></td>
-              <% if analytic_server.status.blank? %>
-                  <td><%= 'Unknown' %></td>
-              <% else %>
-                  <td><%= analytic_server.status %></td>
-              <% end %>
-              <% if analytic_server.pid.blank? %>
-                  <td><%= 'Unknown' %></td>
-              <% else %>
-                  <td><%= analytic_server.pid %></td>
-              <% end %>
-              <td><%= link_to 'Show', analytic_server , :class => "btn btn-xs btn-default" %></td>
-              <!-- TODO Allow editing and destroying only if the analytic server is not running -->
-              <td><%= link_to 'Edit', edit_analytic_server_path(analytic_server), :class => "btn btn-xs btn-warning" %></td>
-              <td><%= link_to 'Destroy', analytic_server, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-xs btn-danger", data: {confirm: 'Are you sure?'} %></td>
-            </tr>
+          <%
+            status = ""
+            pid = 0
+            analytic_server.status.blank? ? status = 'Unknown' : status = analytic_server.status
+            analytic_server.pid.blank? ? pid = 0 : pid = analytic_server.pid.to_i
+          %>
+
+          <tr>
+            <td><%= i %></td>
+            <td><%= analytic_server.id %></td>
+            <td><%= analytic_server.name %></td>
+            <td><%= analytic_server.ip %></td>
+            <td><%= analytic_server.port %></td>
+            <%if status != 'Running' %>
+                -<td style="color:red;"><b><%= status %></b></td>
+                <!--<td style="color:red;"><b>Stopped</b></td>-->
+            <% else %>
+                <td style="color:green;"><b><%= status %></b></td>
+            <% end %>
+
+            <%if pid <= 0 %>
+                <td style="color:red;"><b><%= pid %></b></td>
+                <!--<td style="color:red;"><b>19060</b></td>-->
+            <% else %>
+                <td style="color:green;"><b><%= pid %></b></td>
+            <% end %>
+            <td><%= link_to 'Show', analytic_server , :class => "btn btn-xs btn-default" %></td>
+            <!-- TODO Allow editing and destroying only if the analytic server is not running -->
+            <td><%= link_to 'Edit', edit_analytic_server_path(analytic_server), :class => "btn btn-xs btn-warning" %></td>
+            <td><%= link_to 'Destroy', analytic_server, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-xs btn-danger", data: {confirm: 'Are you sure?'} %></td>
+          </tr>
+          <% i = i + 1 %>
         <% end %>
         </tbody>
       </table>

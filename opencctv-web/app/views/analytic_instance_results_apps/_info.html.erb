@@ -1,0 +1,27 @@
+<div class="container">
+  <h2>Results application information</h2>
+
+ <!-- <%# if isOrganization? %>
+    <a href="<%#edit_group_user_analytic_instance_path(params[:group_user_id],@analytic_instance)%>" class="btn btn-warning"><span class="glyphicon glyphicon-pencil"></span> Edit</a>
+  <%# else %>
+        <a href="<%#edit_analytic_instance_path(@analytic_instance)%>" class="btn btn-warning"><span class="glyphicon glyphicon-pencil"></span> Edit</a>
+  <%# end %>-->
+
+  <p>
+    <strong>Results application:</strong>
+    <%= @analytic_instance_results_app.results_app.name %>
+  </p>
+
+  <p>
+    <strong>Connector type:</strong>
+    <%= @analytic_instance_results_app.results_app.results_app_connector.name %>
+  </p>
+
+  <p>
+    <%= link_to 'Results Application List', analytic_instance_path(@analytic_instance), class: 'btn btn-xs btn-default'%> |
+    <%= link_to 'Edit', edit_analytic_instance_analytic_instance_results_app_path(@analytic_instance,@analytic_instance_results_app), class: "btn btn-xs btn-warning" %>
+
+  </p>
+
+</div>
+

@@ -5,6 +5,7 @@ class ResultsApp < ActiveRecord::Base
 
   has_many :results_app_input_files, dependent: :destroy
   has_many :results_app_input_parameters, dependent: :destroy
+  has_many :analytic_instance_results_apps, dependent: :destroy
 
   validates :name, presence: true
   validates :results_app_connector_id, presence: true

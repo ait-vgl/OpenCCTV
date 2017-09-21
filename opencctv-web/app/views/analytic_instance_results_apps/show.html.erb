@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<div class="container">
+  <ol class="breadcrumb">
+    <li><%= link_to 'Home', root_path %></li>
+    <li><%= link_to 'Analytic instances', analytic_instances_path %></li>
+    <li><%= link_to 'Analytic instance', analytic_instance_path(@analytic_instance) %></li>
+    <li class="active">Analytic instance resullts application</li>
+  </ol>
+</div>
+
+<div class="container">
+  <%= render 'analytic_instances/info' %>
+  <%= render 'info' %>
+</div>

@@ -45,7 +45,7 @@ class AnalyticsController < ApplicationController
         flash[:error] = 'Failed to verify the uploaded analytic.'
       end
 
-      @analytic.log = validation_result[:html_content]
+      validation_result[:html_content].nil? ? @analytic.log = '' : @analytic.log = validation_result[:html_content]
 
       @analytic.save
 
@@ -70,16 +70,23 @@ class AnalyticsController < ApplicationController
   # PATCH/PUT /analytics/1
   def update
     @analytic.update(analytic_params)
-    respond_with @analytic
+    #respond_with @analytic
+    redirect_to analytics_path
   end
 
 
   # DELETE /analytics/1
   def destroy
-    path_to_file = Rails.root.join('app/uploads', 'analytics', (@analytic.filename + '.zip'))
-    File.delete(path_to_file) if File.exist?(path_to_file)
-    @analytic.destroy
-    respond_with @analytic
+    #Allow destroying only if there are no analytic instances exist
+    begin
+      @analytic.destroy
+      path_to_file = Rails.root.join('app/uploads', 'analytics', (@analytic.filename + '.zip'))
+      File.delete(path_to_file) if File.exist?(path_to_file)
+      respond_with @analytic
+    rescue ActiveRecord::DeleteRestrictionError => e
+      flash[:error] = e.message
+      redirect_to analytics_path
+    end
   end
 
   private

@@ -1,0 +1,45 @@
+<%= form_for([@analytic_instance,@analytic_instance_results_app]) do |f| %>
+  <% if @analytic_instance_results_app.errors.any? %>
+        <div id="error_explanation", class="alert alert-danger" role="alert">
+      <h2><%= pluralize(@analytic_instance_results_app.errors.count, "error") %> prohibited this analytic_instance_results_app from being saved:</h2>
+
+      <ul>
+      <% @analytic_instance_results_app.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%
+    # Find the results applications that are not registered by this analytic instance
+    results_app_registrations = @analytic_instance.analytic_instance_results_apps.select(:results_app_id)
+    unregistered_results_apps = ResultsApp.where(usable: true).where.not(id: results_app_registrations)
+    if !@analytic_instance_results_app.new_record?
+      unregistered_results_apps.push(@analytic_instance_results_app.results_app)
+    end
+  %>
+
+  <!--Form fields-->
+  <div class="field">
+    <%= f.hidden_field :analytic_instance_id, value: @analytic_instance.id %>
+  </div>
+  <div class="field">
+    <%= f.label :results_app_id, "Results application" %><br>
+    <%= f.collection_select(:results_app_id, unregistered_results_apps, :id, :name, {prompt: 'Select Results Application'}) %>
+  </div>
+
+    <!--Submit button-->
+    <p>
+    <div class="actions">
+      <%
+        label = 'Register Results Application'
+        if params[:action] == "edit"
+          label = 'Update Results Application'
+        end
+      %>
+      <%= f.submit "#{label}", class:'btn btn-success btn-mini' %>
+      <%= link_to 'Cancel', :back, :class => "btn btn-danger" %>
+    </div>
+    </p>
+<% end %>

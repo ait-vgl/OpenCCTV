@@ -6,15 +6,16 @@ class OpenCctvServersController < ApplicationController
 
   # GET /open_cctv_servers
   def index
-=begin
-    @open_cctv_server = OpenCctvServer.last
+    @open_cctv_server = OpenCctvServer.first
     if (!@open_cctv_server.nil?)
       request_server_status
     end
+    #redirect_to open_cctv_server_path(@open_cctv_server)
     respond_with(@open_cctv_server)
-=end
+=begin
     @open_cctv_servers = OpenCctvServer.all
     respond_with(@open_cctv_servers)
+=end
   end
 
   # GET /open_cctv_servers/1
@@ -38,6 +39,16 @@ class OpenCctvServersController < ApplicationController
 
   # GET /open_cctv_servers/1/edit
   def edit
+    # Editing is allowed only if the OpenCCTV Server is stopped
+    session[:return_to] ||= request.referer
+    if @open_cctv_server.status =='Running'
+      flash[:error] = 'Unable to edit OpenCCTV Server details. Stop the OpenCCTV Server to enable editing!'
+      if session[:return_to]
+        redirect_to session.delete(:return_to)
+      else
+        redirect_to open_cctv_server_path(@open_cctv_server)
+      end
+    end
   end
 
   # POST /open_cctv_servers
@@ -50,17 +61,22 @@ class OpenCctvServersController < ApplicationController
   # PATCH/PUT /open_cctv_servers/1
   def update
     if(@open_cctv_server.status =='Running')
-      flash[:alert] = 'It is not possible to edit the Open CCTV Server details while it is running'
+      flash[:error] = 'It is not possible to edit the OpenCCTV Server details while it is running'
+
     else
       @open_cctv_server.status = 'Unknown'
       @open_cctv_server.update(open_cctv_server_params)
-      respond_with(@open_cctv_server)
     end
+    respond_with(@open_cctv_server)
   end
 
   # DELETE /open_cctv_servers/1
   def destroy
-    @open_cctv_server.destroy
+    if(@open_cctv_server.status =='Running')
+      flash[:error] = 'It is not possible to delete the OpenCCTV Server while it is running'
+    else
+      @open_cctv_server.destroy
+    end
     respond_with(@open_cctv_server)
   end
 
