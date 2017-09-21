@@ -11,7 +11,9 @@
 // boost library link for boost program options (/usr/local/lib/) -lboost_program_options
 #include <boost/program_options/detail/config_file.hpp>
 #include <boost/program_options/parsers.hpp>
+#include <boost/filesystem.hpp>
 #include "../../opencctv/Exception.hpp"
+#include "../../opencctv/util/log/Loggers.hpp"
 
 namespace pod = boost::program_options::detail;
 
@@ -19,12 +21,25 @@ namespace analytic {
 namespace util {
 
 const std::string PROPERTY_ANALYTIC_PLUGIN_DIR = "analytic_plugin_directory";
+//const std::string PROPERTY_ANALYTIC_RESULTS_DIR = "analytic_results_directory";
 
 const std::string PROPERTY_DB_SERVER_NAME = "db_server_name";
 const std::string PROPERTY_DB_PORT = "db_port";
 const std::string PROPERTY_DB_NAME = "db_name";
 const std::string PROPERTY_DB_USERNAME = "db_username";
 const std::string PROPERTY_DB_PASSWORD = "db_password";
+
+const std::string PROPERTY_OPENCCTV_DB_SERVER = "opencctv_db_server_name";
+const std::string PROPERTY_OPENCCTV_DB_PORT = "opencctv_db_port";
+const std::string PROPERTY_OPENCCTV_DB_NAME = "opencctv_db_name";
+const std::string PROPERTY_OPENCCTV_DB_USERNAME = "opencctv_db_username";
+const std::string PROPERTY_OPENCCTV_DB_PASSWORD = "opencctv_db_password";
+
+const std::string PROPERTY_RESULTS_DB_SERVER = "results_db_server_name";
+const std::string PROPERTY_RESULTS_DB_PORT = "results_db_port";
+const std::string PROPERTY_RESULTS_DB_NAME = "results_db_name";
+const std::string PROPERTY_RESULTS_DB_USERNAME = "results_db_username";
+const std::string PROPERTY_RESULTS_DB_PASSWORD = "results_db_password";
 
 class Config {
 private:

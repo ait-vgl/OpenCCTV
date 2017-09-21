@@ -9,14 +9,17 @@
 #define RESULTSAPPINSTANCEGATEWAY_HPP_
 
 #include <vector>
+#include <string>
+#include <sstream>
 #include <cppconn/statement.h>
 #include <cppconn/prepared_statement.h>
 #include <cppconn/resultset.h>
 #include "DbConnector.hpp"
 #include "dto/ResultsAppInstance.hpp"
 #include "../../opencctv/Exception.hpp"
-//#include "../../analytic/util/Config.hpp"
-//#include "../../opencctv/util/Util.hpp"
+#include "../../analytic/util/Config.hpp"
+#include "../../opencctv/util/Util.hpp"
+#include "../../opencctv/util/log/Loggers.hpp"
 
 namespace result {
 namespace db {
@@ -38,8 +41,8 @@ public:
 	void findRAppInstance(
 			const unsigned int iRAppInstanceId,
 			result::db::dto::ResultsAppInstance& resultsAppInstance);
-	void findRAppInstancesForAnalyticInst(const unsigned int iAnalyticInstId,
-			std::vector<result::db::dto::ResultsAppInstance>& vResultsAppInstance);
+	/*void findRAppInstancesForAnalyticInst(const unsigned int iAnalyticInstId,
+			std::vector<unsigned int>& vResultsAppInstanceIds);*/
 	void findRAppInstanceFiles(const int iRAppInstId,
 			std::map<std::string, std::string>& mapInputFiles);
 	void findRAppInstanceParams(const int iRAppInstId,

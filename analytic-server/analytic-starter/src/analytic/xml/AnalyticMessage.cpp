@@ -22,13 +22,15 @@ std::string AnalyticMessage::extractAnalyticRequestOperation(const std::string& 
 	return sRet;
 }
 
-std::string AnalyticMessage::getServerStatusReply(const std::string& sStatus, const int iPid)
+std::string AnalyticMessage::getServerStatusReply(const std::string& sMessage, const std::string& sStatus, const int iPid)
 {
 	boost::property_tree::ptree pt;
-	pt.put("analyticreply.operation", OPERATION_ANALYTIC_SERVER_STATUS);
-	pt.put("analyticreply.status", sStatus);
-	pt.put("analyticreply.pid", iPid);
+	pt.put("analyticreply.type", OPERATION_ANALYTIC_SERVER_STATUS);
+	pt.put("analyticreply.content", sMessage);
+	pt.put("analyticreply.serverstatus", sStatus);
+	pt.put("analyticreply.serverpid", iPid);
 	std::ostringstream oss;
+
 	try
 	{
 		write_xml(oss, pt);
@@ -122,7 +124,6 @@ std::string AnalyticMessage::getAnalyticStartRequest(unsigned int iAnalyticInsta
 /*
  *=======May 08 2017===========
  *======= Later Remove=========*/
-
 std::string AnalyticMessage::getAnalyticStartReply(const std::string& sAnalyticQueueInAddress,
 		const std::string& sAnalyticQueueOutAddress)
 {
@@ -142,15 +143,23 @@ std::string AnalyticMessage::getAnalyticStartReply(const std::string& sAnalyticQ
 	return message;
 }
 
-std::string AnalyticMessage::getAnalyticStartReply(const bool bDone, const std::string& sMessage,
-		const std::string& sAnalyticQueueInAddress,const std::string& sAnalyticQueueOutAddress)
+std::string AnalyticMessage::getAnalyticStartReply(const std::string& sMessage,
+		const std::string& sServerStatus,const int iPid)
 {
+	/*
+	 * Example Message
+	 * <?xml version="1.0" encoding="utf-8"?>
+	 * <analyticreply><type>StartAnalytic</type>
+	 * <content>Analytic instance 4 started</content>
+	 * <serverstatus>Running</serverstatus>
+	 * <serverpid>17287</serverpid></analyticreply>
+	 */
+
 	boost::property_tree::ptree pt;
-	pt.put("analyticreply.operation", OPERATION_START_ANALYTIC);
-	pt.put("analyticreply.done", bDone);
-	pt.put("analyticreply.message", sMessage);
-	pt.put("analyticreply.analyticqueueinaddress", sAnalyticQueueInAddress);
-	pt.put("analyticreply.analyticqueueoutaddress", sAnalyticQueueOutAddress);
+	pt.put("analyticreply.type", OPERATION_START_ANALYTIC);
+	pt.put("analyticreply.content", sMessage);
+	pt.put("analyticreply.serverstatus", sServerStatus);
+	pt.put("analyticreply.serverpid", iPid);
 	std::ostringstream oss;
 	try
 	{
@@ -165,29 +174,40 @@ std::string AnalyticMessage::getAnalyticStartReply(const bool bDone, const std::
 	return message;
 }
 
-
 void AnalyticMessage::extractAnalyticStartRequestData(const std::string& sAnalyticStartRequest,
-		unsigned int& iAnalyticInstanceId, std::string& sAnalyticDirLocation, std::string& sAnalyticFilename)
+		unsigned int& iAnalyticInstanceId, std::string& sAnalyticFilename)
 {
 	boost::property_tree::ptree pt;
 	std::istringstream iss(sAnalyticStartRequest);
+	iAnalyticInstanceId = -1;
+	sAnalyticFilename = "";
+
 	try
 	{
 		read_xml(iss, pt);
 		iAnalyticInstanceId = pt.get<unsigned int>("analyticrequest.analyticinstanceid");
-		sAnalyticDirLocation = pt.get<std::string>("analyticrequest.analyticdirlocation");
 		sAnalyticFilename = pt.get<std::string>("analyticrequest.analyticfilename");
-		boost::algorithm::trim (sAnalyticDirLocation);
-		boost::algorithm::trim (sAnalyticFilename);
 	} catch (boost::property_tree::xml_parser::xml_parser_error &e)
 	{
 		std::string sErrMsg = "Failed to parse Analytic Start Request. ";
 		sErrMsg.append(e.what());
 		throw opencctv::Exception(sErrMsg);
 	}
+
+	if(iAnalyticInstanceId <= 0)
+	{
+		std::string sErrMsg = "Invalid analytic instance id";
+		throw opencctv::Exception(sErrMsg);
+	}
+
+	if(sAnalyticFilename.empty())
+	{
+		std::string sErrMsg = "Invalid analytic name";
+		throw opencctv::Exception(sErrMsg);
+	}
 }
 
-void AnalyticMessage::extractAnalyticStartRequestData(const std::string& sAnalyticStartRequest,
+/*void AnalyticMessage::extractAnalyticStartRequestData(const std::string& sAnalyticStartRequest,
 		unsigned int& iAnalyticInstanceId, std::string& sAnalyticDirLocation)
 {
 	boost::property_tree::ptree pt;
@@ -206,13 +226,34 @@ void AnalyticMessage::extractAnalyticStartRequestData(const std::string& sAnalyt
 		sErrMsg.append(e.what());
 		throw opencctv::Exception(sErrMsg);
 	}
-}
+}*/
 
-void AnalyticMessage::extractAnalyticStopRequestData(const std::string& sAnalyticStartRequest,
-		unsigned int& iAnalyticInstanceId)
+/*void AnalyticMessage::extractAnalyticStartRequestData(const std::string& sAnalyticStartRequest,
+		unsigned int& iAnalyticInstanceId, std::string& sAnalyticDirLocation, std::string& sAnalyticFilename)
 {
 	boost::property_tree::ptree pt;
 	std::istringstream iss(sAnalyticStartRequest);
+	try
+	{
+		read_xml(iss, pt);
+		iAnalyticInstanceId = pt.get<unsigned int>("analyticrequest.analyticinstanceid");
+		sAnalyticDirLocation = pt.get<std::string>("analyticrequest.analyticdirlocation");
+		sAnalyticFilename = pt.get<std::string>("analyticrequest.analyticfilename");
+		boost::algorithm::trim (sAnalyticDirLocation);
+		boost::algorithm::trim (sAnalyticFilename);
+	} catch (boost::property_tree::xml_parser::xml_parser_error &e)
+	{
+		std::string sErrMsg = "Failed to parse Analytic Start Request. ";
+		sErrMsg.append(e.what());
+		throw opencctv::Exception(sErrMsg);
+	}
+}*/
+
+void AnalyticMessage::extractAnalyticStopRequestData(const std::string& sAnalyticStopRequest,
+		unsigned int& iAnalyticInstanceId)
+{
+	boost::property_tree::ptree pt;
+	std::istringstream iss(sAnalyticStopRequest);
 	try
 	{
 		read_xml(iss, pt);
@@ -245,19 +286,21 @@ std::string AnalyticMessage::getStopAnalyticProcessesReply(bool bDone)
 	return message;
 }
 
-std::string AnalyticMessage::getAnalyticStopReply(const bool bDone, const std::string& sMessage)
+std::string AnalyticMessage::getAnalyticStopReply(const std::string& sMessage,
+		const std::string& sServerStatus,const int iPid)
 {
 	boost::property_tree::ptree pt;
-	pt.put("analyticreply.operation", OPERATION_STOP_ANALYTIC);
-	pt.put("analyticreply.done", bDone);
-	pt.put("analyticreply.message", sMessage);
+	pt.put("analyticreply.type", OPERATION_STOP_ANALYTIC);
+	pt.put("analyticreply.content", sMessage);
+	pt.put("analyticreply.serverstatus", sServerStatus);
+	pt.put("analyticreply.serverpid", iPid);
 	std::ostringstream oss;
 	try
 	{
 		write_xml(oss, pt);
 	} catch (boost::property_tree::xml_parser::xml_parser_error &e)
 	{
-		std::string sErrMsg = "AnalyticMessage: Failed to generate Analytic Instance Stop Reply. ";
+		std::string sErrMsg = "Failed to generate Analytic Start Reply. ";
 		sErrMsg.append(e.what());
 		throw opencctv::Exception(sErrMsg);
 	}
@@ -265,21 +308,60 @@ std::string AnalyticMessage::getAnalyticStopReply(const bool bDone, const std::s
 	return message;
 }
 
-std::string AnalyticMessage::getErrorReply(const std::string& sOperation, const bool bDone,
+/*std::string AnalyticMessage::getErrorReply(const std::string& sType, const bool bDone,
 		const std::string& sErrorMessage)
 {
+
+	 * Example
+	 * <?xml version="1.0" encoding="utf-8"?>
+	 * <analyticreply>
+	 * <type>Error</type>
+	 * <content>Failed to start analytic instance 4</content>
+	 * <serverstatus>Running</serverstatus>
+	 * <serverpid>17287</serverpid>
+	 * </analyticreply>
+
 	std::stringstream ossReply;
 	ossReply << "<?xml version=\"1.0\" encoding=\"utf-8\"?>";
 	ossReply << "<analyticreply>";
-	ossReply << "<operation>";
-	ossReply <<	sOperation;
-	ossReply << "</operation>";
-	ossReply << "<done>";
-	ossReply <<	bDone;
-	ossReply << "</done>";
-	ossReply << "<message>";
+	ossReply << "<type>";
+	ossReply <<	sType;
+	ossReply << "</type>";
+	ossReply << "<content>";
 	ossReply <<	sErrorMessage;
-	ossReply << "</message>";
+	ossReply << "</content>";
+	ossReply << "<serverstatus>serverstatus</serverstatus>"; //Remove
+	ossReply << "<serverpid>0</serverpid>"; //Remove
+	ossReply << "</analyticreply>";
+
+	std::string sReplyMessage = ossReply.str();
+	return sReplyMessage;
+}*/
+
+std::string AnalyticMessage::getErrorReply(const std::string& sErrorMessage,
+		const std::string& sServerStatus,const int iPid)
+{
+	/*
+	 * Example
+	 * <?xml version="1.0" encoding="utf-8"?>
+	 * <analyticreply>
+	 * <type>Error</type>
+	 * <content>Failed to start analytic instance 4</content>
+	 * </analyticreply>
+	 */
+	std::stringstream ossReply;
+	ossReply << "<?xml version=\"1.0\" encoding=\"utf-8\"?>";
+	ossReply << "<analyticreply>";
+	ossReply << "<type>Error</type>";
+	ossReply << "<content>";
+	ossReply <<	sErrorMessage;
+	ossReply << "</content>";
+	ossReply << "<serverstatus>";
+	ossReply <<	sServerStatus;
+	ossReply << "</serverstatus>";
+	ossReply << "<serverpid>";
+	ossReply <<	iPid;
+	ossReply << "</serverpid>";
 	ossReply << "</analyticreply>";
 
 	std::string sReplyMessage = ossReply.str();

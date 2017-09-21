@@ -16,7 +16,7 @@
 // for xml generation and parsing
 #include <boost/property_tree/xml_parser.hpp>
 #include <boost/property_tree/ptree.hpp>
-
+#include <boost/filesystem.hpp>
 #include "boost/filesystem/operations.hpp"
 #include "boost/filesystem/path.hpp"
 #include "boost/progress.hpp"
@@ -37,6 +37,7 @@ public:
 	static bool findSharedLibOfPlugin(const std::string& sPathToPluginDir, std::string& sPathToSharedLibOfPlugin);
 	static std::string getPidMessage(pid_t pid);
 	static pid_t getPid(const std::string& sPidMessage);
+	static bool createDir(const std::string& sPathToDir);
 };
 
 } /* namespace util */

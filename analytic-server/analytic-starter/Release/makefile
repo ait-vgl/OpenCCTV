@@ -23,26 +23,21 @@ LD			:= /usr/bin/g++
 
 PKG_CONFIG_LIBS =
 
-CPPFLAGS	:= -I /usr/local/opencv-2.4.9/include \
-				-I /usr/local/opencv-2.4.9/include/opencv \
-				-I /usr/include \
+CPPFLAGS	:= -I /usr/include \
 				-I ./ 
 				
 CXXFLAGS	:=  -O3 -fPIC #e.g., CXXFLAGS=-g -O0 for debugging
 
 # To keep the makefile for 32 and 64 in sync we add 64 and 32-bit library path
 # If you are targeting only 32 bit for you can remove the entries containing "64"
-LDFLAGS		:= -L/usr/local/opencv-2.4.9/lib \
-				-L/usr/lib \
+LDFLAGS		:= -L/usr/lib \
 				-L./
 
 LIBS		:= -lboost_system -lboost_filesystem -lboost_program_options -lboost_thread -lzmq -lmysqlclient -lmysqlcppconn -ldl
 all		: $(NAME)
-Other_L		:= ${A}AnalyticProcess.o ${A}ApplicationModel.o ${A}AnalyticServerController.o \
-		${A_UTIL}Config.o ${A_UTIL}SharedLibLoader.o \
-		${A_XML}AnalyticMessage.o \
-		${O}Process.o ${O}Exception.o \
-		${O_MQ}MqUtil.o ${O_UTIL}Util.o \
+Other_L		:= ${A}Process.o ${A}AnalyticProcess.o ${A}ApplicationModel.o ${A}AnalyticServerController.o \
+		${A_UTIL}Config.o ${A_UTIL}SharedLibLoader.o ${A_XML}AnalyticMessage.o \
+		${O}Exception.o ${O_MQ}MqUtil.o ${O_UTIL}Util.o \
 		${O_UTIL_LOG}Loggers.o ${O_UTIL_LOG}TempLogger.o ${O_UTIL_LOG}colored/ColorLogger.o \
         ${R}ResultAppInstController.o ${R}AnalyticInstController.o ${R}ResultsTxThread.o \
         ${R_DB}DbConnector.o ${R_DB}ResultsAppInstanceGateway.o \

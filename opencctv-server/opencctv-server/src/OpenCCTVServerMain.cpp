@@ -1,20 +1,9 @@
-/* boost includes (/user/local/include) */
-/* boost libraries (/usr/local/lib) -lboost_system */
-
-//#include <boost/thread/thread.hpp> // -lboost_thread -pthread
-//#include <boost/lockfree/queue.hpp>
-//#include <boost/lexical_cast.hpp> // to cast values
 #include <signal.h> // to handle terminate signal
 #include <iostream>
 #include <string>
-//#include <csignal>
-
+#include <unistd.h>
 #include "analytic/AnalyticServerManager.hpp"
-//#include "analytic/AnalyticServer.hpp"
-
 #include "opencctv/OpenCCTVServerManager.hpp"
-//#include "opencctv/OpenCCTVServer.hpp"
-
 #include "opencctv/dto/AnalyticServerDTO.hpp"
 #include "opencctv/db/AnalyticServerGateway.hpp"
 #include "opencctv/db/AnalyticInstanceGateway.hpp"
@@ -31,7 +20,6 @@ int main(int argc, char *argv[])
 
 	// Initialize an instance of the server controller
 	opencctv::ServerController *_pServerController = NULL;
-
 	try
 	{
 		_pServerController = opencctv::ServerController::getInstance();
@@ -43,27 +31,7 @@ int main(int argc, char *argv[])
 		return -1;
 	}
 
-	// Set up OpenCCTV Server
-	/*int iOpenCCTVServerId = 1;
-	opencctv::OpenCCTVServer *pOS = NULL;
-
-	try
-	{
-		pOS = new opencctv::OpenCCTVServer(iOpenCCTVServerId);
-
-		if (pOS)
-		{
-			opencctv::OpenCCTVServerManager::getInstance()->setOpenCCTVServer(iOpenCCTVServerId, pOS);
-			opencctv::util::log::Loggers::getDefaultLogger()->info("OpenCCTV server manager and OpenCCTV Server variable loaded.");
-		}
-	}
-	catch (opencctv::Exception &e)
-	{
-		opencctv::util::log::Loggers::getDefaultLogger()->error(e.what());
-		return -1;
-	} */
-
-	// set up Analytic Server
+	//Set up analytic servers - NOT YET CHECKED
 	std::vector<opencctv::dto::AnalyticServerDTO> vAnalyticServers;
 
 	try
@@ -94,7 +62,7 @@ int main(int argc, char *argv[])
 			{
 				analytic::AnalyticServerManager::getInstance()->setAnalyticServer(analyticServer.getAnalyticServerId(), pAnalyticServer);
 				//pAS = pAnalyticServer;
-				opencctv::util::log::Loggers::getDefaultLogger()->info("Analytic server manager and Analytic Server vriable loaded.");
+				opencctv::util::log::Loggers::getDefaultLogger()->info("Analytic server manager and Analytic Server variable loaded.");
 			}
 
 		}
@@ -107,7 +75,7 @@ int main(int argc, char *argv[])
 	}
 
 
-	// Start all analytic servers
+	//Start all analytic servers - NOT YET CHECKED
 	std::map<unsigned int, analytic::AnalyticServer *> mAnalyticServers = analytic::AnalyticServerManager::getInstance()->getAllAnalyticServer();
 	std::map<unsigned int, analytic::AnalyticServer *>::iterator it;
 
@@ -133,17 +101,38 @@ int main(int argc, char *argv[])
 		{
 			// Read request from the OpenCCTV Web application
 			string sRequestStr = _pServerController->readMessage();
-
 			opencctv::util::log::Loggers::getDefaultLogger()->debug(sRequestStr);
 
 			// Determine message type
 			string sMessageType;
+			opencctv::util::xml::OpenCCTVServerMessage::extractMessageDetails(sRequestStr,sMessageType);
+
+			if(sMessageType.length() == 0)
+			{
+				throw opencctv::Exception("Failed to extract the message details");
+			}
+
 			unsigned int iAIId;
 			int iASId;
-			opencctv::util::xml::OpenCCTVServerMessage::extractMessageDetailWithData(sRequestStr, sMessageType, iAIId, iASId);
+			//opencctv::util::xml::OpenCCTVServerMessage::extractMessageDetailWithData(sRequestStr, sMessageType, iAIId, iASId);
 
 			// Process the message
-			if (sMessageType.compare(opencctv::util::MSG_TYPE_START_ANALYTIC_REQ) == 0 && iAIId > 0 && iASId > 0)
+			if (sMessageType.compare(opencctv::util::MSG_TYPE_STATUS_REQ) == 0)
+			{
+				pid_t iPid = getpid();
+				string sStatusReply;
+				opencctv::util::xml::OpenCCTVServerMessage::createStatusReply("OpenCCTV server status","Running", iPid,sStatusReply);
+
+				std::cout << " sStatusReply : " << sStatusReply << std::endl;
+
+				if(sStatusReply.length() == 0)
+				{
+					throw opencctv::Exception("Failed to generate reply message details");
+				}
+				_pServerController->sendReply(sStatusReply);
+
+			}
+			else if (sMessageType.compare(opencctv::util::MSG_TYPE_START_ANALYTIC_REQ) == 0 && iAIId > 0 && iASId > 0)
 			{
 				// Check dupplicate running analytic instance
 				analytic::AnalyticServer *pAnalyticServer = analytic::AnalyticServerManager::getInstance()->getAnalyticServer(iASId);
@@ -235,13 +224,12 @@ int main(int argc, char *argv[])
 		}
 		catch (opencctv::Exception &e)
 		{
-			_pServerController->sendErrorReply(e.what());
-			opencctv::util::log::Loggers::getDefaultLogger()->error(e.what());
+			_pServerController->sendErrorReply(e.what()); //sendErrorReply() log the error as well
+			//opencctv::util::log::Loggers::getDefaultLogger()->error(e.what());
 		}
 	}
-	
 
-	opencctv::util::log::Loggers::getDefaultLogger()->info("OpenCCTV server finish working, bye !!!.");
+	opencctv::util::log::Loggers::getDefaultLogger()->info("OpenCCTV server finished working, bye !!!.");
 	return 0;
 }
 

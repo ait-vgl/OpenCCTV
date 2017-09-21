@@ -16,7 +16,7 @@ public:
 	TcpMqSender();
 	bool createMq(const std::string& serverPortStr);
 	bool connectToMq(const std::string& serverName, const std::string& serverPortStr);
-	bool send(const std::string* pSMessage);
+	int send(const std::string* pSMessage);
 	virtual ~TcpMqSender();
 };
 

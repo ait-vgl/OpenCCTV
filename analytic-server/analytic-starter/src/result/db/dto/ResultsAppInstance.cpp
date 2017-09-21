@@ -42,16 +42,6 @@ void ResultsAppInstance::setResultsAppInstanceId(unsigned int resultsAppInstance
 	_iResultsAppInstanceId = resultsAppInstanceId;
 }
 
-/*const std::string& ResultsAppInstance::getConfigFilePath() const
-{
-	return _sConfigFilePath;
-}
-
-void ResultsAppInstance::setConfigFilePath(const std::string& configFilePath)
-{
-	_sConfigFilePath = configFilePath;
-}*/
-
 const std::string& ResultsAppInstance::getLibFilePath() const
 {
 	return _sLibFilePath;

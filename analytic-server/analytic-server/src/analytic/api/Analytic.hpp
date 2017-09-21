@@ -1,21 +1,17 @@
 #ifndef ANALYTIC_ANALYTIC_HPP_
 #define ANALYTIC_ANALYTIC_HPP_
 
-
-#include <string>
-#include <map>
-#include <opencv2/core/core.hpp>
 #include "../ConcurrentQueue.hpp"
-#include "IFrameGrabber.hpp"
-#include "../util/log/Loggers.hpp"
-
-using namespace cv;
-using namespace analytic;
+#include <string>
+#include <opencv2/core/core.hpp>
+#include "FrameGrabber.h"
+#include <map>
+#include <vector>
 
 namespace analytic {
 namespace api {
 
-typedef struct
+/*typedef struct
 {
 	cv::Mat matImage;
 	unsigned int iStreamId;
@@ -23,17 +19,29 @@ typedef struct
 	std::string sTimestamp;
 	std::string sCustomTextResult;
 	bool bGenerateAnalyticEvent;
-} Image_t;
+} Image_t;*/
+
+typedef struct
+{
+	std::vector<std::string>* pVResultsFiles; //Path to text,yml,.. files produced as analytic results
+	std::vector<std::string>* pVIamgeFiles;	  //Path to image(.jpg) files produced as analytic results
+	std::vector<std::string>* pVVideoFiles;   ////Path to video(.mp4) files produced as analytic results
+	std::string sTimestamp;
+	std::string sCustomTextResult;
+} Results_t;
 
 class Analytic
 {
 public:
 	Analytic(){}
 	//Load config, module. Check before starting
-	virtual bool init(const std::string& sAnalyticPluginDirLocation, const std::map<std::string,FileStorage>& mConfigFiles, const std::map<std::string,IFrameGrabber*>& mFrameGrabbers, util::log::Logger *pAnalyticLog) = 0;
+	//virtual bool init(const std::string& sAnalyticPluginDirLocation, const std::map<string,FileStorage>& mConfigFiles, const std::map<string,FrameGrabber*>& mFrameGrabbers) = 0;
+	virtual bool init(const std::map<string,FileStorage>& mConfigFiles, const std::map<string,FrameGrabber*>& mFrameGrabbers) = 0;
 	
 	//Start process
-	virtual void process(analytic::ConcurrentQueue<analytic::api::Image_t>* pOutputQueue) = 0;
+	//virtual void process(analytic::ConcurrentQueue<analytic::api::Image_t>* pOutputQueue) = 0;
+	//virtual void process(const std::string& sResultsDir, analytic::ConcurrentQueue<analytic::api::Image_t>* pOutputQueue) = 0;
+	virtual void process(const std::string& sResultsDir, analytic::ConcurrentQueue<analytic::api::Results_t>* pOutputQueue) = 0;
 	virtual std::string getInputStreamNames()
 	{
 		std::map<std::string, std::string> mInputStreams;

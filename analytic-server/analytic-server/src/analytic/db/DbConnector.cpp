@@ -10,20 +10,24 @@
 namespace analytic {
 namespace db {
 
-sql::Connection* DbConnector::getConnection()
+DbConnector::DbConnector()
+{
+	_pDriverPrt = get_driver_instance();
+}
+
+sql::Connection* DbConnector::getConnection_OpenCCTVServerDB()
 {
 	sql::Connection* connPrt = NULL;
-	sql::Driver* driverPrt;
 	std::string dbUrl, mysqlUsername, mysqlPassword, dbName, mysqlServerName, mysqlPort;
-	
+
 	try
 	{
 		analytic::util::Config* pConfig = analytic::util::Config::getInstance();
-		mysqlServerName = pConfig->get(analytic::util::PROPERTY_DB_SERVER_NAME);
-		mysqlPort = pConfig->get(analytic::util::PROPERTY_DB_PORT);
-		dbName = pConfig->get(analytic::util::PROPERTY_DB_NAME);
-		mysqlUsername = pConfig->get(analytic::util::PROPERTY_DB_USERNAME);
-		mysqlPassword = pConfig->get(analytic::util::PROPERTY_DB_PASSWORD);
+		mysqlServerName = pConfig->get(analytic::util::PROPERTY_OPENCCTV_DB_SERVER);
+		mysqlPort = pConfig->get(analytic::util::PROPERTY_OPENCCTV_DB_PORT);
+		dbName = pConfig->get(analytic::util::PROPERTY_OPENCCTV_DB_NAME);
+		mysqlUsername = pConfig->get(analytic::util::PROPERTY_OPENCCTV_DB_USERNAME);
+		mysqlPassword = pConfig->get(analytic::util::PROPERTY_OPENCCTV_DB_PASSWORD);
 
 		dbUrl.append("tcp://");
 		dbUrl.append(mysqlServerName);
@@ -32,23 +36,66 @@ sql::Connection* DbConnector::getConnection()
 
 	}catch(opencctv::Exception &e)
 	{
-		std::string sErrorMsg = "DbConnector::getConnection : ";
+		std::string sErrorMsg = "DbConnector::getConnection_OpenCCTVServerDB : ";
 		throw opencctv::Exception(sErrorMsg.append(e.what()));
 	}
 
 	try
 	{
-		driverPrt = get_driver_instance();
-		connPrt = (*driverPrt).connect(dbUrl, mysqlUsername, mysqlPassword);
+		//driverPrt = get_driver_instance();
+		connPrt = (*_pDriverPrt).connect(dbUrl, mysqlUsername, mysqlPassword);
 		(*connPrt).setSchema(dbName);
 	}
 	catch(sql::SQLException &e)
 	{
-		//std::cerr << "DbConnector:getConnection: Error while creating connection to the database. " << e.what() << std::endl;
-		std::string sErrorMsg = "DbConnector::getConnection : ";
+		std::string sErrorMsg = "DbConnector::getConnection_OpenCCTVServerDB : ";
 		throw opencctv::Exception(sErrorMsg.append(e.what()));
 	}
 	return connPrt;
+}
+
+sql::Connection* DbConnector::getConnection_AnalyticServerDB()
+{
+	sql::Connection* connPrt = NULL;
+	std::string dbUrl, mysqlUsername, mysqlPassword, dbName, mysqlServerName, mysqlPort;
+
+	try
+	{
+		analytic::util::Config* pConfig = analytic::util::Config::getInstance();
+		mysqlServerName = pConfig->get(analytic::util::PROPERTY_RESULTS_DB_SERVER);
+		mysqlPort = pConfig->get(analytic::util::PROPERTY_RESULTS_DB_PORT);
+		dbName = pConfig->get(analytic::util::PROPERTY_RESULTS_DB_NAME);
+		mysqlUsername = pConfig->get(analytic::util::PROPERTY_RESULTS_DB_USERNAME);
+		mysqlPassword = pConfig->get(analytic::util::PROPERTY_RESULTS_DB_PASSWORD);
+
+		dbUrl.append("tcp://");
+		dbUrl.append(mysqlServerName);
+		dbUrl.append(":");
+		dbUrl.append(mysqlPort);
+
+	}catch(opencctv::Exception &e)
+	{
+		std::string sErrorMsg = "DbConnector::getConnection_AnalyticServerDB : ";
+		throw opencctv::Exception(sErrorMsg.append(e.what()));
+	}
+
+	try
+	{
+		//driverPrt = get_driver_instance();
+		connPrt = (*_pDriverPrt).connect(dbUrl, mysqlUsername, mysqlPassword);
+		(*connPrt).setSchema(dbName);
+	}
+	catch(sql::SQLException &e)
+	{
+		std::string sErrorMsg = "DbConnector::getConnection_AnalyticServerDB : ";
+		throw opencctv::Exception(sErrorMsg.append(e.what()));
+	}
+	return connPrt;
+}
+
+DbConnector::~DbConnector()
+{
+	_pDriverPrt->threadEnd();
 }
 
 } /* namespace db */

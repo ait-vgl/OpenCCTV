@@ -121,5 +121,21 @@ pid_t Util::getPid(const std::string& sPidMessage)
 	return pid;
 }
 
+bool Util::createDir(const std::string& sPathToDir)
+{
+	bool result = false;
+
+	if (!boost::filesystem::exists( sPathToDir ))
+	{
+		boost::filesystem::path sDirPath(sPathToDir);
+		result = boost::filesystem::create_directories(sDirPath);
+	}else
+	{
+		result = true;
+	}
+
+	return result;
+}
+
 } /* namespace util */
 } /* namespace opencctv */

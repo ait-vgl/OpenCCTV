@@ -8,3 +8,4 @@
 **/*.mk
 **/licenseVGL.txt
 **/.vscode
+**/*.*~

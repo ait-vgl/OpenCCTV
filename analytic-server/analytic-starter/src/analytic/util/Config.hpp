@@ -22,6 +22,16 @@ const std::string PROPERTY_ANALYTIC_RUNNER_DIR = "analytic_server_directory";
 const std::string PROPERTY_ANALYTIC_RUNNER_FILENAME = "analytic_server_filename";
 const std::string PROPERTY_NUM_OF_ANALYTICS = "number_of_analytics";
 
+const std::string PROPERTY_RESULTS_APP_CONNECTOR_DIR = "results_app_connector_directory";
+const std::string PROPERTY_RESULTS_APP_INPUT_FILE_DIR = "results_app_input_file_directory";
+const std::string PROPERTY_ANALYTIC_RESULTS_DIR = "analytic_results_directory";
+
+const std::string PROPERTY_OPENCCTV_DB_SERVER = "opencctv_db_server_name";
+const std::string PROPERTY_OPENCCTV_DB_PORT = "opencctv_db_port";
+const std::string PROPERTY_OPENCCTV_DB_USERNAME = "opencctv_db_username";
+const std::string PROPERTY_OPENCCTV_DB_PASSWORD = "opencctv_db_password";
+const std::string PROPERTY_OPENCCTV_DB_NAME = "opencctv_db_name";
+
 const std::string PROPERTY_RESULTS_DB_SERVER = "results_db_server_name";
 const std::string PROPERTY_RESULTS_DB_PORT = "results_db_port";
 const std::string PROPERTY_RESULTS_DB_USERNAME = "results_db_username";

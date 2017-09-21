@@ -57,6 +57,7 @@ public:
 
 	void startAnalytic();
 	void replyMessage(string sMessage);
+	void sendReply(string sMessage);
 };
 
 } /* namespace opencctv */

@@ -33,7 +33,7 @@ int main()
 	 * If unsent results are available in the results database start sending them
 	 */
 	//Find the results applications for which the results available
-	result::db::AnalyticResultGateway analyticResultGateway;
+	/*result::db::AnalyticResultGateway analyticResultGateway;
 	std::vector<int> vAnlyticInstIds;
 	analyticResultGateway.findAnalyticsWithUnsentResults(vAnlyticInstIds);
 	result::AnalyticInstController analyticInstController;
@@ -47,7 +47,13 @@ int main()
 	if(sOutputMsg.size() != 0 || !(sOutputMsg.empty()))
 	{
 		opencctv::util::log::Loggers::getDefaultLogger()->error(sOutputMsg);
-	}
+	}*/
+
+	/*
+	 * Set the server status to running
+	 */
+	pAnalyticServerController->setStatus("Running");
+
 
 	/*
 	 * Start responding to requests. At present supported requests are start analytic
@@ -57,6 +63,8 @@ int main()
 	{
 		pAnalyticServerController->executeOperation();
 	}
+
+	pAnalyticServerController->setStatus("Stopped");
 
 	std::string sErrMsg = "Analytic Server Exit...........";
 	opencctv::util::log::Loggers::getDefaultLogger()->debug(sErrMsg);

@@ -22,6 +22,7 @@
 #include "../result/ResultAppInstController.hpp"
 #include "../result/db/ResultsAppInstanceGateway.hpp"
 #include "../result/ResultsTxThread.hpp"
+#include "../result/AnalyticInstController.hpp"
 
 namespace analytic {
 
@@ -33,6 +34,10 @@ private:
 	unsigned int iNumOfAnalytics;
 	zmq::socket_t* _pSocket;
 	analytic::util::Config* _pConfig;
+	std::string _sStatus;
+	int _iPid;
+
+	//std::string _sHost;
 
 	AnalyticServerController();
 	AnalyticServerController(AnalyticServerController const& source);
@@ -42,14 +47,21 @@ private:
 	std::string stopAnalytic(const std::string& sRequest);
 	std::string killAllAnalytics(const std::string& sRequest);
 	std::string getServerStatus();
-	std::string reportError(const std::string& sOperation,const bool bDone,
-			const std::string& sErrorMsg, const std::string& sExceptionMsg);
+	std::string getAnalyticInstStatus();
+	std::string updateAnalyticInstStatus();
+	/*std::string reportError(const std::string& sOperation,const bool bDone,
+			const std::string& sErrorMsg, const std::string& sExceptionMsg);*/
+	std::string reportError(const std::string& sErrorMsg);
 	void sendReply(const std::string& sMessage);
 
 public:
 	static AnalyticServerController* getInstance();
 	void executeOperation();
 	virtual ~AnalyticServerController();
+	const std::string& getStatus() const;
+	void setStatus(const std::string& status);
+	/*const std::string& getHost() const;
+	void setHost(const std::string& host);*/
 };
 
 } /* namespace analytic */

@@ -33,7 +33,13 @@ public:
 	 * Creates connection to a analytic_server_db mysql db
 	 * using the given server IP, port number, username, password and database name.
 	 */
-	sql::Connection* getConnection();
+	sql::Connection* getConnection_AnalyticServerDB();
+
+	/**
+	 * Creates connection to a opencctv_db mysql db
+	 * using the given server IP, port number, username, password and database name.
+	 */
+	sql::Connection* getConnection_OpenCCTVServerDB();
 };
 
 } /* namespace db */

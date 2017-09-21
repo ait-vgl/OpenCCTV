@@ -30,6 +30,7 @@ private:
 	static const std::string _SELECT_RESULT_VIDEOS_SQL;
 	static const std::string _INSERT_SENT_RESULT_SQL;
 	static const std::string _SELECT_ANALYTICS_WITH_UNSENT_RSLTS_SQL;
+	static const std::string _SELECT_RAPP_INST_FOR_ANALYTIC_INST_SQL;
 
 public:
 	AnalyticResultGateway();
@@ -42,6 +43,8 @@ public:
 					std::map<std::string, std::string>& mapVideos);
 	int insertToSentResults(const unsigned int iResultId, const unsigned int iRAppInstId);
 	void findAnalyticsWithUnsentResults(std::vector<int>& vAnalyticInstanceIds);
+	void findRAppInstancesForAnalyticInst(const unsigned int iAnalyticInstId,
+				std::vector<unsigned int>& vResultsAppInstanceIds);
 };
 
 } /* namespace db */

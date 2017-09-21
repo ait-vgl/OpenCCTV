@@ -200,7 +200,6 @@ void ServerController::sendStatusReply()
 void ServerController::sendErrorReply(const string& sMessageContent)
 {
 	string sReplyMessage;
-
 	try
 	{
 		opencctv::util::xml::OpenCCTVServerMessage::createInvalidMessageReply(sMessageContent, _sServerStatus, _pProcess->getPid(), sReplyMessage);
@@ -209,7 +208,7 @@ void ServerController::sendErrorReply(const string& sMessageContent)
 	{
 		ostringstream ossReply;
 		ossReply << "<?xml version=\"1.0\" encoding=\"utf-8\"?> <opencctvmsg><type>Error</type><content>";
-		ossReply << e.what();
+		ossReply << sMessageContent << " and " << e.what();
 		ossReply << "</content><serverstatus>";
 		ossReply << _sServerStatus;
 		ossReply << "</serverstatus><serverpid>";
@@ -221,11 +220,19 @@ void ServerController::sendErrorReply(const string& sMessageContent)
 
 	try
 	{
+		if(!_tcpMq)
+		{
+			throw opencctv::Exception("Unable to send message, OpenCCTV server request-reply queue is not initialized");
+		}
 		opencctv::mq::MqUtil::writeToSocket(_tcpMq, sReplyMessage);
 	}
-	catch(std::runtime_error &e)
+	catch(opencctv::Exception &oe)
 	{
-		opencctv::util::log::Loggers::getDefaultLogger()->error(e.what());
+		opencctv::util::log::Loggers::getDefaultLogger()->error(oe.what());
+	}
+	catch(std::runtime_error &re)
+	{
+		opencctv::util::log::Loggers::getDefaultLogger()->error(re.what());
 	}
 }
 
@@ -260,6 +267,24 @@ void ServerController::replyMessage(string sMessage){
 	catch(std::runtime_error &e)
 	{
 		opencctv::util::log::Loggers::getDefaultLogger()->error(e.what());
+	}
+}
+
+void ServerController::sendReply(string sMessage){
+	if(!_tcpMq)
+	{
+		opencctv::util::log::Loggers::getDefaultLogger()->error("ServerController::sendReply - Request-Reply Queue is not Initialized");
+		throw opencctv::Exception("Unable to send message, socket not initialized");
+	}
+
+	try
+	{
+		opencctv::mq::MqUtil::writeToSocket(_tcpMq, sMessage);
+	}
+	catch(std::runtime_error &e)
+	{
+		opencctv::util::log::Loggers::getDefaultLogger()->error(e.what());
+		throw opencctv::Exception(e.what());
 	}
 }
 

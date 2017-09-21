@@ -8,8 +8,9 @@ Config* Config::_pConfig = NULL;
 Config::Config() {
 	std::string sConfigFilename = "./analytic-server.config";
 	std::ifstream ifstrConfig(sConfigFilename.c_str());
+	boost::filesystem::path abs_path = boost::filesystem::complete("./analytic-server.config");
 	if (!ifstrConfig) {
-		throw opencctv::Exception("Cannot open Analytic Runner configuration file.");
+		throw opencctv::Exception("Cannot open configuration file of analytic runner.");
 	}
 	std::set<std::string> setOptions;
 	setOptions.insert("*");
@@ -18,7 +19,7 @@ Config::Config() {
 			_mConfigDetails[i->string_key] = i->value[0];
 		}
 	} catch (std::exception& e) {
-		std::string sErrMsg = "Failed to extract configuration details from OpenCCTV server configuration file. ";
+		std::string sErrMsg = "Failed to extract configuration details from analytic runner's configuration file. ";
 		sErrMsg.append(e.what());
 		throw opencctv::Exception(sErrMsg);
 	}
@@ -41,6 +42,7 @@ std::string Config::get(const std::string& sPropertyName)
 	{
 		sRet = it->second;
 	}
+
 	return sRet;
 }
 

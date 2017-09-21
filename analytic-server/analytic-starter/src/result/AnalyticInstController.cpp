@@ -26,15 +26,14 @@ void AnalyticInstController::startResultsRouting(unsigned int iAnalyticInstId, s
 	analytic::ApplicationModel* pModel = analytic::ApplicationModel::getInstance();
 
 	//Select the results_app_instance_ids this analytic instance is registered
-	result::db::ResultsAppInstanceGateway resultsAppInstanceGateway;
-	std::vector<result::db::dto::ResultsAppInstance> vResultsAppInstance;
-	resultsAppInstanceGateway.findRAppInstancesForAnalyticInst(iAnalyticInstId, vResultsAppInstance);
+	result::db::AnalyticResultGateway analyticResultGateway;
+	std::vector<unsigned int> vResultsAppInstanceIds;
+	analyticResultGateway.findRAppInstancesForAnalyticInst(iAnalyticInstId, vResultsAppInstanceIds);
 
 	//For each results_app_instance
-	for(size_t i = 0; i < vResultsAppInstance.size(); ++i)
+	for(size_t i = 0; i < vResultsAppInstanceIds.size(); ++i)
 	{
-		result::db::dto::ResultsAppInstance rAppInst = vResultsAppInstance[i];
-		unsigned int iResltsAppInstId = rAppInst.getResultsAppInstanceId();
+		unsigned int iResltsAppInstId = vResultsAppInstanceIds[i];
 
 		result::ResultAppInstController* pResultAppInstController = NULL;
 		//If a results app instant controller already exist use it
@@ -53,7 +52,7 @@ void AnalyticInstController::startResultsRouting(unsigned int iAnalyticInstId, s
 			}else
 			{
 				ssErrMsg << "Failed to create a controller for results application instant ";
-				ssErrMsg << iResltsAppInstId << ".\n";
+				ssErrMsg << iResltsAppInstId << ". ";
 				opencctv::util::log::Loggers::getDefaultLogger()->error(ssErrMsg.str());
 				continue; //Skip the remaining steps in for loop
 			}
@@ -85,7 +84,7 @@ void AnalyticInstController::startResultsRouting(unsigned int iAnalyticInstId, s
 					pModel->getResultAppInstControllers().erase(iResltsAppInstId);
 				}
 				ssErrMsg << "Failed to initialize results transmission thread for results application ";
-				ssErrMsg << iResltsAppInstId << ".\n";
+				ssErrMsg << iResltsAppInstId << ". ";
 				opencctv::util::log::Loggers::getDefaultLogger()->error(ssErrMsg.str());
 				continue; //Skip the remaining steps in for loop
 			}

@@ -16,11 +16,11 @@ const std::string AnalyticInstanceConfigGateway::_SELECT_STREAM_SQL = "SELECT  i
 
 AnalyticInstanceConfigGateway::AnalyticInstanceConfigGateway()
 {
+
 	try
 	{
-		_pDbConnPtr = DbConnector::getConnection();
-		//_pStatement = (*_pDbConnPtr).createStatement();
-		_pStatementPtr = (*_pDbConnPtr).prepareStatement(_SELECT_STREAM_SQL);
+		_pDbConnectorPtr = new DbConnector();
+		_pDbConnPtr = (*_pDbConnectorPtr).getConnection_OpenCCTVServerDB();
 	}catch(sql::SQLException &e)
 	{
 		std::string sErrorMsg = "Error while initializing the AnalyticInstanceConfigGateway - .";
@@ -30,21 +30,17 @@ AnalyticInstanceConfigGateway::AnalyticInstanceConfigGateway()
 	{
 		throw opencctv::Exception(e);
 	}
-
-}
-
-AnalyticInstanceConfigGateway::~AnalyticInstanceConfigGateway() {
-	(*_pStatementPtr).close();
-	delete _pStatementPtr; _pStatementPtr = NULL;
-	delete _pDbConnPtr; _pDbConnPtr = NULL;
 }
 
 void AnalyticInstanceConfigGateway::getAnalyticInstanceConfig(unsigned int iAnalyticInstanceId, std::vector<analytic::dto::AnalyticInstanceConfig>& vAnalyticInstanceConfigs)
 {
+	sql::ResultSet* pResultsPtr = NULL;
+	sql::PreparedStatement* pStatementPtr = NULL;
 	try
 	{ 
-		(*_pStatementPtr).setInt64(1, iAnalyticInstanceId);
-		sql::ResultSet* pResultsPtr = (*_pStatementPtr).executeQuery();
+		pStatementPtr = (*_pDbConnPtr).prepareStatement(_SELECT_STREAM_SQL);
+		(*pStatementPtr).setInt64(1, iAnalyticInstanceId);
+		pResultsPtr = (*pStatementPtr).executeQuery();
 		
 		analytic::dto::AnalyticInstanceConfig aic;
 		while((*pResultsPtr).next())
@@ -55,14 +51,29 @@ void AnalyticInstanceConfigGateway::getAnalyticInstanceConfig(unsigned int iAnal
 			
 			vAnalyticInstanceConfigs.push_back(aic);
 		}
-		(*pResultsPtr).close();
-		delete pResultsPtr;
+
+		if(pStatementPtr){ (*pStatementPtr).close(); delete pStatementPtr; pStatementPtr = NULL;}
+		if(pResultsPtr){(*pResultsPtr).close(); delete pResultsPtr; pResultsPtr = NULL;}
 
 	}catch(sql::SQLException &e)
 	{
+		if(pStatementPtr){ (*pStatementPtr).close(); delete pStatementPtr; pStatementPtr = NULL;}
+		if(pResultsPtr){(*pResultsPtr).close(); delete pResultsPtr; pResultsPtr = NULL;}
 		std::string sErrorMsg = "AnalyticInstanceConfigGateway:findAll: ";
 		throw opencctv::Exception(sErrorMsg.append(e.what()));
-		//std::cerr << "AnalyticInstanceConfigGateway:findAll: Error while finding all streams from the database. " << e.what() << std::endl;
+	}
+}
+
+AnalyticInstanceConfigGateway::~AnalyticInstanceConfigGateway()
+{
+	if(_pDbConnectorPtr)
+	{
+		delete _pDbConnectorPtr; _pDbConnectorPtr = NULL;
+	}
+
+	if(_pDbConnPtr)
+	{
+		delete _pDbConnPtr; _pDbConnPtr = NULL;
 	}
 }
 

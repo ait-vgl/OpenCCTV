@@ -16,6 +16,7 @@ private:
 	std::string _sUsername;
 	std::string _sPassword;
 	std::string _sConfig;
+	int _iFPS;
 	
 public:
 	AnalyticInstanceStream();
@@ -39,6 +40,9 @@ public:
 	
 	void setConfig(const std::string& sConfig);
 	const std::string& getConfig() const;
+
+	int getFps() const;
+	void setFps(int fps);
 };
 
 } /* namespace dto */

@@ -17,6 +17,7 @@
 #include "../../opencctv/Exception.hpp"
 #include "../util/Config.hpp"
 //#include "../util/Util.hpp"
+#include "../../opencctv/util/log/Loggers.hpp"
 
 namespace analytic {
 namespace db {
@@ -24,7 +25,7 @@ namespace db {
 class AnalyticInstanceStreamGateway {
 private:
 	sql::Connection* _pDbConnPtr;
-	sql::PreparedStatement* _pStatementPtr;
+	DbConnector* _pDbConnectorPtr;
 	static const std::string _SELECT_ANALYTIC_INSTANCE_STREAM_SQL;
 
 public:

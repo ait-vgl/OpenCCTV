@@ -13,7 +13,7 @@ namespace dto {
 
 AnalyticInstance::AnalyticInstance()
 {
-	_iOpenCCTVId = 0;
+	//_iOpenCCTVId = 0;
 	_iAnalyticInstId = 0;
 }
 
@@ -27,16 +27,6 @@ void AnalyticInstance::setDescription(const std::string& description)
 	_sDescription = description;
 }
 
-const std::string& AnalyticInstance::getLocation() const
-{
-	return _sLocation;
-}
-
-void AnalyticInstance::setLocation(const std::string& location)
-{
-	_sLocation = location;
-}
-
 const std::string& AnalyticInstance::getName() const
 {
 	return _sName;
@@ -45,16 +35,6 @@ const std::string& AnalyticInstance::getName() const
 void AnalyticInstance::setName(const std::string& name)
 {
 	_sName = name;
-}
-
-unsigned int AnalyticInstance::getOpenCctvId() const
-{
-	return _iOpenCCTVId;
-}
-
-void AnalyticInstance::setOpenCctvId(unsigned int openCctvId)
-{
-	_iOpenCCTVId = openCctvId;
 }
 
 unsigned int AnalyticInstance::getAnalyticInstId() const
@@ -67,9 +47,28 @@ void AnalyticInstance::setAnalyticInstId(unsigned int analyticInstId)
 	_iAnalyticInstId = analyticInstId;
 }
 
+/*unsigned int AnalyticInstance::getOpenCctvId() const
+{
+	return _iOpenCCTVId;
+}
+
+void AnalyticInstance::setOpenCctvId(unsigned int openCctvId)
+{
+	_iOpenCCTVId = openCctvId;
+}
+
+const std::string& AnalyticInstance::getLocation() const
+{
+	return _sLocation;
+}
+
+void AnalyticInstance::setLocation(const std::string& location)
+{
+	_sLocation = location;
+}*/
+
 AnalyticInstance::~AnalyticInstance()
 {
-	// TODO Auto-generated destructor stub
 }
 
 } /* namespace dto */

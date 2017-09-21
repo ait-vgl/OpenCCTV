@@ -15,7 +15,7 @@ public:
 	 * if it was created on the heap using new operator.
 	 * This function is used to write large serialized images to a MQ.
 	 */
-	virtual bool send(const std::string* pSMessageToSend) = 0;
+	virtual int send(const std::string* pSMessageToSend) = 0;
 	virtual ~Sender(){}
 };
 

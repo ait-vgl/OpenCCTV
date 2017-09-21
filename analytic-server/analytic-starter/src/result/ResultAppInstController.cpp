@@ -31,16 +31,17 @@ bool ResultAppInstController::init()
 		resultsAppInstGateway.findRAppInstance(_iResultsAppInstId,rAppInst);
 	}catch (opencctv::Exception &e)
 	{
-		ssMsg << "Database Error. " << e.what();
+		ssMsg << "ResultAppInstController::init - Database Error. " << e.what();
 		opencctv::util::log::Loggers::getDefaultLogger()->error(ssMsg.str());
 		return false;
 	}
 
 	//If failed to find results app instance in DB return error
-	if(rAppInst.getResultsAppInstanceId() == 0)
+	if(rAppInst.getResultsAppInstanceId() == 0 || rAppInst.getLibFilePath().empty())
 	{
+		ssMsg << "ResultAppInstController::init - ";
 		ssMsg << "Results app instance id : " << _iResultsAppInstId;
-		ssMsg << ". Failed to find the results app instance details in DB";
+		ssMsg << ". Failed to find the results application instance or required details in database";
 		opencctv::util::log::Loggers::getDefaultLogger()->error(ssMsg.str());
 		return false;
 	}
@@ -62,13 +63,14 @@ bool ResultAppInstController::init()
 		{
 			pRAppPluginLoader = new analytic::util::PluginLoader<result::api::ResultsAppConnector>();
 			pRAppPluginLoader->loadPlugin(rAppInst.getLibFilePath());
-			pModel->getRAppPluginLoaders()[iResultsAppConnectorId] = pRAppPluginLoader;;
+			pModel->getRAppPluginLoaders()[iResultsAppConnectorId] = pRAppPluginLoader;
 		} catch (opencctv::Exception &e)
 		{
-			std::string sErrMsg = "Failed to load plugin: ";
-			sErrMsg.append(rAppInst.getResultsAppConnectorName()).append(". ");
-			sErrMsg.append(e.what());
-			opencctv::util::log::Loggers::getDefaultLogger()->error(sErrMsg);
+			ssMsg << "ResultAppInstController::init - ";
+			ssMsg << "Failed to load results application connector plugin: ";
+			ssMsg << rAppInst.getResultsAppConnectorName() << ".";
+			ssMsg << e.what();
+			opencctv::util::log::Loggers::getDefaultLogger()->error(ssMsg.str());
 			return false;
 		}
 	}
@@ -80,10 +82,11 @@ bool ResultAppInstController::init()
 
 	}catch (opencctv::Exception &e)
 	{
-		std::string sErrMsg = "Failed to create results app connector for ";
-		sErrMsg.append(rAppInst.getResultsAppInstanceName()).append(". ");
-		sErrMsg.append(e.what());
-		opencctv::util::log::Loggers::getDefaultLogger()->error(sErrMsg);
+		ssMsg << "ResultAppInstController::init - ";
+		ssMsg << "Failed to create results app connector for ";
+		ssMsg << rAppInst.getResultsAppConnectorName() << ".";
+		ssMsg << e.what();
+		opencctv::util::log::Loggers::getDefaultLogger()->error(ssMsg.str());
 		return false;
 	}
 
@@ -107,8 +110,9 @@ bool ResultAppInstController::init()
 		resultsAppInstGateway.findRAppInstanceParams(_iResultsAppInstId, mapInputParams);
 	} catch (opencctv::Exception &e)
 	{
-		ssMsg << "Results app instance id: " << _iResultsAppInstId;
-		ssMsg << ". Failed to initialize results app connector. ";
+		ssMsg << "ResultAppInstController::init - ";
+		ssMsg << "Failed to initialize results app connector. ";
+		ssMsg << "Results app instance id: " << _iResultsAppInstId << ".\n";
 		ssMsg << e.what();
 		opencctv::util::log::Loggers::getDefaultLogger()->error(ssMsg.str());
 		return false;
@@ -134,6 +138,7 @@ bool ResultAppInstController::authenticate()
 
 	if(!_pRAppConnector)
 	{
+		ssMsg << "ResultAppInstController::authenticate - ";
 		ssMsg << "Cannot find the connector plugin for the results app instance ";
 		ssMsg << _iResultsAppInstId << ".";
 		opencctv::util::log::Loggers::getDefaultLogger()->error(ssMsg.str());
@@ -150,6 +155,7 @@ bool ResultAppInstController::authenticate()
 			break;
 		}else
 		{
+			ssMsg << "ResultAppInstController::authenticate - ";
 			ssMsg << "Results app instance id: " << _iResultsAppInstId << ". ";
 			ssMsg << sResult;
 			opencctv::util::log::Loggers::getDefaultLogger()->error(ssMsg.str());
@@ -179,7 +185,8 @@ bool ResultAppInstController::sendAllAnalyticInstInfo()
 	{
 		if(!sendAnalyticInstInfo(*it))
 		{
-			ssMsg << sResult;
+			ssMsg.clear();
+			ssMsg << "ResultAppInstController::sendAllAnalyticInstInfo - ";
 			ssMsg << ". Results app instance id: " << _iResultsAppInstId;
 			ssMsg << ". Analytic instance id: " << it->getAnalyticInstId();
 			ssMsg << " Failed to send analytic instance information to the results application instance";
@@ -195,11 +202,11 @@ bool ResultAppInstController::sendAnalyticInstInfo(result::db::dto::AnalyticInst
 	std::stringstream ssId;
 	std::string sResult;
 	bool bResult;
-	ssId << analyticInstance.getOpenCctvId();
+	ssId << analyticInstance.getAnalyticInstId();
 	mapAnalyticInstInfo.insert(std::pair<std::string, std::string>("opencctv_id", ssId.str()));
 	mapAnalyticInstInfo.insert(std::pair<std::string, std::string>("name", analyticInstance.getName()));
 	mapAnalyticInstInfo.insert(std::pair<std::string, std::string>("description",analyticInstance.getDescription()));
-	mapAnalyticInstInfo.insert(std::pair<std::string, std::string>("location", analyticInstance.getLocation()));
+	mapAnalyticInstInfo.insert(std::pair<std::string, std::string>("location", "Test Location"));
 	bResult = _pRAppConnector->sendAnalyticInstanceInfo(&mapAnalyticInstInfo,sResult);
 
 	std::map<unsigned int, AnalyticInstance_t>::iterator it;
@@ -288,6 +295,7 @@ void ResultAppInstController::sendAnalyticResult(result::db::dto::AnalyticResult
 		iResult = analyticResultGateway.insertToSentResults(analyticResult.getResultsId(),_iResultsAppInstId);
 	}else
 	{
+		ssMsg << "ResultAppInstController::sendAnalyticResult - ";
 		ssMsg << sResult;
 		ssMsg << ". Analytic results id: ";
 		ssMsg << analyticResult.getResultsId();

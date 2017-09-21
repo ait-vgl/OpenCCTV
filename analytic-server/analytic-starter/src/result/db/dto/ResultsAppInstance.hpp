@@ -20,7 +20,6 @@ private:
 	std::string _sResultsAppInstanceName;
 	unsigned int _iResultsAppConnectorId;
 	std::string _sResultsAppConnectorName;
-	//std::string _sConfigFilePath;
 	std::string _sLibFilePath;
 public:
 	ResultsAppInstance();
@@ -30,8 +29,6 @@ public:
 	void setResultsAppConnectorId(unsigned int resultsAppConnectorId);
 	unsigned int getResultsAppInstanceId() const;
 	void setResultsAppInstanceId(unsigned int resultsAppInstanceId);
-	//const std::string& getConfigFilePath() const ;
-	//void setConfigFilePath(const std::string& configFilePath);
 	const std::string& getLibFilePath() const ;
 	void setLibFilePath(const std::string& libFilePath) ;
 	const std::string& getResultsAppConnectorName() const;

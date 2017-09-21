@@ -26,6 +26,8 @@ private:
 	sql::Connection* _pConnectionPtr;
 	static const std::string _SELECT_ANALYTIC_INST_SQL;
 	static const std::string _SELECT_ANALYTIC_INST_FOR_RAPP_INST_SQL;
+	static const std::string _UPDATE_ANALYTIC_INST_STATUS_SQL;
+
 public:
 	AnalyticInstanceGateway();
 	virtual ~AnalyticInstanceGateway();
@@ -33,6 +35,7 @@ public:
 			std::vector<result::db::dto::AnalyticInstance>& vAnalyticInstances);
 	void findAnalyticInstance(const unsigned int iAnalyticInstanceId,
 			result::db::dto::AnalyticInstance& analyticInstance);
+	int updateStatus(const unsigned int iAnalyticInstanceId, const unsigned int iStatus);
 };
 
 } /* namespace db */

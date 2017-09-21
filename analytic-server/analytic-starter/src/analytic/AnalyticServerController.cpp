@@ -30,6 +30,8 @@ AnalyticServerController::AnalyticServerController()
 {
 	// Loading Configuration file
 	_pConfig = NULL;
+	_iPid = getpid();
+	//_sHost = "";
 	try
 	{
 		_pConfig = analytic::util::Config::getInstance();
@@ -87,6 +89,7 @@ void AnalyticServerController::executeOperation()
 	try
 	{
 		opencctv::mq::MqUtil::readFromSocket(_pSocket, sRequest);
+		std::cout << "sRequest : " << sRequest << "\n" << std::endl;
 		sOperation = analytic::xml::AnalyticMessage::extractAnalyticRequestOperation(sRequest);
 	}
 	catch(opencctv::Exception &e)
@@ -100,29 +103,29 @@ void AnalyticServerController::executeOperation()
 	if(sOperation.compare(analytic::xml::OPERATION_START_ANALYTIC) == 0)
 	{
 		sReply = startAnalytic(sRequest);
-		sendReply(sReply);
 	}
 	else if(sOperation.compare(analytic::xml::OPERATION_STOP_ANALYTIC) == 0)
 	{
 		sReply = stopAnalytic(sRequest);
-		sendReply(sReply);
 
 	}
 	else if(sOperation.compare(analytic::xml::OPERATION_KILL_ALL_ANALYTICS) == 0)
 	{
 		sReply = killAllAnalytics(sRequest);
-		sendReply(sReply);
 	}
 	else if(sOperation.compare(analytic::xml::OPERATION_ANALYTIC_SERVER_STATUS) == 0)
 	{
 		sReply = getServerStatus();
-		sendReply(sReply);
+	}else if(sOperation.compare(analytic::xml::OPERATION_ANALYTIC_INST_STATUS) == 0)
+	{
+		sReply = getAnalyticInstStatus();
 	}
 	else
 	{
-		sendReply(reportError(analytic::xml::OPERATION_UNKNOWN, false,
-				"Request with an unknown Operation",sMessage));
+		sReply = reportError("Request with an unknown Operation");
 	}
+	std::cout << "sReply : " << sReply << "\n" << std::endl;
+	sendReply(sReply);
 }
 
 std::string AnalyticServerController::startAnalytic(const std::string& sRequest)
@@ -137,57 +140,75 @@ std::string AnalyticServerController::startAnalytic(const std::string& sRequest)
 	bool bAIStarted = false;
 	std::stringstream ssErrMsg;
 	std::string sErrMsg;
-	std::string sAnalyticInputQueueAddress;
-	std::string sAnalyticOutputQueueAddress;
+	std::string sAnalyticInputQueueAddress = "in";
+	std::string sAnalyticOutputQueueAddress = "out";
 
 	// TODO Check maximum num. of analytic instances???
+
+	// TODO The analytic start request XML message has to be updated
+
+	//Step 0 - Check for config details
+	if(!_pConfig)
+	{
+		return reportError("Analytic-starter module not properly configured");
+	}
 
 	//Step 1 - Extract data from the request message
 	try
 	{
-		analytic::xml::AnalyticMessage::extractAnalyticStartRequestData(sRequest, iAnalyticInstanceId, sAnalyticDirPath, sAnalyticFilename);
+		analytic::xml::AnalyticMessage::extractAnalyticStartRequestData(sRequest, iAnalyticInstanceId,sAnalyticFilename);
 	}
 	catch (opencctv::Exception &e)
 	{
-
-		return reportError(analytic::xml::OPERATION_START_ANALYTIC,
-				false, "Failed to extract data from analytic start request",e.what());
+		return reportError("Failed to extract data from analytic start request");
 	}
 
-	if((iAnalyticInstanceId <= 0) || sAnalyticDirPath.empty() || sAnalyticFilename.empty())
+	//Step 2 - Set the analytic results path
+	std::string sAnalyticResultsDir = "";
+	sAnalyticResultsDir = _pConfig->get(analytic::util::PROPERTY_ANALYTIC_RESULTS_DIR);
+	if(sAnalyticResultsDir.empty())
 	{
+		return reportError("Failed to locate the path to save analytic results");
+	}
+	if (*sAnalyticResultsDir.rbegin() != '/')     // check last char
+	{
+		sAnalyticResultsDir.append("/");
+	}
+	std::ostringstream sResultsDir;
+	sResultsDir << sAnalyticResultsDir << iAnalyticInstanceId;
+	sAnalyticResultsDir = sResultsDir.str();
 
-		return reportError(analytic::xml::OPERATION_START_ANALYTIC,
-						false, "Analytic start request with invalid data","");
+	if(!opencctv::util::Util::createDir(sAnalyticResultsDir))
+	{
+		return reportError("Failed to create a directory to save analytic results.");
 	}
 
-	//Step 2 - Start the analytic instance
+
+	//Step 3 - Start the analytic instance
 
 	// TODO Check if a process already exist with the same analytic instance id
 	//If so stop the analytic instance and start the analytic instance again
 
+	// TODO Code not modified. Need updating to use the current changes.
+
 	// Creating Analytic process
-	analytic::AnalyticProcess *pAnalyticProcess = new analytic::AnalyticProcess();
+	analytic::AnalyticProcess *pAnalyticProcess = new analytic::AnalyticProcess(iAnalyticInstanceId);
 	if(!pAnalyticProcess)
 	{
-		return reportError(analytic::xml::OPERATION_START_ANALYTIC,
-								false, "Out of memory - failed to create new analytic instance","");
+		return reportError("Out of memory - failed to create new analytic instance");
 	}
-
-	// TODO Remove later=========
-	sAnalyticInputQueueAddress = "9999"; //= boost::lexical_cast<std::string>(++iPort);
-	sAnalyticOutputQueueAddress = "9999";//= boost::lexical_cast<std::string>(++iPort);
-	// ==========================
 
 	try
 	{
 		std::string sAnalyticRunnerPath;
 		sAnalyticRunnerPath.append(_pConfig->get(analytic::util::PROPERTY_ANALYTIC_RUNNER_DIR));
-		sAnalyticRunnerPath.append("/");
+		if (*sAnalyticRunnerPath.rbegin() != '/')     // check last char of path
+		{
+			sAnalyticRunnerPath.append("/");
+		}
 		sAnalyticRunnerPath.append(_pConfig->get(analytic::util::PROPERTY_ANALYTIC_RUNNER_FILENAME));
 		//std::cout << "From Starter: Instance id " + boost::lexical_cast<std::string>(iAnalyticInstanceId) + " plugin location" + sAnalyticDirPath + " plugin file anem" + sAnalyticFilename + " Input Queue port" + sAnalyticInputQueueAddress + " Output queue port" + sAnalyticOutputQueueAddress << std::endl;
-		bAIStarted = pAnalyticProcess->startAnalytic(sAnalyticRunnerPath, iAnalyticInstanceId,
-				sAnalyticDirPath, sAnalyticFilename, sAnalyticInputQueueAddress, sAnalyticOutputQueueAddress);
+		bAIStarted = pAnalyticProcess->startAnalytic(sAnalyticRunnerPath, sAnalyticFilename, sAnalyticResultsDir);
 	}catch(opencctv::Exception &e)
 	{
 		sErrMsg = e.what();
@@ -197,8 +218,7 @@ std::string AnalyticServerController::startAnalytic(const std::string& sRequest)
 	if(!bAIStarted)
 	{
 		ssErrMsg << "Failed to start analytic instance " << iAnalyticInstanceId;
-		return reportError(analytic::xml::OPERATION_START_ANALYTIC,
-										false, ssErrMsg.str(),sErrMsg);
+		return reportError(sErrMsg);
 	}
 
 	analytic::ApplicationModel* pModel = analytic::ApplicationModel::getInstance();
@@ -206,92 +226,29 @@ std::string AnalyticServerController::startAnalytic(const std::string& sRequest)
 	//Record the details of the analytic process in ApplicationModel
 	pModel->getAnalyticProcesses()[iAnalyticInstanceId] = pAnalyticProcess;
 
-	//Step 3 - Start the results routing threads for each results app instance
-	//         registered for this analytic instance
+	//Step 4 - Start the results routing threads for each results app instance
+	//         registered by this analytic instance
+	//result::AnalyticInstController analyticInstController;
+	std::string sOutputMsg;
+	//analyticInstController.startResultsRouting(iAnalyticInstanceId,sOutputMsg);
 
-	//Select the results_app_instance_ids this analytic instance is registered
-	result::db::ResultsAppInstanceGateway resultsAppInstanceGateway;
-	std::vector<result::db::dto::ResultsAppInstance> vResultsAppInstance;
-	resultsAppInstanceGateway.findRAppInstancesForAnalyticInst(iAnalyticInstanceId, vResultsAppInstance);
-
-	//For each results_app_instance
-	for(size_t i = 0; i < vResultsAppInstance.size(); ++i)
-	{
-		result::db::dto::ResultsAppInstance rAppInst = vResultsAppInstance[i];
-		unsigned int iResltsAppInstId = rAppInst.getResultsAppInstanceId();
-
-		result::ResultAppInstController* pResultAppInstController = NULL;
-		//If a results app instant controller already exist use it
-		if(pModel->containsResultAppInstController(iResltsAppInstId))
-		{
-			pResultAppInstController = pModel->getResultAppInstControllers()[iResltsAppInstId];
-
-		}else //Otherwise create a new results app instant controller
-		{
-			pResultAppInstController = new result::ResultAppInstController(iResltsAppInstId);
-			//Add this results app instant controller to app model
-			if(pResultAppInstController)
-			{
-				pModel->getResultAppInstControllers().insert(std::pair<unsigned int,
-									result::ResultAppInstController*>(iResltsAppInstId,pResultAppInstController));
-			}else
-			{
-				ssErrMsg << "Failed to create a controller for results application instant ";
-				ssErrMsg << iResltsAppInstId << ".\n";
-				opencctv::util::log::Loggers::getDefaultLogger()->error(ssErrMsg.str());
-				continue; //Skip the remaining steps in for loop
-			}
-		}
-
-		pResultAppInstController->addAnalyticInstance(iAnalyticInstanceId);
-
-		//If a thread does not exist for this results app instant create a one
-		if(!pModel->containsResultsTxThread(iResltsAppInstId))
-		{
-			result::ResultsTxThread resultsTxThread(iResltsAppInstId);
-			boost::thread* pThread = NULL;
-			pThread = new boost::thread(resultsTxThread);
-			if(pThread && pThread->joinable())
-			{
-				//Add this thread to the app model and the thread group
-				pModel->getResultsTxThreads()[iResltsAppInstId] = pThread;
-				pModel->getResultsTxThreadGroup()->add_thread(pThread);
-			}else
-			{
-				//Delete the thread if it is created
-				delete pThread; pThread = NULL;
-				//Remove the ResultAppInstController created for this thread
-				if(pModel->containsResultAppInstController(iResltsAppInstId))
-				{
-					pResultAppInstController = pModel->getResultAppInstControllers()[iResltsAppInstId];
-					delete pResultAppInstController; pResultAppInstController = NULL;
-					pModel->getResultAppInstControllers().erase(iResltsAppInstId);
-				}
-				ssErrMsg << "Failed to initialize results transmission thread for results application instant ";
-				ssErrMsg << iResltsAppInstId << ".\n";
-				opencctv::util::log::Loggers::getDefaultLogger()->error(ssErrMsg.str());
-				continue; //Skip the remaining steps in for loop
-			}
-		}
-	}
-
-	//Step 4 - Return the reply XML message
+	//Step 5 - Return the reply XML message
 	std::stringstream ssMsg;
 	ssMsg << "Analytic instance " << iAnalyticInstanceId << " started.";
 	opencctv::util::log::Loggers::getDefaultLogger()->info(ssMsg.str());
-	if(!ssErrMsg.str().empty())
+	if(!sOutputMsg.empty())
 	{
-		ssMsg << " But, few errors occurred during the operation. Check the analytic server log for more details.";
+		ssMsg << " But, few errors occurred during the operation. ";
+		ssMsg << sOutputMsg << " Check the analytic server log for more details. ";
 	}
 
 	try
 	{
-		sReply = analytic::xml::AnalyticMessage::getAnalyticStartReply(true, ssMsg.str(), sAnalyticInputQueueAddress, sAnalyticOutputQueueAddress);
+		sReply = analytic::xml::AnalyticMessage::getAnalyticStartReply(ssMsg.str(), _sStatus, _iPid);
 	}
 	catch (opencctv::Exception &e)
 	{
-		sReply = reportError(analytic::xml::OPERATION_START_ANALYTIC,
-				bAIStarted, "Failed to create analytic start reply XML message",e.what());
+		sReply = reportError("Failed to create analytic start reply XML message");
 	}
 
 	return sReply;
@@ -317,7 +274,7 @@ std::string AnalyticServerController::stopAnalytic(const std::string& sRequest)
 		sErrMsg = "Failed to extract data from analytic stop request. ";
 		sErrMsg.append(e.what());
 		opencctv::util::log::Loggers::getDefaultLogger()->error(sErrMsg);
-		sReply = analytic::xml::AnalyticMessage::getErrorReply(analytic::xml::OPERATION_STOP_ANALYTIC,false,sErrMsg);
+		return analytic::xml::AnalyticMessage::getErrorReply(sErrMsg, _sStatus, _iPid);
 		return sReply;
 	}
 
@@ -328,9 +285,9 @@ std::string AnalyticServerController::stopAnalytic(const std::string& sRequest)
 	if(it == mAnalyticProcesses.end())
 	{
 		std::stringstream ssMsg;
-		ssMsg << "Failed to stop the analytic instance. Analytic instance id. ";
-		ssMsg << iAnalyticInstanceId << " is invalid.";
-		sReply = analytic::xml::AnalyticMessage::getErrorReply(analytic::xml::OPERATION_STOP_ANALYTIC,bDone,ssMsg.str());
+		ssMsg << "Failed to stop the analytic instance. Cannot find analytic instance with ID : ";
+		ssMsg << iAnalyticInstanceId << ".";
+		return analytic::xml::AnalyticMessage::getErrorReply(ssMsg.str(), _sStatus, _iPid);
 		return sReply;
 	}
 
@@ -342,7 +299,7 @@ std::string AnalyticServerController::stopAnalytic(const std::string& sRequest)
 	{
 		std::stringstream ssMsg;
 		ssMsg << "Error occurred while stopping the analytic instance " << iAnalyticInstanceId << ".";
-		sReply = analytic::xml::AnalyticMessage::getErrorReply(analytic::xml::OPERATION_STOP_ANALYTIC,bDone,ssMsg.str());
+		return analytic::xml::AnalyticMessage::getErrorReply(ssMsg.str(), _sStatus, _iPid);
 		return sReply;
 	}
 
@@ -365,7 +322,7 @@ std::string AnalyticServerController::stopAnalytic(const std::string& sRequest)
 	{
 		std::stringstream ssMsg;
 		ssMsg << "Analytic instance " << iAnalyticInstanceId << " stopped successfully.";
-		sReply = analytic::xml::AnalyticMessage::getAnalyticStopReply(bDone,ssMsg.str());
+		sReply = analytic::xml::AnalyticMessage::getAnalyticStopReply(ssMsg.str(), _sStatus, _iPid);
 		opencctv::util::log::Loggers::getDefaultLogger()->debug("Finished stopping analytic instance, replied");
 	}
 	catch (opencctv::Exception &e)
@@ -373,8 +330,10 @@ std::string AnalyticServerController::stopAnalytic(const std::string& sRequest)
 		std::string sErrMsg = "Failed to create analytic stop reply. ";
 		sErrMsg.append(e.what());
 		opencctv::util::log::Loggers::getDefaultLogger()->error(sErrMsg);
-		sReply = analytic::xml::AnalyticMessage::getErrorReply(analytic::xml::OPERATION_STOP_ANALYTIC, bDone, sErrMsg);
+		return analytic::xml::AnalyticMessage::getErrorReply(sErrMsg, _sStatus, _iPid);
 	}
+
+	//std::cout << "AnalyticServerController::stopAnalytic (): returning: "<< sReply << std::endl;
 
 	return sReply;
 
@@ -426,7 +385,7 @@ std::string AnalyticServerController::killAllAnalytics(const std::string& sReque
 		catch (opencctv::Exception &e)
 		{
 			std::string sErrMsg = "Failed to create kill all analytics reply. ";
-			sReply = analytic::xml::AnalyticMessage::getErrorReply(analytic::xml::OPERATION_KILL_ALL_ANALYTICS, true, sErrMsg);
+			//sReply = analytic::xml::AnalyticMessage::getErrorReply(analytic::xml::OPERATION_KILL_ALL_ANALYTICS, true, sErrMsg);
 			sErrMsg.append(e.what());
 			opencctv::util::log::Loggers::getDefaultLogger()->error(sErrMsg);
 		}
@@ -435,7 +394,7 @@ std::string AnalyticServerController::killAllAnalytics(const std::string& sReque
 		sErrMsg = "Failed to stop following analytic instances : ";
 		sErrMsg.append(ssNotStoppedAnalytics.str());
 		opencctv::util::log::Loggers::getDefaultLogger()->error(sErrMsg);
-		sReply = analytic::xml::AnalyticMessage::getErrorReply(analytic::xml::OPERATION_KILL_ALL_ANALYTICS, false, sErrMsg);
+		//sReply = analytic::xml::AnalyticMessage::getErrorReply(analytic::xml::OPERATION_KILL_ALL_ANALYTICS, false, sErrMsg);
 	}
 
 	return sReply;
@@ -444,35 +403,110 @@ std::string AnalyticServerController::killAllAnalytics(const std::string& sReque
 std::string AnalyticServerController::AnalyticServerController::getServerStatus()
 {
 	std::string sReply;
+	std::string sMessage = "Analytic server status retrieved successfully.";
 
 	//Return the reply XML message
-	int iPid = getpid();
-	//TODO Modify server status accordingly, at the moment hard-coded to "Running"
-	std::string sStatus = "Running";
 	try
 	{
-		sReply = analytic::xml::AnalyticMessage::getServerStatusReply(sStatus,iPid);
+		sReply = analytic::xml::AnalyticMessage::getServerStatusReply(sMessage,_sStatus,_iPid);
 	}
 	catch (opencctv::Exception &e)
 	{
 		std::stringstream ossReply;
 		ossReply << "<?xml version=\"1.0\" encoding=\"utf-8\"?>";
 		ossReply << "<analyticreply>";
-		ossReply << "<operation>";
+		ossReply << "<type>";
 		ossReply <<	analytic::xml::OPERATION_ANALYTIC_SERVER_STATUS;
-		ossReply << "</operation>";
-		ossReply << "<status>";
-		ossReply <<	sStatus;
-		ossReply << "</status>";
-		ossReply << "<pid>";
-		ossReply <<	iPid;
-		ossReply << "</pid>";
+		ossReply << "</type>";
+		ossReply << "<content>";
+		ossReply <<	sMessage;
+		ossReply << "</content>";
+		ossReply << "<serverstatus>";
+		ossReply <<	_sStatus;
+		ossReply << "</serverstatus>";
+		ossReply << "<serverpid>";
+		ossReply <<	_iPid;
+		ossReply << "</serverpid>";
 		ossReply << "</analyticreply>";
 
 		sReply = ossReply.str();
 	}
 
 	return sReply;
+}
+
+std::string AnalyticServerController:: getAnalyticInstStatus()
+{
+	std::string sReply;
+	//Update the status of each analytic instance
+	std::string sAnalyticInstStatusFailures = updateAnalyticInstStatus();
+	std::string sMessage;
+	if(sAnalyticInstStatusFailures.empty())
+	{
+		sMessage = "Status of analytic instances retrieved successfully.";
+	}else
+	{
+		sMessage = "Errors occurred while updating the status of analytic instance(s) " + sAnalyticInstStatusFailures + ".";
+	}
+
+	//Return the reply XML message
+	try
+	{
+		sReply = analytic::xml::AnalyticMessage::getServerStatusReply(sMessage,_sStatus,_iPid);
+	}
+	catch (opencctv::Exception &e)
+	{
+		std::stringstream ossReply;
+		ossReply << "<?xml version=\"1.0\" encoding=\"utf-8\"?>";
+		ossReply << "<analyticreply>";
+		ossReply << "<type>";
+		ossReply <<	analytic::xml::OPERATION_ANALYTIC_INST_STATUS;
+		ossReply << "</type>";
+		ossReply << "<content>";
+		ossReply <<	sMessage;
+		ossReply << "</content>";
+		ossReply << "<serverstatus>";
+		ossReply <<	_sStatus;
+		ossReply << "</serverstatus>";
+		ossReply << "<serverpid>";
+		ossReply <<	_iPid;
+		ossReply << "</serverpid>";
+		ossReply << "</analyticreply>";
+
+		sReply = ossReply.str();
+	}
+
+	return sReply;
+}
+
+std::string AnalyticServerController::updateAnalyticInstStatus()
+{
+	analytic::ApplicationModel* pModel = analytic::ApplicationModel::getInstance();
+	std::map<unsigned int, analytic::AnalyticProcess*> mAnalyticProcesses = pModel->getAnalyticProcesses();
+	std::map<unsigned int, analytic::AnalyticProcess*> ::iterator it;
+
+	std::stringstream ssFailedAnalytics;
+	ssFailedAnalytics << "";
+	const char* cSeparator = "";
+
+	for (it = mAnalyticProcesses.begin(); it != mAnalyticProcesses.end(); ++it)
+	{
+		try
+		{
+			if(!it->second->updateStatus())
+			{
+				ssFailedAnalytics << cSeparator << it->first;
+			}
+
+		}catch(opencctv::Exception &e)
+		{
+			ssFailedAnalytics << cSeparator << it->first;
+		}
+
+		cSeparator = ", ";
+	}
+
+	return ssFailedAnalytics.str();
 }
 
 void AnalyticServerController::sendReply(const std::string& sMessage)
@@ -492,15 +526,39 @@ void AnalyticServerController::sendReply(const std::string& sMessage)
 	}
 }
 
-std::string AnalyticServerController::reportError(const std::string& sOperation,
+/*std::string AnalyticServerController::reportError(const std::string& sOperation,
 		const bool bDone, const std::string& sErrorMsg,const std::string& sExceptionMsg)
 {
-	std::string sMsg = sErrorMsg;
+	std::string sMsg = sOperation;
+	sMsg = sMsg.append(" : ");
+	sMsg = sMsg.append(sErrorMsg);
 	sMsg = sMsg.append(". ");
 	sMsg = sMsg.append(sExceptionMsg);
 	opencctv::util::log::Loggers::getDefaultLogger()->error(sMsg);
 	return analytic::xml::AnalyticMessage::getErrorReply(sOperation, bDone, sMsg);
+}*/
+
+std::string AnalyticServerController::reportError(const std::string& sErrorMsg)
+{
+	opencctv::util::log::Loggers::getDefaultLogger()->error(sErrorMsg);
+	return analytic::xml::AnalyticMessage::getErrorReply(sErrorMsg, _sStatus, _iPid);
 }
+
+const std::string& AnalyticServerController::getStatus() const {
+	return _sStatus;
+}
+
+void AnalyticServerController::setStatus(const std::string& status) {
+	_sStatus = status;
+}
+
+/*const std::string& AnalyticServerController::getHost() const {
+	return _sHost;
+}
+
+void AnalyticServerController::setHost(const std::string& host) {
+	_sHost = host;
+}*/
 
 AnalyticServerController::~AnalyticServerController()
 {

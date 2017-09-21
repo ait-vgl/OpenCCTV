@@ -9,6 +9,7 @@
 /* boost includes (/usr/local/include/) */
 /* boost library links (/usr/local/lib/) -lboost_system */
 #include <boost/lexical_cast.hpp> // to cast types
+//#include "../Exception.hpp"
 #include <exception> // to throw runtime exceptions
 
 namespace opencctv {

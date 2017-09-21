@@ -28,7 +28,14 @@ Config* Config::getInstance()
 {
 	if(!_pConfig)
 	{
-		_pConfig = new Config();
+		try
+		{
+			_pConfig = new Config();
+		}catch(opencctv::Exception &e)
+		{
+			throw e;
+		}
+
 	}
 	return _pConfig;
 }
