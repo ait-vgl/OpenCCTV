@@ -17,16 +17,22 @@
 
 namespace analytic {
 
-//enum class Process_Status_t {STOPPED, STARTING, STARTED, ERROR};
+const unsigned int ANALYTIC_STATUS_STOPPED = 0;
+const unsigned int ANALYTIC_STATUS_STARTING = 1;
+const unsigned int ANALYTIC_STATUS_STARTED = 2;
+const unsigned int ANALYTIC_STATUS_ERROR = 3;
+const unsigned int ANALYTIC_STATUS_UNKNOWN = 4;
 
 class Process
 {
 protected:
-	enum Process_Status_t {STOPPED = 0, STARTING = 1, STARTED = 2, ERROR = 3};
+	//enum Process_Status_t {STOPPED = 0, STARTING = 1, STARTED = 2, ERROR = 3, UNKNOWN = 4};
 	FILE* _pReadStream;
 	pid_t _pid;
-	Process_Status_t _iStatus;
-	Process_Status_t getStatus();
+	//Process_Status_t _iStatus;
+	//Process_Status_t getStatus();
+	unsigned int _iStatus;
+	unsigned int getStatus();
 
 public:
 	Process();

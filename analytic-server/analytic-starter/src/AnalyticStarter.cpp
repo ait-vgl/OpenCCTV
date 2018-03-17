@@ -7,8 +7,17 @@
 #include "result/db/AnalyticResultGateway.hpp"
 #include "result/AnalyticInstController.hpp"
 
+void exitHandler(int iSignum);
+
 int main()
 {
+	/*
+	 * Registering signals with exit handler
+	 */
+	signal(SIGINT, exitHandler); // for Ctrl + C keyboard interrupt
+	signal(SIGTERM, exitHandler); // for Terminate signal
+	signal(SIGKILL, exitHandler); // for SIGKILL
+
 	/*
 	 * Initialize the analytic server
 	 */
@@ -20,6 +29,12 @@ int main()
 		if(pAnalyticServerController)
 		{
 			bEnabled = true;
+			/*
+			 * Set the server status to running
+			 */
+			pAnalyticServerController->updateStatus(analytic::ANALYTIC_SERVER_RUNNING);
+
+			opencctv::util::log::Loggers::getDefaultLogger()->info("Analytic server started........");
 		}
 	}catch(opencctv::Exception &e)
 	{
@@ -49,10 +64,7 @@ int main()
 		opencctv::util::log::Loggers::getDefaultLogger()->error(sOutputMsg);
 	}*/
 
-	/*
-	 * Set the server status to running
-	 */
-	pAnalyticServerController->setStatus("Running");
+
 
 
 	/*
@@ -64,11 +76,34 @@ int main()
 		pAnalyticServerController->executeOperation();
 	}
 
-	pAnalyticServerController->setStatus("Stopped");
-
-	std::string sErrMsg = "Analytic Server Exit...........";
-	opencctv::util::log::Loggers::getDefaultLogger()->debug(sErrMsg);
+	exitHandler(0);
 
 	return 0;
+}
 
+void exitHandler(int iSignum)
+{
+	//Call stopServer which will stop the analytics, server and update status in the database
+	analytic::AnalyticServerController* pAnalyticServerController = NULL;
+	try
+	{
+		pAnalyticServerController = analytic::AnalyticServerController::getInstance();
+
+	}catch(opencctv::Exception &e)
+	{
+		std::string sErrMsg = "Error occured while exiting analytic server. Failed to get access to  Analytic Server Controller : ";
+		sErrMsg.append(e.what());
+		opencctv::util::log::Loggers::getDefaultLogger()->error(sErrMsg);
+	}
+
+	if(pAnalyticServerController)
+	{
+
+		pAnalyticServerController->stopServer();
+
+	}
+
+	std::string sMsg = "Analytic Server Exit...........";
+	opencctv::util::log::Loggers::getDefaultLogger()->debug(sMsg);
+    exit(iSignum);
 }

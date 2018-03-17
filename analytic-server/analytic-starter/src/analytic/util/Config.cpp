@@ -42,7 +42,7 @@ Config* Config::getInstance()
 
 std::string Config::get(const std::string& sPropertyName)
 {
-	std::string sRet;
+	std::string sRet = "";
 	std::map<std::string, std::string>::iterator it = _mConfigDetails.find(sPropertyName);
 	if (it != _mConfigDetails.end())
 	{

@@ -7,7 +7,7 @@ Process::Process()
 {
 	_pReadStream = NULL;
 	_pid = 0;
-	_iStatus = STOPPED;
+	_iStatus = ANALYTIC_STATUS_STOPPED;
 }
 
 bool Process::start(const std::string& sPathToExecutable, const std::string& sCommandLineParams)
@@ -18,7 +18,7 @@ bool Process::start(const std::string& sPathToExecutable, const std::string& sCo
 	ssCommand << sPathToExecutable << " ";
 	ssCommand << sCommandLineParams;
     _pReadStream = popen(ssCommand.str().data(), "r");
-    _iStatus = STARTING;
+    _iStatus = ANALYTIC_STATUS_STARTING;
 	if (!_pReadStream)
 	{
 		std::string sErrMsg = "Failed to start Analytic process. Failed to execute command: ";
@@ -47,7 +47,7 @@ bool Process::start(const std::string& sPathToExecutable, const std::string& sCo
 
 		if (_pid > 0)
 		{
-			_iStatus = STARTED;
+			_iStatus = ANALYTIC_STATUS_STARTED;
 			bRet = true;
 		}
 	}
@@ -65,7 +65,7 @@ bool Process::start(std::string sPathToAnalyticRunnerExecutable,
 
 	if(_pid == 0)
 	{
-		_iStatus = STARTING;
+		_iStatus = ANALYTIC_STATUS_STARTING;
 		char* exec_args[5];
 
 		exec_args[0] = &sPathToAnalyticRunnerExecutable[0];
@@ -83,29 +83,25 @@ bool Process::start(std::string sPathToAnalyticRunnerExecutable,
 
 		//If exec returns, process must have failed.
 		throw opencctv::Exception("Failed to start the analytic instance");
-		_iStatus = ERROR;
+		_iStatus = ANALYTIC_STATUS_ERROR;
 		_exit(-1);
 	}
 
-	_iStatus = STARTED;
+	_iStatus = ANALYTIC_STATUS_STARTED;
 	return true;
 }
 
 bool Process::stop()
 {
-	//std::cout << "From Process::stop(): _pid : "<< _pid << std::endl;
-
 	bool died = false;
 	int status;
 	if (_pid > 0)
 	{
-		//std::cout << "Before kill........... :  " << (waitpid(_pid, &status, WNOHANG)) << std::endl;
 		kill(_pid, SIGTERM);
 		sleep(2);
 		for (int loop = 0; !died && loop < 10; ++loop)
 		{
 			pid_t result = waitpid(_pid, &status, WNOHANG);
-			//std::cout << "After kill........... :  " << result << std::endl;
 			if (result == _pid)
 			{
 				died = true;
@@ -121,11 +117,11 @@ bool Process::stop()
 			died = true;
 		}
 	}
-	_iStatus = STOPPED;
+	_iStatus = ANALYTIC_STATUS_STOPPED;
 	_pid = 0;
 	if (_pReadStream)
 	{
-		pclose(_pReadStream);
+		pclose(_pReadStream); _pReadStream = NULL;
 
 	}
 	return died;
@@ -161,19 +157,25 @@ bool Process::readLine(std::string& sStreamOutputLine)
 	return false;
 }
 
-Process::Process_Status_t Process::getStatus()
+unsigned int Process::getStatus()
 {
+	if(_pid == 0)
+	{
+		_iStatus = ANALYTIC_STATUS_STOPPED;
+		return _iStatus;
+	}
+
 	int status;
 	pid_t result = waitpid(_pid, &status, WNOHANG);
 	if (result == 0) /* Child is still running */
 	{
-		_iStatus = STARTED;
+		_iStatus = ANALYTIC_STATUS_STARTED;
 	} else if (result == _pid) /* Child has finished execution */
 	{
-		_iStatus = STOPPED;
+		_iStatus = ANALYTIC_STATUS_STOPPED;
 	} else /* Error */
 	{
-		_iStatus = ERROR;
+		_iStatus = ANALYTIC_STATUS_ERROR;
 	}
 
 	return _iStatus;
@@ -183,8 +185,8 @@ Process::~Process()
 {
 	if (_pReadStream)
 	{
-		// pclose(_pReadStream);
-		// delete _pReadStream;
+		pclose(_pReadStream);
+		delete _pReadStream; _pReadStream = NULL;
 	}
 }
 

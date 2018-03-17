@@ -22,31 +22,32 @@ const std::string OPERATION_UNKNOWN = "Unknown";
 
 class AnalyticMessage {
 public:
-	static std::string extractAnalyticRequestOperation(const std::string& sAnalyticRequest);
-	static std::string getServerStatusReply(const std::string& sMessage, const std::string& sStatus, const int iPid);
-	//static std::string getAnalyticStartRequest(unsigned int iAnalyticInstanceId, const std::string& sAnalyticPluginDirLocation, const std::string& sAnalyticPluginFilename);
-	//static std::string getAnalyticStartReply(const std::string& sAnalyticQueueInAddress,const std::string& sAnalyticQueueOutAddress);
-	static std::string getAnalyticStartReply(const std::string& sMessage,const std::string& sServerStatus,const int iPid);
-	// TODO May 08 2017 Later Remove =======
-	static std::string getAnalyticStartReply(const std::string& sAnalyticQueueInAddress,const std::string& sAnalyticQueueOutAddress);
-	//static std::string getPidMessage(pid_t pid);
-    //static pid_t getPid(const std::string& sPidMessage);
-	//static std::string getKillAllAnalyticProcessesRequest();
-	// TODO May 08 2017 Later Remove =======
-	static std::string getKillAllAnalyticProcessesReply(bool bDone);
-	static std::string getKillAllAnalyticProcessesReply(bool bDone, const std::string& sMessage);
-	static void extractAnalyticStartRequestData(const std::string& sAnalyticStartRequest, unsigned int& iAnalyticInstanceId, std::string& sAnalyticFilename);
-	//static void extractAnalyticStartRequestData(const std::string& sAnalyticStartRequest, unsigned int& iAnalyticInstanceId, std::string& sAnalyticDirLocation);
-	static void extractAnalyticStartReplyData(const std::string& sAnalyticStartReply, std::string& sAnalyticQueueInAddress, std::string& sAnalyticQueueOutAddress);
-	//static void parseKillAllAnalyticProcessesReply(const std::string& sReply, bool& sDone);
-	
-    
-    static void extractAnalyticStopRequestData(const std::string& sAnalyticStopRequest, unsigned int& iAnalyticInstanceId);
-    static std::string getStopAnalyticProcessesReply(bool bDone);
-    static std::string getAnalyticStopReply(const std::string& sMessage, const std::string& sServerStatus,const int iPid);
+	static void extractInitialDetails(const std::string& sAnalyticRequest,
+			unsigned int& iServerId, std::string& sOperation);
+	static std::string getServerStatusReply(const std::string& sMessage,
+			const std::string& sStatus, const int iPid);
+	static std::string getAnalyticStartReply(const std::string& sMessage,
+			const std::string& sServerStatus,const int iPid);
 
-    //static std::string getErrorReply(const std::string& sOperation, const bool bDone, const std::string& sErrorMessage);
-    static std::string getErrorReply(const std::string& sErrorMessage, const std::string& sServerStatus,const int iPid);
+	// TODO May 08 2017 Later Remove =======
+	//static std::string getAnalyticStartReply(const std::string& sAnalyticQueueInAddress,
+	//const std::string& sAnalyticQueueOutAddress);
+
+	static std::string getKillAllAnalyticsReply(const std::string& sMessage,
+			const std::string& sServerStatus,const int iPid);
+	static void extractAnalyticStartRequestData(const std::string& sAnalyticStartRequest,
+			unsigned int& iAnalyticInstanceId, std::string& sAnalyticFilename);
+	static void extractAnalyticStartReplyData(const std::string& sAnalyticStartReply,
+			std::string& sAnalyticQueueInAddress, std::string& sAnalyticQueueOutAddress);
+	static void extractAnalyticStopRequestData(const std::string& sAnalyticStopRequest,
+			unsigned int& iAnalyticInstanceId);
+    static std::string getStopAnalyticProcessesReply(bool bDone);
+    static std::string getAnalyticStopReply(const std::string& sMessage,
+    		const std::string& sServerStatus,const int iPid);
+    static std::string getErrorReply(const std::string& sErrorMessage,
+    		const std::string& sServerStatus,const int iPid);
+    static void extractKillAllAnalyticsReply(const std::string& sKillAllAnalyticsReply,
+    		std::string& sContent);
 };
 
 } /* namespace xml */

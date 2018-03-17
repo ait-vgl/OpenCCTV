@@ -31,7 +31,9 @@ AnalyticServerController::AnalyticServerController()
 	// Loading Configuration file
 	_pConfig = NULL;
 	_iPid = getpid();
-	//_sHost = "";
+	_iServerId = 0;
+	_sHost = "";
+	_iPort = 0;
 	try
 	{
 		_pConfig = analytic::util::Config::getInstance();
@@ -40,28 +42,47 @@ AnalyticServerController::AnalyticServerController()
 		throw e;
 	}
 
-	opencctv::util::log::Loggers::getDefaultLogger()->info("Loading Configuration file done.");
+	opencctv::util::log::Loggers::getDefaultLogger()->info("Loading configuration file done.");
 
 	// Initializing values
+	//Read the server's ip/host address
+	_sHost = _pConfig->get(analytic::util::PROPERTY_STARTER_HOST);
+	boost::algorithm::trim(_sHost);
+	if(_sHost.empty())
+	{
+		throw opencctv::Exception("Failed to retrieve analytic server host address from configuration file.");
+	}
+
 	//Read the starting port
-	std::string sStartingPort = _pConfig->get(analytic::util::PROPERTY_STARTER_PORT);
+	std::string sStartingPort =_pConfig->get(analytic::util::PROPERTY_STARTER_PORT);
+	boost::trim(sStartingPort);
 	if(sStartingPort.empty())
 	{
-		throw opencctv::Exception("Failed to retrieve Analytic Starter port from Configuration file.");
+		throw opencctv::Exception("Failed to retrieve analytic server port from configuration file.");
 	}
-	//STARTING_PORT = boost::lexical_cast<unsigned int>(sStartingPort);
-	iPort = boost::lexical_cast<unsigned int>(sStartingPort);
+
+	try
+	{
+		_iPort = boost::lexical_cast<unsigned int>(sStartingPort);
+	}
+	catch (const boost::bad_lexical_cast &e)
+	{
+		throw opencctv::Exception("Failed to retrieve analytic server port from configuration file.");
+	}
+
+	std::stringstream ssMsg;
+	ssMsg << "Analytic server details - Host: " << _sHost;
+	ssMsg << " Port: " << _iPort;
+	opencctv::util::log::Loggers::getDefaultLogger()->info(ssMsg.str());
 
 	//Read the number of analytics
-	std::string sNoAnalytics = _pConfig->get(analytic::util::PROPERTY_NUM_OF_ANALYTICS);
-	if(sNoAnalytics.empty())
-	{
-		throw opencctv::Exception("Failed to retrieve Number of Analytics from Configuration file.");
-	}
+	//std::string sNoAnalytics = _pConfig->get(analytic::util::PROPERTY_NUM_OF_ANALYTICS);
+	//if(sNoAnalytics.empty())
+	//{
+		//throw opencctv::Exception("Failed to retrieve Number of Analytics from configuration file.");
+	//}
 
-	iNumOfAnalytics = boost::lexical_cast<unsigned int>(sNoAnalytics);
-
-	//fillIOPorts();
+	//_iNumOfAnalytics = boost::lexical_cast<unsigned int>(sNoAnalytics);
 
 	opencctv::util::log::Loggers::getDefaultLogger()->info("Initializing configuration details done.");
 
@@ -82,7 +103,8 @@ AnalyticServerController::AnalyticServerController()
 void AnalyticServerController::executeOperation()
 {
 	std::string sRequest;
-	std::string sOperation;
+	std::string sOperation = "";
+	unsigned int iServerId = 0;
 	std::string sMessage;
 
 	//Read the request
@@ -90,7 +112,9 @@ void AnalyticServerController::executeOperation()
 	{
 		opencctv::mq::MqUtil::readFromSocket(_pSocket, sRequest);
 		std::cout << "sRequest : " << sRequest << "\n" << std::endl;
-		sOperation = analytic::xml::AnalyticMessage::extractAnalyticRequestOperation(sRequest);
+		//sOperation = analytic::xml::AnalyticMessage::extractAnalyticRequestOperation(sRequest);
+		analytic::xml::AnalyticMessage::extractInitialDetails(sRequest, iServerId, sOperation);
+		//std::cout << "sReply : " << sReply << "\n" << std::endl;
 	}
 	catch(opencctv::Exception &e)
 	{
@@ -98,20 +122,33 @@ void AnalyticServerController::executeOperation()
 		sMessage = e.what();
 	}
 
-	//Execute the operation according to the operation type
+	//Update the server id
+	if(iServerId >0)
+	{
+		_iServerId = iServerId;
+	}
+
+	//If Initial details are invalid reply with an error message
+	//Otherwise, execute the operation according to the operation type
 	std::string sReply;
-	if(sOperation.compare(analytic::xml::OPERATION_START_ANALYTIC) == 0)
+	if(iServerId == 0)
+	{
+		sReply = reportError("Request with invalid analytic server Id.");
+	}else if(sOperation.empty())
+	{
+		sReply = reportError("Request with an unknown operation.");
+	}
+	else if(sOperation.compare(analytic::xml::OPERATION_START_ANALYTIC) == 0)
 	{
 		sReply = startAnalytic(sRequest);
 	}
 	else if(sOperation.compare(analytic::xml::OPERATION_STOP_ANALYTIC) == 0)
 	{
 		sReply = stopAnalytic(sRequest);
-
 	}
 	else if(sOperation.compare(analytic::xml::OPERATION_KILL_ALL_ANALYTICS) == 0)
 	{
-		sReply = killAllAnalytics(sRequest);
+		sReply = killAllAnalytics();
 	}
 	else if(sOperation.compare(analytic::xml::OPERATION_ANALYTIC_SERVER_STATUS) == 0)
 	{
@@ -122,7 +159,7 @@ void AnalyticServerController::executeOperation()
 	}
 	else
 	{
-		sReply = reportError("Request with an unknown Operation");
+		sReply = reportError("Request with an unknown operation.");
 	}
 	std::cout << "sReply : " << sReply << "\n" << std::endl;
 	sendReply(sReply);
@@ -217,29 +254,43 @@ std::string AnalyticServerController::startAnalytic(const std::string& sRequest)
 
 	if(!bAIStarted)
 	{
-		ssErrMsg << "Failed to start analytic instance " << iAnalyticInstanceId;
-		return reportError(sErrMsg);
+		return reportError("Failed to start analytic instance.");
 	}
 
+	//Step 4 - Record the details of the analytic process in ApplicationModel and
+	//         update the database
 	analytic::ApplicationModel* pModel = analytic::ApplicationModel::getInstance();
-
-	//Record the details of the analytic process in ApplicationModel
 	pModel->getAnalyticProcesses()[iAnalyticInstanceId] = pAnalyticProcess;
 
-	//Step 4 - Start the results routing threads for each results app instance
+	std::string sOutputMsg = "";
+	try
+	{
+		result::db::AnalyticInstanceGateway analyticInstanceGateway;
+		analyticInstanceGateway.updateStatus(iAnalyticInstanceId, analytic::ANALYTIC_STATUS_STARTED);
+	}
+	catch(opencctv::Exception &e)
+	{
+		sOutputMsg = "Failed to update the status of analytic instances in the database.";
+		//return reportError("Database error. Failed to update the status of analytic instances.");
+	}
+
+	if (!sOutputMsg.empty()){ ssErrMsg << sOutputMsg; }
+
+	//Step 5 - Start the results routing threads for each results app instance
 	//         registered by this analytic instance
 	//result::AnalyticInstController analyticInstController;
-	std::string sOutputMsg;
-	//analyticInstController.startResultsRouting(iAnalyticInstanceId,sOutputMsg);
 
-	//Step 5 - Return the reply XML message
+	//analyticInstController.startResultsRouting(iAnalyticInstanceId,sOutputMsg);
+	//if (!sOutputMsg.empty()){ ssErrMsg << " " << sOutputMsg; }
+
+	//Step 6 - Return the reply XML message
 	std::stringstream ssMsg;
 	ssMsg << "Analytic instance " << iAnalyticInstanceId << " started.";
 	opencctv::util::log::Loggers::getDefaultLogger()->info(ssMsg.str());
-	if(!sOutputMsg.empty())
+	if(!(ssErrMsg.str().empty()))
 	{
-		ssMsg << " But, few errors occurred during the operation. ";
-		ssMsg << sOutputMsg << " Check the analytic server log for more details. ";
+		ssMsg << " But, few errors occurred while starting the analytic instance. ";
+		ssMsg << "Errors : " << ssErrMsg.str() << " Check the analytic server log for more details.";
 	}
 
 	try
@@ -257,7 +308,7 @@ std::string AnalyticServerController::startAnalytic(const std::string& sRequest)
 std::string AnalyticServerController::stopAnalytic(const std::string& sRequest)
 {
 	// Request data
-	unsigned int iAnalyticInstanceId;
+	unsigned int iAnalyticInstanceId = 0;
 
 	//Reply data
 	std::string sReply;
@@ -268,13 +319,17 @@ std::string AnalyticServerController::stopAnalytic(const std::string& sRequest)
 	try
 	{
 		analytic::xml::AnalyticMessage::extractAnalyticStopRequestData(sRequest, iAnalyticInstanceId);
+		if(iAnalyticInstanceId == 0)
+		{
+			throw opencctv::Exception("Invalid analytic instance Id.");
+		}
 	}
 	catch (opencctv::Exception &e)
 	{
 		sErrMsg = "Failed to extract data from analytic stop request. ";
 		sErrMsg.append(e.what());
 		opencctv::util::log::Loggers::getDefaultLogger()->error(sErrMsg);
-		return analytic::xml::AnalyticMessage::getErrorReply(sErrMsg, _sStatus, _iPid);
+		sReply = analytic::xml::AnalyticMessage::getErrorReply(sErrMsg, _sStatus, _iPid);
 		return sReply;
 	}
 
@@ -303,43 +358,56 @@ std::string AnalyticServerController::stopAnalytic(const std::string& sRequest)
 		return sReply;
 	}
 
-	//Remove the analytic process from the ApplicationModel
-	//mAnalyticProcesses.erase(it);
-
 	//Free the memory taken by the analytic process
-	/*if (pAnalyticProcess)
+	if (pAnalyticProcess)
 	{
 		delete pAnalyticProcess; pAnalyticProcess = NULL;
-	}*/
+	}
+	//Remove the analytic process from the ApplicationModel
+	mAnalyticProcesses.erase(it);
 
-	// TODO Remove the analytic process and its results threads when all results are transmitted
-	pAnalyticProcess->setIsActive(false);
 
-	bDone = true;
+	//Update the database status
+	std::string sOutputMsg = "";
+	try
+	{
+		result::db::AnalyticInstanceGateway analyticInstanceGateway;
+		analyticInstanceGateway.updateStatus(iAnalyticInstanceId, analytic::ANALYTIC_STATUS_STOPPED);
+	}
+	catch(opencctv::Exception &e)
+	{
+		sOutputMsg = "Failed to update the status of analytic instances in the database.";
+	}
+
+	// TODO Remove results routing threads when all results are transmitted
+	//pAnalyticProcess->setIsActive(false);
 
 	//Return the reply XML message
 	try
 	{
 		std::stringstream ssMsg;
-		ssMsg << "Analytic instance " << iAnalyticInstanceId << " stopped successfully.";
+		ssMsg << "Analytic instance " << iAnalyticInstanceId << " stopped.";
+		if(!sOutputMsg.empty())
+		{
+			ssMsg << " But, few errors occurred while stopping the analytic instance. ";
+			ssMsg << "Errors : " << sOutputMsg << " Check the analytic server log for more details.";
+		}
 		sReply = analytic::xml::AnalyticMessage::getAnalyticStopReply(ssMsg.str(), _sStatus, _iPid);
 		opencctv::util::log::Loggers::getDefaultLogger()->debug("Finished stopping analytic instance, replied");
 	}
 	catch (opencctv::Exception &e)
 	{
-		std::string sErrMsg = "Failed to create analytic stop reply. ";
+		std::string sErrMsg = "XML parser error. Failed to create analytic stop reply. ";
 		sErrMsg.append(e.what());
 		opencctv::util::log::Loggers::getDefaultLogger()->error(sErrMsg);
 		return analytic::xml::AnalyticMessage::getErrorReply(sErrMsg, _sStatus, _iPid);
 	}
 
-	//std::cout << "AnalyticServerController::stopAnalytic (): returning: "<< sReply << std::endl;
-
 	return sReply;
 
 }
 
-std::string AnalyticServerController::killAllAnalytics(const std::string& sRequest)
+/*std::string AnalyticServerController::killAllAnalytics(const std::string& sRequest)
 {
 	//bool bDone = false;
 	std::string sReply;
@@ -356,14 +424,14 @@ std::string AnalyticServerController::killAllAnalytics(const std::string& sReque
 
 		if (pAnalyticProcess->stopAnalytic())
 		{
-			/*//Remove the analytic process from the ApplicationModel
+			//Remove the analytic process from the ApplicationModel
 			mAnalyticProcesses.erase(it);
 
 			//Free the memory taken by the analytic process
 			if (pAnalyticProcess)
 			{
 				delete pAnalyticProcess; pAnalyticProcess = NULL;
-			}*/
+			}
 
 			// TODO Remove the analytic process and its results threads when all results are transmitted
 			pAnalyticProcess->setIsActive(false);
@@ -395,6 +463,104 @@ std::string AnalyticServerController::killAllAnalytics(const std::string& sReque
 		sErrMsg.append(ssNotStoppedAnalytics.str());
 		opencctv::util::log::Loggers::getDefaultLogger()->error(sErrMsg);
 		//sReply = analytic::xml::AnalyticMessage::getErrorReply(analytic::xml::OPERATION_KILL_ALL_ANALYTICS, false, sErrMsg);
+	}
+
+	return sReply;
+}*/
+
+std::string AnalyticServerController::killAllAnalytics()
+{
+	std::string sReply;
+	std::stringstream ssErrMsg;
+	std::stringstream ssNotStoppedAnalytics;
+	std::stringstream ssNotStatusUpdatedAnalytics;
+	std::string sSeparator1 = "";
+	std::string sSeparator2 = "";
+	unsigned int iAnalyticInstId = 0;
+
+	std::map<unsigned int, analytic::AnalyticProcess *> mAnalyticProcesses = analytic::ApplicationModel::getInstance()->getAnalyticProcesses();
+	std::map<unsigned int, analytic::AnalyticProcess *>::iterator it;
+
+	for (it = mAnalyticProcesses.begin(); it != mAnalyticProcesses.end(); /*++it*/)//Iterator incremented below
+	{
+		std::map<unsigned int, analytic::AnalyticProcess *>::iterator itErase = it;
+		++it;
+
+		analytic::AnalyticProcess *pAnalyticProcess = itErase->second;
+
+		if(!pAnalyticProcess)//If analytic process is null skip the loop
+		{
+			continue;
+		}
+
+		iAnalyticInstId = pAnalyticProcess ->getAnalyticInstanceId();
+
+		if (pAnalyticProcess->stopAnalytic())
+		{
+			delete pAnalyticProcess; pAnalyticProcess = NULL;
+			//Remove the analytic process from the ApplicationModel
+			mAnalyticProcesses.erase(itErase);
+
+			//Update the database status
+			try
+			{
+				result::db::AnalyticInstanceGateway analyticInstanceGateway;
+				analyticInstanceGateway.updateStatus(iAnalyticInstId, analytic::ANALYTIC_STATUS_STOPPED);
+			}
+			catch(opencctv::Exception &e)
+			{
+
+				ssNotStatusUpdatedAnalytics << sSeparator2 << iAnalyticInstId;
+				sSeparator2 = ", ";
+			}
+
+			// TODO Remove results routing threads when all results are transmitted
+		}
+		else
+		{
+			ssNotStoppedAnalytics << sSeparator1 << it->first;
+			sSeparator1 = ", ";
+		}
+	}
+
+	//Return the reply XML message
+	std::string sMsg = "";
+
+	if(!(ssNotStoppedAnalytics.str().empty()))
+	{
+		ssErrMsg << "Failed to stop following analytic instances properly: ";
+		ssErrMsg << ssNotStoppedAnalytics.str() << ".";
+
+	}
+
+	if(!(ssNotStatusUpdatedAnalytics.str().empty()))
+	{
+		ssErrMsg << " Failed to update the status of following analytic instances in the database : ";
+		ssErrMsg << ssNotStatusUpdatedAnalytics.str() << ".";
+
+	}
+
+	if(!(ssErrMsg.str().empty()))
+	{
+		sMsg = "Few errors occurred while stopping analytic instances. Errors : ";
+		sMsg.append(ssErrMsg.str());
+	}else
+	{
+		sMsg = "All analytic instances successfully stopped.";
+	}
+
+	//opencctv::util::log::Loggers::getDefaultLogger()->debug(sMsg);
+
+	try
+	{
+		sReply = analytic::xml::AnalyticMessage::getKillAllAnalyticsReply(sMsg, _sStatus, _iPid);
+
+	}
+	catch (opencctv::Exception &e)
+	{
+		std::string sErrMsg = "XML parser error. Failed to create kill all analytics reply. ";
+		sErrMsg.append(e.what());
+		return analytic::xml::AnalyticMessage::getErrorReply(sErrMsg, _sStatus, _iPid);
 	}
 
 	return sReply;
@@ -435,18 +601,79 @@ std::string AnalyticServerController::AnalyticServerController::getServerStatus(
 	return sReply;
 }
 
-std::string AnalyticServerController:: getAnalyticInstStatus()
+std::string AnalyticServerController::getAnalyticInstStatus()
 {
-	std::string sReply;
-	//Update the status of each analytic instance
-	std::string sAnalyticInstStatusFailures = updateAnalyticInstStatus();
-	std::string sMessage;
-	if(sAnalyticInstStatusFailures.empty())
+	std::string sReply = "";
+	std::stringstream ssFailedAnalytics;
+	ssFailedAnalytics << "";
+	const char* cSeparator = "";
+	/*Retrieve the list of analytic instances assigned to this analytic server*/
+	std::vector<unsigned int > vAnlyticInstIds;
+	try
+	{
+		result::db::AnalyticServerGateway analyticServerGateway;
+		analyticServerGateway.findAllAnalyticInstances(_iServerId, vAnlyticInstIds);
+	}catch(opencctv::Exception &e)
+	{
+		return reportError("Failed to retrieve analytic instance details.");
+	}
+
+	if(vAnlyticInstIds.empty())
+	{
+		return reportError("No analytic instances are assigned to this analytic server.");
+	}
+
+	try
+	{
+		result::db::AnalyticInstanceGateway analyticInstanceGateway;
+		analytic::ApplicationModel* pModel = analytic::ApplicationModel::getInstance();
+		std::map<unsigned int, analytic::AnalyticProcess*> mAnalyticProcesses = pModel->getAnalyticProcesses();
+		std::map<unsigned int, analytic::AnalyticProcess*> ::iterator itInst;
+		std::vector<unsigned int>::iterator itDBInst;
+		unsigned int iInstId = 0;
+		unsigned int iInstStatus = 999;
+
+
+
+		for (itDBInst = vAnlyticInstIds.begin(); itDBInst != vAnlyticInstIds.end(); ++itDBInst)
+		{
+			int iInstId = *itDBInst;
+			itInst = mAnalyticProcesses.find(iInstId);
+
+			if(itInst == mAnalyticProcesses.end())// The analytic is not currently running on this server
+			{
+				//Update the status to "stopped"
+				iInstStatus = 0;
+			}else// The analytic is currently running on this server
+			{
+				//Check the status of the AnalyticProcess object
+				iInstStatus = itInst->second->getAnalyticStatus();
+			}
+
+			//Update the DB
+			try
+			{
+				analyticInstanceGateway.updateStatus(iInstId, iInstStatus);
+			}catch(opencctv::Exception &e)
+			{
+				ssFailedAnalytics << cSeparator << iInstId;
+			}
+
+			cSeparator = ", ";
+		}
+	}catch(opencctv::Exception &e)
+	{
+		return reportError("Database error. Failed to update the status of analytic instances.");
+	}
+
+	std::string sMessage = "";
+
+	if (ssFailedAnalytics.str().empty())
 	{
 		sMessage = "Status of analytic instances retrieved successfully.";
 	}else
 	{
-		sMessage = "Errors occurred while updating the status of analytic instance(s) " + sAnalyticInstStatusFailures + ".";
+		sMessage = "Errors occurred while updating the status of analytic instance(s) " + ssFailedAnalytics.str() + ".";
 	}
 
 	//Return the reply XML message
@@ -479,36 +706,6 @@ std::string AnalyticServerController:: getAnalyticInstStatus()
 	return sReply;
 }
 
-std::string AnalyticServerController::updateAnalyticInstStatus()
-{
-	analytic::ApplicationModel* pModel = analytic::ApplicationModel::getInstance();
-	std::map<unsigned int, analytic::AnalyticProcess*> mAnalyticProcesses = pModel->getAnalyticProcesses();
-	std::map<unsigned int, analytic::AnalyticProcess*> ::iterator it;
-
-	std::stringstream ssFailedAnalytics;
-	ssFailedAnalytics << "";
-	const char* cSeparator = "";
-
-	for (it = mAnalyticProcesses.begin(); it != mAnalyticProcesses.end(); ++it)
-	{
-		try
-		{
-			if(!it->second->updateStatus())
-			{
-				ssFailedAnalytics << cSeparator << it->first;
-			}
-
-		}catch(opencctv::Exception &e)
-		{
-			ssFailedAnalytics << cSeparator << it->first;
-		}
-
-		cSeparator = ", ";
-	}
-
-	return ssFailedAnalytics.str();
-}
-
 void AnalyticServerController::sendReply(const std::string& sMessage)
 {
 	if(_pSocket)
@@ -526,18 +723,6 @@ void AnalyticServerController::sendReply(const std::string& sMessage)
 	}
 }
 
-/*std::string AnalyticServerController::reportError(const std::string& sOperation,
-		const bool bDone, const std::string& sErrorMsg,const std::string& sExceptionMsg)
-{
-	std::string sMsg = sOperation;
-	sMsg = sMsg.append(" : ");
-	sMsg = sMsg.append(sErrorMsg);
-	sMsg = sMsg.append(". ");
-	sMsg = sMsg.append(sExceptionMsg);
-	opencctv::util::log::Loggers::getDefaultLogger()->error(sMsg);
-	return analytic::xml::AnalyticMessage::getErrorReply(sOperation, bDone, sMsg);
-}*/
-
 std::string AnalyticServerController::reportError(const std::string& sErrorMsg)
 {
 	opencctv::util::log::Loggers::getDefaultLogger()->error(sErrorMsg);
@@ -548,17 +733,41 @@ const std::string& AnalyticServerController::getStatus() const {
 	return _sStatus;
 }
 
-void AnalyticServerController::setStatus(const std::string& status) {
-	_sStatus = status;
+void AnalyticServerController::updateStatus(const std::string& sStatus) {
+	_sStatus = sStatus;
+	int iResult = 0;
+	try
+	{
+		result::db::AnalyticServerGateway analyticServerGateway;
+		//iResult = analyticServerGateway.updateAnalyticServerStatus(_sHost, _iPort, analytic::ANALYTIC_SERVER_STOPPED);
+		iResult = analyticServerGateway.updateAnalyticServerStatus(_sHost, _iPort, sStatus);
+	}
+	catch(opencctv::Exception &e)
+	{
+
+		opencctv::util::log::Loggers::getDefaultLogger()->error(e.what());
+	}
+
+	if(iResult < 1)
+	{
+		opencctv::util::log::Loggers::getDefaultLogger()->error("Faild to update the analytic server status in the database." );
+	}
 }
 
-/*const std::string& AnalyticServerController::getHost() const {
-	return _sHost;
-}
+void AnalyticServerController::stopServer()
+{
+	_sStatus = "Stopped";
+	std::string sReply;
 
-void AnalyticServerController::setHost(const std::string& host) {
-	_sHost = host;
-}*/
+	//Stop all the analytics
+	sReply = killAllAnalytics(); //This will update the analytic status in DB
+	std::string sReplyContent = "";
+	analytic::xml::AnalyticMessage::extractKillAllAnalyticsReply(sReply, sReplyContent);
+	opencctv::util::log::Loggers::getDefaultLogger()->debug(sReplyContent);
+
+	//Update the server status in the database.
+	updateStatus(analytic::ANALYTIC_SERVER_STOPPED);
+}
 
 AnalyticServerController::~AnalyticServerController()
 {

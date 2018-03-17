@@ -10,11 +10,6 @@
 namespace result {
 namespace db {
 
-/*const std::string AnalyticResultGateway::_SELECT_ANALYTIC_RESULTS_FOR_RAPP_INST_SQL = "SELECT ar.id as result_id, ar.analytic_instance_id, ar.timestamp, ar.result "
-		"FROM analytic_results as ar, results_app_registrations as rar WHERE ar.analytic_instance_id = rar.analytic_instance_id AND "
-		"rar.results_app_instance_id = ? AND (ar.id, rar.results_app_instance_id)  NOT IN (SELECT sar.analytic_result_id as result_id, "
-		"sar.results_app_instance_id as inst_id  FROM sent_analytic_results as sar) ORDER BY ar.id";*/
-
 //Executed on the analytic server DB
 const std::string AnalyticResultGateway::_SELECT_ANALYTIC_RESULTS_FOR_RAPP_INST_SQL = "SELECT ar.id as result_id, ar.analytic_instance_id, ar.timestamp, ar.result FROM analytic_results as ar, "
 		"analytic_results_app_registrations as arar WHERE arar.results_app_instance_id = ? AND ar.analytic_instance_id = arar.analytic_instance_id AND (ar.id, arar.results_app_instance_id) "
@@ -28,10 +23,6 @@ const std::string AnalyticResultGateway::_SELECT_RESULT_VIDEOS_SQL = "SELECT vid
 
 //Executed on the analytic server DB
 const std::string AnalyticResultGateway::_INSERT_SENT_RESULT_SQL = "INSERT INTO sent_analytic_results (analytic_result_id, results_app_instance_id) VALUES(?,?)";
-
-/*const std::string AnalyticResultGateway::_SELECT_ANALYTICS_WITH_UNSENT_RSLTS_SQL = "SELECT DISTINCT ar.analytic_instance_id FROM analytic_results as ar, results_app_registrations as rar "
-		"WHERE ar.analytic_instance_id = rar.analytic_instance_id AND (ar.id, rar.results_app_instance_id) NOT IN (SELECT sar.analytic_result_id as result_id, sar.results_app_instance_id as inst_id "
-		"FROM sent_analytic_results as sar) ORDER BY ar.id";*/
 
 //Executed on the analytic server DB
 const std::string AnalyticResultGateway::_SELECT_ANALYTICS_WITH_UNSENT_RSLTS_SQL = "SELECT DISTINCT ar.analytic_instance_id FROM analytic_results as ar, analytic_results_app_registrations as rar "

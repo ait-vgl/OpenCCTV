@@ -3,7 +3,8 @@
 #define ANALYTIC_ANALYTICPROCESS_HPP_
 
 #include "Process.hpp"
-#include "../result/db/AnalyticInstanceGateway.hpp"
+//#include "../result/db/AnalyticInstanceGateway.hpp"
+
 namespace analytic {
 
 class AnalyticProcess : public analytic::Process
@@ -23,7 +24,9 @@ public:
 	virtual ~AnalyticProcess();
 	bool isIsActive() const;
 	void setIsActive(bool isActive);
-	bool updateStatus();
+	unsigned int getAnalyticStatus();
+	unsigned int getAnalyticInstanceId() const;
+	//bool updateStatus();
 	//bool isIsAnalyticInstInfoSent() const;
 	//void setIsAnalyticInstInfoSent(bool isAnalyticInstInfoSent);
 };

@@ -10,14 +10,8 @@
 namespace result {
 namespace db {
 
-/*const std::string AnalyticInstanceGateway::_SELECT_ANALYTIC_INST_SQL = "SELECT * "
-		"FROM analytic_server_db.analytic_instances WHERE id = ?";*/
-
 //Executed on OpenCCTV server DB
 const std::string AnalyticInstanceGateway::_SELECT_ANALYTIC_INST_SQL = "SELECT ai.id, ai.name, ai.description FROM analytic_instances as ai WHERE ai.id = ?";
-
-/*const std::string AnalyticInstanceGateway::_SELECT_ANALYTIC_INST_FOR_RAPP_INST_SQL = "SELECT ai.id, ai.opencctv_id, ai.name, ai.description, ai.location "
-		"FROM analytic_instances as ai, results_app_registrations as rar WHERE ai.id = rar.analytic_instance_id AND rar.results_app_instance_id = ?";*/
 
 //Executed on OpenCCTV server DB
 const std::string AnalyticInstanceGateway::_SELECT_ANALYTIC_INST_FOR_RAPP_INST_SQL = "SELECT ai.id, ai.name, ai.description FROM analytic_instances as ai, "
