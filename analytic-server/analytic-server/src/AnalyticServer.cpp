@@ -15,7 +15,8 @@
 #include "opencctv/util/log/Loggers.hpp"
 #include "analytic/ConcurrentQueue.hpp"
 #include "analytic/api/Analytic.hpp"
-#include "analytic/api/IFrameGrabberWrapper.hpp"
+//#include "analytic/api/IFrameGrabberWrapper.hpp"
+#include "IFrameGrabberWrapper.hpp"
 #include "FrameGrabberWrapper.h"
 
 #include "analytic/xml/AnalyticMessage.hpp"
@@ -37,7 +38,7 @@ std::map<string, FrameGrabber *> mFrameGrabbers;
 
 int main(int argc, char *argv[])
 {
-    // Registering signal SIGINT and signal handler
+    // Registering signals with exit handler
 	signal(SIGINT, exitHandler); // for Ctrl + C keyboard interrupt
 	signal(SIGTERM, exitHandler); // for Terminate signal
     signal(SIGKILL, exitHandler); // for SIGKILL
@@ -57,6 +58,17 @@ int main(int argc, char *argv[])
     std::string sAnalyticPluginFilename = argv[2];
     std::string sAnalyticsResultsDir = argv[3];
     std::string sAnalyticPluginDirLocation = "";
+    unsigned int iAnalyticInstanceId = 0;
+
+    try
+    {
+    	iAnalyticInstanceId = boost::lexical_cast<unsigned int> (sAnalyticInstanceId);
+    }
+    catch (const boost::bad_lexical_cast &e)
+    {
+    	opencctv::util::log::Loggers::getDefaultLogger()->error("Error : Incorrect analytic instance Id .");
+    	return -1;
+    }
 
 	//Check if analytic results directory is writable
 	if(access(sAnalyticsResultsDir.c_str(), W_OK)!= 0)
@@ -119,7 +131,7 @@ int main(int argc, char *argv[])
 
 	try
 	{
-		pAnalyticInstanceStreamGateway->getAnalyticInstanceStreams(boost::lexical_cast<unsigned int> (sAnalyticInstanceId), vAnalyticInstanceStream);
+		pAnalyticInstanceStreamGateway->getAnalyticInstanceStreams(iAnalyticInstanceId, vAnalyticInstanceStream);
 		opencctv::util::log::Loggers::getDefaultLogger()->info("Analytic instance - "+ sAnalyticInstanceId +" : Analytic instance stream loaded.");
 	}
 	catch (opencctv::Exception &e)
@@ -152,7 +164,7 @@ int main(int argc, char *argv[])
 	try
 	{
        
-		pAnalyticInstanceConfigGateway->getAnalyticInstanceConfig(boost::lexical_cast<unsigned int> (sAnalyticInstanceId), vAnalyticInstaceConfig);
+		pAnalyticInstanceConfigGateway->getAnalyticInstanceConfig(iAnalyticInstanceId, vAnalyticInstaceConfig);
 		//opencctv::util::log::Loggers::getDefaultLogger()->info("Analytic instance config loaded, with " + boost::lexical_cast<std::string>(vAnalyticInstaceConfig.size()) + "config files." );
 	}
 	catch (opencctv::Exception &e)
@@ -238,29 +250,25 @@ int main(int argc, char *argv[])
 	opencctv::util::log::Loggers::getDefaultLogger()->info("Analytic instance - "+ sAnalyticInstanceId +" : Init Analytic plugin done.");
 
 	// Creating threads
-	analytic::ConcurrentQueue<analytic::api::Results_t> *pOutputResultQueue = new analytic::ConcurrentQueue<analytic::api::Results_t> (5);
-	/*analytic::ImageQueue<analytic::api::Image_t>* pInputImageQueue = new analytic::ImageQueue<analytic::api::Image_t>(5);
-	analytic::ImageQueue<analytic::api::Image_t>* pOutputResultQueue = new analytic::ImageQueue<analytic::api::Image_t>(5);*/
-	//opencctv::util::log::Loggers::getDefaultLogger()->info("Creating output queue done.");
+	//analytic::ConcurrentQueue<analytic::api::Results_t> *pOutputResultQueue = new analytic::ConcurrentQueue<analytic::api::Results_t> (5);
+	analytic::api::ResultsQueue<analytic::api::Result_t*> *pOutputResultQueue = new analytic::api::ResultsQueue<analytic::api::Result_t*> (5);
 
 	boost::thread_group threadGroup;
-	analytic::ConsumerThread resultsConsumer(pOutputResultQueue);
-	//boost::thread *pConsumerThread = new boost::thread(resultsConsumer);
+	analytic::ConsumerThread resultsConsumer(iAnalyticInstanceId,pOutputResultQueue);
+	boost::thread *pConsumerThread = new boost::thread(resultsConsumer);
 
-	/*if (pConsumerThread->joinable())
+	if (pConsumerThread->joinable())
 	{
-		//threadGroup.add_thread(pProducerThread);
 		threadGroup.add_thread(pConsumerThread);
-	}*/
+	}
 
-	//}
-	//opencctv::util::log::Loggers::getDefaultLogger()->info("Creating threads done.");
+	opencctv::util::log::Loggers::getDefaultLogger()->info("Analytic instance - "+ sAnalyticInstanceId +" : Creating threads done.");
 
 
 	// Starting Analytic plugin
 	opencctv::util::log::Loggers::getDefaultLogger()->info("Analytic instance - "+ sAnalyticInstanceId +" : Starting Analytic plugin...");
 
-	pAnalytic->process(sAnalyticsResultsDir, pOutputResultQueue);
+	pAnalytic->process(sAnalyticsResultsDir, *pOutputResultQueue );
 
 	return 0;
 }
@@ -279,7 +287,6 @@ void exitHandler(int iSignum)
             mFrameGrabbers.erase(itErase);
         }
     }
-    //opencctv::util::log::Loggers::getDefaultLogger()->info("This analytic instance resources were release from exitHandler before the analytic instance was terminated.");
 	opencctv::util::log::Loggers::getDefaultLogger()->info("Analytic instance terminated.");
     exit(iSignum);
 }

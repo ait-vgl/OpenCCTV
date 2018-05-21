@@ -11,6 +11,7 @@
 #include <vector>
 #include <cppconn/resultset.h>
 #include <cppconn/prepared_statement.h>
+#include <cppconn/statement.h>
 #include "DbConnector.hpp"
 #include "../dto/AnalyticInstanceConfig.hpp"
 #include "../../opencctv/Exception.hpp"

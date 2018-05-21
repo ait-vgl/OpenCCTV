@@ -13,7 +13,6 @@
 #include <cppconn/resultset.h>
 #include <cppconn/prepared_statement.h>
 #include "DbConnector.hpp"
-//#include "../dto/AnalyticInstanceConfig.hpp"
 #include "../../opencctv/Exception.hpp"
 
 namespace analytic {
@@ -24,6 +23,7 @@ class AnalyticResultsGateway
 private:
 	sql::Connection* _pDbConnPtr;
 	DbConnector* _pDbConnectorPtr;
+
 	static const std::string _INSERT_RESULT_SQL;
 	static const std::string _SELECT_ANALYTIC_INST_MAX_RESULTS_ID;
 	static const std::string _INSERT_FILES_SQL;
@@ -33,7 +33,7 @@ private:
 public:
 	AnalyticResultsGateway();
 	int insertResults(const unsigned int iAnalyticIinstId, const std::string& sTimestamp, const std::string& sResult);
-	int insertFiles(const unsigned int iResultsId, const std::vector<std::string>* pVFiles);
+	int insertFiles(const int iResultsId, const std::vector<std::string>* pVFiles, const std::string& sFileType);
 	virtual ~AnalyticResultsGateway();
 };
 

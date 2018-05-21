@@ -14,7 +14,7 @@ namespace db {
 const std::string AnalyticResultsGateway::_INSERT_RESULT_SQL = "INSERT INTO analytic_results(analytic_instance_id, timestamp, result) VALUES (?,?,?)";
 
 //Executed on the analytic server DB
-const std::string AnalyticResultsGateway::_SELECT_ANALYTIC_INST_MAX_RESULTS_ID = "SELECT MAX(id) FROM analytic_results WHERE analytic_instance_id = ?";
+const std::string AnalyticResultsGateway::_SELECT_ANALYTIC_INST_MAX_RESULTS_ID = "SELECT MAX(id) as result_id FROM analytic_results WHERE analytic_instance_id = ?";
 
 //Executed on the analytic server DB
 //const std::string AnalyticResultsGateway::_INSERT_FILES_SQL = "SELECT MAX(id) FROM analytic_results WHERE analytic_instance_id = ?";
@@ -86,7 +86,7 @@ int AnalyticResultsGateway::insertResults(const unsigned int iAnalyticIinstId,
 
 		while((*pResultsPtr).next())
 		{
-			iResult = (*pResultsPtr).getInt("id");
+			iResult = (*pResultsPtr).getInt("result_id");
 		}
 
 		if(pStatementPtr){ (*pStatementPtr).close(); delete pStatementPtr; pStatementPtr = NULL;}
@@ -104,38 +104,60 @@ int AnalyticResultsGateway::insertResults(const unsigned int iAnalyticIinstId,
 }
 
 //sql::Statement* pStatement = (*_pConnectionPtr).createStatement();
-int AnalyticResultsGateway::insertFiles(const unsigned int iResultsId,
-		const std::vector<std::string>* pVFiles)
+int AnalyticResultsGateway::insertFiles(const int iResultsId,
+		const std::vector<std::string>* pVFiles, const std::string& sFileType)
 {
+	int iResult = 0;
+	std::string sPath = "";
 
 	if(!pVFiles || pVFiles->empty())
 	{
-		return 0;
+		iResult =  0;
+		return iResult;
+	}
+
+	if(sFileType.compare("results_files") == 0)
+	{
+		sPath = "file_path";
+	}else if(sFileType.compare("images") == 0)
+	{
+		sPath = "image_file_path";
+	}else if(sFileType.compare("videos") == 0)
+	{
+		sPath = "video_file_path";
+	}else
+	{
+		iResult =  0;
+		return iResult;
 	}
 
 	//Prepare the insert query
 	//INSERT INTO results_files(analytic_result_id, file_path) VALUES (1, 'test1'),(1, 'test2');
 	std::stringstream sQuery;
-	sQuery << "INSERT INTO results_files(analytic_result_id, file_path) VALUES (";
+	sQuery << "INSERT INTO " << sFileType << "(analytic_result_id, " << sPath <<") VALUES ";
+	std::string sSep = "";
 
-	int iResult = 0;
-	sql::PreparedStatement* pStatementPtr = NULL;
-	//Insert the analytic result
+	for (std::vector<std::string>::const_iterator it = pVFiles->begin() ; it != pVFiles->end(); ++it)
+	{
+	    //std::cout << ' ' << *it;
+		sQuery << sSep <<"(" << iResultsId << "," << "'" << *it << "')";
+		sSep = ",";
+	}
+
+	//std::cout << "sQuery : " << sQuery.str() << std::endl;
+	sql::Statement* pStatement = NULL;
+
 	try
 	{
-		//pStatementPtr = (*_pDbConnPtr).prepareStatement(_INSERT_RESULT_SQL);
-		sql::Statement* pStatementPtr = (*_pDbConnPtr).createStatement();
-		/*(*pStatementPtr).setUInt(1, iAnalyticIinstId);
-		(*pStatementPtr).setString(2, sTimestamp);
-		(*pStatementPtr).setString(3, sResult);*/
-		iResult = (*pStatementPtr).executeUpdate("");
-		(*pStatementPtr).close(); delete pStatementPtr; pStatementPtr = NULL;
+		pStatement = (*_pDbConnPtr).createStatement();
+		iResult = (*pStatement).executeUpdate(sQuery.str());
+		if(pStatement){ (*pStatement).close(); delete pStatement; pStatement = NULL;}
 
 	}catch(sql::SQLException &e)
 	{
+		if(pStatement){ (*pStatement).close(); delete pStatement; pStatement = NULL;}
 		iResult = -1;
-		if(pStatementPtr){(*pStatementPtr).close(); delete pStatementPtr; pStatementPtr = NULL;}
-		std::string sErrorMsg = "AnalyticResultsGateway::insertResults : ";
+		std::string sErrorMsg = "AnalyticResultsGateway::insertFiles : ";
 		throw opencctv::Exception(sErrorMsg.append(e.what()));
 		// TODO: log
 	}

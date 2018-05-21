@@ -4,48 +4,62 @@
 namespace analytic
 {
 
-/*ConsumerThread::ConsumerThread(ConcurrentQueue<api::Image_t>* pResultsOutputQueue, opencctv::mq::Sender* pSender, opencctv::util::serialization::Serializable* pSerializer) {
-	_pResultsOutputQueue = pResultsOutputQueue;
-	_pSender = pSender;
-	_pSerializer = pSerializer;
-}*/
-
-ConsumerThread::ConsumerThread(ConcurrentQueue<analytic::api::Results_t>* pResultsOutputQueue)
+ConsumerThread::ConsumerThread(unsigned int iAnalyticInstanceId, analytic::api::ResultsQueue<analytic::api::Result_t*>* pResultsOutputQueue)
 {
+	_iAnalyticInstanceId = iAnalyticInstanceId;
 	_pResultsOutputQueue = pResultsOutputQueue;
 }
-
-/*
-void ConsumerThread::operator()()
-{
-	opencctv::util::log::Loggers::getDefaultLogger()->info("Analytic consumer thread started.");
-	while(_pResultsOutputQueue && _pSender && _pSerializer)
-	{
-		api::Image_t outputImage = _pResultsOutputQueue->pop();
-		AnalyticResult result(outputImage.iStreamId, outputImage.sInputName, outputImage.sTimestamp, outputImage.sCustomTextResult, outputImage.bGenerateAnalyticEvent);
-		std::stringstream ssMsg;
-		ssMsg << "Image " << result.getTimestamp() << " processed. VM used = "
-				<< opencctv::util::Util::getCurrentVmUsageKb() << " Kb";
-		opencctv::util::log::Loggers::getDefaultLogger()->debug(ssMsg.str());
-		//Writing the result to the analytic output queue
-		std::string sSerializedResult = _pSerializer->serialize(result);
-		_pSender->send(&sSerializedResult);
-		outputImage.matImage.release();
-	}
-}
-*/
 
 void ConsumerThread::operator()()
 {
 	opencctv::util::log::Loggers::getDefaultLogger()->info("Analytic consumer thread started.");
 	while(_pResultsOutputQueue)
 	{
-		//std::cout << "Result saved to DB" << std::endl;
-		//usleep(1000000);
 		//Read from the ResultsOutputQueue
-		analytic::api::Results_t result = _pResultsOutputQueue->pop();
+		analytic::api::Result_t* pResult = _pResultsOutputQueue->pop();
 
 		//Save to the results database
+		analytic::db::AnalyticResultsGateway analyticResultsGateway;
+		int iResultId = 0;
+		try
+		{
+			iResultId = analyticResultsGateway.insertResults(_iAnalyticInstanceId, pResult->getTimestamp(), pResult->getCustomTextResult());
+		}catch(opencctv::Exception &e)
+		{
+			opencctv::util::log::Loggers::getDefaultLogger()->error(e.what());
+		}
+
+		if(iResultId > 0)
+		{
+			try
+			{
+				//Insert results files
+				const std::vector<std::string>* vResults = pResult->getVResultsFiles();
+				if (vResults && !(vResults->empty()))
+				{
+					analyticResultsGateway.insertFiles(iResultId, vResults, "results_files");
+				}
+
+				//Insert image files
+				const std::vector<std::string>* vImages = pResult->getVIamgeFiles();
+				if (vImages && !(vImages->empty()))
+				{
+					analyticResultsGateway.insertFiles(iResultId, vImages, "images");
+				}
+
+				//Insert video files
+				const std::vector<std::string>* vVideos = pResult->getVVideoFiles();
+				if (vVideos && !(vVideos->empty()))
+				{
+					analyticResultsGateway.insertFiles(iResultId, vVideos, "videos");
+				}
+			} catch (opencctv::Exception &e)
+			{
+				opencctv::util::log::Loggers::getDefaultLogger()->error(e.what());
+			}
+		}
+
+		delete pResult; pResult = NULL;
 	}
 }
 
